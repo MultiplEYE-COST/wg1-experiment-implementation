@@ -4,11 +4,11 @@
 import os
 import random
 import numpy as np
-from experiment_implementation.utils import experiment_utils
+from utils import experiment_utils
 from psychopy import core, event, visual
 
-from experiment_implementation.utils.collect_eyelink_samples import CollectEyelinkSamples
-from experiment_implementation.utils.calibration_marker import CalibrationMarker
+from utils.collect_eyelink_samples import CollectEyelinkSamples
+from utils.calibration_marker import CalibrationMarker
 
 DOT_RAD = 0.25
 BACKGROUND_COLOR = (0.6, 0.6, 0.6)

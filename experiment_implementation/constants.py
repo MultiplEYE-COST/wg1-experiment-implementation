@@ -6,7 +6,7 @@ More on what default values there are can be found in the pygaze git repo:
 https://github.com/esdalmaijer/PyGaze/blob/master/pygaze/defaults.py
 """
 
-DUMMY_MODE = True
+DUMMY_MODE = False
 
 # a few custom defaults
 DIALOG_SESSION_TITLE = "Enter Session Name"
