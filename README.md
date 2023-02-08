@@ -1,6 +1,12 @@
 # MultiplEYE WG1: Experiment Implementation
 
+A full dummy experiment that shows the entire experiment flow can be found on the branch `deborahs_branch`. In order 
+to run it, you will have to install a modified PyGaze version. You **cannot** use the official version that is installed 
+when calling `pip install pygaze`! The modified version can be found here: https://github.com/theDebbister/PyGaze
 
+You can then create a virtual environment and install PyGaze from the git repo. I will add a description of how to do 
+that shortly. We will use this modified PyGaze version for the final experiment. It will be made available within this cost
+action GitHub organization.
 
 
 
