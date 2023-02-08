@@ -6,7 +6,7 @@ More on what default values there are can be found in the pygaze git repo:
 https://github.com/esdalmaijer/PyGaze/blob/master/pygaze/defaults.py
 """
 
-DUMMY_MODE = False
+DUMMY_MODE = True
 
 # a few custom defaults
 DIALOG_SESSION_TITLE = "Enter Session Name"
@@ -45,5 +45,6 @@ FULL_SCREEN = True
 BGC = (231, 231, 231)
 FGC = (0, 0, 0)
 DISPTYPE = 'psychopy'
+WRAP_WIDTH = 900
 
 
