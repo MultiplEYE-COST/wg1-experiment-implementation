@@ -42,9 +42,21 @@ SCREENDIST = 90.0
 
 RESULT_FOLDER_PATH = "results"
 FULL_SCREEN = True
+
+# background color
 BGC = (231, 231, 231)
+
+# foreground color (i.e. font color)
 FGC = (0, 0, 0)
+
 DISPTYPE = 'psychopy'
+FONT = 'Courier New'
+LINE_SPACING = 2.0
+
+# TODO: the below two constants needs to be defined as a function of the display size such that the area where the
+#  stimuli are presented is of the same size at every location
 WRAP_WIDTH = 900
+TOP_LEFT_CORNER = (460, 195)
+
 
 
