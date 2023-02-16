@@ -1,5 +1,7 @@
 # MultiplEYE WG1: Experiment Implementation
 
+**NOTE: The README and the specification of how to set everything up is still work in progress**
+
 This repository contains the code for an eye-tracking-while-reading experiment for multiple languages.
 
 In order to contribute and use it properly it is necessary to set up a few things. All of the necessary steps are 
@@ -7,15 +9,16 @@ described below.
 
 
 ## Set up conda environment with our own PyGaze version
-It is easiest if you set up your own virtual environment. You'll find a description of how to set up a conda env below,
-but can use another env if you prefer something else. 
+It is easiest if you set up your own virtual environment. You'll find a description of how to set up a conda environment below,
+but can use another environment if you prefer something else. 
 
 **IMPORTANT**: in `environment.yml` you'll find all the dependencies you need for the project.
 We're using a different PyGaze version than the one that is installed when using `pip install pygaze`. If you set up the
-env following the instructions below, this won't be an issue. If you do it differently, just make sure you have the PyGaze
-version installed that is specified in `environment.yml`
+environment following the instructions below, this won't be an issue. If you do it differently, just make sure you have the PyGaze
+version installed that is specified in `environment.yml` (it is a link that points to the GitHub 
+repository where it is currently located.)
 
-1. **Install conda / miniconda**
+**1. Install conda / miniconda**
    
    If you don't already have conda or miniconda installed you need to do it if you want to use the repo with a conda 
    environment. Miniconda should be enough for our purposes.
@@ -25,10 +28,12 @@ version installed that is specified in `environment.yml`
    you need to run `conda init powershell` int he powershell and then restart the powershell.
 
    
-2. **Clone this repository.**
+**2. Clone this repository.**
+   
+   
 
 
-3. **Create the conda environment**
+**3. Create the conda environment**
    
    Navigate to the root folder of your local clone of the repository and run the below line in your terminal (if you use an
    IDE like VS Code or PyCharm, there is always the option to use the terminal built into the IDE if that is easier)
@@ -41,7 +46,7 @@ version installed that is specified in `environment.yml`
    Note that 3.9 denotes the python version that is used in the env.
 
 
-4. If you work in an IDE, you can open the repository as a project and configure the python interpreter to be the newly
+**4.** If you work in an IDE, you can open the repository as a project and configure the python interpreter to be the newly
    created env. How you have to do it depends on the IDE. For PyCharm it is explained under this link: [Configure existing conda env as PyCharm interpreter](https://www.jetbrains.com/help/pycharm/conda-support-creating-conda-virtual-environment.html)
    
 
@@ -50,15 +55,15 @@ You will need to install `pylink` a package provided by SR Research if you use E
 Note that `pip install pylink` installs a different package although the names are the same!
 
 The steps below are basically a summary of the instructions that SR Research gives in their forum and that worked for 
-me on a Windows machine. You need to create an SR Research account to access the documentation: 
-https://www.sr-research.com/support/thread-48.html. You will find more instructions there also for Mac and Linux. Note 
-that if you use a virtual environment using the `intall_pylink.py` script will probably not work.
+me on a Windows machine. You need to create an [SR Research account](https://www.sr-research.com/support/thread-48.html) to access the documentation. 
+You will find more instructions there also for Mac and Linux (note 
+that if you use a virtual environment using the `intall_pylink.py` script will not work).
 
-1. Install the EyeLink Developers Kit: https://www.sr-research.com/support/showthread.php?tid=13 (again, you'll need
-   an account)
+1. Install the [EyeLink Developers Kit](https://www.sr-research.com/support/showthread.php?tid=13), again, you'll need
+   an account
    
 
-2. Set up you virtual environment (e.g. conda) with the python version specified (python 3.9)
+2. Set up your virtual environment (e.g. conda) with the python version specified (python 3.9), see above
    
 
 3. Go to the folder where SR Research is installed and then to the Python folder in the SampleExperiments. In there you 
@@ -68,12 +73,12 @@ that if you use a virtual environment using the `intall_pylink.py` script will p
     
    Then go to either the `32` folder or the `64` folder depending on your system. Now you should see a list of folders 
    each of which contains a different version of pylink depending on the python version. Go to the folder of the python 
-   version you've installed in your env and copy the pylink folder.
+   version you've installed in your env (3.9 in our case) and copy the `pylink` folder.
   
  
-4. Now you can paste the folder to your env. Look for the folder called `site-pacakges` (might look different for 
+4. Now you can paste the folder to your env. Look for the folder called `site-packages` (might look different for 
    different env and different OS). On Windows in a conda env it looks something like this:
    
    `C:\Users\[USERNAME]\miniconda3\envs\env-multipleye3.9\Lib\site-packages`
 
-   Now paste to pylink folder in the site-packages folder.
+   Now paste to `pylink` folder in the site-packages folder.
