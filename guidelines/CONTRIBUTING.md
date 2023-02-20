@@ -60,12 +60,6 @@ git checkout -b feature/your-feature-branch
 We do not allow for pushing directly to the `main` branch and merge changes exclusively by
 [pull requests](#pull-requests).
 
-We will squash your commits into a single commit on merge to maintain a clean git history.
-We use a linear git-history, where each commit contains a full feature/bug fix, such that each
-commit represents an executable version. This way you also don't have to worry much about your
-intermediate commits and can focus on getting your work done first.
-
-
 ### Code Style
 
 We write our code to follow [PEP-8](https://www.python.org/dev/peps/pep-0008) with a maximum
@@ -90,20 +84,9 @@ Once you are ready to publish your changes:
 - Provide a summary of the changes you are introducing according to the default template.
 - In case you are resolving an issue, don't forget to add a reference in the description.
 
-The default template is meant as a helper and should guide you through the process of creating a
-pull request. It's also totally fine to submit work in progress, in which case you'll likely be
-asked to make some further changes.
-
-If your change will be a significant amount of work to write, we highly recommend starting by
-opening an issue laying out what you want to do. That lets a conversation happen early in case other
-contributors disagree with what you'd like to do or have ideas that will help you do it.
-
 The best pull requests are focused, clearly describe what they're for and why they're correct, and
-contain tests for whatever changes they make to the code's behavior. As a bonus these are easiest
+contain tests for whatever changes they make to the code's behavior (but see note on testing). As a bonus these are easiest
 for someone to review, which helps your pull request get merged quickly. Standard advice about good
 pull requests for open-source projects applies.
-
-Do not squash your commits after you have submitted a pull request, as this
-erases context during review. We will squash commits when the pull request is ready to be merged.
 
 
