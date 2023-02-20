@@ -5,11 +5,13 @@ me on a Windows machine. You need to create an [SR Research account](https://www
 You will find more instructions there also for Mac and Linux (note 
 that if you use a virtual environment using the `intall_pylink.py` script will not work).
 
+## Windows
+
 1. Install the [EyeLink Developers Kit](https://www.sr-research.com/support/showthread.php?tid=13), again, you'll need
    an account
    
 
-2. Set up your virtual environment (e.g. conda) with the python version specified (python 3.9). See [CONDA_ENVIRONMENT.md](https://github.com/MultiplEYE-COST/wg1-experiment-implementation/blob/733c5e98929c0eb41722e0d271618f98b8272a52/guidelines/CONDA_ENVIRONMENT.md).
+2. Set up your virtual environment (e.g. conda) with the python version specified (python 3.9). See [CONDA_ENVIRONMENT.md](guidelines/CONDA_ENVIRONMENT.md).
    
 
 3. Go to the folder where SR Research is installed and then to the Python folder in the SampleExperiments. In there you 
