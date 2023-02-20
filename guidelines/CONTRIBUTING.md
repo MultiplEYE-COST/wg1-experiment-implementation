@@ -14,7 +14,6 @@ Here we give you an overview of the workflow and best practices for contributing
   - [Creating a Branch](#creating-a-branch)
   - [Code Style](#code-style)
   - [Testing](#testing)
-  - [Documentation](#documentation)
   - [Pull Requests](#pull-requests)
 
 
@@ -64,8 +63,7 @@ We do not allow for pushing directly to the `main` branch and merge changes excl
 
 We write our code to follow [PEP-8](https://www.python.org/dev/peps/pep-0008) with a maximum
 line-width of 100 characters. We additionally use type annotations as in [PEP-484](
-https://peps.python.org/pep-0484). For docstrings we use the [numpydoc](
-https://numpydoc.readthedocs.io/en/latest/format.html) formatting standard.
+https://peps.python.org/pep-0484).
 
 ### Testing
 
