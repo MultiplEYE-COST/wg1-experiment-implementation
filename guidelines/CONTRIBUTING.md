@@ -10,18 +10,13 @@ Here we give you an overview of the workflow and best practices for contributing
 ## Table of Contents
 - [Code of Conduct](#code-of-conduct)
 - [Reporting Bugs](#reporting-bugs)
-- [First-time Contributors](#first-time-contributors)
 - [Getting Started](#getting-started)
-  - [Development Installation](#development-installation)
   - [Creating a Branch](#creating-a-branch)
   - [Code Style](#code-style)
   - [Testing](#testing)
   - [Documentation](#documentation)
   - [Pull Requests](#pull-requests)
-  - [Continuous Integration](#continuous-integration)
-- [Core Developer Guidelines](#core-developer-guidelines)
-- [License](#license)
-- [Questions](#questions)
+
 
 
 ## Code of Conduct

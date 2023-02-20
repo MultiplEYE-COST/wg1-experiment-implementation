@@ -14,7 +14,7 @@ of how to install `pylink` can be found here: [INSTALL_PYLINK.md](guidelines/INS
 ## Run the dummy experiment
 The version of the experiment which is currently on main is a dummy version that can be run without an actual eye-tracker.
 If you'd like to run it, make sure you have completed the above steps, and you have your conda environment activated.
-Then you can navigate to the root folder of your local clone of the repository. Run the following command to runt he dummy experiment:
+Then you can navigate to the root folder of your local clone of the repository. Run the following command to run the dummy experiment:
 
 ```bash
 python experiment_implementation/run_experiment.py
