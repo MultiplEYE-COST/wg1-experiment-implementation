@@ -29,7 +29,7 @@ articulated in the [Python Community Code of Conduct](https://www.python.org/psf
 ## Reporting Bugs
 
 If you discover a bug, as a first step please check the existing
-[Issues](https://github.com/aeye-lab/pymovements/issues) to see if this bug has already been
+[Issues](https://github.com/MultiplEYE-COST/wg1-experiment-implementation/issues) to see if this bug has already been
 reported.
 
 In case the bug has not been reported yet, please do the following:
