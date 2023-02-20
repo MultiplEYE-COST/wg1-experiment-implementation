@@ -34,7 +34,7 @@ reported.
 
 In case the bug has not been reported yet, please do the following:
 
-- [Open an issue](https://github.com/aeye-lab/pymovements/issues/new?labels=bug&template=ISSUE.md).
+- [Open an issue](https://github.com/MultiplEYE-COST/wg1-experiment-implementation/issues).
 - Add a descriptive title to the issue and write a short summary of the problem.
 - We provide you with a default template to guide you through a typical reporting process.
 - Adding more context, including error messages and references to the problematic parts of the code,
@@ -80,7 +80,7 @@ it might be possible but not for all. Therefore:
 
 Once you are ready to publish your changes:
 
-- Create a [pull request (PR)](https://github.com/aeye-lab/pymovements/compare).
+- Create a [pull request (PR)](https://github.com/MultiplEYE-COST/wg1-experiment-implementation/pulls).
 - Provide a summary of the changes you are introducing according to the default template.
 - In case you are resolving an issue, don't forget to add a reference in the description.
 
