@@ -83,27 +83,8 @@ https://numpydoc.readthedocs.io/en/latest/format.html) formatting standard.
 It is probably not possible to write meaningful unittests for the implementation. For certain methods or classes
 it might be possible but not for all. Therefore:
 
-- 
-
-
-### Documentation
-
-Make sure to add docstrings to every class, method and function that you add to the codebase.
-Docstrings should include a description of all parameters, returns and exceptions. Use the existing
-documentation as an example.
-
-The API-documentation is generated from the numpydoc-style docstring of the respective
-modules/classes/functions by [Sphinx](https://www.sphinx-doc.org).
-You can build the documentation locally using the respective tox environment:
-```bash
-tox -e docs
-```
-It will appear in the `build/docs` directory.
-
-To rebuild the full documentation use
-```bash
-tox -e docs -- -aE
-```
+- please make sure you test your code at least by running the dummy experiment or if possible with an actual eye-tracker
+- if there are methods where you think it is possible to add unittests, please do so
 
 
 ### Pull Requests
@@ -130,53 +111,4 @@ pull requests for open-source projects applies.
 Do not squash your commits after you have submitted a pull request, as this
 erases context during review. We will squash commits when the pull request is ready to be merged.
 
-
-### Continuous Integration
-
-Tests, code style and documentation are all additionally checked using a GitHub Actions
-workflow which executes the appropriate tox environments. Merging of Pull requests will not be
-possible until all checks pass.
-
-
-## Core Developer Guidelines
-
-Core developers should follow these rules when processing pull requests:
-
-- Always wait for tests to pass before merging PRs.
-- Use "[Squash and merge](https://github.com/blog/2141-squash-your-commits)" to merge PRs.
-- Delete branches for merged PRs.
-- Edit the final commit message before merging to conform to the following style (we wish to have a
-clean `git log` output):
-
-```
-Category: Short subject describing changes (#PR-id) (50 characters or less)
-
-- detailed description, wrapped at 72 characters
-- bullet points or sentences are okay
-- all changes should be documented and explained
-- valid categories are, for example:
-    - `Docs` for documentation
-    - `Tests` for tests
-    - `Core` for core changes
-    - `Events` for changes in event detection
-    - `Transforms` for changes in transformations
-    - `Package` for package-related changes, e.g. in setup.cfg
-```
-
-Make sure:
-
-  - that when merging a multi-commit PR the commit message doesn't
-    contain the local history from the committer and the review history from
-    the PR. Edit the message to only describe the end state of the PR.
-  - that there is a *single* newline between subject and description,
-    This way there is a single empty line between commits in `git log`
-    output.
-  - that the maximum subject line length is under 50 characters
-  - that the maximum line length of the commit message is under 72 characters
-  - to capitalize the subject and each paragraph.
-  - that the subject of the commit message has no trailing dot.
-  - to use the imperative mood in the subject line (e.g. "Fix typo in README").
-  - if the PR fixes an issue, that something like "Fixes #xxx." occurs in the body of the message
-(not in the subject).
-  - to use Markdown for formatting.
 
