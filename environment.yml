@@ -1,8 +1,9 @@
-name: env-multipleye3.9
+name: multipleye3.9
 channels:
   - conda-forge
   - defaults
 dependencies:
+  - python==3.9
   - pip==22.3.1
   - psychopy==2022.2.5
   - pip:
