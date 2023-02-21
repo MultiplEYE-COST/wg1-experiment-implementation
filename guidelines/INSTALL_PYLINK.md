@@ -1,35 +1,62 @@
 # Install Pylink for EyeLink eye-trackers
-You will need to install `pylink` a package provided by SR Research if you use EyeLink eye-trackers. 
-The steps below are a summary of the instructions that SR Research gives in their forum and that worked for 
-me on a Windows machine. You need to create an [SR Research account](https://www.sr-research.com/support/thread-48.html) to access the documentation. 
-You will find more instructions there also for Mac and Linux (note 
+You will need to install `pylink`, a package provided by SR Research, if you use EyeLink eye-trackers.
+The steps below are a summary of the instructions that SR Research gives in their forum and that worked
+on a Windows machine and on a Mac. 
+You need to create an [SR Research account](https://www.sr-research.com/support/thread-48.html) to access the documentation.
+You will find more instructions there also for Linux (note
 that if you use a virtual environment using the `intall_pylink.py` script will not work).
 
-## Windows
+## Windows and Mac
 
-1. Install the [EyeLink Developers Kit](https://www.sr-research.com/support/showthread.php?tid=13), again, you'll need
-   an account
+### Install EyeLink developer kit
+Install the [EyeLink Developers Kit](https://www.sr-research.com/support/showthread.php?tid=13), again, you'll need
+an account
+
+### Set up conda env
+Set up your virtual environment (e.g. conda) with the python version specified (python 3.9). 
+See [CONDA_ENVIRONMENT.md](guidelines/CONDA_ENVIRONMENT.md).
+
+### EyeLink path
+**Windows**
+
+On Windows machines, the EyeLink developer kit is installed in an SR Research Folder. Everything related to the
+developer kit is contained in the EyeLink folder. It includes different versions of pylink for different python versions.
+The correct pylink version can be found under the path below:
+```
+C:\Program Files (x86)\SR Research\EyeLink\SampleExperiments\Python\[64 OR 32]\3.9\pylink
+```
+
+In the path above, pick either the `32` folder or the `64` folder depending on your system. The `3.9` folder in the
+path refers to the python version that we are using.
+
+**Mac**
+
+On Macs, the developer kit is stored in an EyeLink folder under applications. The pylink version is found under the
+following link:
+```
+/Applications/EyeLink/SampleExperiments/Python/3.9/pylink
+```
    
+The `3.9` folder in the path refers to the python version that we are using.
 
-2. Set up your virtual environment (e.g. conda) with the python version specified (python 3.9). See [CONDA_ENVIRONMENT.md](guidelines/CONDA_ENVIRONMENT.md).
-   
+### Copy pylink folder to environment
+Now you need to paste the pylink folder to your environment. You can run the following command with the link from above
+inserted as the first argument. The second argument is the `site-packages` folder in your virtual environment where you
+want to paste pylink into:
 
-3. Go to the folder where SR Research is installed and then to the Python folder in the SampleExperiments. In there you 
-   should have several files and folders. 
-   
-   `C:\Program Files (x86)\SR Research\EyeLink\SampleExperiments\Python`
-    
-   Then go to either the `32` folder or the `64` folder depending on your system. Now you should see a list of folders 
-   each of which contains a different version of pylink depending on the python version. Go to the folder of the python 
-   version you've installed in your env (3.9 in our case) and copy the `pylink` folder.
-  
- 
-4. Now you can paste the folder to your env. Look for the folder called `site-packages` *within you virtual environment* (might look different for 
-   different env and different OS). On Windows in a (mini)conda env it looks something like this:
-   
-   `C:\Users\[USERNAME]\miniconda3\envs\env-multipleye3.9\Lib\site-packages`
+**Windows**
 
-   Now paste to `pylink` folder in the site-packages folder.
+It is possible to use the ``cp`` command in the Windows powershell, in other terminals you might not be able to use it.
+But you can always copy and paste it manually.
+```
+cp -R "C:\Program Files (x86)\SR Research\EyeLink\SampleExperiments\Python\64\3.9\pylink" C:\Users\debor\miniconda3\envs\test\Lib\site-packages
+```
 
-   Note: the path on Windows looks different if:
-   a) you installed anaconda instead of miniconda. Then you can replace `miniconda3` with `anaconda3` 
+**Mac**
+
+```
+cp -R /Applications/EyeLink/SampleExperiments/Python/3.9/pylink/ /Users/yourusername/miniconda3/envs/multipleye3.9/lib/python3.10/site-packages
+```
+
+Note: the paths look different if:
+1. you installed anaconda instead of miniconda. Then you can replace `miniconda3` with `anaconda3` 
