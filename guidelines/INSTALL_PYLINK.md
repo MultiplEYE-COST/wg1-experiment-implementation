@@ -49,14 +49,15 @@ want to paste pylink into:
 It is possible to use the ``cp`` command in the Windows powershell, in other terminals you might not be able to use it.
 But you can always copy and paste it manually.
 ```
-cp -R "C:\Program Files (x86)\SR Research\EyeLink\SampleExperiments\Python\64\3.9\pylink" C:\Users\debor\miniconda3\envs\test\Lib\site-packages
+cp -R "C:\Program Files (x86)\SR Research\EyeLink\SampleExperiments\Python\64\3.9\pylink" C:\Users\[USERNAME]\miniconda3\envs\multipleye3.9\Lib\site-packages
 ```
 
 **Mac**
 
 ```
-cp -R /Applications/EyeLink/SampleExperiments/Python/3.9/pylink/ /Users/yourusername/miniconda3/envs/multipleye3.9/lib/python3.10/site-packages
+cp -R /Applications/EyeLink/SampleExperiments/Python/3.9/pylink/ /Users/[USERNAME]/miniconda3/envs/multipleye3.9/lib/python3.10/site-packages
 ```
 
-Note: the paths look different if:
+Note, that the path to your environment (for both Mac and Windows) looks different if:
 1. you installed anaconda instead of miniconda. Then you can replace `miniconda3` with `anaconda3` 
+2. you named your virtual environment differently. Then `multipleye3.9` must be replaced with the name of the environment.
