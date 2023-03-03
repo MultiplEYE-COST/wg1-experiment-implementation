@@ -21,11 +21,14 @@ class Experiment:
     # TODO: add separate keyboard with keys that only experimenter can press such that experimenter
     #  can interrupt at specific times (on mac and linux we can explicitly call different physical keyboards, on
     #  windows this is sadly not possible which is why we have to solve it by using disjoint set of keys)
-    _keyboard: Keyboard = Keyboard(keylist=['space', 'a', 'b', 'c'], timeout=None)
+    _participant_keyboard: Keyboard = Keyboard(keylist=['space', 'a', 'b', 'c'], timeout=None)
 
-    def __init__(self, stimuli_texts: list[str]):
+    # TODO define list of keys that the experiment can press to navigate the experiment
+    _experimenter_keyboard: Keyboard = Keyboard(keylist=['q', 'n', 'p', 'k', 'v'], timeout=None)
 
-        self.stimuli_texts = stimuli_texts
+    def __init__(self, stimuli_loader: list[str]):
+
+        self.stimuli_texts = stimuli_loader
 
         self._eye_tracker = EyeTracker(
             self._display,
@@ -46,19 +49,19 @@ class Experiment:
 
         self._display.fill(self._screens['welcome_screen'])
         self._display.show()
-        self._keyboard.get_key()
+        self._participant_keyboard.get_key()
 
         self._eye_tracker.calibrate()
 
         self._display.fill(self._screens['instruction_screen'])
         self._display.show()
-        self._keyboard.get_key()
+        self._participant_keyboard.get_key()
 
         self._practice_trial()
 
         self._display.fill(self._screens['begin_screen'])
         self._display.show()
-        self._keyboard.get_key()
+        self._participant_keyboard.get_key()
 
         for trial_number in range(1, 3):
             # self._drift_correction()
@@ -69,7 +72,7 @@ class Experiment:
 
         self._display.fill(self._screens['goodbye_screen'])
         self._display.show()
-        self._keyboard.get_key()
+        self._participant_keyboard.get_key()
 
         # end the experiment
         self.log_file.close()
@@ -82,33 +85,33 @@ class Experiment:
         # present fixation cross before stimulus
         self._display.fill(screen=self._screens['fixation_screen'])
         self._display.show()
-        self._keyboard.get_key(flush=True)
+        self._participant_keyboard.get_key(flush=True)
         self._display.fill(screen=self._screens['practice_trial'])
         _ = self._display.show()
         key_pressed_stimulus = ''
         # add timeout
         while key_pressed_stimulus not in ['space']:
-            key_pressed_stimulus, keypress_timestamp = self._keyboard.get_key(flush=True)
+            key_pressed_stimulus, keypress_timestamp = self._participant_keyboard.get_key(flush=True)
 
         # present fixation cross before stimulus
         self._display.fill(screen=self._screens['fixation_screen'])
         self._display.show()
-        self._keyboard.get_key(flush=True)
+        self._participant_keyboard.get_key(flush=True)
         self._display.fill(screen=self._screens['practice_trial'])
         _ = self._display.show()
         key_pressed_stimulus = ''
 
         # add timeout
         while key_pressed_stimulus not in ['space']:
-            key_pressed_stimulus, keypress_timestamp = self._keyboard.get_key(flush=True)
+            key_pressed_stimulus, keypress_timestamp = self._participant_keyboard.get_key(flush=True)
 
         self._display.fill(screen=self._screens['fixation_screen'])
         self._display.show()
-        self._keyboard.get_key(flush=True)
+        self._participant_keyboard.get_key(flush=True)
         question_screen = self._get_question_screen(0)
         self._display.fill(screen=question_screen)
         _ = self._display.show()
-        self._keyboard.get_key()
+        self._participant_keyboard.get_key()
 
     def _execute_trail(self, trial_number: int):
 
@@ -123,15 +126,15 @@ class Experiment:
             self._display.fill(screen=self._screens['fixation_screen'])
             self._display.show()
             self._eye_tracker.log("fixation cross")
-            self._keyboard.get_key(flush=True)
+            self._participant_keyboard.get_key(flush=True)
 
             if trial_number > 1 and page_number == 1:
                 self._display.fill(screen=self._screens['recalibration_screen'])
                 self._display.show()
-                self._keyboard.get_key(flush=True)
+                self._participant_keyboard.get_key(flush=True)
                 self._display.fill(screen=self._screens['fixation_screen'])
                 self._display.show()
-                self._keyboard.get_key(flush=True)
+                self._participant_keyboard.get_key(flush=True)
 
             # start eye-tracking
             self._eye_tracker.start_recording()
@@ -147,7 +150,7 @@ class Experiment:
             keypress_timestamp = -1
             # add timeout
             while key_pressed_stimulus not in ['space']:
-                key_pressed_stimulus, keypress_timestamp = self._keyboard.get_key(flush=True)
+                key_pressed_stimulus, keypress_timestamp = self._participant_keyboard.get_key(flush=True)
 
             self.log_file.write(
                 [trial_number, page_number, stimulus_timestamp, keypress_timestamp, key_pressed_stimulus, False])
@@ -163,7 +166,7 @@ class Experiment:
             self._display.fill(screen=self._screens['fixation_screen'])
             self._display.show()
             self._eye_tracker.log("fixation cross")
-            self._keyboard.get_key(flush=True)
+            self._participant_keyboard.get_key(flush=True)
 
             question_screen = self._get_question_screen(trial_number)
             self._display.fill(screen=question_screen)
@@ -172,7 +175,7 @@ class Experiment:
             key_pressed_question = ''
             # add timeout
             while key_pressed_question not in ['a', 'b', 'c']:
-                key_pressed_question, keypress_timestamp = self._keyboard.get_key(flush=True)
+                key_pressed_question, keypress_timestamp = self._participant_keyboard.get_key(flush=True)
 
             self.log_file.write(
                 [trial_number, question_number, question_timestamp, keypress_timestamp, key_pressed_question, True])
@@ -381,9 +384,6 @@ class Experiment:
         )
 
         self._screens['recalibration_screen'] = recalibration_screen
-
-    def _load_stimuli(self):
-        pass
 
     def _drift_correction(self):
 
