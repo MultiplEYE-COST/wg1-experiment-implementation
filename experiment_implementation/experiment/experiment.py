@@ -196,6 +196,14 @@ class Experiment:
             pos=(constants.DISPSIZE[0] - 210, constants.DISPSIZE[1] - 130)
         )
 
+        stimulus_screen.draw_image(
+            # This requires full path to the image. Revise this path depends on your envi.
+            image='/Users/soyoung/Documents/workspace/wg1-experiment-implementation/experiment_implementation/stimuli/images.jpeg',
+            scale=1,
+            pos=(constants.DISPSIZE[0] - 350, constants.DISPSIZE[1] - 350)
+        )
+
+
         stimulus_screen.draw_circle(
             pos=(constants.DISPSIZE[0] - 225, constants.DISPSIZE[1] - 175),
             color='black',
