@@ -1,0 +1,6 @@
+stimulus_id,page_1_img_path,page_2_img_path,page_3_img_path,page_4_img_path,question_1_img_path,question_2_img_path,question_3_img_path,question_4_img_path,answer_1,answer_2,answer_3,answer_4,stimulus_text_title
+1,/data/stimuli_images/font-size18_spacing2.0_words70.jpg,/data/stimuli_images/font-size18_spacing2.5_words70.jpg,/data/stimuli_images/font-size18_spacing3.0_words70.jpg,,,,,,,,,,some_title
+2,/data/stimuli_images/font-size20_spacing2.0_words50.jpg,/data/stimuli_images/font-size20_spacing2.0_words60.jpg,/data/stimuli_images/font-size20_spacing2.0_words70.jpg,/data/stimuli_images/font-size20_spacing2.0_words90.jpg,,,,,,,,,some_title
+3,/data/stimuli_images/font-size20_spacing2.5_words50.jpg,/data/stimuli_images/font-size20_spacing2.5_words60.jpg,/data/stimuli_images/font-size20_spacing2.5_words70.jpg,/data/stimuli_images/font-size20_spacing2.5_words90.jpg,,,,,,,,,some_title
+4,/data/stimuli_images/font-size20_spacing3.0_words50.jpg,/data/stimuli_images/font-size20_spacing3.0_words60.jpg,/data/stimuli_images/font-size20_spacing3.0_words70.jpg,/data/stimuli_images/font-size20_spacing3.0_words90.jpg,,,,,,,,,some_title
+5,/data/stimuli_images/font-size22_spacing2.0_words70.jpg,/data/stimuli_images/font-size22_spacing2.5_words70.jpg,/data/stimuli_images/font-size22_spacing3.0_words70.jpg,,,,,,,,,,some_title

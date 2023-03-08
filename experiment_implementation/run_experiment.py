@@ -1,24 +1,34 @@
 #!/usr/bin/env python
+from pygaze.libtime import get_time
+from pygaze.logfile import Logfile
 
+from data import data_utils
 from experiment.experiment import Experiment
-from stimuli.stimuli_loader import DataLoader
+
+DATA_PATH = 'data/data.csv'
 
 
 def run_experiment():
-    # TODO: implement functionality to load stimuli
-    # stimuli_texts = [
-    #     # "וּחַ־הַצָּפרׄן וְהַשֶּׁמֶשׁ הׅתְוֲכְּוּ בֵינֵהֶם, מִי מֵהֶם חָזָק יוֺתֵר.‏גָמְרוּ,",
-    #     "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et"
-    #     "dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet "
-    #     "clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. t wisi enim ad minim veniam, "
-    #     "quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem "
-    # ]
+    general_log_file = Logfile(filename='GENERAL_LOGFILE')
+    general_log_file.write(['timestamp', 'message'])
 
-    stimuli_loader = DataLoader()
-    stimuli_loader.prepare_screens()
+    general_log_file.write([get_time(), 'START'])
 
-    experiment = Experiment(stimuli_loader=stimuli_loader)
+    general_log_file.write([get_time(), 'start preparing stimuli screens'])
+    stimuli_screens = data_utils.get_stimuli_screens(DATA_PATH)
+    general_log_file.write([get_time(), 'finished preparing stimuli screens'])
+
+    experiment = Experiment(stimuli_screens=stimuli_screens)
+
+    general_log_file.write([get_time(), 'start practice trial'])
+    experiment.practice_trial()
+    general_log_file.write([get_time(), 'finished practice trial'])
+
+    general_log_file.write([get_time(), 'start practice trial'])
     experiment.run_experiment()
+    general_log_file.write([get_time(), 'finished practice trial'])
+
+    general_log_file.write([get_time(), 'END'])
 
 
 if __name__ == '__main__':

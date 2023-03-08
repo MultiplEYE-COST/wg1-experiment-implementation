@@ -34,27 +34,27 @@ DISPSIZE = (1920, 1080)
 SCREENDIST = 90.0
 
 # Physical display size in centimeters as (width,height). Can be floats.
-# SCREENSIZE = (33.8, 27.1)
+SCREENSIZE = (33.8, 27.1)
 
 ##############################################################################################################
 # BELOW WE SPECIFY THOSE VARIABLES THAT ARE THE SAME ACROSS ALL LANGUAGES AND DEVICES; DO NOT CHANGE THESE ###
 ##############################################################################################################
 
 RESULT_FOLDER_PATH = "results"
-FULL_SCREEN = True
+FULLSCREEN = True
 
 # background color
-BGC = (231, 231, 231)
+BGC = (0, 0, 0)
 
 # foreground color (i.e. font color)
-FGC = (0, 0, 0)
+FGC = (255, 255, 255)
 
 DISPTYPE = 'psychopy'
 FONT = 'Courier New'
 LINE_SPACING = 2.0
 
 # TODO: the below two constants needs to be defined as a function of the display size such that the area where the
-#  stimuli are presented is of the same size at every location
+#  data are presented is of the same size at every location
 WRAP_WIDTH = 900
 TOP_LEFT_CORNER = (460, 195)
 

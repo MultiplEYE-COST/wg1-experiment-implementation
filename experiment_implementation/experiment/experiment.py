@@ -8,6 +8,9 @@ from pygaze.eyetracker import EyeTracker
 from pygaze.libinput import Keyboard
 from pygaze.liblog import Logfile
 from typing import Union
+
+from pygaze.libtime import get_time
+
 import constants
 
 
@@ -26,9 +29,9 @@ class Experiment:
     # TODO define list of keys that the experiment can press to navigate the experiment
     _experimenter_keyboard: Keyboard = Keyboard(keylist=['q', 'n', 'p', 'k', 'v'], timeout=None)
 
-    def __init__(self, stimuli_loader: list[str]):
+    def __init__(self, stimuli_screens: list[list[Screen]]):
 
-        self.stimuli_texts = stimuli_loader
+        self.stimuli_texts = stimuli_screens
 
         self._eye_tracker = EyeTracker(
             self._display,
@@ -39,36 +42,71 @@ class Experiment:
 
         self._set_up_general_screens()
 
-        self.log_file = Logfile()
-        self.log_file.write(['trial_number', 'page_number', 'stimulus_timestamp',
+        self.log_file = Logfile(filename='EXPERIMENT_LOGFILE')
+        self.log_file.write(['timestamp', 'trial_number', 'page_number', 'stimulus_timestamp',
                              'keypress_timestamp', 'key_pressed', 'question'])
 
-    def run_experiment(self):
-
-        # add logging here to the welcome screen and instruction screen
-
+    def welcome_screen(self):
         self._display.fill(self._screens['welcome_screen'])
         self._display.show()
         self._participant_keyboard.get_key()
 
+    def calibrate(self):
         self._eye_tracker.calibrate()
 
+    def run_experiment(self):
         self._display.fill(self._screens['instruction_screen'])
         self._display.show()
         self._participant_keyboard.get_key()
-
-        self._practice_trial()
 
         self._display.fill(self._screens['begin_screen'])
         self._display.show()
         self._participant_keyboard.get_key()
 
-        for trial_number in range(1, 3):
+        for stimulus_nr, stimulus_list in enumerate(self.stimuli_texts):
             # self._drift_correction()
 
             milliseconds = 1000
             libtime.pause(milliseconds)
-            self._execute_trail(trial_number)
+            self._eye_tracker.status_msg(f"trial {stimulus_nr}")
+            self._eye_tracker.log(f"start_trial {stimulus_nr}")
+
+            for page_number, page_screen in enumerate(stimulus_list):
+                # present fixation cross before stimulus
+                self._display.fill(screen=self._screens['fixation_screen'])
+                self._display.show()
+                self._eye_tracker.log("fixation cross")
+                self._participant_keyboard.get_key(flush=True)
+
+                if stimulus_nr > 1 and page_number == 1:
+                    self._display.fill(screen=self._screens['recalibration_screen'])
+                    self._display.show()
+                    self._participant_keyboard.get_key(flush=True)
+                    self._display.fill(screen=self._screens['fixation_screen'])
+                    self._display.show()
+                    self._participant_keyboard.get_key(flush=True)
+
+                # start eye-tracking
+                self._eye_tracker.start_recording()
+                self._eye_tracker.status_msg(f"page {page_number}")
+                self._eye_tracker.log(f"start_recording_page_{page_number}")
+
+                self._display.fill(screen=page_screen)
+                stimulus_timestamp = self._display.show()
+
+                key_pressed_stimulus = ''
+                keypress_timestamp = -1
+                # add timeout
+                while key_pressed_stimulus not in ['space']:
+                    key_pressed_stimulus, keypress_timestamp = self._participant_keyboard.get_key(flush=True)
+
+                self.log_file.write(
+                    [get_time(), stimulus_nr, page_number, stimulus_timestamp, keypress_timestamp, key_pressed_stimulus,
+                     False])
+
+                # stop eye tracking
+                self._eye_tracker.stop_recording()
+                self._eye_tracker.log(f"stop_recording_page_{page_number}")
 
         self._display.fill(self._screens['goodbye_screen'])
         self._display.show()
@@ -80,86 +118,12 @@ class Experiment:
         self._display.close()
         libtime.expend()
 
-    def _practice_trial(self):
-        # two practice runs
-        # present fixation cross before stimulus
-        self._display.fill(screen=self._screens['fixation_screen'])
-        self._display.show()
-        self._participant_keyboard.get_key(flush=True)
-        self._display.fill(screen=self._screens['practice_trial'])
-        _ = self._display.show()
-        key_pressed_stimulus = ''
-        # add timeout
-        while key_pressed_stimulus not in ['space']:
-            key_pressed_stimulus, keypress_timestamp = self._participant_keyboard.get_key(flush=True)
+    def practice_trial(self):
+        self.log_file.write([get_time(), 'practice_trial', '1', 'stimulus_timestamp',
+                             'keypress_timestamp', 'key_pressed', 'question'])
 
-        # present fixation cross before stimulus
-        self._display.fill(screen=self._screens['fixation_screen'])
-        self._display.show()
-        self._participant_keyboard.get_key(flush=True)
-        self._display.fill(screen=self._screens['practice_trial'])
-        _ = self._display.show()
-        key_pressed_stimulus = ''
+    def _questions(self, trial_number: int):
 
-        # add timeout
-        while key_pressed_stimulus not in ['space']:
-            key_pressed_stimulus, keypress_timestamp = self._participant_keyboard.get_key(flush=True)
-
-        self._display.fill(screen=self._screens['fixation_screen'])
-        self._display.show()
-        self._participant_keyboard.get_key(flush=True)
-        question_screen = self._get_question_screen(0)
-        self._display.fill(screen=question_screen)
-        _ = self._display.show()
-        self._participant_keyboard.get_key()
-
-    def _execute_trail(self, trial_number: int):
-
-        # start eye tracking
-        # self.eye_tracker.start_recording()
-        self._eye_tracker.status_msg(f"trial {trial_number}")
-        self._eye_tracker.log(f"start_trial {trial_number}")
-
-        # present target sentence
-        for page_number in range(1, 3):
-            # present fixation cross before stimulus
-            self._display.fill(screen=self._screens['fixation_screen'])
-            self._display.show()
-            self._eye_tracker.log("fixation cross")
-            self._participant_keyboard.get_key(flush=True)
-
-            if trial_number > 1 and page_number == 1:
-                self._display.fill(screen=self._screens['recalibration_screen'])
-                self._display.show()
-                self._participant_keyboard.get_key(flush=True)
-                self._display.fill(screen=self._screens['fixation_screen'])
-                self._display.show()
-                self._participant_keyboard.get_key(flush=True)
-
-            # start eye-tracking
-            self._eye_tracker.start_recording()
-            self._eye_tracker.status_msg(f"page {page_number}")
-            self._eye_tracker.log(f"start_recording_page {page_number}")
-
-            screen = self._get_stimuli_screen(trial_number, page_number)
-
-            self._display.fill(screen=screen)
-            stimulus_timestamp = self._display.show()
-
-            key_pressed_stimulus = ''
-            keypress_timestamp = -1
-            # add timeout
-            while key_pressed_stimulus not in ['space']:
-                key_pressed_stimulus, keypress_timestamp = self._participant_keyboard.get_key(flush=True)
-
-            self.log_file.write(
-                [trial_number, page_number, stimulus_timestamp, keypress_timestamp, key_pressed_stimulus, False])
-
-            # stop eye tracking
-            self._eye_tracker.stop_recording()
-            self._eye_tracker.log(f"stop_recording_page {page_number}")
-
-        # right now we do not track the eye movements during the questions but we can do that
         for question_number in range(1, 3):
 
             # present fixation cross before question
@@ -178,72 +142,10 @@ class Experiment:
                 key_pressed_question, keypress_timestamp = self._participant_keyboard.get_key(flush=True)
 
             self.log_file.write(
-                [trial_number, question_number, question_timestamp, keypress_timestamp, key_pressed_question, True])
+                [get_time(), trial_number, question_number, question_timestamp, keypress_timestamp,
+                 key_pressed_question, True])
 
         libtime.pause(200)
-
-    def _get_stimuli_screen(self, trial: int, page: int) -> Screen:
-
-        # we can use this function to retrieve the stimuli and the respective page from wherever we store them. It
-        # might be good to load them previously and put them in some appropriate format
-
-        stimulus_screen = Screen()
-        stimulus_screen.draw_text(
-            text='Press space to go to next page.',
-            fontsize=12,
-            font=constants.FONT,
-            wrap_width=200,
-            anchor_horiz='right',
-            anchor_vert='bottom',
-            align_text='right',
-            pos=(constants.DISPSIZE[0] - 210, constants.DISPSIZE[1] - 130)
-        )
-
-        stimulus_screen.draw_circle(
-            pos=(constants.DISPSIZE[0] - 225, constants.DISPSIZE[1] - 175),
-            color='black',
-            r=7,
-            pw=3.7
-
-        )
-
-        # TODO: iterate correctly over stimuli texts here, so far we use just one hardcoded text
-        stimulus_screen.draw_text_box(
-            text=f"[This is the page {page} of trial {trial}.] \n\n{self.stimuli_texts[0]}",
-            fontsize=24,
-            font=constants.FONT,
-            pos=constants.TOP_LEFT_CORNER,
-            line_spacing=constants.LINE_SPACING,
-            size=(1050, None),
-            align_text='left',
-            anchor='top_left',
-        )
-
-        return stimulus_screen
-
-    def _get_question_screen(self, trial: int) -> Screen:
-
-        # we can use this function to retrieve the stimuli and the respective page from wherever we store them. It
-        # might be good to load them previously and put them in some appropriate format
-
-        question_screen = Screen()
-
-        question_screen.draw_text_box(
-            text=f"[This is the comprehension question of trial {trial}.] \n\n"
-                 "What was the text about?\n"
-                 "[a] a person\n"
-                 "[b] something else\n"
-                 "[c] nothing\n",
-            fontsize=24,
-            font=constants.FONT,
-            pos=constants.TOP_LEFT_CORNER,
-            line_spacing=constants.LINE_SPACING,
-            size=(1050, None),
-            align_text='left',
-            anchor='top_left',
-        )
-
-        return question_screen
 
     def _set_up_general_screens(self):
         """
@@ -263,7 +165,7 @@ class Experiment:
             text=welcome_text,
             fontsize=24,
             font=constants.FONT,
-            color='black',
+            color=constants.FGC,
             pos=constants.TOP_LEFT_CORNER,
             line_spacing=constants.LINE_SPACING,
             size=(1050, None),
@@ -281,6 +183,7 @@ class Experiment:
                  "It does not matter which of the keys, but you cannot press space."
                  "\n\nIf you are ready, please press space and the experiment will start.",
             fontsize=24,
+            color=constants.FGC,
             font=constants.FONT,
             pos=(400, 230),
             size=(1200, None),
@@ -304,6 +207,7 @@ class Experiment:
             size=(1050, None),
             align_text='center',
             anchor='top_left',
+            color=constants.FGC,
         )
 
         self._screens['goodbye_screen'] = goodbye_screen
@@ -317,7 +221,9 @@ class Experiment:
             anchor_horiz='right',
             anchor_vert='bottom',
             align_text='right',
-            pos=(constants.DISPSIZE[0] - 210, constants.DISPSIZE[1] - 130)
+            pos=(constants.DISPSIZE[0] - 210, constants.DISPSIZE[1] - 130),
+            color=constants.FGC,
+
         )
 
         practice_screen.draw_circle(
@@ -337,6 +243,7 @@ class Experiment:
             size=(1050, None),
             align_text='left',
             anchor='top_left',
+            color=constants.FGC,
         )
 
         self._screens['practice_trial'] = practice_screen
@@ -351,6 +258,7 @@ class Experiment:
             line_spacing=constants.LINE_SPACING,
             size=(1050, None),
             align_text='center',
+            color=constants.FGC,
             anchor='top_left',
         )
 
@@ -365,6 +273,7 @@ class Experiment:
             line_spacing=constants.LINE_SPACING,
             size=(1050, None),
             align_text='center',
+            color=constants.FGC,
             anchor='top_left',
         )
 
@@ -380,6 +289,7 @@ class Experiment:
             line_spacing=constants.LINE_SPACING,
             size=(1050, None),
             align_text='left',
+            color=constants.FGC,
             anchor='top_left',
         )
 
