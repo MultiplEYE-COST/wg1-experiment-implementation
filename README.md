@@ -2,6 +2,9 @@
 
 This repository contains the code for an eye-tracking-while-reading experiment for multiple languages.
 
+
+If you would like to contribute, please read the following guidelines: [CONTRIBUTING.md](guidelines/CONTRIBUTING.md)
+
 ## Set environment with our own PyGaze version
 In order to make the experiment work, you will have to install a few python packages. Please follow these guidelines to 
 do so: [CONDA_ENVIRONMENT.md](guidelines/CONDA_ENVIRONMENT.md)
