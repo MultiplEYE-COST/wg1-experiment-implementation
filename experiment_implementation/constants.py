@@ -41,13 +41,14 @@ SCREENSIZE = (33.8, 27.1)
 ##############################################################################################################
 
 RESULT_FOLDER_PATH = "results"
+LOGFILENAME = 'exp'
 FULLSCREEN = True
 
 # background color
 BGC = (0, 0, 0)
 
 # foreground color (i.e. font color)
-FGC = (255, 255, 255)
+FGC = (0, 0, 0)
 
 DISPTYPE = 'psychopy'
 FONT = 'Courier New'

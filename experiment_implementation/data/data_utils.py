@@ -7,7 +7,7 @@ from pygaze.libtime import get_time
 
 from pathlib import Path
 
-HEADER = [
+DATA_FILE_HEADER = [
     'stimulus_id',
     'page_1_img_path',
     'page_2_img_path',
@@ -17,11 +17,38 @@ HEADER = [
     'question_2_img_path',
     'question_3_img_path',
     'question_4_img_path',
-    'answer_1',
-    'answer_2',
-    'answer_3',
-    'answer_4',
+    'answer_option_1_1',
+    'answer_option_1_2',
+    'answer_option_1_3',
+    'answer_option_2_1',
     'stimulus_text_title',
+    'page_1_text',
+    'page_2_text',
+    'page_3_text',
+    'page_4_text',
+    'question_1_text',
+    'question_2_text',
+    'question_3_text',
+    'question_4_text',
+    'answer_option_2_2',
+    'answer_option_2_3',
+    'answer_option_3_1',
+    'answer_option_3_2',
+    'answer_option_3_3',
+    'answer_option_4_1',
+    'answer_option_4_2',
+    'answer_option_4_3',
+    'question_1_correct_answer',
+    'question_2_correct_answer',
+    'question_3_correct_answer',
+    'question_4_correct_answer',
+]
+
+OTHER_SCREENS_FILE_HEADER = [
+    'id',
+    'img_path',
+    'screen_name',
+    'text',
 ]
 
 DATA_LOGFILE = Logfile(filename='DATA_LOGFILE')
@@ -35,21 +62,29 @@ PAGE_LIST = [
     'page_4_img_path',
 ]
 
+QUESTION_LIST = [
+    'question_1_img_path',
+    'question_2_img_path',
+    'question_3_img_path',
+    'question_4_img_path',
+]
+
 ROOT_PATH = os.getcwd()
 
 
-def get_stimuli_screens(path_data_csv: str, ) -> list[list[Screen]]:
+def get_stimuli_screens(path_data_csv: str) -> list[dict[str, list[Screen]]]:
     screens = []
 
     DATA_LOGFILE.write([get_time(), 'action', 'loading data', path_data_csv, 'stimuli'])
     data_csv = pd.read_csv(path_data_csv, sep=',')
 
     header = data_csv.columns.tolist()
-    if header != HEADER:
+
+    if header != DATA_FILE_HEADER:
         # TODO: implement proper error messages
-        raise Warning(f'Your data csv does not have the correct header names. '
+        raise Warning(f'Your data csv does not have the correct column names. '
                       f'\n Your column names: {header}'
-                      f'\n Correct column names: {HEADER}')
+                      f'\n Correct column names: {DATA_FILE_HEADER}')
 
     DATA_LOGFILE.write([get_time(), 'check', 'header ok', path_data_csv, 'stimuli'])
 
@@ -64,32 +99,95 @@ def get_stimuli_screens(path_data_csv: str, ) -> list[list[Screen]]:
         pages = []
         for page_id, page_name in enumerate(PAGE_LIST):
 
-            page_path = row[page_name]
+            img_path = row[page_name]
 
-            if page_path.notnull().values.any():
-                page_path = ROOT_PATH + page_path.values[0]
+            if img_path.notnull().values.any():
+                img_path = ROOT_PATH + img_path.values[0]
 
                 DATA_LOGFILE.write([
                     get_time(),
                     'action',
                     f'preparing screen for stimuli {stimulus_id} page {page_id+1}',
                     path_data_csv,
-                    f'{row["stimulus_text_title"].to_string(index=False)}'])
+                    f'{row["stimulus_text_title"].to_string(index=False)}'
+                ])
 
-                norm_page_path = os.path.normpath(page_path)
+                norm_img_path = os.path.normpath(img_path)
 
                 page_screen = Screen()
                 page_screen.draw_image(
-                    image=Path(norm_page_path),
+                    image=Path(norm_img_path),
                     scale=1
                 )
 
                 pages.append(page_screen)
 
-        screens.append(pages)
+        questions = []
+        for question_id, question in enumerate(QUESTION_LIST):
+
+            img_path = row[question]
+
+            # not all
+            if img_path.notnull().values.any():
+                img_path = ROOT_PATH + img_path.values[0]
+
+                DATA_LOGFILE.write([
+                    get_time(),
+                    'action',
+                    f'preparing screen for stimuli {stimulus_id} question {question_id+1}',
+                    path_data_csv,
+                    f'{row["stimulus_text_title"].to_string(index=False)}'
+                ])
+
+                norm_img_path = os.path.normpath(img_path)
+
+                question_screen = Screen()
+                question_screen.draw_image(
+                    image=Path(norm_img_path),
+                    scale=1
+                )
+
+                questions.append(question_screen)
+
+        screens.append({'pages': pages, 'questions': questions})
 
     return screens
 
 
-def get_messages_screens(path_messages: str) -> dict[str, Screen]:
-    pass
+def get_other_screens(path_other_screens: str) -> dict[str, Screen]:
+    screens = {}
+
+    DATA_LOGFILE.write([get_time(), 'action', 'loading data', path_other_screens, 'other screens'])
+    other_screens_csv = pd.read_csv(path_other_screens, sep=',')
+
+    header = other_screens_csv.columns.tolist()
+
+    if header != OTHER_SCREENS_FILE_HEADER:
+        # TODO: implement proper error messages
+        raise Warning(f'Your data csv does not have the correct column names. '
+                      f'\n Your column names: {header}'
+                      f'\n Correct column names: {OTHER_SCREENS_FILE_HEADER}')
+
+    DATA_LOGFILE.write([get_time(), 'check', 'header ok', path_other_screens, 'other screens'])
+
+    for idx, row in other_screens_csv.iterrows():
+        DATA_LOGFILE.write([
+            get_time(),
+            'action',
+            f'loading screen {row["id"]}',
+            path_other_screens, row['screen_name']
+        ])
+
+        screen_path = ROOT_PATH + row['img_path']
+        norm_screen_path = os.path.normpath(screen_path)
+
+        screen = Screen()
+        screen.draw_image(
+            image=Path(norm_screen_path),
+            scale=1
+        )
+
+        screens[row['screen_name']] = screen
+
+    return screens
+
