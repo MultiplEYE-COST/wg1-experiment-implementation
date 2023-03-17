@@ -60,7 +60,7 @@ if __name__ == '__main__':
         'other_screens_path': str,
         'session_id': 1,
         'participant_id': 1,
-        'date': 123,
+        'date': 'date',
         'dataset_type': 'core',
     }
 

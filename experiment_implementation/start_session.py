@@ -1,9 +1,8 @@
+#! /usr/bin/env python
+
 import os
-
 from gooey import Gooey, GooeyParser
-
 from datetime import date
-
 import constants
 
 
