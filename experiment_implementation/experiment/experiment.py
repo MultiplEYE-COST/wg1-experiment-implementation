@@ -39,7 +39,8 @@ class Experiment:
             session_id: int,
             participant_id: int,
             dataset_type: str,
-            experiment_start_timestamp: int
+            experiment_start_timestamp: int,
+            exp_path: str,
     ):
 
         self.stimuli_screens = stimuli_screens
@@ -55,8 +56,7 @@ class Experiment:
         self._set_up_general_screens()
 
         self.log_file = Logfile(
-            filename=f'{constants.RESULT_FOLDER_PATH}/'
-                     f'{dataset_type.lower()}/'
+            filename=f'{exp_path}/'
                      f'EXPERIMENT_LOGFILE_{session_id}_{participant_id}_{date}_{experiment_start_timestamp}'
         )
 

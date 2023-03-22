@@ -79,11 +79,10 @@ def create_data_logfile(
         participant_id: int,
         date: str,
         experiment_start_timestamp: int,
-        dataset_type: str
+        exp_path: str
 ):
     lf = Logfile(
-        filename=f'{constants.RESULT_FOLDER_PATH}/'
-                 f'{dataset_type.lower()}/'
+        filename=f'{exp_path}/'
                  f'DATA_LOGFILE_{session_id}_{participant_id}_{date}_{experiment_start_timestamp}')
     lf.write(['timestamp', 'message_type', 'message', 'data_path', 'data_name'])
 

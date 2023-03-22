@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 import datetime
+import os
+import shutil
 
 from pygaze.libtime import get_time
 from pygaze.logfile import Logfile
@@ -16,13 +18,22 @@ def run_experiment(
         participant_id: int,
         date: str,
         dataset_type: str,
+        test_run: bool,
 
 ) -> None:
+
+    if test_run:
+        exp_path = f'{constants.RESULT_FOLDER_PATH}/{dataset_type.lower()}/{participant_id}_testrun'
+        if not os.path.isdir(exp_path):
+            os.mkdir(exp_path)
+    else:
+        exp_path = f'{constants.RESULT_FOLDER_PATH}/{dataset_type.lower()}/{participant_id}'
+        os.mkdir(exp_path)
+
     experiment_start_timestamp = int(datetime.datetime.now().timestamp())
 
     general_log_file = Logfile(
-        filename=f'{constants.RESULT_FOLDER_PATH}/'
-                 f'{dataset_type.lower()}/'
+        filename=f'{exp_path}/'
                  f'GENERAL_LOGFILE_{session_id}_{participant_id}_{date}_{experiment_start_timestamp}'
     )
     general_log_file.write(['timestamp', 'message'])
@@ -35,7 +46,7 @@ def run_experiment(
     general_log_file.write([get_time(), 'START'])
 
     data_logfile = data_utils.create_data_logfile(
-        session_id, participant_id, date, experiment_start_timestamp, dataset_type
+        session_id, participant_id, date, experiment_start_timestamp, exp_path
     )
 
     general_log_file.write([get_time(), 'start preparing stimuli screens'])
@@ -54,6 +65,7 @@ def run_experiment(
         participant_id=participant_id,
         dataset_type=dataset_type,
         experiment_start_timestamp=experiment_start_timestamp,
+        exp_path=exp_path,
     )
 
     general_log_file.write([get_time(), 'show welcome screen'])
