@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+import datetime
+
 from pygaze.libtime import get_time
 from pygaze.logfile import Logfile
 
@@ -21,8 +23,11 @@ def run_experiment(
         dataset_type: str,
 
 ) -> None:
-    general_log_file = Logfile(filename='GENERAL_LOGFILE')
+    general_log_file = Logfile(filename=f'GENERAL_LOGFILE_{session_id}_{participant_id}_{date}')
     general_log_file.write(['timestamp', 'message'])
+    general_log_file.write([get_time(), f'DATE_{date}'])
+    general_log_file.write([get_time(), f'SESSION_ID_{session_id}'])
+    general_log_file.write([get_time(), f'PARTICIPANT_ID_{participant_id}'])
 
     general_log_file.write([get_time(), 'START'])
 
@@ -34,7 +39,13 @@ def run_experiment(
     other_screens = data_utils.get_other_screens(other_screens_path)
     general_log_file.write([get_time(), 'finished preparing other screens'])
 
-    experiment = Experiment(stimuli_screens=stimuli_screens, other_screens=other_screens)
+    experiment = Experiment(
+        stimuli_screens=stimuli_screens,
+        other_screens=other_screens,
+        date=date,
+        session_id=session_id,
+        participant_id=participant_id,
+    )
 
     general_log_file.write([get_time(), 'show welcome screen'])
     experiment.welcome_screen()
@@ -57,10 +68,10 @@ def run_experiment(
 if __name__ == '__main__':
     args_dict = {
         'data_screens_path': DATA_SCREENS_PATH,
-        'other_screens_path': str,
+        'other_screens_path': OTHER_SCREENS_PATH,
         'session_id': 1,
         'participant_id': 1,
-        'date': 'date',
+        'date': str(datetime.date.today()),
         'dataset_type': 'core',
     }
 

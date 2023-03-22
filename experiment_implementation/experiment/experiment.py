@@ -30,7 +30,14 @@ class Experiment:
     # TODO define list of keys that the experiment can press to navigate the experiment
     _experimenter_keyboard: Keyboard = Keyboard(keylist=['q', 'n', 'p', 'k', 'v'], timeout=None)
 
-    def __init__(self, stimuli_screens: list[dict[str, list[Screen]]], other_screens: dict[str, Screen]):
+    def __init__(
+            self,
+            stimuli_screens: list[dict[str, list[Screen]]],
+            other_screens: dict[str, Screen],
+            date: str,
+            session_id: int,
+            participant_id: int,
+    ):
 
         self.stimuli_screens = stimuli_screens
         self.other_screens = other_screens
@@ -46,7 +53,11 @@ class Experiment:
 
         self.log_file = Logfile(filename='EXPERIMENT_LOGFILE')
         self.log_file.write(['timestamp', 'trial_number', 'page_number', 'stimulus_timestamp',
-                             'keypress_timestamp', 'key_pressed', 'question'])
+                             'keypress_timestamp', 'key_pressed', 'question', 'message'])
+
+        self.log_file.write([get_time(), 'NA', 'NA', 'NA', 'NA', 'NA', 'NA', f'DATE_{date}'])
+        self.log_file.write([get_time(), 'NA', 'NA', 'NA', 'NA', 'NA', 'NA', f'SESSION_ID_{session_id}'])
+        self.log_file.write([get_time(), 'NA', 'NA', 'NA', 'NA', 'NA', 'NA', f'PARTICIPANT_ID_{participant_id}'])
 
     def welcome_screen(self):
         self._display.fill(self.other_screens['welcome_screen'])
@@ -66,7 +77,7 @@ class Experiment:
         self._participant_keyboard.get_key()
 
         for stimulus_nr, screens in enumerate(self.stimuli_screens):
-            self._drift_correction()
+            # self._drift_correction()
 
             stimulus_list = screens['pages']
             questions_list = screens['questions']
@@ -79,18 +90,18 @@ class Experiment:
             # show stimulus pages
             for page_number, page_screen in enumerate(stimulus_list):
                 # present fixation cross before stimulus
-                self._display.fill(screen=self.other_screens['fixation_screen'])
-                self._display.show()
-                self._eye_tracker.log("fixation cross")
-                self._participant_keyboard.get_key(flush=True)
-
-                if stimulus_nr > 1 and page_number == 1:
-                    self._display.fill(screen=self._screens['recalibration_screen'])
-                    self._display.show()
-                    self._participant_keyboard.get_key(flush=True)
-                    self._display.fill(screen=self._screens['fixation_screen'])
-                    self._display.show()
-                    self._participant_keyboard.get_key(flush=True)
+                # self._display.fill(screen=self.other_screens['fixation_screen'])
+                # self._display.show()
+                # self._eye_tracker.log("fixation cross")
+                # self._participant_keyboard.get_key(flush=True)
+                #
+                # if stimulus_nr > 1 and page_number == 1:
+                #     self._display.fill(screen=self._screens['recalibration_screen'])
+                #     self._display.show()
+                #     self._participant_keyboard.get_key(flush=True)
+                #     self._display.fill(screen=self.other_screens['fixation_screen'])
+                #     self._display.show()
+                #     self._participant_keyboard.get_key(flush=True)
 
                 # start eye-tracking
                 self._eye_tracker.start_recording()
@@ -108,7 +119,7 @@ class Experiment:
 
                 self.log_file.write(
                     [get_time(), stimulus_nr, page_number, stimulus_timestamp, keypress_timestamp, key_pressed_stimulus,
-                     False])
+                     False, 'NA'])
 
                 # stop eye tracking
                 self._eye_tracker.stop_recording()
@@ -116,10 +127,10 @@ class Experiment:
 
             for question_number, question_screen in enumerate(questions_list):
                 # present fixation cross before stimulus
-                self._display.fill(screen=self.other_screens['fixation_screen'])
-                self._display.show()
-                self._eye_tracker.log("fixation cross")
-                self._participant_keyboard.get_key(flush=True)
+                # self._display.fill(screen=self.other_screens['fixation_screen'])
+                # self._display.show()
+                # self._eye_tracker.log("fixation cross")
+                # self._participant_keyboard.get_key(flush=True)
 
                 # start eye-tracking
                 self._eye_tracker.start_recording()
@@ -155,7 +166,7 @@ class Experiment:
 
     def practice_trial(self):
         self.log_file.write([get_time(), 'practice_trial', '1', 'stimulus_timestamp',
-                             'keypress_timestamp', 'key_pressed', 'question'])
+                             'keypress_timestamp', 'key_pressed', 'question', 'NA'])
 
 
     def _set_up_general_screens(self):

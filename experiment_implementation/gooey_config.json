@@ -1,6 +1,6 @@
 {
   "language": "English",
-  "target": "\"C:\\Users\\debor\\miniconda3\\envs\\multipleye3.9\\python.exe\" -u \"start_session.py\"",
+  "target": "\"C:\\Users\\debor\\miniconda3\\envs\\multipleye3.9\\python.exe\" -u \"C:\\Users\\debor\\repos\\wg1-experiment-implementation\\experiment_implementation\\start_session.py\"",
   "suppress_gooey_flag": false,
   "program_name": "MultiplEYE Data Collection",
   "program_description": "Before we start the experiment we need some information about the participant, session etc. Please fill in the below form and follow the instructions.",
@@ -159,7 +159,7 @@
                   "--date"
                 ],
                 "choices": [],
-                "default": "2023-03-17",
+                "default": "2023-03-20",
                 "dest": "date"
               },
               "options": {
@@ -242,7 +242,7 @@
               }
             },
             {
-              "id": "bb2b5dfa-9b63-4083-81d2-c4398451a59f",
+              "id": "c463a737-274e-4af0-8755-595af2240743",
               "type": "RadioGroup",
               "cli_type": "optional",
               "group_name": "Choose Option",

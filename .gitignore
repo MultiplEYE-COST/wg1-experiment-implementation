@@ -130,7 +130,7 @@ dmypy.json
 
 .idea
 
-*LOGFILE.txt
+*LOGFILE*.txt
 
 default.edf
 default.txt

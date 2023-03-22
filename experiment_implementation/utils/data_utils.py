@@ -54,7 +54,7 @@ OTHER_SCREENS_FILE_HEADER = [
 DATA_LOGFILE = Logfile(filename='DATA_LOGFILE')
 DATA_LOGFILE.write(['timestamp', 'message_type', 'message', 'data_path', 'data_name'])
 
-RANDOMIZATION = [1, 2, 3, 4, 5]
+RANDOMIZATION = [7, 6, 1, 3, 4]
 PAGE_LIST = [
     'page_1_img_path',
     'page_2_img_path',

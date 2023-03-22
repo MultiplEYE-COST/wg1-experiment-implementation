@@ -28,7 +28,8 @@ PUPIL_PORT = 50020
 TRACKERTYPE = 'eyelink'
 
 # Display resolution in pixels as (width,height). Needs to be integers!
-DISPSIZE = (1920, 1080)
+#DISPSIZE = (1920, 1080)
+DISPSIZE = (1536, 864)
 
 # Distance between the eye and the display in centimeters. Float.
 SCREENDIST = 90.0
