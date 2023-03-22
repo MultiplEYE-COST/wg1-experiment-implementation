@@ -8,17 +8,17 @@ https://github.com/esdalmaijer/PyGaze/blob/master/pygaze/defaults.py
 
 DUMMY_MODE = True
 
-# a few custom defaults
-DIALOG_SESSION_TITLE = "Enter Session Name"
-FPS = 60
-RIGHT_EYE = 1
-LEFT_EYE = 0
-BINOCULAR = 2
-SAMPLE_TYPE = 200
-DOT_RAD = 0.25
-EYELINK_SAMPLE_RATE = 1000
-PUPIL_IP = '192.168.0.1'
-PUPIL_PORT = 50020
+# # a few custom defaults
+# # DIALOG_SESSION_TITLE = "Enter Session Name"
+# FPS = 60
+# RIGHT_EYE = 1
+# LEFT_EYE = 0
+# BINOCULAR = 2
+# SAMPLE_TYPE = 200
+# DOT_RAD = 0.25
+# EYELINK_SAMPLE_RATE = 1000
+# PUPIL_IP = '192.168.0.1'
+# PUPIL_PORT = 50020
 
 # THE FOLLOWING VARIABLES CHANGE FROM SYSTEM TO SYSTEM; ADAPT THEM TO YOUR SETUP
 
@@ -42,7 +42,13 @@ SCREENSIZE = (33.8, 27.1)
 ##############################################################################################################
 
 RESULT_FOLDER_PATH = "results"
-LOGFILENAME = 'exp'
+# this is the path to the csv file that contains the stimuli texts
+DATA_SCREENS_PATH = 'data/data.csv'
+
+# this is the path to the csv for all other messages like welcome message that are shown on the screen
+OTHER_SCREENS_PATH = 'data/other_screens.csv'
+
+
 FULLSCREEN = True
 
 # background color
@@ -59,6 +65,8 @@ LINE_SPACING = 2.0
 #  data are presented is of the same size at every location
 WRAP_WIDTH = 900
 TOP_LEFT_CORNER = (460, 195)
+
+
 
 
 

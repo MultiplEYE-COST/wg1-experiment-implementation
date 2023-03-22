@@ -12,7 +12,7 @@ import constants
     program_description="Before we start the experiment we need some information about the participant, "
                         "session etc. Please fill in the below form and follow the instructions.",
     dump_build_config=True,
-    image_dir=os.getcwd() + '/data/logos/',
+    image_dir=os.getcwd() + '/data/icons/',
     default_size=(1500, 800),
     # load_build_config=True,
 )
@@ -63,7 +63,7 @@ def parse_args():
     dataset_type_group = parser.add_mutually_exclusive_group(required=True)
 
     dataset_type_group.add_argument(
-        '--core_multipleye_dataset',
+        '--core_dataset',
         help='Chose this is the data collection is part of the core dataset.',
         action='store_true',
         dest='dataset_type',

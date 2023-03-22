@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import datetime
 import os
 import random
 
@@ -37,6 +38,8 @@ class Experiment:
             date: str,
             session_id: int,
             participant_id: int,
+            dataset_type: str,
+            experiment_start_timestamp: int
     ):
 
         self.stimuli_screens = stimuli_screens
@@ -45,13 +48,18 @@ class Experiment:
         self._eye_tracker = EyeTracker(
             self._display,
             trackertype='dummy',
-            eyedatafile='eyedatafile',
+            eyedatafile=f'eyedatafile',
             logfile='logfile',
         )
 
         self._set_up_general_screens()
 
-        self.log_file = Logfile(filename='EXPERIMENT_LOGFILE')
+        self.log_file = Logfile(
+            filename=f'{constants.RESULT_FOLDER_PATH}/'
+                     f'{dataset_type.lower()}/'
+                     f'EXPERIMENT_LOGFILE_{session_id}_{participant_id}_{date}_{experiment_start_timestamp}'
+        )
+
         self.log_file.write(['timestamp', 'trial_number', 'page_number', 'stimulus_timestamp',
                              'keypress_timestamp', 'key_pressed', 'question', 'message'])
 

@@ -1,3 +1,4 @@
+import datetime
 import os
 
 import pandas as pd
@@ -6,6 +7,8 @@ from pygaze.screen import Screen
 from pygaze.libtime import get_time
 
 from pathlib import Path
+
+import constants
 
 DATA_FILE_HEADER = [
     'stimulus_id',
@@ -51,8 +54,7 @@ OTHER_SCREENS_FILE_HEADER = [
     'text',
 ]
 
-DATA_LOGFILE = Logfile(filename='DATA_LOGFILE')
-DATA_LOGFILE.write(['timestamp', 'message_type', 'message', 'data_path', 'data_name'])
+
 
 RANDOMIZATION = [7, 6, 1, 3, 4]
 PAGE_LIST = [
@@ -72,10 +74,29 @@ QUESTION_LIST = [
 ROOT_PATH = os.getcwd()
 
 
-def get_stimuli_screens(path_data_csv: str) -> list[dict[str, list[Screen]]]:
+def create_data_logfile(
+        session_id: int,
+        participant_id: int,
+        date: str,
+        experiment_start_timestamp: int,
+        dataset_type: str
+):
+    lf = Logfile(
+        filename=f'{constants.RESULT_FOLDER_PATH}/'
+                 f'{dataset_type.lower()}/'
+                 f'DATA_LOGFILE_{session_id}_{participant_id}_{date}_{experiment_start_timestamp}')
+    lf.write(['timestamp', 'message_type', 'message', 'data_path', 'data_name'])
+
+    return lf
+
+
+def get_stimuli_screens(
+        path_data_csv: str,
+        logfile: Logfile,
+) -> list[dict[str, list[Screen]]]:
     screens = []
 
-    DATA_LOGFILE.write([get_time(), 'action', 'loading data', path_data_csv, 'stimuli'])
+    logfile.write([get_time(), 'action', 'loading data', path_data_csv, 'stimuli'])
     data_csv = pd.read_csv(path_data_csv, sep=',')
 
     header = data_csv.columns.tolist()
@@ -86,15 +107,15 @@ def get_stimuli_screens(path_data_csv: str) -> list[dict[str, list[Screen]]]:
                       f'\n Your column names: {header}'
                       f'\n Correct column names: {DATA_FILE_HEADER}')
 
-    DATA_LOGFILE.write([get_time(), 'check', 'header ok', path_data_csv, 'stimuli'])
+    logfile.write([get_time(), 'check', 'header ok', path_data_csv, 'stimuli'])
 
-    DATA_LOGFILE.write([get_time(), 'action', 'preparing screens', path_data_csv, 'stimuli'])
+    logfile.write([get_time(), 'action', 'preparing screens', path_data_csv, 'stimuli'])
 
     for stimulus_id in RANDOMIZATION:
 
         row = data_csv[data_csv['stimulus_id'] == stimulus_id]
-        DATA_LOGFILE.write([get_time(), 'action', f'preparing screen for stimuli {stimulus_id}',
-                            path_data_csv, f'{row["stimulus_text_title"].to_string()}'])
+        logfile.write([get_time(), 'action', f'preparing screen for stimuli {stimulus_id}',
+                       path_data_csv, f'{row["stimulus_text_title"].to_string()}'])
 
         pages = []
         for page_id, page_name in enumerate(PAGE_LIST):
@@ -104,7 +125,7 @@ def get_stimuli_screens(path_data_csv: str) -> list[dict[str, list[Screen]]]:
             if img_path.notnull().values.any():
                 img_path = ROOT_PATH + img_path.values[0]
 
-                DATA_LOGFILE.write([
+                logfile.write([
                     get_time(),
                     'action',
                     f'preparing screen for stimuli {stimulus_id} page {page_id+1}',
@@ -131,7 +152,7 @@ def get_stimuli_screens(path_data_csv: str) -> list[dict[str, list[Screen]]]:
             if img_path.notnull().values.any():
                 img_path = ROOT_PATH + img_path.values[0]
 
-                DATA_LOGFILE.write([
+                logfile.write([
                     get_time(),
                     'action',
                     f'preparing screen for stimuli {stimulus_id} question {question_id+1}',
@@ -154,10 +175,13 @@ def get_stimuli_screens(path_data_csv: str) -> list[dict[str, list[Screen]]]:
     return screens
 
 
-def get_other_screens(path_other_screens: str) -> dict[str, Screen]:
+def get_other_screens(
+        path_other_screens: str,
+        logfile: Logfile,
+) -> dict[str, Screen]:
     screens = {}
 
-    DATA_LOGFILE.write([get_time(), 'action', 'loading data', path_other_screens, 'other screens'])
+    logfile.write([get_time(), 'action', 'loading data', path_other_screens, 'other screens'])
     other_screens_csv = pd.read_csv(path_other_screens, sep=',')
 
     header = other_screens_csv.columns.tolist()
@@ -168,10 +192,10 @@ def get_other_screens(path_other_screens: str) -> dict[str, Screen]:
                       f'\n Your column names: {header}'
                       f'\n Correct column names: {OTHER_SCREENS_FILE_HEADER}')
 
-    DATA_LOGFILE.write([get_time(), 'check', 'header ok', path_other_screens, 'other screens'])
+    logfile.write([get_time(), 'check', 'header ok', path_other_screens, 'other screens'])
 
     for idx, row in other_screens_csv.iterrows():
-        DATA_LOGFILE.write([
+        logfile.write([
             get_time(),
             'action',
             f'loading screen {row["id"]}',
