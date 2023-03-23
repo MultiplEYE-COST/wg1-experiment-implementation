@@ -43,10 +43,10 @@ SCREENSIZE = (33.8, 27.1)
 
 RESULT_FOLDER_PATH = "results"
 # this is the path to the csv file that contains the stimuli texts
-DATA_SCREENS_PATH = 'data/data.csv'
+DATA_SCREENS_PATH = 'data.csv'
 
 # this is the path to the csv for all other messages like welcome message that are shown on the screen
-OTHER_SCREENS_PATH = 'data/other_screens.csv'
+OTHER_SCREENS_PATH = 'other_screens.csv'
 
 
 FULLSCREEN = True

@@ -12,39 +12,79 @@ import constants
 
 DATA_FILE_HEADER = [
     'stimulus_id',
-    'page_1_img_path',
-    'page_2_img_path',
-    'page_3_img_path',
-    'page_4_img_path',
-    'question_1_img_path',
-    'question_2_img_path',
-    'question_3_img_path',
-    'question_4_img_path',
-    'answer_option_1_1',
-    'answer_option_1_2',
+    'stimulus_text_title',
+    'page_1',
+    'page_2',
+    'page_3',
+    'page_4',
+    'page_5',
+    'page_6',
+    'page_7',
+    'page_8',
+    'page_9',
+    'page_10',
+    'page_11',
+    'page_12',
+    'page_13',
+    'question_1',
+    'question_2',
+    'question_3',
+    'answer_option1_1',
+    'answer_option1_2',
     'answer_option_1_3',
     'answer_option_2_1',
-    'stimulus_text_title',
-    'page_1_text',
-    'page_2_text',
-    'page_3_text',
-    'page_4_text',
-    'question_1_text',
-    'question_2_text',
-    'question_3_text',
-    'question_4_text',
     'answer_option_2_2',
     'answer_option_2_3',
     'answer_option_3_1',
     'answer_option_3_2',
     'answer_option_3_3',
-    'answer_option_4_1',
-    'answer_option_4_2',
-    'answer_option_4_3',
-    'question_1_correct_answer',
-    'question_2_correct_answer',
-    'question_3_correct_answer',
-    'question_4_correct_answer',
+    'answer_option_1_1_key',
+    'answer_option_1_2_key',
+    'answer_option_1_3_key',
+    'answer_option_2_1_key',
+    'answer_option_2_2_key',
+    'answer_option_2_3_key',
+    'answer_option_3_1_key',
+    'answer_option_3_2_key',
+    'answer_option_3_3_key',
+    'correct_answer_q1',
+    'correct_answer_q2',
+    'correct_answer_q3',
+    'correct_answer_key_q1',
+    'correct_answer_key_q2',
+    'correct_answer_key_q3',
+    'page_1_img_path',
+    'page_1_img_file',
+    'page_2_img_path',
+    'page_2_img_file',
+    'page_3_img_path',
+    'page_3_img_file',
+    'page_4_img_path',
+    'page_4_img_file',
+    'page_5_img_path',
+    'page_5_img_file',
+    'page_6_img_path',
+    'page_6_img_file',
+    'page_7_img_path',
+    'page_7_img_file',
+    'page_8_img_path',
+    'page_8_img_file',
+    'page_9_img_path',
+    'page_9_img_file',
+    'page_10_img_path',
+    'page_10_img_file',
+    'page_11_img_path',
+    'page_11_img_file',
+    'page_12_img_path',
+    'page_12_img_file',
+    'page_13_img_path',
+    'page_13_img_file',
+    'question_1_img_path',
+    'question_1_img_file',
+    'question_2_img_path',
+    'question_2_img_file',
+    'question_3_img_path',
+    'question_3_img_file',
 ]
 
 OTHER_SCREENS_FILE_HEADER = [
@@ -54,24 +94,30 @@ OTHER_SCREENS_FILE_HEADER = [
     'text',
 ]
 
-
-
 RANDOMIZATION = [7, 6, 1, 3, 4]
 PAGE_LIST = [
     'page_1_img_path',
     'page_2_img_path',
     'page_3_img_path',
     'page_4_img_path',
+    'page_5_img_path',
+    'page_6_img_path',
+    'page_7_img_path',
+    'page_8_img_path',
+    'page_9_img_path',
+    'page_10_img_path',
+    'page_11_img_path',
+    'page_12_img_path',
+    'page_13_img_path',
 ]
 
 QUESTION_LIST = [
     'question_1_img_path',
     'question_2_img_path',
     'question_3_img_path',
-    'question_4_img_path',
 ]
 
-ROOT_PATH = os.getcwd()
+ROOT_PATH = os.getcwd() + '/data/'
 
 
 def create_data_logfile(
@@ -110,7 +156,7 @@ def get_stimuli_screens(
 
     logfile.write([get_time(), 'action', 'preparing screens', path_data_csv, 'stimuli'])
 
-    for stimulus_id in RANDOMIZATION:
+    for stimulus_id in range(1, len(data_csv) + 1):
 
         row = data_csv[data_csv['stimulus_id'] == stimulus_id]
         logfile.write([get_time(), 'action', f'preparing screen for stimuli {stimulus_id}',
@@ -181,7 +227,7 @@ def get_other_screens(
     screens = {}
 
     logfile.write([get_time(), 'action', 'loading data', path_other_screens, 'other screens'])
-    other_screens_csv = pd.read_csv(path_other_screens, sep=',')
+    other_screens_csv = pd.read_csv(ROOT_PATH + path_other_screens, sep=',')
 
     header = other_screens_csv.columns.tolist()
 

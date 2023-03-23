@@ -29,7 +29,7 @@ class Experiment:
     _participant_keyboard: Keyboard = Keyboard(keylist=['space', 'a', 'b', 'c'], timeout=None)
 
     # TODO define list of keys that the experiment can press to navigate the experiment
-    _experimenter_keyboard: Keyboard = Keyboard(keylist=['q', 'n', 'p', 'k', 'v'], timeout=None)
+    _experimenter_keyboard: Keyboard = Keyboard(keylist=['q', 'n', 'p', 'k', 'v'])
 
     def __init__(
             self,
@@ -96,14 +96,37 @@ class Experiment:
             self._eye_tracker.log(f"start_trial {stimulus_nr}")
 
             # show stimulus pages
+
+            # key_pressed_stimulus = ''
+            # keypress_timestamp = -1
+            # # add timeout
+            #
+            # starttime = get_time()
+            # time = get_time()
+            # timeout = 5000
+            #
+            # while key_pressed_stimulus not in ['q', 'n', 'p', 'k', 'v'] or time - starttime <= timeout:
+            #     key_pressed_stimulus, keypress_timestamp = self._experimenter_keyboard.get_key(flush=True)
+            #
+            # if key_pressed_stimulus == 'p':
+            #     self._pause_experiment()
+            #
+            # elif key_pressed_stimulus == 'k':
+            #     self._eye_tracker.calibrate()
+            #
+            # elif key_pressed_stimulus == 'q':
+            #     self._quit_experiment()
+
             for page_number, page_screen in enumerate(stimulus_list):
+
+
                 # present fixation cross before stimulus
                 # self._display.fill(screen=self.other_screens['fixation_screen'])
                 # self._display.show()
                 # self._eye_tracker.log("fixation cross")
                 # self._participant_keyboard.get_key(flush=True)
                 #
-                # if stimulus_nr > 1 and page_number == 1:
+                # if stimulus_nr > 1 and page_number == 1:n      nnnn n n nn n n n
                 #     self._display.fill(screen=self._screens['recalibration_screen'])
                 #     self._display.show()
                 #     self._participant_keyboard.get_key(flush=True)
@@ -283,6 +306,12 @@ class Experiment:
         )
 
         self._screens['recalibration_screen'] = recalibration_screen
+
+    def _pause_experiment():
+        pass
+
+    def _quit_experiment():
+        pass
 
     def _drift_correction(self):
 
