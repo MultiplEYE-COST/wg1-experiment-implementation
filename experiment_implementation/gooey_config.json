@@ -1,7 +1,7 @@
 {
   "show_preview_warning": false,
   "language": "English",
-  "target": "\"C:\\Users\\debor\\miniconda3\\envs\\multipleye3.9\\python.exe\" -u \"C:\\Users\\debor\\repos\\wg1-experiment-implementation\\experiment_implementation\\start_session_additional_dataset.py\"",
+  "target": "\"C:\\Users\\debor\\miniconda3\\envs\\multipleye3.9\\python.exe\" -u \"C:\\Users\\debor\\repos\\wg1-experiment-implementation\\experiment_implementation\\start_session_core_dataset.py\"",
   "dump_build_config": true,
   "load_build_config": null,
   "use_cmd_args": false,
@@ -10,8 +10,8 @@
   "program_description": "Before we start the experiment we need some information about the participant, session etc. Please fill in the below form and follow the instructions.",
   "sidebar_title": "Actions",
   "default_size": [
-    600,
-    500
+    800,
+    400
   ],
   "auto_start": false,
   "advanced": true,
@@ -68,13 +68,13 @@
   "richtext_controls": false,
   "error_color": "#ea7878",
   "cli": [
-    "C:\\Users\\debor\\repos\\wg1-experiment-implementation\\experiment_implementation\\start_session_additional_dataset.py"
+    "C:\\Users\\debor\\repos\\wg1-experiment-implementation\\experiment_implementation\\start_session_core_dataset.py"
   ],
   "layout": "standard",
   "widgets": {
-    "start_session_additional_dataset.py": {
+    "start_session_core_dataset.py": {
       "command": "::gooey/default",
-      "name": "start_session_additional_dataset.py",
+      "name": "start_session_core_dataset.py",
       "help": null,
       "description": "",
       "contents": [
@@ -112,98 +112,18 @@
               }
             },
             {
-              "id": "session_id",
-              "type": "TextField",
-              "cli_type": "positional",
-              "required": true,
-              "data": {
-                "display_name": "Session ID",
-                "help": "",
-                "required": true,
-                "nargs": "",
-                "commands": [],
-                "choices": [],
-                "default": 1,
-                "dest": "session_id"
-              },
-              "options": {
-                "error_color": "#ea7878",
-                "label_color": "#000000",
-                "help_color": "#363636",
-                "full_width": false,
-                "validator": {
-                  "type": "ExpressionValidator",
-                  "test": "user_input and not user_input.isspace()",
-                  "message": "This field is required"
-                },
-                "external_validator": {
-                  "cmd": ""
-                }
-              }
-            },
-            {
-              "id": "data_screens_path",
-              "type": "FileChooser",
-              "cli_type": "positional",
-              "required": true,
-              "data": {
-                "display_name": "Data file",
-                "help": "Please select the csv file where the stimuli information is stored.",
-                "required": true,
-                "nargs": "",
-                "commands": [],
-                "choices": [],
-                "default": null,
-                "dest": "data_screens_path"
-              },
-              "options": {
-                "error_color": "#ea7878",
-                "label_color": "#000000",
-                "help_color": "#363636",
-                "full_width": false,
-                "validator": {
-                  "type": "ExpressionValidator",
-                  "test": "user_input and not user_input.isspace()",
-                  "message": "This field is required"
-                },
-                "external_validator": {
-                  "cmd": ""
-                }
-              }
-            }
-          ],
-          "groups": [],
-          "description": null,
-          "options": {
-            "label_color": "#000000",
-            "description_color": "#363636",
-            "legacy": {
-              "required_cols": 2,
-              "optional_cols": 2
-            },
-            "columns": 2,
-            "padding": 10,
-            "show_border": false
-          }
-        },
-        {
-          "name": "optional_args_msg",
-          "items": [
-            {
               "id": "date",
               "type": "DateChooser",
-              "cli_type": "optional",
+              "cli_type": "positional",
               "required": true,
               "data": {
                 "display_name": "Date",
                 "help": "Please confirm the date. It defaults to today.",
                 "required": true,
                 "nargs": "",
-                "commands": [
-                  "--date"
-                ],
+                "commands": [],
                 "choices": [],
-                "default": "2023-03-23",
+                "default": "2023-03-24",
                 "dest": "date"
               },
               "options": {

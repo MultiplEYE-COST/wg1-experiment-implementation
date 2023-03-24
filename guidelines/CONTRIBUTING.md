@@ -86,5 +86,3 @@ The best pull requests are focused, clearly describe what they're for and why th
 contain tests for whatever changes they make to the code's behavior (but see note on testing). As a bonus these are easiest
 for someone to review, which helps your pull request get merged quickly. Standard advice about good
 pull requests for open-source projects applies.
-
-

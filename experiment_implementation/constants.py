@@ -1,10 +1,10 @@
 #!/usr/bin/env python
-
 """
 This file will automatically be loaded by pygaze. We can define default values here that will automatically be used
 More on what default values there are can be found in the pygaze git repo:
 https://github.com/esdalmaijer/PyGaze/blob/master/pygaze/defaults.py
 """
+from __future__ import annotations
 
 DUMMY_MODE = True
 
@@ -28,7 +28,7 @@ DUMMY_MODE = True
 TRACKERTYPE = 'eyelink'
 
 # Display resolution in pixels as (width,height). Needs to be integers!
-#DISPSIZE = (1920, 1080)
+# DISPSIZE = (1920, 1080)
 DISPSIZE = (1536, 864)
 
 # Distance between the eye and the display in centimeters. Float.
@@ -41,7 +41,7 @@ SCREENSIZE = (33.8, 27.1)
 # BELOW WE SPECIFY THOSE VARIABLES THAT ARE THE SAME ACROSS ALL LANGUAGES AND DEVICES; DO NOT CHANGE THESE ###
 ##############################################################################################################
 
-RESULT_FOLDER_PATH = "results"
+RESULT_FOLDER_PATH = 'results'
 # this is the path to the csv file that contains the stimuli texts
 DATA_SCREENS_PATH = 'data.csv'
 
@@ -65,8 +65,3 @@ LINE_SPACING = 2.0
 #  data are presented is of the same size at every location
 WRAP_WIDTH = 900
 TOP_LEFT_CORNER = (460, 195)
-
-
-
-
-

@@ -3,11 +3,11 @@
 This repository contains the code for an eye-tracking-while-reading experiment for multiple languages.
 
 ## Set environment with our own PyGaze version
-In order to make the experiment work, you will have to install a few python packages. Please follow these guidelines to 
+In order to make the experiment work, you will have to install a few python packages. Please follow these guidelines to
 do so: [CONDA_ENVIRONMENT.md](guidelines/CONDA_ENVIRONMENT.md)
 
 ## Develop experiments for EyeLink
-You will need to install `pylink` a package provided by SR Research if you use EyeLink eye-trackers. 
+You will need to install `pylink` a package provided by SR Research if you use EyeLink eye-trackers.
 Note that `pip install pylink` installs a different package although the names are the same! Step-by-step instructions
 of how to install `pylink` can be found here: [INSTALL_PYLINK.md](guidelines/INSTALL_PYLINK.md)
 

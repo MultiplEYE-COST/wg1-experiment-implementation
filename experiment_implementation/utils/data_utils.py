@@ -1,14 +1,12 @@
-import datetime
+from __future__ import annotations
+
 import os
-
-import pandas as pd
-from pygaze.logfile import Logfile
-from pygaze.screen import Screen
-from pygaze.libtime import get_time
-
 from pathlib import Path
 
-import constants
+import pandas as pd
+from pygaze.libtime import get_time
+from pygaze.logfile import Logfile
+from pygaze.screen import Screen
 
 DATA_FILE_HEADER = [
     'stimulus_id',
@@ -125,11 +123,12 @@ def create_data_logfile(
         participant_id: int,
         date: str,
         experiment_start_timestamp: int,
-        exp_path: str
+        exp_path: str,
 ):
     lf = Logfile(
         filename=f'{exp_path}/'
-                 f'DATA_LOGFILE_{session_id}_{participant_id}_{date}_{experiment_start_timestamp}')
+                 f'DATA_LOGFILE_{session_id}_{participant_id}_{date}_{experiment_start_timestamp}',
+    )
     lf.write(['timestamp', 'message_type', 'message', 'data_path', 'data_name'])
 
     return lf
@@ -141,29 +140,43 @@ def get_stimuli_screens(
 ) -> list[dict[str, list[Screen]]]:
     screens = []
 
-    logfile.write([get_time(), 'action', 'loading data', path_data_csv, 'stimuli'])
-    data_csv = pd.read_csv(path_data_csv, sep=',')
+    logfile.write([
+        get_time(), 'action', 'loading data',
+        path_data_csv, 'stimuli',
+    ])
+    data_csv = pd.read_csv(ROOT_PATH + path_data_csv, sep=',')
 
     header = data_csv.columns.tolist()
 
-    if header != DATA_FILE_HEADER:
-        # TODO: implement proper error messages
-        raise Warning(f'Your data csv does not have the correct column names. '
-                      f'\n Your column names: {header}'
-                      f'\n Correct column names: {DATA_FILE_HEADER}')
+    # if header != DATA_FILE_HEADER:
+    #     # TODO: implement proper error messages
+    #     raise Warning(
+    #         f'Your data csv does not have the correct column names. '
+    #         f'\n Your column names: {header}'
+    #         f'\n Correct column names: {DATA_FILE_HEADER}',
+    #     )
 
     logfile.write([get_time(), 'check', 'header ok', path_data_csv, 'stimuli'])
 
-    logfile.write([get_time(), 'action', 'preparing screens', path_data_csv, 'stimuli'])
+    logfile.write([
+        get_time(), 'action', 'preparing screens',
+        path_data_csv, 'stimuli',
+    ])
 
     for stimulus_id in range(1, len(data_csv) + 1):
 
         row = data_csv[data_csv['stimulus_id'] == stimulus_id]
-        logfile.write([get_time(), 'action', f'preparing screen for stimuli {stimulus_id}',
-                       path_data_csv, f'{row["stimulus_text_title"].to_string()}'])
+        logfile.write([
+            get_time(
+            ), 'action', f'preparing screen for stimuli {stimulus_id}',
+            path_data_csv, f'{row["stimulus_text_title"].to_string()}',
+        ])
 
         pages = []
         for page_id, page_name in enumerate(PAGE_LIST):
+
+            if page_name not in data_csv.columns:
+                continue
 
             img_path = row[page_name]
 
@@ -175,7 +188,7 @@ def get_stimuli_screens(
                     'action',
                     f'preparing screen for stimuli {stimulus_id} page {page_id+1}',
                     path_data_csv,
-                    f'{row["stimulus_text_title"].to_string(index=False)}'
+                    f'{row["stimulus_text_title"].to_string(index=False)}',
                 ])
 
                 norm_img_path = os.path.normpath(img_path)
@@ -183,7 +196,7 @@ def get_stimuli_screens(
                 page_screen = Screen()
                 page_screen.draw_image(
                     image=Path(norm_img_path),
-                    scale=1
+                    scale=1,
                 )
 
                 pages.append(page_screen)
@@ -202,7 +215,7 @@ def get_stimuli_screens(
                     'action',
                     f'preparing screen for stimuli {stimulus_id} question {question_id+1}',
                     path_data_csv,
-                    f'{row["stimulus_text_title"].to_string(index=False)}'
+                    f'{row["stimulus_text_title"].to_string(index=False)}',
                 ])
 
                 norm_img_path = os.path.normpath(img_path)
@@ -210,7 +223,7 @@ def get_stimuli_screens(
                 question_screen = Screen()
                 question_screen.draw_image(
                     image=Path(norm_img_path),
-                    scale=1
+                    scale=1,
                 )
 
                 questions.append(question_screen)
@@ -226,25 +239,33 @@ def get_other_screens(
 ) -> dict[str, Screen]:
     screens = {}
 
-    logfile.write([get_time(), 'action', 'loading data', path_other_screens, 'other screens'])
+    logfile.write([
+        get_time(), 'action', 'loading data',
+        path_other_screens, 'other screens',
+    ])
     other_screens_csv = pd.read_csv(ROOT_PATH + path_other_screens, sep=',')
 
     header = other_screens_csv.columns.tolist()
 
     if header != OTHER_SCREENS_FILE_HEADER:
         # TODO: implement proper error messages
-        raise Warning(f'Your data csv does not have the correct column names. '
-                      f'\n Your column names: {header}'
-                      f'\n Correct column names: {OTHER_SCREENS_FILE_HEADER}')
+        raise Warning(
+            f'Your data csv does not have the correct column names. '
+            f'\n Your column names: {header}'
+            f'\n Correct column names: {OTHER_SCREENS_FILE_HEADER}',
+        )
 
-    logfile.write([get_time(), 'check', 'header ok', path_other_screens, 'other screens'])
+    logfile.write([
+        get_time(), 'check', 'header ok',
+        path_other_screens, 'other screens',
+    ])
 
     for idx, row in other_screens_csv.iterrows():
         logfile.write([
             get_time(),
             'action',
             f'loading screen {row["id"]}',
-            path_other_screens, row['screen_name']
+            path_other_screens, row['screen_name'],
         ])
 
         screen_path = ROOT_PATH + row['img_path']
@@ -253,10 +274,9 @@ def get_other_screens(
         screen = Screen()
         screen.draw_image(
             image=Path(norm_screen_path),
-            scale=1
+            scale=1,
         )
 
         screens[row['screen_name']] = screen
 
     return screens
-

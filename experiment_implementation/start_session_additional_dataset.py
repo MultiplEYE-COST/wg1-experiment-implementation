@@ -1,17 +1,21 @@
 #! /usr/bin/env python
+from __future__ import annotations
 
 import os
-from gooey import Gooey, GooeyParser, Events
 from datetime import date
+
 import constants
+from gooey import Events
+from gooey import Gooey
+from gooey import GooeyParser
 from utils.experiment_utils import validate_participant_id
 
 
 @Gooey(
     language='English',
-    program_name="MultiplEYE Data Collection",
-    program_description="Before we start the experiment we need some information about the participant, "
-                        "session etc. Please fill in the below form and follow the instructions.",
+    program_name='MultiplEYE Data Collection',
+    program_description='Before we start the experiment we need some information about the participant, '
+                        'session etc. Please fill in the below form and follow the instructions.',
     dump_build_config=True,
     image_dir=os.getcwd() + '/data/icons/',
     default_size=(600, 500),
@@ -20,7 +24,9 @@ from utils.experiment_utils import validate_participant_id
     # load_build_config=True,
 )
 def parse_args():
-    parser = GooeyParser(description='Information about current data collection')
+    parser = GooeyParser(
+        description='Information about current data collection',
+    )
 
     parser.add_argument(
         'participant_id',
@@ -42,13 +48,13 @@ def parse_args():
         help='Please confirm the date. It defaults to today.',
         required=True,
         default=str(date.today()),
-        widget="DateChooser",
+        widget='DateChooser',
     )
     parser.add_argument(
         'data_screens_path',
         metavar='Data file',
         help='Please select the csv file where the stimuli information is stored.',
-        widget="FileChooser",
+        widget='FileChooser',
     )
 
     args = vars(parser.parse_args())
