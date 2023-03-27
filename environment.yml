@@ -1,4 +1,4 @@
-name: multipleye3.9
+name: multipleye3.9-test
 channels:
   - conda-forge
   - defaults
@@ -9,7 +9,6 @@ dependencies:
   - pip:
       - pygame==2.1.2
       - git+https://github.com/theDebbister/PyGaze # pygaze
-      - gooey==1.2.0a0 --no-dependencies
       - re-wx>=0.0.2
       - wxpython>=4.1.0
       - Pillow>=4.3.0
@@ -18,3 +17,4 @@ dependencies:
       - pygtrie>=2.3.3
       - typing-extensions==3.10.0.2
       - mypy-extensions==0.4.3
+

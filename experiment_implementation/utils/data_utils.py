@@ -10,6 +10,9 @@ from pygaze.screen import Screen
 
 import constants
 
+# The column names for the datafiles are at the moment hardcoded in the data_utils.py. This is not ideal,
+# but will change this later once the data format is clearer.
+
 DATA_FILE_HEADER = [
     'stimulus_id',
     'stimulus_text_title',
@@ -94,7 +97,6 @@ OTHER_SCREENS_FILE_HEADER = [
     'text',
 ]
 
-RANDOMIZATION = [7, 6, 1, 3, 4]
 PAGE_LIST = [
     'page_1_img_path',
     'page_2_img_path',
@@ -124,7 +126,7 @@ def create_data_logfile(
         date: str,
         experiment_start_timestamp: int,
         exp_path: str,
-):
+) -> Logfile:
     lf = Logfile(
         filename=f'{exp_path}/'
                  f'DATA_LOGFILE_{session_id}_{participant_id}_{date}_{experiment_start_timestamp}',

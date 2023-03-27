@@ -74,7 +74,7 @@ class Experiment:
         self._display.show()
         self._keyboard.get_key()
 
-    def calibrate(self):
+    def calibrate(self) -> None:
 
         # this is a workaround for now, as the calibration screen would be black as per default
         # we need to set the background to our color
@@ -92,7 +92,7 @@ class Experiment:
 
         self._eye_tracker.calibrate()
 
-    def run_experiment(self):
+    def run_experiment(self) -> None:
         self._display.fill(self.other_screens['instruction_screen'])
         self._display.show()
         self._keyboard.get_key()
@@ -102,10 +102,23 @@ class Experiment:
         self._keyboard.get_key()
 
         for stimulus_nr, screens in enumerate(self.stimuli_screens):
+
+            # before we present the next stimulus, the experiment can recalibrate, pause or quite the experiment
+            # not all the functionality is implemented yet
+            # also, there might be a better way to do this but for now it works
             self._display.fill(self.other_screens['empty_screen'])
             self._display.show()
 
+            # if there is no key pressed, there is a timeout, so we can continue
             key_pressed, keypress_timestamp = self._keyboard.get_key(flush=True, timeout=5000)
+
+            self.log_file.write(
+                [
+                    get_time(), stimulus_nr, pd.NA, pd.NA, keypress_timestamp,
+                    key_pressed,
+                    False, 'event before drift correction',
+                ],
+            )
 
             if key_pressed == 'p':
                 self._pause_experiment()
@@ -115,14 +128,6 @@ class Experiment:
 
             elif key_pressed == 'q':
                 self._quit_experiment()
-
-            self.log_file.write(
-                [
-                    get_time(), stimulus_nr, pd.NA, pd.NA, keypress_timestamp,
-                    key_pressed,
-                    False, 'event before drift correction',
-                ],
-            )
 
             self._drift_correction()
 
@@ -143,14 +148,6 @@ class Experiment:
                 # self._display.show()
                 # self._eye_tracker.log("fixation cross")
                 # self._participant_keyboard.get_key(flush=True)
-                #
-                # if stimulus_nr > 1 and page_number == 1:
-                #     self._display.fill(screen=self._screens['recalibration_screen'])
-                #     self._display.show()
-                #     self._participant_keyboard.get_key(flush=True)
-                #     self._display.fill(screen=self.other_screens['fixation_screen'])
-                #     self._display.show()
-                #     self._participant_keyboard.get_key(flush=True)
 
                 # start eye-tracking
                 self._eye_tracker.start_recording()
@@ -223,12 +220,12 @@ class Experiment:
         self._keyboard.get_key()
 
         # end the experiment
-        self.log_file.close()
-        self._eye_tracker.close()
-        self._display.close()
-        libtime.expend()
+        self._quit_experiment()
 
-    def practice_trial(self):
+    def practice_trial(self) -> None:
+        """
+        Not implemented yet.
+        """
         self.log_file.write([
             get_time(), 'practice_trial', '1', 'stimulus_timestamp',
             'keypress_timestamp', 'key_pressed', 'question', pd.NA,
@@ -276,8 +273,8 @@ class Experiment:
     def _pause_experiment(self):
         pass
 
-    def _quit_experiment(self):
-        # end the experiment
+    def _quit_experiment(self) -> None:
+        # end the experiment and close all the files + connection to eye-tracker
         self.log_file.close()
         self._eye_tracker.close()
         self._display.close()
@@ -293,7 +290,6 @@ class Experiment:
         else:
             self._eye_tracker.scr.draw_image(image=os.getcwd() + '/data/other_screens_images/empty_screen.png')
 
-        # TODO: make sure we set this up correctly such that the experimenter that can interrupt the experiment here
         checked = False
         while not checked:
             checked = self._eye_tracker.drift_correction(

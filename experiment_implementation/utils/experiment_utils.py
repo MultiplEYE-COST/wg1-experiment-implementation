@@ -26,7 +26,8 @@ def validate_participant_id(value: str) -> int:
     return value
 
 
-def create_results_folder() -> None:
+def create_results_folder(dataset) -> None:
 
-    if not os.path.isdir(f'{constants.RESULT_FOLDER_PATH}'):
-        os.makedirs(f'{constants.RESULT_FOLDER_PATH}')
+    if not os.path.isdir(f'{constants.RESULT_FOLDER_PATH}/{dataset}/'):
+        os.makedirs(f'{constants.RESULT_FOLDER_PATH}/{dataset}/')
+

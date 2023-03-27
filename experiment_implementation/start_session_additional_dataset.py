@@ -59,17 +59,18 @@ def parse_args():
 
     args = vars(parser.parse_args())
 
-    args['dataset_type'] = 'core_dataset'
-    args['test_run'] = True
-    args['other_screens_path'] = constants.DATA_ROOT_PATH + constants.OTHER_SCREENS_PATH
-
     return args
 
 
 if __name__ == '__main__':
-    create_results_folder()
+    create_results_folder(dataset='additional_dataset')
 
     arguments = parse_args()
+
+    # hardcoded args
+    arguments['dataset_type'] = 'additional_dataset'
+    arguments['test_run'] = True
+    arguments['other_screens_path'] = constants.DATA_ROOT_PATH + constants.OTHER_SCREENS_PATH
 
     # !!! THIS IMPORT CANNOT BE MOVED SOMEWHERE ELSE; OTHERWISE THE PROGRAM GETS REALLY SLOW !!!
     from run_experiment import run_experiment
