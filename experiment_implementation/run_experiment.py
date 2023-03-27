@@ -27,7 +27,7 @@ def run_experiment(
     if test_run:
         exp_path = f'{constants.RESULT_FOLDER_PATH}/{dataset_type.lower()}/{participant_id}_testrun'
         if not os.path.isdir(exp_path):
-            os.mkdir(exp_path)
+            os.makedirs(exp_path)
 
     # it has already been checked that there is no folder with the same participant ID, so we can create a new folder
     else:
@@ -109,7 +109,7 @@ if __name__ == '__main__':
         'session_id': 1,
         'participant_id': 1,
         'date': str(datetime.date.today()),
-        'dataset_type': 'core',
+        'dataset_type': 'core_dataset',
     }
 
     run_experiment(**args_dict)

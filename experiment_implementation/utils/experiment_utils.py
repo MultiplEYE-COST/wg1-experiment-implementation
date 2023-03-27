@@ -5,7 +5,7 @@ import os
 import constants
 
 
-def validate_participant_id(value):
+def validate_participant_id(value: str) -> int:
     # check if the participant ID is a number
     try:
         value = int(value)
@@ -26,4 +26,7 @@ def validate_participant_id(value):
     return value
 
 
+def create_results_folder() -> None:
 
+    if not os.path.isdir(f'{constants.RESULT_FOLDER_PATH}'):
+        os.makedirs(f'{constants.RESULT_FOLDER_PATH}')

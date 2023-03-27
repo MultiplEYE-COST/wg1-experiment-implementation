@@ -8,7 +8,7 @@ import constants
 from gooey import Events
 from gooey import Gooey
 from gooey import GooeyParser
-from utils.experiment_utils import validate_participant_id
+from utils.experiment_utils import validate_participant_id, create_results_folder
 
 
 @Gooey(
@@ -59,14 +59,16 @@ def parse_args():
 
     args = vars(parser.parse_args())
 
-    args['dataset_type'] = 'Core_dataset'
+    args['dataset_type'] = 'core_dataset'
     args['test_run'] = True
-    args['other_screens_path'] = constants.OTHER_SCREENS_PATH
+    args['other_screens_path'] = constants.DATA_ROOT_PATH + constants.OTHER_SCREENS_PATH
 
     return args
 
 
 if __name__ == '__main__':
+    create_results_folder()
+
     arguments = parse_args()
 
     # !!! THIS IMPORT CANNOT BE MOVED SOMEWHERE ELSE; OTHERWISE THE PROGRAM GETS REALLY SLOW !!!

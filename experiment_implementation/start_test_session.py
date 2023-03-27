@@ -46,10 +46,10 @@ def parse_args():
     args = vars(parser.parse_args())
 
     args['session_id'] = -1
-    args['dataset_type'] = 'core_dataset'
-    args['data_screens_path'] = constants.DATA_ROOT_PATH + constants.DATA_SCREENS_PATH
+    args['dataset_type'] = 'test_dataset'
+    args['data_screens_path'] = constants.DATA_ROOT_PATH + constants.TEST_DATA_PATH
     args['other_screens_path'] = constants.DATA_ROOT_PATH + constants.OTHER_SCREENS_PATH
-    args['test_run'] = False
+    args['test_run'] = True
 
     return args
 

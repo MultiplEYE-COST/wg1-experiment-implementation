@@ -8,6 +8,8 @@ from pygaze.libtime import get_time
 from pygaze.logfile import Logfile
 from pygaze.screen import Screen
 
+import constants
+
 DATA_FILE_HEADER = [
     'stimulus_id',
     'stimulus_text_title',
@@ -115,8 +117,6 @@ QUESTION_LIST = [
     'question_3_img_path',
 ]
 
-ROOT_PATH = os.getcwd() + '/data/'
-
 
 def create_data_logfile(
         session_id: int,
@@ -144,7 +144,7 @@ def get_stimuli_screens(
         get_time(), 'action', 'loading data',
         path_data_csv, 'stimuli',
     ])
-    data_csv = pd.read_csv(ROOT_PATH + path_data_csv, sep=',')
+    data_csv = pd.read_csv(path_data_csv, sep=',')
 
     header = data_csv.columns.tolist()
 
@@ -181,7 +181,7 @@ def get_stimuli_screens(
             img_path = row[page_name]
 
             if img_path.notnull().values.any():
-                img_path = ROOT_PATH + img_path.values[0]
+                img_path = constants.DATA_ROOT_PATH + img_path.values[0]
 
                 logfile.write([
                     get_time(),
@@ -208,7 +208,7 @@ def get_stimuli_screens(
 
             # not all
             if img_path.notnull().values.any():
-                img_path = ROOT_PATH + img_path.values[0]
+                img_path = constants.DATA_ROOT_PATH + img_path.values[0]
 
                 logfile.write([
                     get_time(),
@@ -243,7 +243,7 @@ def get_other_screens(
         get_time(), 'action', 'loading data',
         path_other_screens, 'other screens',
     ])
-    other_screens_csv = pd.read_csv(ROOT_PATH + path_other_screens, sep=',')
+    other_screens_csv = pd.read_csv(path_other_screens, sep=',')
 
     header = other_screens_csv.columns.tolist()
 
@@ -268,7 +268,7 @@ def get_other_screens(
             path_other_screens, row['screen_name'],
         ])
 
-        screen_path = ROOT_PATH + row['img_path']
+        screen_path = constants.DATA_ROOT_PATH + row['img_path']
         norm_screen_path = os.path.normpath(screen_path)
 
         screen = Screen()

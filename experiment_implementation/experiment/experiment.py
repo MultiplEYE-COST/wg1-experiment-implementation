@@ -61,24 +61,13 @@ class Experiment:
             'keypress_timestamp', 'key_pressed', 'question', 'message',
         ])
 
-        self.log_file.write([
-            get_time(), pd.NA, pd.NA, pd.NA,
-            pd.NA, pd.NA, pd.NA, f'DATE_{date}',
-        ])
-
-        self.log_file.write(
-            [get_time(), pd.NA, pd.NA, pd.NA,
-             pd.NA, pd.NA, pd.NA, f'EXP_START_TIMESTAMP_{experiment_start_timestamp}'],
-        )
-
-        self.log_file.write([
-            get_time(), pd.NA, pd.NA, pd.NA,
-            pd.NA, pd.NA, pd.NA, f'SESSION_ID_{session_id}',
-        ])
-        self.log_file.write([
-            get_time(), pd.NA, pd.NA, pd.NA, pd.NA,
-            pd.NA, pd.NA, f'PARTICIPANT_ID_{participant_id}',
-        ])
+        # logfile headers
+        self.log_file.write([get_time(), pd.NA, pd.NA, pd.NA, pd.NA, pd.NA, pd.NA, f'DATE_{date}'])
+        self.log_file.write([get_time(), pd.NA, pd.NA, pd.NA, pd.NA, pd.NA, pd.NA,
+                             f'EXP_START_TIMESTAMP_{experiment_start_timestamp}'])
+        self.log_file.write([get_time(), pd.NA, pd.NA, pd.NA, pd.NA, pd.NA, pd.NA, f'SESSION_ID_{session_id}'])
+        self.log_file.write([get_time(), pd.NA, pd.NA, pd.NA, pd.NA, pd.NA, pd.NA, f'PARTICIPANT_ID_{participant_id}'])
+        self.log_file.write([get_time(), pd.NA, pd.NA, pd.NA, pd.NA,pd.NA, pd.NA, f'DATASET_TYPE_{dataset_type}'])
 
     def welcome_screen(self):
         self._display.fill(self.other_screens['welcome_screen'])
@@ -87,6 +76,8 @@ class Experiment:
 
     def calibrate(self):
 
+        # this is a workaround for now, as the calibration screen would be black as per default
+        # we need to set the background to our color
         if constants.DUMMY_MODE:
             self._eye_tracker.screen.draw_image(
                 image=os.getcwd() + '/data/other_screens_images/empty_screen.png',
@@ -245,8 +236,7 @@ class Experiment:
 
     def _set_up_general_screens(self):
         """
-        This function is used to
-        :return:
+        This function will be replaced once we have all the screens as images.
         """
 
         goodbye_screen = Screen()
@@ -267,59 +257,8 @@ class Experiment:
 
         self._screens['goodbye_screen'] = goodbye_screen
 
-        practice_screen = Screen()
-        practice_screen.draw_text(
-            text='Press space to go to next page.',
-            fontsize=12,
-            font=constants.FONT,
-            wrap_width=200,
-            anchor_horiz='right',
-            anchor_vert='bottom',
-            align_text='right',
-            pos=(constants.DISPSIZE[0] - 210, constants.DISPSIZE[1] - 130),
-            color=constants.FGC,
-
-        )
-
-        practice_screen.draw_circle(
-            pos=(constants.DISPSIZE[0] - 225, constants.DISPSIZE[1] - 175),
-            color='black',
-            r=7,
-            pw=3.7,
-
-        )
-
-        practice_screen.draw_text_box(
-            text=f'[This is a page of a practice trial.] \n\n{self.stimuli_screens[0]}',
-            fontsize=24,
-            font=constants.FONT,
-            pos=constants.TOP_LEFT_CORNER,
-            line_spacing=constants.LINE_SPACING,
-            size=(1050, None),
-            align_text='left',
-            anchor='top_left',
-            color=constants.FGC,
-        )
-
-        self._screens['practice_trial'] = practice_screen
-
-        calibration_screen = Screen()
-        calibration_screen.draw_text_box(
-            text='\n\nIf this were a real experiment, calibration followed by validation would now take place.\n\n\n\n'
-                 'We will start now with a practice trial.',
-            fontsize=24,
-            font=constants.FONT,
-            pos=constants.TOP_LEFT_CORNER,
-            line_spacing=constants.LINE_SPACING,
-            size=(1050, None),
-            align_text='center',
-            color=constants.FGC,
-            anchor='top_left',
-        )
-
-        self._screens['calibration_screen'] = calibration_screen
-
         begin_screen = Screen()
+        begin_screen.draw_image(image=os.getcwd() + '/data/other_screens_images/empty_screen.png')
         begin_screen.draw_text_box(
             text='\n\nThe practice trial is over, press space to start with the experiment.',
             fontsize=24,
@@ -338,19 +277,21 @@ class Experiment:
         pass
 
     def _quit_experiment(self):
-        pass
+        # end the experiment
+        self.log_file.close()
+        self._eye_tracker.close()
+        self._display.close()
+        libtime.expend()
 
     def _drift_correction(self):
 
+        # this is a workaround for now, as the calibration screen would be black as per default
+        # we need to set the background to our color
         if constants.DUMMY_MODE:
-            self._eye_tracker.screen.draw_image(
-                image=os.getcwd() + '/data/other_screens_images/empty_screen.png',
-            )
+            self._eye_tracker.screen.draw_image(image=os.getcwd() + '/data/other_screens_images/empty_screen.png')
 
         else:
-            self._eye_tracker.scr.draw_image(
-                image=os.getcwd() + '/data/other_screens_images/empty_screen.png',
-            )
+            self._eye_tracker.scr.draw_image(image=os.getcwd() + '/data/other_screens_images/empty_screen.png')
 
         # TODO: make sure we set this up correctly such that the experimenter that can interrupt the experiment here
         checked = False
