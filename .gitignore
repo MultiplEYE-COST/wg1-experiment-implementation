@@ -132,5 +132,9 @@ dmypy.json
 
 *LOGFILE*.txt
 
+results/
+
 default.edf
 default.txt
+
+tmp.txt
