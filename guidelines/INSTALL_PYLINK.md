@@ -55,7 +55,7 @@ cp -R "C:\Program Files (x86)\SR Research\EyeLink\SampleExperiments\Python\64\3.
 **Mac**
 
 ```
-cp -R /Applications/EyeLink/SampleExperiments/Python/3.9/pylink/ /Users/[USERNAME]/miniconda3/envs/multipleye3.9/lib/python3.10/site-packages
+cp -R /Applications/EyeLink/SampleExperiments/Python/3.9/pylink/ /Users/[USERNAME]/miniconda3/envs/multipleye3.9/lib/python3.9/site-packages
 ```
 
 Note, that the path to your environment (for both Mac and Windows) looks different if:
