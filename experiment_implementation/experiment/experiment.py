@@ -2,18 +2,15 @@
 from __future__ import annotations
 
 import os
-from pathlib import Path
 
 import pandas as pd
 
 import constants
 from psychopy.monitors import Monitor
 from pygaze import libtime
-from pygaze.eyetracker import EyeTracker
 from pygaze.libinput import Keyboard
 from pygaze.liblog import Logfile
 from pygaze.libscreen import Display
-from pygaze.libscreen import Screen
 from pygaze.libtime import get_time
 
 from devices.eye_tracker import MultiplEyeEyeTracker

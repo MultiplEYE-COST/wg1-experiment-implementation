@@ -1,6 +1,5 @@
 from pathlib import Path
 
-from pygaze import eyetracker
 from pygaze.eyetracker import EyeTracker
 
 import constants
@@ -25,13 +24,12 @@ class MultiplEyeEyeTracker(EyeTracker):
     ):
         self.display = display
         self.screen = MultiplEyeScreen().draw_image(
-            image=Path(r'C:\Users\debor\repos\wg1-experiment-implementation\experiment_implementation\data'
-                       r'\other_screens_images\empty_screen.png'),
+            image=Path(Path(constants.DATA_ROOT_PATH + '/other_screens_images/empty_screen.png')),
             scale=1,
         )
         self.scr = MultiplEyeScreen().draw_image(
-            image=Path(r'C:\Users\debor\repos\wg1-experiment-implementation\experiment_implementation\data'
-                       r'\other_screens_images\empty_screen.png'),
+            image=Path(Path(constants.DATA_ROOT_PATH + '/other_screens_images/empty_screen.png')),
+
             scale=1,
         )
 
