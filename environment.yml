@@ -1,4 +1,4 @@
-name: multipleye3.9-test
+name: multipleye3.9
 channels:
   - conda-forge
   - defaults
@@ -8,7 +8,7 @@ dependencies:
   - psychopy==2022.2.5
   - pip:
       - pygame==2.1.2
-      - git+https://github.com/theDebbister/PyGaze # pygaze
+      - pygaze
       - re-wx>=0.0.2
       - wxpython>=4.1.0
       - Pillow>=4.3.0

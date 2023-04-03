@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import os
+from pathlib import Path
 
 import pandas as pd
 
@@ -15,9 +16,12 @@ from pygaze.libscreen import Display
 from pygaze.libscreen import Screen
 from pygaze.libtime import get_time
 
+from devices.eye_tracker import MultiplEyeEyeTracker
+from devices.screen import MultiplEyeScreen
+
 
 class Experiment:
-    _screens: dict[str, Screen | list[Screen]] = {}
+    _screens: dict[str, MultiplEyeScreen | list[MultiplEyeScreen]] = {}
 
     _display: Display = Display(
         monitor=Monitor('myMonitor', width=53.0, distance=90.0),
@@ -29,8 +33,8 @@ class Experiment:
 
     def __init__(
             self,
-            stimuli_screens: list[dict[str, list[Screen]]],
-            other_screens: dict[str, Screen],
+            stimuli_screens: list[dict[str, list[MultiplEyeScreen]]],
+            other_screens: dict[str, MultiplEyeScreen],
             date: str,
             session_id: int,
             participant_id: int,
@@ -42,9 +46,9 @@ class Experiment:
         self.stimuli_screens = stimuli_screens
         self.other_screens = other_screens
 
-        self._eye_tracker = EyeTracker(
+        self._eye_tracker = MultiplEyeEyeTracker(
             self._display,
-            trackertype='dummy',
+            tracker_type='dummy',
             eyedatafile='eyedatafile',
             logfile='logfile',
         )
@@ -236,7 +240,7 @@ class Experiment:
         This function will be replaced once we have all the screens as images.
         """
 
-        goodbye_screen = Screen()
+        goodbye_screen = MultiplEyeScreen()
         goodbye_screen.draw_text_box(
             text='\n\nThank you very much for participating in the experiment!'
                  '\n'
@@ -254,7 +258,7 @@ class Experiment:
 
         self._screens['goodbye_screen'] = goodbye_screen
 
-        begin_screen = Screen()
+        begin_screen = MultiplEyeScreen()
         begin_screen.draw_image(image=os.getcwd() + '/data/other_screens_images/empty_screen.png')
         begin_screen.draw_text_box(
             text='\n\nThe practice trial is over, press space to start with the experiment.',

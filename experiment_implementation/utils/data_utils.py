@@ -6,9 +6,9 @@ from pathlib import Path
 import pandas as pd
 from pygaze.libtime import get_time
 from pygaze.logfile import Logfile
-from pygaze.screen import Screen
 
 import constants
+from devices.screen import MultiplEyeScreen
 
 # The column names for the datafiles are at the moment hardcoded in the data_utils.py. This is not ideal,
 # but will change this later once the data format is clearer.
@@ -139,7 +139,7 @@ def create_data_logfile(
 def get_stimuli_screens(
         path_data_csv: str,
         logfile: Logfile,
-) -> list[dict[str, list[Screen]]]:
+) -> list[dict[str, list[MultiplEyeScreen]]]:
     screens = []
 
     logfile.write([
@@ -195,7 +195,7 @@ def get_stimuli_screens(
 
                 norm_img_path = os.path.normpath(img_path)
 
-                page_screen = Screen()
+                page_screen = MultiplEyeScreen()
                 page_screen.draw_image(
                     image=Path(norm_img_path),
                     scale=1,
@@ -222,7 +222,7 @@ def get_stimuli_screens(
 
                 norm_img_path = os.path.normpath(img_path)
 
-                question_screen = Screen()
+                question_screen = MultiplEyeScreen()
                 question_screen.draw_image(
                     image=Path(norm_img_path),
                     scale=1,
@@ -273,7 +273,7 @@ def get_other_screens(
         screen_path = constants.DATA_ROOT_PATH + row['img_path']
         norm_screen_path = os.path.normpath(screen_path)
 
-        screen = Screen()
+        screen = MultiplEyeScreen()
         screen.draw_image(
             image=Path(norm_screen_path),
             scale=1,
