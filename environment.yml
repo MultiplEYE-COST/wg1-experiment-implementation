@@ -8,7 +8,7 @@ dependencies:
   - psychopy==2022.2.5
   - pip:
       - pygame==2.1.2
-      - pygaze
+      - python-pygaze==0.7.5
       - gooey==1.0.8.1
       - typing-extensions==3.10.0.2
       - mypy-extensions==0.4.3
