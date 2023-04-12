@@ -5,10 +5,9 @@ import os
 from datetime import date
 
 import constants
-from gooey import Events
 from gooey import Gooey
 from gooey import GooeyParser
-from utils.experiment_utils import validate_participant_id, create_results_folder
+from utils.experiment_utils import ValidateParticipantIDAction, create_results_folder
 
 
 @Gooey(
@@ -16,12 +15,9 @@ from utils.experiment_utils import validate_participant_id, create_results_folde
     program_name='MultiplEYE Data Collection',
     program_description='Before we start the experiment we need some information about the participant, '
                         'session etc. Please fill in the below form and follow the instructions.',
-    dump_build_config=True,
     image_dir=os.getcwd() + '/data/icons/',
     default_size=(800, 400),
-    use_events=[Events.VALIDATE_FORM],
     show_preview_warning=False,
-    # load_build_config=True,
 )
 def parse_args():
     parser = GooeyParser(
@@ -32,7 +28,7 @@ def parse_args():
         'participant_id',
         metavar='Participant ID',
         help='Enter the participant ID here.',
-        type=validate_participant_id,
+        action=ValidateParticipantIDAction
     )
 
     parser.add_argument(

@@ -104,12 +104,13 @@ def run_experiment(
 if __name__ == '__main__':
     # to skip the GUI you can run this file directly
     args_dict = {
-        'data_screens_path': constants.DATA_SCREENS_PATH,
-        'other_screens_path': constants.OTHER_SCREENS_PATH,
+        'data_screens_path': constants.DATA_ROOT_PATH + constants.DATA_SCREENS_PATH,
+        'other_screens_path': constants.DATA_ROOT_PATH + constants.OTHER_SCREENS_PATH,
         'session_id': 1,
         'participant_id': 1,
         'date': str(datetime.date.today()),
         'dataset_type': 'core_dataset',
+        'test_run': True,
     }
 
     run_experiment(**args_dict)

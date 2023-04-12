@@ -8,15 +8,15 @@ that if you use a virtual environment using the `intall_pylink.py` script will n
 
 ## Windows and Mac
 
-### Install EyeLink developer kit
-Install the [EyeLink Developers Kit](https://www.sr-research.com/support/showthread.php?tid=13), again, you'll need
-an account
+### 1. Install EyeLink developer kit
+Install the [EyeLink Developers Kit](https://www.sr-research.com/support/showthread.php?tid=13). Again, you'll need
+an [SR Research account](https://www.sr-research.com/support/thread-48.html).
 
-### Set up conda env
-Set up your virtual environment (e.g. conda) with the python version specified (python 3.9).
+### 2. Set up conda environment
+Set up your virtual environment with the python version specified (python 3.9). 
 See [CONDA_ENVIRONMENT.md](guidelines/CONDA_ENVIRONMENT.md).
 
-### EyeLink path
+### 3. EyeLink path
 **Windows**
 
 On Windows machines, the EyeLink developer kit is installed in an SR Research Folder. Everything related to the
@@ -39,7 +39,7 @@ following link:
 
 The `3.9` folder in the path refers to the python version that we are using.
 
-### Copy pylink folder to environment
+### 4. Copy pylink folder to environment
 Now you need to paste the pylink folder to your environment. You can run the following command with the link from above
 inserted as the first argument. The second argument is the `site-packages` folder in your virtual environment where you
 want to paste pylink into:

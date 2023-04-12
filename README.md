@@ -27,3 +27,24 @@ Then you can navigate to the root folder of your local clone of the repository. 
 ```bash
 python experiment_implementation/run_test_session.py
 ```
+
+### Run the experiment on macOS
+In order to run the experiment including the GUI on Mac you need to do the following things:
+
+1. You need to allow PsychoPy to access your input. In order to do that go to `System Preferences` 
+-> `Security & Privacy` -> `Privacy` -> `Input Monitoring`. Then you click on the '+' and add PsychoPy. 
+Pick the PsychoPy version that is in your env. For me the path for a anaconda env called 'test' looks like this:
+```bash
+/Users/[USERNAME]/opt/anaconda3/envs/test/bin/psychopy
+```
+2. You need to run the experiment files using ``pythonw`` instead of ``python``. 
+The commands to run the experiment will look like this:
+```bash
+pythonw experiment_implementation/start_test_session.py
+```
+```bash
+pythonw experiment_implementation/start_session_core_dataset.py
+```
+```bash
+pythonw experiment_implementation/start_session_additional_dataset.py
+```
