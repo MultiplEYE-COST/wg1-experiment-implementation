@@ -8,7 +8,8 @@ import os
 
 DUMMY_MODE = True
 
-TRACKERTYPE = 'eyelink'
+#TRACKERTYPE = 'eyelink'
+TRACKERTYPE = 'dummy'
 
 # Display resolution in pixels as (width,height). Needs to be integers!
 # DISPSIZE = (1920, 1080)

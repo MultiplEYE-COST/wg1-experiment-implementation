@@ -45,7 +45,6 @@ class Experiment:
 
         self._eye_tracker = MultiplEyeEyeTracker(
             self._display,
-            tracker_type='dummy',
             eyedatafile='eyedatafile',
             logfile='logfile',
         )
