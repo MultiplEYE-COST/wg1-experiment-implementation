@@ -4,10 +4,6 @@ Contributing to this repository is easiest if you set up your own virtual conda 
 but it is possible to use another environment if you prefer something else.
 
 **IMPORTANT**: in `environment.yml` you'll find all the dependencies you need for the project.
-We're using a different PyGaze version than the one that is installed when using `pip install pygaze`. If you set up the
-environment following the instructions below, this won't be an issue. If you do it differently, just make sure you have the PyGaze
-version installed that is specified in `environment.yml` (it is a link that points to the GitHub
-repository where it is currently located.)
 
 **1. Install anaconda / miniconda**
 
