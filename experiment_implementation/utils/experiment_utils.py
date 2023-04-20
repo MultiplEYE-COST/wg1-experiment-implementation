@@ -32,6 +32,7 @@ class ValidateParticipantIDAction(argparse.Action):
 
         setattr(namespace, self.dest, values)
 
+
 def create_results_folder(dataset) -> None:
 
     if not os.path.isdir(f'{constants.RESULT_FOLDER_PATH}/{dataset}/'):
