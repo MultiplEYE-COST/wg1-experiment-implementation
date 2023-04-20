@@ -6,10 +6,11 @@ https://github.com/esdalmaijer/PyGaze/blob/master/pygaze/defaults.py
 """
 import os
 
-DUMMY_MODE = True
+DUMMY_MODE = False
 
 # TRACKERTYPE = 'eyelink' # or whatever eye-tracker your using
-TRACKERTYPE = 'dummy'
+TRACKERTYPE = 'tobii'
+# TRACKERTYPE = 'dummy'
 
 # Display resolution in pixels as (width,height). Needs to be integers!
 # DISPSIZE = (1920, 1080)

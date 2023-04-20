@@ -84,6 +84,10 @@ of how to install `pylink` can be found here: [INSTALL_PYLINK.md](guidelines/INS
 ### Develop and run experiments for Tobii
 *will soon be added*
 
+1. Install Tobii Pro SDK: [link](https://connect.tobii.com/s/sdk-downloads?language=en_US)
+2. Download the SDK
+3. Unzip the folder and copy all files in the either '32' or '64' folder to the experiment_implementation folder
+
 ### Develop and run experiments for other eye-trackers
 Depending on what is needed we can add more eye-trackers. There is also a team that is trying to set up experiment 
 using a webcam. Please contact [jakobi@cl.uzh.ch](mailto:jakobi@cl.uzh.ch) for more information.
