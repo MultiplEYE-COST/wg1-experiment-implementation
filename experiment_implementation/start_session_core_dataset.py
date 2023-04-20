@@ -52,7 +52,9 @@ if __name__ == '__main__':
     arguments = parse_args()
 
     # hardcoded args
-    arguments['session_id'] = -1
+
+    # there is no session_id in the core dataset, only one session
+    arguments['session_id'] = 1
     arguments['dataset_type'] = 'core_dataset'
     arguments['data_screens_path'] = constants.DATA_ROOT_PATH + constants.DATA_SCREENS_PATH
     arguments['other_screens_path'] = constants.DATA_ROOT_PATH + constants.OTHER_SCREENS_PATH

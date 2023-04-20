@@ -8,7 +8,7 @@ import os
 
 DUMMY_MODE = True
 
-#TRACKERTYPE = 'eyelink'
+# TRACKERTYPE = 'eyelink' # or whatever eye-tracker your using
 TRACKERTYPE = 'dummy'
 
 # Display resolution in pixels as (width,height). Needs to be integers!
@@ -36,7 +36,6 @@ TEST_DATA_PATH = 'test_data.csv'
 
 # this is the path to the csv for all other messages like welcome message that are shown on the screen
 OTHER_SCREENS_PATH = 'other_screens.csv'
-
 
 FULLSCREEN = True
 
