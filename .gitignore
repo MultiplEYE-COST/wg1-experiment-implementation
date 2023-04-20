@@ -129,3 +129,12 @@ dmypy.json
 .pyre/
 
 .idea
+
+*LOGFILE*.txt
+
+results/
+
+default.edf
+default.txt
+
+tmp.txt
