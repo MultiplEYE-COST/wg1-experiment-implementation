@@ -76,17 +76,20 @@ TRACKERTYPE = 'eyelink' # line 11
 # TRACKERTYPE = 'dummy' # line 12
 ```
 
+Depending on what eye-tracker you intend to use you need to install the software that comes with the eye-tracker. You 
+don't always need a license for that. E.g. for tobii trackers there is a free software available 
+[here](https://www.tobii.com/products/software/applications-and-developer-kits/tobii-pro-eye-tracker-manager).
+
 ### Develop and run experiments for EyeLink
 You will need to install `pylink` a package provided by SR Research if you use EyeLink eye-trackers.
 Note that `pip install pylink` installs a different package although the names are the same! Step-by-step instructions
 of how to install `pylink` can be found here: [INSTALL_PYLINK.md](guidelines/INSTALL_PYLINK.md)
 
 ### Develop and run experiments for Tobii
-*will soon be added*
-
 1. Install Tobii Pro SDK: [link](https://connect.tobii.com/s/sdk-downloads?language=en_US)
 2. Download the SDK
 3. Unzip the folder and copy all files in the either '32' or '64' folder to the experiment_implementation folder
+4. Then you can pip install the package: ``pip install tobii_research``
 
 ### Develop and run experiments for other eye-trackers
 Depending on what is needed we can add more eye-trackers. There is also a team that is trying to set up experiment 

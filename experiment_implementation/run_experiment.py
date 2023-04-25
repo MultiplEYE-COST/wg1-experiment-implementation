@@ -86,10 +86,10 @@ def run_experiment(
     general_log_file.write([get_time(), 'start initial calibration'])
     experiment.calibrate()
     general_log_file.write([get_time(), 'finished initial calibration'])
-
-    general_log_file.write([get_time(), 'start practice trial'])
-    experiment.practice_trial()
-    general_log_file.write([get_time(), 'finished practice trial'])
+    #
+    # general_log_file.write([get_time(), 'start practice trial'])
+    # experiment.practice_trial()
+    # general_log_file.write([get_time(), 'finished practice trial'])
 
     general_log_file.write([get_time(), 'start experiment'])
     experiment.run_experiment()

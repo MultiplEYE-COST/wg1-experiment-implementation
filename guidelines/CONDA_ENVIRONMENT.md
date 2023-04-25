@@ -33,7 +33,7 @@ but it is possible to use another environment if you prefer something else.
    Navigate to the root folder of your local clone of the repository and run the below line in your terminal.
 
    ```bash
-   conda env create -f environment.yml
+   conda env create -f environment-tobii.yml
    ```
 
    This step installs all the necessary requirements and creates a new conda environment. You can activate the environment with:

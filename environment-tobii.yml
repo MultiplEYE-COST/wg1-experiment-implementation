@@ -1,9 +1,9 @@
-name: multipleye3.9
+name: multipleye3.10-tobii
 channels:
   - conda-forge
   - defaults
 dependencies:
-  - python==3.9
+  - python==3.10
   - pip==22.3.1
   - psychopy==2022.2.5
   - pip:

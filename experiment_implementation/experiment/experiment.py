@@ -85,6 +85,11 @@ class Experiment:
             self._eye_tracker.display.fill(self._eye_tracker.screen)
             self._eye_tracker.display.show()
 
+        if constants.TRACKERTYPE == 'tobii':
+            self._eye_tracker.screen.draw_image(
+                image=os.getcwd() + '/data/other_screens_images/empty_screen.png',
+            )
+
         else:
             self._eye_tracker.scr.draw_image(
                 image=os.getcwd() + '/data/other_screens_images/empty_screen.png',
@@ -94,10 +99,6 @@ class Experiment:
 
     def run_experiment(self) -> None:
         self._display.fill(self.other_screens['instruction_screen'])
-        self._display.show()
-        self._keyboard.get_key()
-
-        self._display.fill(self._screens['begin_screen'])
         self._display.show()
         self._keyboard.get_key()
 
@@ -156,6 +157,7 @@ class Experiment:
 
                 self._display.fill(screen=page_screen)
                 stimulus_timestamp = self._display.show()
+                libtime.pause(1000)
 
                 key_pressed_stimulus = ''
                 keypress_timestamp = -1
@@ -287,8 +289,11 @@ class Experiment:
         if constants.DUMMY_MODE:
             self._eye_tracker.screen.draw_image(image=os.getcwd() + '/data/other_screens_images/empty_screen.png')
 
+        if constants.TRACKERTYPE == 'tobii':
+            pass
+
         else:
-            self._eye_tracker.scr.draw_image(image=os.getcwd() + '/data/other_screens_images/empty_screen.png')
+            self._eye_tracker.screen.draw_image(image=os.getcwd() + '/data/other_screens_images/empty_screen.png')
 
         checked = False
         while not checked:

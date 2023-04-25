@@ -9,8 +9,12 @@ import os
 DUMMY_MODE = False
 
 # TRACKERTYPE = 'eyelink' # or whatever eye-tracker your using
-TRACKERTYPE = 'tobii'
 # TRACKERTYPE = 'dummy'
+
+# tobii trackers
+TRACKERTYPE = 'tobii'
+TRACKERSERIALNUMBER = 'TPFC2-010202524041'
+
 
 # Display resolution in pixels as (width,height). Needs to be integers!
 # DISPSIZE = (1920, 1080)
@@ -34,6 +38,8 @@ DATA_ROOT_PATH = os.getcwd() + '/data/'
 
 DATA_SCREENS_PATH = 'data.csv'
 TEST_DATA_PATH = 'test_data.csv'
+MULTIPLY_DATA_PATH = 'PopSci_MultiplEYE_EN_example_stimuli_with_img_paths.csv'
+
 
 # this is the path to the csv for all other messages like welcome message that are shown on the screen
 OTHER_SCREENS_PATH = 'other_screens.csv'
@@ -50,7 +56,5 @@ DISPTYPE = 'psychopy'
 FONT = 'Courier New'
 LINE_SPACING = 2.0
 
-# TODO: the below two constants needs to be defined as a function of the display size such that the area where the
-#  data are presented is of the same size at every location
 WRAP_WIDTH = 900
 TOP_LEFT_CORNER = (300, 160)

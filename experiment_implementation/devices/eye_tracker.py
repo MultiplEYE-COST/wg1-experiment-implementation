@@ -3,8 +3,6 @@ from pathlib import Path
 from pygaze.eyetracker import EyeTracker
 
 import constants
-from devices.dummy_eye_tracker import DummyEyeTracker
-from devices.eyelink_eye_tracker import EyeLinkEyeTracker
 from devices.screen import MultiplEyeScreen
 
 
@@ -40,15 +38,28 @@ class MultiplEyeEyeTracker(EyeTracker):
         )
 
         # EyeLink
-
         if tracker_type == "eyelink":
+            from devices.eyelink_eye_tracker import EyeLinkEyeTracker
             # morph class
             self.__class__ = EyeLinkEyeTracker
             # initialize
             self.__class__.__init__(self, display, **args)
 
+        # Tobii
+        elif tracker_type == "tobii":
+            # import libraries
+            from devices.tobii_eye_tracker import TobiiEyeTracker
+            # morph class
+            self.__class__ = TobiiEyeTracker
+            # initialize
+            self.__class__.__init__(self, display, **args)
+
         elif tracker_type == "dummy":
+            from devices.dummy_eye_tracker import DummyEyeTracker
             # morph class
             self.__class__ = DummyEyeTracker
             # initialize
             self.__class__.__init__(self, display)
+
+        else:
+            raise ValueError(f"Unknown tracker type: {tracker_type}")

@@ -19,7 +19,7 @@ class MultiplEyeScreen(PsychoPyScreen):
     def draw_fixation(self, fixtype="circle", colour=None, color=None,
                       pos=None, pw=1, diameter=12):
 
-        """Draws a fixation (cross, x or dot) on the screen
+        """Draws a fixation (cross, x, circle or dot) on the screen
 
         arguments
         None

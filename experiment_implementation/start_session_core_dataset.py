@@ -56,7 +56,7 @@ if __name__ == '__main__':
     # there is no session_id in the core dataset, only one session
     arguments['session_id'] = 1
     arguments['dataset_type'] = 'core_dataset'
-    arguments['data_screens_path'] = constants.DATA_ROOT_PATH + constants.DATA_SCREENS_PATH
+    arguments['data_screens_path'] = constants.DATA_ROOT_PATH + constants.MULTIPLY_DATA_PATH
     arguments['other_screens_path'] = constants.DATA_ROOT_PATH + constants.OTHER_SCREENS_PATH
     arguments['test_run'] = False
 
