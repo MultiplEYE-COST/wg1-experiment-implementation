@@ -21,7 +21,7 @@ class Experiment:
     _screens: dict[str, MultiplEyeScreen | list[MultiplEyeScreen]] = {}
 
     _display: Display = Display(
-        monitor=Monitor('myMonitor', width=53.0, distance=90.0),
+        monitor=Monitor('myMonitor', width=25.0, distance=90.0),
     )
 
     _keyboard: Keyboard = Keyboard(

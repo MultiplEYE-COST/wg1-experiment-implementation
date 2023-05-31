@@ -208,7 +208,6 @@ def get_stimuli_screens(
 
             img_path = row[question]
 
-            # not all
             if img_path.notnull().values.any():
                 img_path = constants.DATA_ROOT_PATH + img_path.values[0]
 
@@ -225,7 +224,6 @@ def get_stimuli_screens(
                 question_screen = MultiplEyeScreen()
                 question_screen.draw_image(
                     image=Path(norm_img_path),
-                    scale=1,
                 )
 
                 questions.append(question_screen)

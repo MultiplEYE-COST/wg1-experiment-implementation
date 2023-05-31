@@ -6,10 +6,10 @@ https://github.com/esdalmaijer/PyGaze/blob/master/pygaze/defaults.py
 """
 import os
 
-DUMMY_MODE = False
+DUMMY_MODE = True
 
-TRACKERTYPE = 'eyelink' # or whatever eye-tracker your using
-# TRACKERTYPE = 'dummy'
+# TRACKERTYPE = 'eyelink' # or whatever eye-tracker your using
+TRACKERTYPE = 'dummy'
 
 # tobii trackers
 # TRACKERTYPE = 'tobii'
@@ -17,15 +17,15 @@ TRACKERTYPE = 'eyelink' # or whatever eye-tracker your using
 
 
 # Display resolution in pixels as (width,height). Needs to be integers!
-# DISPSIZE = (1920, 1080)
+DISPSIZE = (1920, 1080)
 # DISPSIZE = (1536, 864)
-DISPSIZE = (1256, 864)
+# DISPSIZE = (1256, 864)
 
 # Distance between the eye and the display in centimeters. Float.
 SCREENDIST = 90.0
 
 # Physical display size in centimeters as (width,height). Can be floats.
-SCREENSIZE = (33.8, 27.1)
+SCREENSIZE = (34.4, 19.4)
 
 ##############################################################################################################
 # BELOW WE SPECIFY THOSE VARIABLES THAT ARE THE SAME ACROSS ALL LANGUAGES AND DEVICES; DO NOT CHANGE THESE ###
@@ -39,7 +39,7 @@ DATA_ROOT_PATH = os.getcwd() + '/data/'
 
 DATA_SCREENS_PATH = 'data.csv'
 TEST_DATA_PATH = 'test_data.csv'
-MULTIPLY_DATA_PATH = 'multipleye-stimuli-en-test_with_img_paths.csv'
+MULTIPLY_DATA_PATH = 'multipleye-stimuli-experiment-de_with_img_paths.csv'
 
 
 # this is the path to the csv for all other messages like welcome message that are shown on the screen

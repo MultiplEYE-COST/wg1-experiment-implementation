@@ -5,6 +5,7 @@ import pygaze
 from psychopy.visual import TextBox2
 from pygaze._misc.misc import rgb2psychorgb, pos2psychopos
 from pygaze._screen.psychopyscreen import PsychoPyScreen
+from pygaze._screen.pygamescreen import PyGameScreen
 
 import constants
 
