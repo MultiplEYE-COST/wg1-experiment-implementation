@@ -31,11 +31,20 @@ class MultiplEyeEyeTracker(EyeTracker):
             scale=1,
         )
 
-        super().__init__(
-            trackertype=tracker_type,
-            display=display,
-            **args,
-        )
+        # set trackertype to dummy in dummymode
+        if constants.DUMMY_MODE:
+            tracker_type = "dummy"
+
+        # correct wrong input
+        allowed_trackers = ["dumbdummy", "dummy", "eyelink", "eyelogic", "smi", \
+                            "eyetribe", "opengaze", "alea", "tobii", "tobii-legacy", \
+                            "tobiiglasses"]
+        if tracker_type not in allowed_trackers:
+            raise Exception( \
+                "Error in eyetracker.EyeTracker: trackertype {} not recognized; it should be one of {}".format(
+                    tracker_type, allowed_trackers
+                    )
+            )
 
         # EyeLink
         if tracker_type == "eyelink":

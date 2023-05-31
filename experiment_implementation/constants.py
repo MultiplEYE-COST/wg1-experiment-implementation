@@ -8,17 +8,18 @@ import os
 
 DUMMY_MODE = False
 
-# TRACKERTYPE = 'eyelink' # or whatever eye-tracker your using
+TRACKERTYPE = 'eyelink' # or whatever eye-tracker your using
 # TRACKERTYPE = 'dummy'
 
 # tobii trackers
-TRACKERTYPE = 'tobii'
-TRACKERSERIALNUMBER = 'TPFC2-010202524041'
+# TRACKERTYPE = 'tobii'
+# TRACKERSERIALNUMBER = 'TPFC2-010202524041'
 
 
 # Display resolution in pixels as (width,height). Needs to be integers!
 # DISPSIZE = (1920, 1080)
-DISPSIZE = (1536, 864)
+# DISPSIZE = (1536, 864)
+DISPSIZE = (1256, 864)
 
 # Distance between the eye and the display in centimeters. Float.
 SCREENDIST = 90.0
@@ -38,7 +39,7 @@ DATA_ROOT_PATH = os.getcwd() + '/data/'
 
 DATA_SCREENS_PATH = 'data.csv'
 TEST_DATA_PATH = 'test_data.csv'
-MULTIPLY_DATA_PATH = 'PopSci_MultiplEYE_EN_example_stimuli_with_img_paths.csv'
+MULTIPLY_DATA_PATH = 'multipleye-stimuli-en-test_with_img_paths.csv'
 
 
 # this is the path to the csv for all other messages like welcome message that are shown on the screen
@@ -47,7 +48,7 @@ OTHER_SCREENS_PATH = 'other_screens.csv'
 FULLSCREEN = True
 
 # background color
-BGC = (0, 0, 0)
+BGC = (255, 255, 255)
 
 # foreground color (i.e. font color)
 FGC = (0, 0, 0)

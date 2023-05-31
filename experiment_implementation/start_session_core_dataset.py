@@ -16,7 +16,7 @@ from utils.experiment_utils import create_results_folder, ValidateParticipantIDA
     program_description='Before we start the experiment we need some information about the participant, '
                         'session etc. Please fill in the below form and follow the instructions.',
     image_dir=os.getcwd() + '/data/icons/',
-    default_size=(800, 400),
+    default_size=(800, 600),
     show_preview_warning=False,
 )
 def parse_args():

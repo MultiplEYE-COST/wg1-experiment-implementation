@@ -16,7 +16,7 @@ from utils.experiment_utils import ValidateParticipantIDAction, create_results_f
     program_description='Before we start the experiment we need some information about the participant, '
                         'session etc. Please fill in the below form and follow the instructions.',
     image_dir=os.getcwd() + '/data/icons/',
-    default_size=(800, 400),
+    default_size=(800, 600),
     show_preview_warning=False,
 )
 def parse_args():
@@ -28,7 +28,6 @@ def parse_args():
         'participant_id',
         metavar='Participant ID',
         help='Enter the participant ID here.',
-        action=ValidateParticipantIDAction
     )
 
     parser.add_argument(
@@ -51,9 +50,9 @@ if __name__ == '__main__':
     arguments = parse_args()
 
     # hardcoded args
-    arguments['session_id'] = -1
+    arguments['session_id'] = 1
     arguments['dataset_type'] = 'test_dataset'
-    arguments['data_screens_path'] = constants.DATA_ROOT_PATH + constants.TEST_DATA_PATH
+    arguments['data_screens_path'] = constants.DATA_ROOT_PATH + constants.MULTIPLY_DATA_PATH
     arguments['other_screens_path'] = constants.DATA_ROOT_PATH + constants.OTHER_SCREENS_PATH
     arguments['test_run'] = True
 

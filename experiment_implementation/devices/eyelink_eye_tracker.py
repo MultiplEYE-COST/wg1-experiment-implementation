@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import pylink
 from pygaze._eyetracker.libeyelink import libeyelink, deg2pix
 from pygaze.libtime import clock
@@ -16,6 +18,20 @@ class EyeLinkEyeTracker(libeyelink):
             mousevisible=False
         )
 
+        self.screen = MultiplEyeScreen(
+            disptype=constants.DISPTYPE,
+            mousevisible=False
+        )
+
+        self.screen.draw_image(
+            image=Path(Path(constants.DATA_ROOT_PATH + '/other_screens_images/empty_screen.png')),
+            scale=1,
+        )
+        self.scr.draw_image(
+            image=Path(Path(constants.DATA_ROOT_PATH + '/other_screens_images/empty_screen.png')),
+            scale=1,
+        )
+
     def draw_drift_correction_target(self, x, y):
         """
         Draws the drift-correction target.
@@ -26,7 +42,6 @@ class EyeLinkEyeTracker(libeyelink):
         y        --    The Y coordinate
         """
 
-        # self.screen.clear()
         self.scr.draw_fixation(fixtype='circle', colour=constants.FGC,
                                pos=(x, y), pw=0, diameter=12)
 

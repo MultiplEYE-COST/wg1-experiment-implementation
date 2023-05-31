@@ -45,7 +45,7 @@ class Experiment:
 
         self._eye_tracker = MultiplEyeEyeTracker(
             self._display,
-            eyedatafile='eyedatafile',
+            eyedatafile='gazedata',
             logfile='logfile',
         )
 
@@ -85,7 +85,7 @@ class Experiment:
             self._eye_tracker.display.fill(self._eye_tracker.screen)
             self._eye_tracker.display.show()
 
-        if constants.TRACKERTYPE == 'tobii':
+        elif constants.TRACKERTYPE == 'tobii':
             self._eye_tracker.screen.draw_image(
                 image=os.getcwd() + '/data/other_screens_images/empty_screen.png',
             )
@@ -145,10 +145,10 @@ class Experiment:
             for page_number, page_screen in enumerate(stimulus_list):
 
                 # present fixation cross before stimulus
-                # self._display.fill(screen=self.other_screens['fixation_screen'])
-                # self._display.show()
-                # self._eye_tracker.log("fixation cross")
-                # self._participant_keyboard.get_key(flush=True)
+                self._display.fill(screen=self.other_screens['fixation_screen'])
+                self._display.show()
+                self._eye_tracker.log("fixation cross")
+                self._keyboard.get_key(flush=True)
 
                 # start eye-tracking
                 self._eye_tracker.start_recording()
@@ -285,11 +285,11 @@ class Experiment:
     def _drift_correction(self):
 
         # this is a workaround for now, as the calibration screen would be black as per default
-        # we need to set the background to our color
+        # we need to set the background to our color for some eye-trackers
         if constants.DUMMY_MODE:
             self._eye_tracker.screen.draw_image(image=os.getcwd() + '/data/other_screens_images/empty_screen.png')
 
-        if constants.TRACKERTYPE == 'tobii':
+        elif constants.TRACKERTYPE == 'tobii':
             pass
 
         else:
