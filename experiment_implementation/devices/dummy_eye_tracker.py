@@ -27,7 +27,7 @@ class DummyEyeTracker(Dummy):
 
         # self.screen.clear()
         self.screen.draw_fixation(fixtype='circle', colour=constants.FGC,
-                                  pos=(x, y), pw=0, diameter=12)
+                                  pos=(x, y), pw=0, diameter=14)
 
         self.display.fill(self.screen)
         self.display.show()

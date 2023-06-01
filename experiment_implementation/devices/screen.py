@@ -85,7 +85,7 @@ class MultiplEyeScreen(PsychoPyScreen):
             self.draw_circle(colour=colour, pos=pos, r=r, pw=0, fill=True)
 
         elif fixtype == "circle":
-            self.draw_circle(colour=colour, pos=pos, r=8, pw=4, fill=False)
+            self.draw_circle(colour=colour, pos=pos, r=10, pw=5, fill=False)
 
     def draw_text_box(
             self,

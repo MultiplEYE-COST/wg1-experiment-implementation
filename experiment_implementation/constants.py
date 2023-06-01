@@ -25,6 +25,7 @@ DISPSIZE = (1920, 1080)
 SCREENDIST = 90.0
 
 # Physical display size in centimeters as (width,height). Can be floats.
+# SCREENSIZE = (52.1, 29.3)
 SCREENSIZE = (34.4, 19.4)
 
 ##############################################################################################################
@@ -58,4 +59,28 @@ FONT = 'Courier New'
 LINE_SPACING = 2.0
 
 WRAP_WIDTH = 900
-TOP_LEFT_CORNER = (300, 160)
+
+INCH_IN_CM = 2.54
+
+IMAGE_SIZE_CM = (25, 19)
+IMAGE_SIZE_INCH = (IMAGE_SIZE_CM[0] / INCH_IN_CM, IMAGE_SIZE_CM[1] / INCH_IN_CM)
+
+SCREEN_SIZE_INCH = (SCREENSIZE[0] / INCH_IN_CM, SCREENSIZE[1] / INCH_IN_CM)
+IMAGE_WIDTH_PX = int(IMAGE_SIZE_INCH[0] * DISPSIZE[0] / SCREEN_SIZE_INCH[0])
+IMAGE_HEIGHT_PX = int(IMAGE_SIZE_INCH[1] * DISPSIZE[1] / SCREEN_SIZE_INCH[1])
+
+# calculate the margins in inch, we set the margin fixed as fixed percentage of the image size
+HORIZONTAL_MARGIN_INCH = 0.25
+VERTICAL_MARGIN_INCH = 0.3
+
+# margins from all sides in pixels, at the moment the same for all, but can be changed later
+MIN_MARGIN_LEFT_PX = int(HORIZONTAL_MARGIN_INCH * DISPSIZE[0] / SCREEN_SIZE_INCH[0])
+MIN_MARGIN_RIGHT_PX = int(HORIZONTAL_MARGIN_INCH * DISPSIZE[0] / SCREEN_SIZE_INCH[0])
+MIN_MARGIN_TOP_PX = (DISPSIZE[1] // 41) * 2
+MIN_MARGIN_BOTTOM_PX = (DISPSIZE[1] // 41) * 2
+
+TOP_LEFT_CORNER = (
+    ((DISPSIZE[0] - IMAGE_WIDTH_PX) // 2) + 0.75 * MIN_MARGIN_LEFT_PX,
+    ((DISPSIZE[1] - IMAGE_HEIGHT_PX) // 2) + (1.25 * MIN_MARGIN_TOP_PX)
+)
+

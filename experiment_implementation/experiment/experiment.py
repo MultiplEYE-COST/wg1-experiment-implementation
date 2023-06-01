@@ -2,8 +2,10 @@
 from __future__ import annotations
 
 import os
+from pathlib import Path
 
 import pandas as pd
+from pygaze.eyetracker import EyeTracker
 
 import constants
 from psychopy.monitors import Monitor
@@ -13,7 +15,7 @@ from pygaze.liblog import Logfile
 from pygaze.libscreen import Display
 from pygaze.libtime import get_time
 
-from devices.eye_tracker import MultiplEyeEyeTracker
+
 from devices.screen import MultiplEyeScreen
 
 
@@ -24,9 +26,7 @@ class Experiment:
         monitor=Monitor('myMonitor', width=25.0, distance=90.0),
     )
 
-    _keyboard: Keyboard = Keyboard(
-        keylist=['space', 'a', 'b', 'c', 'q', 'n', 'p', 'k', 'v'], timeout=None,
-    )
+    _keyboard: Keyboard = Keyboard(keylist=None, timeout=None)
 
     def __init__(
             self,
@@ -43,10 +43,19 @@ class Experiment:
         self.stimuli_screens = stimuli_screens
         self.other_screens = other_screens
 
-        self._eye_tracker = MultiplEyeEyeTracker(
+        self.screen = MultiplEyeScreen(
+            disptype=constants.DISPTYPE,
+            mousevisible=False
+        )
+
+        self.screen.draw_image(
+            image=Path(Path(constants.DATA_ROOT_PATH + '/other_screens_images/empty_screen.png')),
+            scale=1,
+        )
+
+        self._eye_tracker = EyeTracker(
             self._display,
-            eyedatafile='gazedata',
-            logfile='logfile',
+            screen=self.screen,
         )
 
         self._set_up_general_screens()
@@ -75,25 +84,6 @@ class Experiment:
         self._keyboard.get_key()
 
     def calibrate(self) -> None:
-
-        # this is a workaround for now, as the calibration screen would be black as per default
-        # we need to set the background to our color
-        if constants.DUMMY_MODE:
-            self._eye_tracker.screen.draw_image(
-                image=os.getcwd() + '/data/other_screens_images/empty_screen.png',
-            )
-            self._eye_tracker.display.fill(self._eye_tracker.screen)
-            self._eye_tracker.display.show()
-
-        elif constants.TRACKERTYPE == 'tobii':
-            self._eye_tracker.screen.draw_image(
-                image=os.getcwd() + '/data/other_screens_images/empty_screen.png',
-            )
-
-        else:
-            self._eye_tracker.scr.draw_image(
-                image=os.getcwd() + '/data/other_screens_images/empty_screen.png',
-            )
 
         self._eye_tracker.calibrate()
 
@@ -144,11 +134,12 @@ class Experiment:
 
             for page_number, page_screen in enumerate(stimulus_list):
 
-                # present fixation cross before stimulus
-                self._display.fill(screen=self.other_screens['fixation_screen'])
-                self._display.show()
-                self._eye_tracker.log("fixation cross")
-                self._keyboard.get_key(flush=True)
+                # present fixation cross before stimulus except for the first page
+                if not page_number == 0:
+                    self._display.fill(screen=self.other_screens['fixation_screen'])
+                    self._display.show()
+                    self._eye_tracker.log("fixation dot")
+                    self._keyboard.get_key(flush=True)
 
                 # start eye-tracking
                 self._eye_tracker.start_recording()

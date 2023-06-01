@@ -198,7 +198,6 @@ def get_stimuli_screens(
                 page_screen = MultiplEyeScreen()
                 page_screen.draw_image(
                     image=Path(norm_img_path),
-                    scale=1,
                 )
 
                 pages.append(page_screen)
@@ -274,7 +273,6 @@ def get_other_screens(
         screen = MultiplEyeScreen()
         screen.draw_image(
             image=Path(norm_screen_path),
-            scale=1,
         )
 
         screens[row['screen_name']] = screen
