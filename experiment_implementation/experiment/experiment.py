@@ -10,9 +10,9 @@ from pygaze.eyetracker import EyeTracker
 import constants
 from psychopy.monitors import Monitor
 from pygaze import libtime
-from pygaze.libinput import Keyboard
-from pygaze.liblog import Logfile
-from pygaze.libscreen import Display
+from pygaze.keyboard import Keyboard
+from pygaze.logfile import Logfile
+from pygaze.display import Display
 from pygaze.libtime import get_time
 
 
@@ -45,7 +45,7 @@ class Experiment:
 
         self.screen = MultiplEyeScreen(
             disptype=constants.DISPTYPE,
-            mousevisible=False
+            mousevisible=False,
         )
 
         self.screen.draw_image(
@@ -57,6 +57,8 @@ class Experiment:
             self._display,
             screen=self.screen,
         )
+
+        self._eye_tracker.set_eye_used(eye_used=constants.EYE_USED)
 
         self._set_up_general_screens()
 
@@ -277,17 +279,10 @@ class Experiment:
 
         # this is a workaround for now, as the calibration screen would be black as per default
         # we need to set the background to our color for some eye-trackers
-        if constants.DUMMY_MODE:
-            self._eye_tracker.screen.draw_image(image=os.getcwd() + '/data/other_screens_images/empty_screen.png')
-
-        elif constants.TRACKERTYPE == 'tobii':
-            pass
-
-        else:
-            self._eye_tracker.screen.draw_image(image=os.getcwd() + '/data/other_screens_images/empty_screen.png')
 
         checked = False
         while not checked:
             checked = self._eye_tracker.drift_correction(
                 pos=constants.TOP_LEFT_CORNER,
+                fix_triggered=True,
             )

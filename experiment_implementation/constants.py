@@ -6,10 +6,10 @@ https://github.com/esdalmaijer/PyGaze/blob/master/pygaze/defaults.py
 """
 import os
 
-DUMMY_MODE = True
+DUMMY_MODE = False
 
-# TRACKERTYPE = 'eyelink' # or whatever eye-tracker your using
-TRACKERTYPE = 'dummy'
+TRACKERTYPE = 'eyelink' # or whatever eye-tracker your using
+# TRACKERTYPE = 'dummy'
 
 # tobii trackers
 # TRACKERTYPE = 'tobii'
@@ -32,6 +32,9 @@ SCREENSIZE = (34.4, 19.4)
 # BELOW WE SPECIFY THOSE VARIABLES THAT ARE THE SAME ACROSS ALL LANGUAGES AND DEVICES; DO NOT CHANGE THESE ###
 ##############################################################################################################
 
+EVENTDETECTION = "native"
+EYE_USED = "left"
+
 RESULT_FOLDER_PATH = 'results'
 
 # this is the path to the csv file that contains the stimuli texts
@@ -49,7 +52,8 @@ OTHER_SCREENS_PATH = 'other_screens.csv'
 FULLSCREEN = True
 
 # background color
-BGC = (255, 255, 255)
+BGC = (15, 15, 15)
+IMAGE_BGC = (231, 230, 230)
 
 # foreground color (i.e. font color)
 FGC = (0, 0, 0)

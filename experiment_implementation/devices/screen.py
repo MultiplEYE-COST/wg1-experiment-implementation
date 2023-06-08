@@ -14,6 +14,7 @@ class MultiplEyeScreen(PsychoPyScreen):
 
     def __init__(self, **args):
 
+
         super().__init__(dispytpe=constants.DISPTYPE, **args)
         self.screen = []
 
