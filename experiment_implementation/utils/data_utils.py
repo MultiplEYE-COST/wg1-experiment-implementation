@@ -2,16 +2,21 @@ from __future__ import annotations
 
 import os
 from pathlib import Path
+from typing import Dict, Any
 
 import pandas as pd
+from numpy import ndarray
+from pandas import Series
 from pygaze.libtime import get_time
 from pygaze.logfile import Logfile
+from pygaze.screen import Screen
 
 import constants
 from devices.screen import MultiplEyeScreen
 
 # The column names for the datafiles are at the moment hardcoded in the data_utils.py. This is not ideal,
 # but will change this later once the data format is clearer.
+# TODO: put all of that information to a config file or so
 
 DATA_FILE_HEADER = [
     'stimulus_id',
@@ -82,12 +87,30 @@ DATA_FILE_HEADER = [
     'page_12_img_file',
     'page_13_img_path',
     'page_13_img_file',
+    'page_14_img_path',
+    'page_14_img_file',
+    'page_15_img_path',
+    'page_15_img_file',
+    'page_16_img_path',
+    'page_16_img_file',
+    'page_17_img_path',
+    'page_17_img_file',
+    'page_18_img_path',
+    'page_18_img_file',
+    'page_19_img_path',
+    'page_19_img_file',
+    'page_20_img_path',
+    'page_20_img_file',
     'question_1_img_path',
     'question_1_img_file',
     'question_2_img_path',
     'question_2_img_file',
     'question_3_img_path',
     'question_3_img_file',
+    'question_4_img_path',
+    'question_4_img_file',
+    'question_5_img_path',
+    'question_5_img_file',
 ]
 
 OTHER_SCREENS_FILE_HEADER = [
@@ -111,12 +134,21 @@ PAGE_LIST = [
     'page_11_img_path',
     'page_12_img_path',
     'page_13_img_path',
+    'page_14_img_path',
+    'page_15_img_path',
+    'page_16_img_path',
+    'page_17_img_path',
+    'page_18_img_path',
+    'page_19_img_path',
+    'page_20_img_path',
 ]
 
 QUESTION_LIST = [
     'question_1_img_path',
     'question_2_img_path',
     'question_3_img_path',
+    'question_4_img_path',
+    'question_5_img_path',
 ]
 
 
@@ -183,7 +215,7 @@ def get_stimuli_screens(
             img_path = row[page_name]
 
             if img_path.notnull().values.any():
-                img_path = constants.DATA_ROOT_PATH + img_path.values[0]
+                full_img_path = constants.DATA_ROOT_PATH + img_path.values[0]
 
                 logfile.write([
                     get_time(),
@@ -193,14 +225,14 @@ def get_stimuli_screens(
                     f'{row["stimulus_text_title"].to_string(index=False)}',
                 ])
 
-                norm_img_path = os.path.normpath(img_path)
+                norm_img_path = os.path.normpath(full_img_path)
 
                 page_screen = MultiplEyeScreen()
                 page_screen.draw_image(
                     image=Path(norm_img_path),
                 )
 
-                pages.append(page_screen)
+                pages.append({'screen': page_screen, 'path': norm_img_path})
 
         questions = []
         for question_id, question in enumerate(QUESTION_LIST):
@@ -235,7 +267,7 @@ def get_stimuli_screens(
 def get_other_screens(
         path_other_screens: str,
         logfile: Logfile,
-) -> dict[str, Screen]:
+) -> dict[Any, MultiplEyeScreen]:
     screens = {}
 
     logfile.write([

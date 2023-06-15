@@ -20,7 +20,6 @@ from devices.screen import MultiplEyeScreen
 
 
 class Experiment:
-    _screens: dict[str, MultiplEyeScreen | list[MultiplEyeScreen]] = {}
 
     _display: Display = Display(
         monitor=Monitor('myMonitor', width=25.0, distance=90.0),
@@ -53,14 +52,15 @@ class Experiment:
             scale=1,
         )
 
+        data_file = Path(exp_path) / f'{participant_id}.edf'
+
         self._eye_tracker = EyeTracker(
             self._display,
             screen=self.screen,
+            data_file=data_file,
         )
 
         self._eye_tracker.set_eye_used(eye_used=constants.EYE_USED)
-
-        self._set_up_general_screens()
 
         self.log_file = Logfile(
             filename=f'{exp_path}/'
@@ -134,19 +134,23 @@ class Experiment:
 
             # show stimulus pages
 
-            for page_number, page_screen in enumerate(stimulus_list):
+            for page_number, page_dict in enumerate(stimulus_list):
 
-                # present fixation cross before stimulus except for the first page
+                page_screen = page_dict['screen']
+                page_path = page_dict['path']
+
+                # present fixation cross before stimulus except for the first page as we have a drift correction then
                 if not page_number == 0:
                     self._display.fill(screen=self.other_screens['fixation_screen'])
                     self._display.show()
                     self._eye_tracker.log("fixation dot")
-                    self._keyboard.get_key(flush=True)
+
+                self._eye_tracker.send_backdrop_image(page_path)
 
                 # start eye-tracking
                 self._eye_tracker.start_recording()
-                self._eye_tracker.status_msg(f'page_{page_number}')
-                self._eye_tracker.log(f'start_recording_page_{page_number}')
+                self._eye_tracker.status_msg(f'trial_{stimulus_nr}_page_{page_number}')
+                self._eye_tracker.log(f'start_recording_trial_{stimulus_nr}_page_{page_number}')
 
                 self._display.fill(screen=page_screen)
                 stimulus_timestamp = self._display.show()
@@ -173,11 +177,11 @@ class Experiment:
                 self._eye_tracker.log(f'stop_recording_page_{page_number}')
 
             for question_number, question_screen in enumerate(questions_list):
-                # present fixation cross before stimulus
-                # self._display.fill(screen=self.other_screens['fixation_screen'])
-                # self._display.show()
-                # self._eye_tracker.log("fixation cross")
-                # self._participant_keyboard.get_key(flush=True)
+                # fixation dot
+                self._display.fill(screen=self.other_screens['fixation_screen'])
+                self._display.show()
+                self._eye_tracker.log("fixation dot")
+                self._keyboard.get_key(flush=True)
 
                 # start eye-tracking
                 self._eye_tracker.start_recording()
@@ -210,7 +214,10 @@ class Experiment:
                     f'stop_recording_question_{question_number}',
                 )
 
-        self._display.fill(self._screens['goodbye_screen'])
+                self._display.fill(screen=self.other_screens['empty_screen'])
+                libtime.pause(300)
+
+        self._display.fill(self.other_screens['final_screen'])
         self._display.show()
         self._keyboard.get_key()
 
@@ -225,45 +232,6 @@ class Experiment:
             get_time(), 'practice_trial', '1', 'stimulus_timestamp',
             'keypress_timestamp', 'key_pressed', 'question', pd.NA,
         ])
-
-    def _set_up_general_screens(self):
-        """
-        This function will be replaced once we have all the screens as images.
-        """
-
-        goodbye_screen = MultiplEyeScreen()
-        goodbye_screen.draw_text_box(
-            text='\n\nThank you very much for participating in the experiment!'
-                 '\n'
-                 '\n'
-                 'The experiment is now completed. We wish you a good day.',
-            fontsize=24,
-            font=constants.FONT,
-            pos=constants.TOP_LEFT_CORNER,
-            line_spacing=constants.LINE_SPACING,
-            size=(1050, None),
-            align_text='center',
-            anchor='top_left',
-            color=constants.FGC,
-        )
-
-        self._screens['goodbye_screen'] = goodbye_screen
-
-        begin_screen = MultiplEyeScreen()
-        begin_screen.draw_image(image=os.getcwd() + '/data/other_screens_images/empty_screen.png')
-        begin_screen.draw_text_box(
-            text='\n\nThe practice trial is over, press space to start with the experiment.',
-            fontsize=24,
-            font=constants.FONT,
-            pos=constants.TOP_LEFT_CORNER,
-            line_spacing=constants.LINE_SPACING,
-            size=(1050, None),
-            align_text='center',
-            color=constants.FGC,
-            anchor='top_left',
-        )
-
-        self._screens['begin_screen'] = begin_screen
 
     def _pause_experiment(self):
         pass
