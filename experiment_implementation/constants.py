@@ -41,13 +41,9 @@ RESULT_FOLDER_PATH = 'results'
 
 DATA_ROOT_PATH = os.getcwd() + '/data/'
 
-DATA_SCREENS_PATH = 'data.csv'
-TEST_DATA_PATH = 'test_data.csv'
-MULTIPLY_DATA_PATH = 'multipleye-stimuli-experiment-de_with_img_paths.csv'
-
-
+MULTIPLY_DATA_PATH = 'multipleye-stimuli-experiment-en_with_img_paths.csv'
 # this is the path to the csv for all other messages like welcome message that are shown on the screen
-OTHER_SCREENS_PATH = 'other_screens.csv'
+OTHER_SCREENS_PATH = 'multipleye-other-screens-en_with_img_paths.csv'
 
 FULLSCREEN = True
 
