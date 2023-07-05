@@ -1,0 +1,13 @@
+name: multipleye3.9
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python==3.9
+  - pip==22.3.1
+  - psychopy==2022.2.5
+  - pip:
+      - pygame==2.1.29
+      - gooey==1.0.8.1
+      - typing-extensions==3.10.0.2
+      - mypy-extensions==0.4.3
