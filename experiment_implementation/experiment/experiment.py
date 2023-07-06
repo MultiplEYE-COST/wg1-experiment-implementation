@@ -60,7 +60,8 @@ class Experiment:
             data_file=data_file,
         )
 
-        self._eye_tracker.set_eye_used(eye_used=constants.EYE_USED)
+        if not constants.DUMMY_MODE:
+            self._eye_tracker.set_eye_used(eye_used=constants.EYE_USED)
 
         self.log_file = Logfile(
             filename=f'{exp_path}/'
@@ -144,6 +145,8 @@ class Experiment:
                     self._display.fill(screen=self.other_screens['fixation_screen'])
                     self._display.show()
                     self._eye_tracker.log("fixation dot")
+                    milliseconds = 1000
+                    libtime.pause(milliseconds)
 
                 self._eye_tracker.send_backdrop_image(page_path)
 
@@ -154,7 +157,7 @@ class Experiment:
 
                 self._display.fill(screen=page_screen)
                 stimulus_timestamp = self._display.show()
-                libtime.pause(1000)
+                libtime.pause(2000)
 
                 key_pressed_stimulus = ''
                 keypress_timestamp = -1
@@ -181,7 +184,7 @@ class Experiment:
                 self._display.fill(screen=self.other_screens['fixation_screen'])
                 self._display.show()
                 self._eye_tracker.log("fixation dot")
-                self._keyboard.get_key(flush=True)
+                self._keyboard.get_key()
 
                 # start eye-tracking
                 self._eye_tracker.start_recording()
@@ -252,5 +255,5 @@ class Experiment:
         while not checked:
             checked = self._eye_tracker.drift_correction(
                 pos=constants.TOP_LEFT_CORNER,
-                fix_triggered=True,
+                fix_triggered=False,
             )

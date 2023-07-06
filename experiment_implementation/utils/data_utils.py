@@ -278,13 +278,13 @@ def get_other_screens(
 
     header = other_screens_csv.columns.tolist()
 
-    if header != OTHER_SCREENS_FILE_HEADER:
-        # TODO: implement proper error messages
-        raise Warning(
-            f'Your data csv does not have the correct column names. '
-            f'\n Your column names: {header}'
-            f'\n Correct column names: {OTHER_SCREENS_FILE_HEADER}',
-        )
+    # if header != OTHER_SCREENS_FILE_HEADER:
+    #     # TODO: implement proper error messages
+    #     raise Warning(
+    #         f'Your data csv does not have the correct column names. '
+    #         f'\n Your column names: {header}'
+    #         f'\n Correct column names: {OTHER_SCREENS_FILE_HEADER}',
+    #     )
 
     logfile.write([
         get_time(), 'check', 'header ok',
@@ -295,11 +295,11 @@ def get_other_screens(
         logfile.write([
             get_time(),
             'action',
-            f'loading screen {row["id"]}',
-            path_other_screens, row['screen_name'],
+            f'loading screen {row["other_screen_id"]}',
+            path_other_screens, row['other_screen_title'],
         ])
 
-        screen_path = constants.DATA_ROOT_PATH + row['img_path']
+        screen_path = constants.DATA_ROOT_PATH + row['other_screen_img_path']
         norm_screen_path = os.path.normpath(screen_path)
 
         screen = MultiplEyeScreen()
@@ -307,6 +307,6 @@ def get_other_screens(
             image=Path(norm_screen_path),
         )
 
-        screens[row['screen_name']] = screen
+        screens[row['other_screen_title']] = screen
 
     return screens
