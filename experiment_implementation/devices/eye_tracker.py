@@ -7,6 +7,8 @@ from devices.dummy_eye_tracker import DummyEyeTracker
 from devices.eyelink_eye_tracker import EyeLinkEyeTracker
 from devices.screen import MultiplEyeScreen
 
+from devices.webcam_tracker import WebcamEyeTracker
+
 
 class MultiplEyeEyeTracker(EyeTracker):
     """
@@ -33,11 +35,11 @@ class MultiplEyeEyeTracker(EyeTracker):
             scale=1,
         )
 
-        super().__init__(
-            trackertype=tracker_type,
-            display=display,
-            **args,
-        )
+        # super().__init__(
+        #     trackertype=tracker_type,
+        #     display=display,
+        #     **args,
+        # )
 
         # EyeLink
 
@@ -50,5 +52,11 @@ class MultiplEyeEyeTracker(EyeTracker):
         elif tracker_type == "dummy":
             # morph class
             self.__class__ = DummyEyeTracker
+            # initialize
+            self.__class__.__init__(self, display)
+
+        elif tracker_type == "webcam":
+            # morph class
+            self.__class__ = WebcamEyeTracker
             # initialize
             self.__class__.__init__(self, display)
