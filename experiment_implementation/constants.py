@@ -73,14 +73,18 @@ IMAGE_HEIGHT_PX = int(IMAGE_SIZE_INCH[1] * DISPSIZE[1] / SCREEN_SIZE_INCH[1])
 HORIZONTAL_MARGIN_INCH = 0.25
 VERTICAL_MARGIN_INCH = 0.3
 
-# margins from all sides in pixels, at the moment the same for all, but can be changed later
+# margins from all sides OF THE IMAGE in pixels, at the moment the same for all, but can be changed later
 MIN_MARGIN_LEFT_PX = int(HORIZONTAL_MARGIN_INCH * DISPSIZE[0] / SCREEN_SIZE_INCH[0])
 MIN_MARGIN_RIGHT_PX = int(HORIZONTAL_MARGIN_INCH * DISPSIZE[0] / SCREEN_SIZE_INCH[0])
 MIN_MARGIN_TOP_PX = (DISPSIZE[1] // 41) * 2
 MIN_MARGIN_BOTTOM_PX = (DISPSIZE[1] // 41) * 2
 
+# margins from the DISPLAY!
+DISP_MARGIN_RIGHT_PX = (DISPSIZE[0] - IMAGE_WIDTH_PX) // 2
+DISP_MARGIN_TOP_PX = (DISPSIZE[1] - IMAGE_HEIGHT_PX) // 2
+
 TOP_LEFT_CORNER = (
-    ((DISPSIZE[0] - IMAGE_WIDTH_PX) // 2) + 0.75 * MIN_MARGIN_LEFT_PX,
-    ((DISPSIZE[1] - IMAGE_HEIGHT_PX) // 2) + (1.25 * MIN_MARGIN_TOP_PX)
+    MIN_MARGIN_RIGHT_PX,
+    MIN_MARGIN_TOP_PX
 )
 

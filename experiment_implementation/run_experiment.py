@@ -28,11 +28,15 @@ def run_experiment(
         exp_path = f'{constants.RESULT_FOLDER_PATH}/{dataset_type.lower()}/{participant_id}_testrun'
         if not os.path.isdir(exp_path):
             os.makedirs(exp_path)
+        exp_path = os.path.abspath(exp_path)
 
     # it has already been checked that there is no folder with the same participant ID, so we can create a new folder
     else:
         exp_path = f'{constants.RESULT_FOLDER_PATH}/{dataset_type.lower()}/{participant_id}'
         os.mkdir(exp_path)
+        exp_path = os.path.abspath(exp_path)
+
+    print(exp_path)
 
     # all logfile name include the timestamp of the experiment start, such that we do not accidentally overwrite
     # something

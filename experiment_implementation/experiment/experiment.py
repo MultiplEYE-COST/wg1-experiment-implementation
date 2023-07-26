@@ -43,6 +43,7 @@ class Experiment:
         self.other_screens = other_screens
 
         self.screen = MultiplEyeScreen(
+            dispsize=(constants.IMAGE_WIDTH_PX, constants.IMAGE_HEIGHT_PX),
             disptype=constants.DISPTYPE,
             mousevisible=False,
         )
@@ -52,7 +53,8 @@ class Experiment:
             scale=1,
         )
 
-        data_file = Path(exp_path) / f'{participant_id}.edf'
+        data_file = str(Path(exp_path) / f'{participant_id}.edf')
+        print(data_file)
 
         self._eye_tracker = EyeTracker(
             self._display,
@@ -103,6 +105,9 @@ class Experiment:
             self._display.fill(self.other_screens['empty_screen'])
             self._display.show()
 
+            milliseconds = 1000
+            libtime.pause(milliseconds)
+
             # if there is no key pressed, there is a timeout, so we can continue
             key_pressed, keypress_timestamp = self._keyboard.get_key(flush=True, timeout=5000)
 
@@ -117,21 +122,28 @@ class Experiment:
             if key_pressed == 'p':
                 self._pause_experiment()
 
-            elif key_pressed == 'k':
+            elif key_pressed == 'c':
                 self.calibrate()
 
-            elif key_pressed == 'q':
+            elif key_pressed == 'esc':
                 self._quit_experiment()
 
-            self._drift_correction()
+            if constants.DUMMY_MODE:
+                self._display.fill(screen=self.other_screens['fixation_screen'])
+                self._display.show()
+                self._eye_tracker.log("fake_drift_correction")
+                milliseconds = 1000
+                libtime.pause(milliseconds)
+            else:
+                self._drift_correction()
 
             stimulus_list = screens['pages']
             questions_list = screens['questions']
 
             milliseconds = 1000
             libtime.pause(milliseconds)
-            self._eye_tracker.status_msg(f'trial {stimulus_nr}')
-            self._eye_tracker.log(f'start_trial {stimulus_nr}')
+            self._eye_tracker.status_msg(f'trial_{stimulus_nr}')
+            self._eye_tracker.log(f'start_trial_{stimulus_nr}')
 
             # show stimulus pages
 
