@@ -57,6 +57,7 @@ FGC = (0, 0, 0)
 DISPTYPE = 'psychopy'
 FONT = 'Courier New'
 LINE_SPACING = 2.0
+LANGUAGE = 'en'
 
 WRAP_WIDTH = 900
 

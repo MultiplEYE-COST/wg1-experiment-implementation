@@ -1,8 +1,10 @@
-other_screen_id,other_screen_title,other_screen_text_1,other_screen_text_2,comment,other_screen_img_path,other_screen_img_file
-1,welcome_screen,Welcome to the MultiplEYE experiment,,,stimuli_en/other_screens/welcome_screen_en.png,welcome_screen_en.png
-2,empty_screen,,,,stimuli_en/other_screens/empty_screen_en.png,empty_screen_en.png
-3,fixation_screen,,,,stimuli_en/other_screens/fixation_screen_en.png,fixation_screen_en.png
-4,break_screen,"If you are ready to continue with the next text,
-please press space.",,,stimuli_en/other_screens/instrucion_screen_en.png,instrucion_screen_en.png
-5,final_screen,Thank you very much for participating in this experiment!,Good Bye!,,stimuli_en/other_screens/final_screen_en.png,final_screen_en.png
-6,instruction_screen,"In this experiment you will be presented with a series of texts.",,,stimuli_en/other_screens/instrucion_screen_en.png,instrucion_screen_en.png
+other_screen_id,other_screen_title,other_screen_text,comment,other_screen_img_path,other_screen_img_file
+1,welcome_screen,Welcome to the Multipleye experiment.,,stimuli_en/other_screens/welcome_screen_en.png,welcome_screen_en.png
+2,empty_screen,,,stimuli_en/other_screens/empty_screen_en.png,empty_screen_en.png
+3,fixation_screen,,,stimuli_en/other_screens/fixation_screen_en.png,fixation_screen_en.png
+4,break_screen,Press space to pause.,,stimuli_en/other_screens/break_screen_en.png,break_screen_en.png
+5,final_screen,"Thanks for your participation!
+Goodbye!",,stimuli_en/other_screens/final_screen_en.png,final_screen_en.png
+6,instruction_screen,"In this experiment you will read a series of texts. Each text is divided into a few pages. Please read the text carefully. When you are finished, look at the bottom right edge of the screen and press the space bar. Then the next page will appear. After each text you will have to answer a few questions.",,stimuli_en/other_screens/instrucion_screen_en.png,instrucion_screen_en.png
+7,practice_screen,Now an exercise text will follow. In practice you do not have to hurry and you can ask questions.,,stimuli_en/other_screens/practice_screen_en.png,practice_screen_en.png
+8,transition_screen,"This is the end of the practice part. Just to remind you: Read the text carefully. When you're done, look at the bottom right of the screen and press the space bar. Then the next page will appear. After each text, you will have to answer a few questions.",,stimuli_en/other_screens/transition_screen_en.png,transition_screen_en.png

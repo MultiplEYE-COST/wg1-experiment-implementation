@@ -49,7 +49,7 @@ class Experiment:
         )
 
         self.screen.draw_image(
-            image=Path(Path(constants.DATA_ROOT_PATH + '/other_screens_images/empty_screen.png')),
+            image=Path(Path(constants.DATA_ROOT_PATH + f'stimuli_{constants.LANGUAGE}/other_screens/empty_screen_{constants.LANGUAGE}.png')),
             scale=1,
         )
 
