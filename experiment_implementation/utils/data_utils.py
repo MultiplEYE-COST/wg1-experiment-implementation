@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import os
 from pathlib import Path
+import random
 from typing import Dict, Any
 
 import pandas as pd
@@ -17,6 +18,8 @@ from devices.screen import MultiplEyeScreen
 # The column names for the datafiles are at the moment hardcoded in the data_utils.py. This is not ideal,
 # but will change this later once the data format is clearer.
 # TODO: put all of that information to a config file or so
+
+NUM_STIMULI = 12
 
 DATA_FILE_HEADER = [
     'stimulus_id',
@@ -147,8 +150,8 @@ QUESTION_LIST = [
     'question_1_img_path',
     'question_2_img_path',
     'question_3_img_path',
-    'question_4_img_path',
-    'question_5_img_path',
+    #'question_4_img_path',
+    #'question_5_img_path',
 ]
 
 
@@ -171,16 +174,21 @@ def create_data_logfile(
 def get_stimuli_screens(
         path_data_csv: str,
         logfile: Logfile,
-) -> list[dict[str, list[MultiplEyeScreen]]]:
+        img_type: str,
+) -> list[dict, dict]:
+
+    if img_type != 'stimuli' and img_type != 'practice':
+        raise ValueError('Argument "type" must be either "stimuli" or "practice".')
+
     screens = []
 
     logfile.write([
         get_time(), 'action', 'loading data',
-        path_data_csv, 'stimuli',
+        path_data_csv, img_type,
     ])
     data_csv = pd.read_csv(path_data_csv, sep=',')
 
-    header = data_csv.columns.tolist()
+    # header = data_csv.columns.tolist()
 
     # if header != DATA_FILE_HEADER:
     #     # TODO: implement proper error messages
@@ -189,25 +197,38 @@ def get_stimuli_screens(
     #         f'\n Your column names: {header}'
     #         f'\n Correct column names: {DATA_FILE_HEADER}',
     #     )
-
-    logfile.write([get_time(), 'check', 'header ok', path_data_csv, 'stimuli'])
+    # logfile.write([get_time(), 'check', 'header ok', path_data_csv, 'stimuli'])
 
     logfile.write([
         get_time(), 'action', 'preparing screens',
-        path_data_csv, 'stimuli',
+        path_data_csv, img_type,
     ])
 
-    for stimulus_id in range(1, len(data_csv) + 1):
+    if img_type == 'stimuli':
+        randomized_stimuli = [i for i in range(2, NUM_STIMULI + 1)]
+        random.shuffle(randomized_stimuli)
 
-        row = data_csv[data_csv['stimulus_id'] == stimulus_id]
+        stimuli_ids = [1] + randomized_stimuli
+
+    else:
+        stimuli_ids = [1, 2]
+
+    for stimulus_id in stimuli_ids:
+
+        title_col = f'stimulus_text_title{"_practice" if img_type == "practice" else ""}'
+
+        row = data_csv[data_csv[f'stimulus_id{"_practice" if img_type == "practice" else ""}'] == stimulus_id]
         logfile.write([
             get_time(
-            ), 'action', f'preparing screen for stimuli {stimulus_id}',
-            path_data_csv, f'{row["stimulus_text_title"].to_string()}',
+            ), 'action', f'preparing screen for practice text {stimulus_id}',
+            path_data_csv, f'{row[title_col].to_string()}',
         ])
 
         pages = []
         for page_id, page_name in enumerate(PAGE_LIST):
+
+            if img_type == 'practice':
+                page_name = f'page_{page_id+1}_practice_img_path'
 
             if page_name not in data_csv.columns:
                 continue
@@ -220,9 +241,9 @@ def get_stimuli_screens(
                 logfile.write([
                     get_time(),
                     'action',
-                    f'preparing screen for stimuli {stimulus_id} page {page_id+1}',
+                    f'preparing screen for practice text {stimulus_id} page {page_id+1}',
                     path_data_csv,
-                    f'{row["stimulus_text_title"].to_string(index=False)}',
+                    f'{row[title_col].to_string(index=False)}',
                 ])
 
                 norm_img_path = os.path.normpath(full_img_path)
@@ -237,6 +258,18 @@ def get_stimuli_screens(
         questions = []
         for question_id, question in enumerate(QUESTION_LIST):
 
+            correct_answer_col_name = f'correct_answer_q{question_id+1}{"_practice" if img_type == "practice" else ""}'
+            correct_answer_key_col_name = f'correct_answer_key_q{question_id+1}{"_practice" if img_type == "practice" else ""}'
+
+            correct_answer = row[correct_answer_col_name].values[0]
+            correct_answer_key = row[correct_answer_key_col_name].values[0]
+
+            if img_type == 'practice':
+                question = f'question_{question_id+1}_practice_img_path'
+
+            if question not in data_csv.columns:
+                continue
+
             img_path = row[question]
 
             if img_path.notnull().values.any():
@@ -245,9 +278,9 @@ def get_stimuli_screens(
                 logfile.write([
                     get_time(),
                     'action',
-                    f'preparing screen for stimuli {stimulus_id} question {question_id+1}',
+                    f'preparing screen for practice text {stimulus_id} question {question_id+1}',
                     path_data_csv,
-                    f'{row["stimulus_text_title"].to_string(index=False)}',
+                    f'{row[title_col].to_string(index=False)}',
                 ])
 
                 norm_img_path = os.path.normpath(img_path)
@@ -257,7 +290,14 @@ def get_stimuli_screens(
                     image=Path(norm_img_path),
                 )
 
-                questions.append(question_screen)
+                questions.append(
+                    {
+                        'question_screen': question_screen,
+                        'correct_answer': correct_answer,
+                        'correct_answer_key': correct_answer_key,
+                        'path': norm_img_path,
+                    }
+                )
 
         screens.append({'pages': pages, 'questions': questions})
 

@@ -67,6 +67,7 @@ if __name__ == '__main__':
     arguments['dataset_type'] = 'additional_dataset'
     arguments['test_run'] = True
     arguments['other_screens_path'] = constants.DATA_ROOT_PATH + constants.OTHER_SCREENS_PATH
+    arguments['practice_screens_path'] = constants.DATA_ROOT_PATH + constants.PRACTICE_STIMULI_PATH
 
     # !!! THIS IMPORT CANNOT BE MOVED SOMEWHERE ELSE; OTHERWISE THE PROGRAM GETS REALLY SLOW !!!
     from run_experiment import run_experiment

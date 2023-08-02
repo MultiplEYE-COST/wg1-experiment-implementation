@@ -58,6 +58,7 @@ if __name__ == '__main__':
     arguments['dataset_type'] = 'core_dataset'
     arguments['data_screens_path'] = constants.DATA_ROOT_PATH + constants.MULTIPLY_DATA_PATH
     arguments['other_screens_path'] = constants.DATA_ROOT_PATH + constants.OTHER_SCREENS_PATH
+    arguments['practice_screens_path'] = constants.DATA_ROOT_PATH + constants.PRACTICE_STIMULI_PATH
     arguments['test_run'] = False
 
     # !!! THIS IMPORT CANNOT BE MOVED SOMEWHERE ELSE; OTHERWISE THE PROGRAM GETS REALLY SLOW !!!

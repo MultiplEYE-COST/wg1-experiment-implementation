@@ -14,6 +14,7 @@ from utils import data_utils
 def run_experiment(
         data_screens_path: str,
         other_screens_path: str,
+        practice_screens_path: str,
         session_id: int,
         participant_id: int,
         date: str,
@@ -63,9 +64,15 @@ def run_experiment(
 
     general_log_file.write([get_time(), 'start preparing stimuli screens'])
     stimuli_screens = data_utils.get_stimuli_screens(
-        data_screens_path, data_logfile,
+        data_screens_path, data_logfile, img_type='stimuli',
     )
     general_log_file.write([get_time(), 'finished preparing stimuli screens'])
+
+    general_log_file.write([get_time(), 'start preparing practice screens'])
+    practice_screens = data_utils.get_stimuli_screens(
+        practice_screens_path, data_logfile, img_type='practice',
+    )
+    general_log_file.write([get_time(), 'finished preparing practice screens'])
 
     general_log_file.write([get_time(), 'start preparing other screens'])
     other_screens = data_utils.get_other_screens(
@@ -73,9 +80,12 @@ def run_experiment(
     )
     general_log_file.write([get_time(), 'finished preparing other screens'])
 
+    print(other_screens)
+
     experiment = Experiment(
         stimuli_screens=stimuli_screens,
         other_screens=other_screens,
+        practice_screens=practice_screens,
         date=date,
         session_id=session_id,
         participant_id=participant_id,
@@ -90,10 +100,10 @@ def run_experiment(
     general_log_file.write([get_time(), 'start initial calibration'])
     experiment.calibrate()
     general_log_file.write([get_time(), 'finished initial calibration'])
-    #
+
     # general_log_file.write([get_time(), 'start practice trial'])
     # experiment.practice_trial()
-    # general_log_file.write([get_time(), 'finished practice trial'])
+    # general_log_file.write([get_time(), 'finished practice trial'])y
 
     general_log_file.write([get_time(), 'start experiment'])
     experiment.run_experiment()
