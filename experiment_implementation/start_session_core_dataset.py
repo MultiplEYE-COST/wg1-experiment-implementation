@@ -11,12 +11,13 @@ from utils.experiment_utils import create_results_folder, ValidateParticipantIDA
 
 
 @Gooey(
-    language='English',
+    language=constants.FULL_LANGUAGE,
     program_name='MultiplEYE Data Collection',
-    program_description='Before we start the experiment we need some information about the participant, '
-                        'session etc. Please fill in the below form and follow the instructions.',
+    program_description='Before we start the experiment we need some information about the participant,\n'
+                        'session etc. Please fill in the form below and follow the instructions.',
     image_dir=os.getcwd() + '/data/icons/',
     default_size=(800, 600),
+    language_dir=os.getcwd() + '/data/gooey_lang/',
     show_preview_warning=False,
 )
 def parse_args():
@@ -46,7 +47,6 @@ def parse_args():
 
 
 if __name__ == '__main__':
-
     create_results_folder(dataset='core_dataset')
 
     arguments = parse_args()
@@ -63,4 +63,5 @@ if __name__ == '__main__':
 
     # !!! THIS IMPORT CANNOT BE MOVED SOMEWHERE ELSE; OTHERWISE THE PROGRAM GETS REALLY SLOW !!!
     from run_experiment import run_experiment
+
     run_experiment(**arguments)

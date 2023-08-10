@@ -6,27 +6,18 @@ https://github.com/esdalmaijer/PyGaze/blob/master/pygaze/defaults.py
 """
 import os
 
-DUMMY_MODE = True
+DUMMY_MODE = False
 
-#TRACKERTYPE = 'eyelink' # or whatever eye-tracker your using
-TRACKERTYPE = 'dummy'
+TRACKERTYPE = 'eyelink' # or whatever eye-tracker your using
+#TRACKERTYPE = 'dummy'
 
 # tobii trackers
 # TRACKERTYPE = 'tobii'
 # TRACKERSERIALNUMBER = 'TPFC2-010202524041'
 
 
-# Display resolution in pixels as (width,height). Needs to be integers!
-DISPSIZE = (1920, 1080)
-
-# Distance between the eye and the display in centimeters. Float.
-SCREENDIST = 90.0
-
-# Physical display size in centimeters as (width,height). Can be floats.
-# SCREENSIZE = (52.1, 29.3)
-SCREENSIZE = (34.4, 19.4)
-
 LANGUAGE = 'en'
+FULL_LANGUAGE = 'English'
 
 ##############################################################################################################
 # BELOW WE SPECIFY THOSE VARIABLES THAT ARE THE SAME ACROSS ALL LANGUAGES AND DEVICES; DO NOT CHANGE THESE ###
@@ -63,16 +54,34 @@ WRAP_WIDTH = 900
 
 INCH_IN_CM = 2.54
 
-IMAGE_SIZE_CM = (25, 19)
-IMAGE_SIZE_INCH = (IMAGE_SIZE_CM[0] / INCH_IN_CM, IMAGE_SIZE_CM[1] / INCH_IN_CM)
-
-SCREEN_SIZE_INCH = (SCREENSIZE[0] / INCH_IN_CM, SCREENSIZE[1] / INCH_IN_CM)
-IMAGE_WIDTH_PX = int(IMAGE_SIZE_INCH[0] * DISPSIZE[0] / SCREEN_SIZE_INCH[0])
-IMAGE_HEIGHT_PX = int(IMAGE_SIZE_INCH[1] * DISPSIZE[1] / SCREEN_SIZE_INCH[1])
+#########################################################
+# COPY THOSE FROM IMAGE CREATION REPO FOR EACH LANGUAGE #
+#########################################################
+# these settings are now adapted to deborah's laptop in the dili lab
+IMAGE_SIZE_CM = (36, 28)
 
 # calculate the margins in inch, we set the margin fixed as fixed percentage of the image size
 HORIZONTAL_MARGIN_INCH = 0.25
 VERTICAL_MARGIN_INCH = 0.3
+
+# Display resolution in pixels as (width,height). Needs to be integers!
+DISPSIZE = (1920, 1080)
+
+# Distance between the eye and the display in centimeters. Float.
+SCREENDIST = 90.0
+
+# Physical display size in centimeters as (width,height). Can be floats.aaa
+# SCREENSIZE = (52.1, 29.3)
+SCREENSIZE = (54.4, 30.3)
+#########################################################
+
+
+IMAGE_SIZE_INCH = (IMAGE_SIZE_CM[0] / INCH_IN_CM,
+                   IMAGE_SIZE_CM[1] / INCH_IN_CM)
+
+SCREEN_SIZE_INCH = (SCREENSIZE[0] / INCH_IN_CM, SCREENSIZE[1] / INCH_IN_CM)
+IMAGE_WIDTH_PX = int(IMAGE_SIZE_INCH[0] * DISPSIZE[0] / SCREEN_SIZE_INCH[0])
+IMAGE_HEIGHT_PX = int(IMAGE_SIZE_INCH[1] * DISPSIZE[1] / SCREEN_SIZE_INCH[1])
 
 # margins from all sides OF THE IMAGE in pixels, at the moment the same for all, but can be changed later
 MIN_MARGIN_LEFT_PX = int(HORIZONTAL_MARGIN_INCH * DISPSIZE[0] / SCREEN_SIZE_INCH[0])

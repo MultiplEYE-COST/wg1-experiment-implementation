@@ -5,9 +5,10 @@ import datetime
 import os
 
 import constants
-from experiment.experiment import Experiment
+
 from pygaze.libtime import get_time
 from pygaze.logfile import Logfile
+from experiment.experiment import Experiment
 from utils import data_utils
 
 
@@ -36,8 +37,6 @@ def run_experiment(
         exp_path = f'{constants.RESULT_FOLDER_PATH}/{dataset_type.lower()}/{participant_id}'
         os.mkdir(exp_path)
         exp_path = os.path.abspath(exp_path)
-
-    print(exp_path)
 
     # all logfile name include the timestamp of the experiment start, such that we do not accidentally overwrite
     # something
@@ -79,8 +78,6 @@ def run_experiment(
         other_screens_path, data_logfile,
     )
     general_log_file.write([get_time(), 'finished preparing other screens'])
-
-    print(other_screens)
 
     experiment = Experiment(
         stimuli_screens=stimuli_screens,

@@ -23,7 +23,6 @@ class Experiment:
 
     _display: Display = Display(
         monitor=Monitor('myMonitor', width=25.0, distance=90.0),
-        bgc=(15, 15, 15),
     )
 
     _keyboard: Keyboard = Keyboard(keylist=None, timeout=None)

@@ -11,13 +11,14 @@ from utils.experiment_utils import ValidateParticipantIDAction, create_results_f
 
 
 @Gooey(
-    language='English',
+    language=constants.FULL_LANGUAGE,
     program_name='MultiplEYE Data Collection',
-    program_description='Before we start the experiment we need some information about the participant, '
+    program_description='Before we start the experiment we need some information about the participant,\n'
                         'session etc. Please fill in the below form and follow the instructions.',
     image_dir=os.getcwd() + '/data/icons/',
     default_size=(600, 600),
     show_preview_warning=False,
+    language_dir=os.getcwd() + '/data/gooey_lang/',
 )
 def parse_args():
     parser = GooeyParser(
