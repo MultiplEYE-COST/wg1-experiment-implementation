@@ -94,13 +94,12 @@ def run_experiment(
     general_log_file.write([get_time(), 'show welcome screen'])
     experiment.welcome_screen()
 
+    general_log_file.write([get_time(), 'show informed consent screen'])
+    experiment.show_informed_consent()
+
     general_log_file.write([get_time(), 'start initial calibration'])
     experiment.calibrate()
     general_log_file.write([get_time(), 'finished initial calibration'])
-
-    # general_log_file.write([get_time(), 'start practice trial'])
-    # experiment.practice_trial()
-    # general_log_file.write([get_time(), 'finished practice trial'])y
 
     general_log_file.write([get_time(), 'start experiment'])
     experiment.run_experiment()

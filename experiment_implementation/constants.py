@@ -24,7 +24,7 @@ FULL_LANGUAGE = 'English'
 ##############################################################################################################
 
 EVENTDETECTION = "native"
-EYE_USED = "right"
+EYE_USED = "RIGHT"
 
 RESULT_FOLDER_PATH = 'results'
 
@@ -68,12 +68,11 @@ VERTICAL_MARGIN_INCH = 0.3
 DISPSIZE = (1920, 1080)
 
 # Distance between the eye and the display in centimeters. Float.
-SCREENDIST = 90.0
+SCREENDIST = 60.0
 
 # Physical display size in centimeters as (width,height). Can be floats.aaa
 # SCREENSIZE = (52.1, 29.3)
 SCREENSIZE = (54.4, 30.3)
-#########################################################
 
 
 IMAGE_SIZE_INCH = (IMAGE_SIZE_CM[0] / INCH_IN_CM,
@@ -97,4 +96,7 @@ TOP_LEFT_CORNER = (
     MIN_MARGIN_RIGHT_PX,
     MIN_MARGIN_TOP_PX
 )
+
+#########################################################
+
 

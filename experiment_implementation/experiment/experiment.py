@@ -5,24 +5,25 @@ import os
 from pathlib import Path
 
 import pandas as pd
+import pylink
 from pygaze.eyetracker import EyeTracker
 
 import constants
+from psychopy import core, event
 from psychopy.monitors import Monitor
 from pygaze import libtime
 from pygaze.keyboard import Keyboard
 from pygaze.logfile import Logfile
 from pygaze.display import Display
 from pygaze.libtime import get_time
-
+from math import fabs
 
 from devices.screen import MultiplEyeScreen
 
 
 class Experiment:
-
     _display: Display = Display(
-        monitor=Monitor('myMonitor', width=25.0, distance=90.0),
+        monitor=Monitor('myMonitor', width=constants.SCREENSIZE[0], distance=constants.SCREENDIST),
     )
 
     _keyboard: Keyboard = Keyboard(keylist=None, timeout=None)
@@ -51,7 +52,11 @@ class Experiment:
         )
 
         self.screen.draw_image(
-            image=Path(Path(constants.DATA_ROOT_PATH + f'stimuli_{constants.LANGUAGE}/other_screens/empty_screen_{constants.LANGUAGE}.png')),
+            image=Path(
+                Path(
+                    constants.DATA_ROOT_PATH + f'stimuli_{constants.LANGUAGE}/other_screens/empty_screen_{constants.LANGUAGE}.png'
+                )
+            ),
             scale=1,
         )
 
@@ -72,23 +77,42 @@ class Experiment:
                      f'EXPERIMENT_LOGFILE_{session_id}_{participant_id}_{date}_{experiment_start_timestamp}',
         )
 
-        self.log_file.write([
-            'timestamp', 'trial_number', 'page_number', 'stimulus_timestamp',
-            'keypress_timestamp', 'key_pressed', 'question', 'answer_correct', 'message',
-        ])
+        self.log_file.write(
+            [
+                'timestamp', 'trial_number', 'page_number', 'stimulus_timestamp',
+                'keypress_timestamp', 'key_pressed', 'question', 'answer_correct', 'message',
+            ]
+        )
 
         # logfile headers
         self.log_file.write([get_time(), pd.NA, pd.NA, pd.NA, pd.NA, pd.NA, pd.NA, pd.NA, f'DATE_{date}'])
-        self.log_file.write([get_time(), pd.NA, pd.NA, pd.NA, pd.NA, pd.NA, pd.NA, pd.NA,
-                             f'EXP_START_TIMESTAMP_{experiment_start_timestamp}'])
+        self.log_file.write(
+            [get_time(), pd.NA, pd.NA, pd.NA, pd.NA, pd.NA, pd.NA, pd.NA,
+             f'EXP_START_TIMESTAMP_{experiment_start_timestamp}']
+        )
         self.log_file.write([get_time(), pd.NA, pd.NA, pd.NA, pd.NA, pd.NA, pd.NA, pd.NA, f'SESSION_ID_{session_id}'])
-        self.log_file.write([get_time(), pd.NA, pd.NA, pd.NA, pd.NA, pd.NA, pd.NA, pd.NA, f'PARTICIPANT_ID_{participant_id}'])
-        self.log_file.write([get_time(), pd.NA, pd.NA, pd.NA, pd.NA, pd.NA, pd.NA, pd.NA, f'DATASET_TYPE_{dataset_type}'])
+        self.log_file.write(
+            [get_time(), pd.NA, pd.NA, pd.NA, pd.NA, pd.NA, pd.NA, pd.NA, f'PARTICIPANT_ID_{participant_id}']
+        )
+        self.log_file.write(
+            [get_time(), pd.NA, pd.NA, pd.NA, pd.NA, pd.NA, pd.NA, pd.NA, f'DATASET_TYPE_{dataset_type}']
+        )
 
     def welcome_screen(self):
         self._display.fill(self.other_screens['welcome_screen'])
         self._display.show()
-        self._keyboard.get_key()
+        timestamp, key = 0, 0
+
+        while key not in ['space']:
+            timestamp, key = self._keyboard.get_key()
+
+    def show_informed_consent(self):
+        self._display.fill(self.other_screens['informed_consent_screen'])
+        self._display.show()
+        timestamp, key = 0, 0
+
+        while key not in ['space']:
+            timestamp, key = self._keyboard.get_key()
 
     def calibrate(self) -> None:
 
@@ -130,23 +154,21 @@ class Experiment:
             flag = ''
         else:
             images = self.practice_screens
-            flag = 'practice_'
+            flag = 'PRACTICE_'
+
+        recalibrate = False
 
         for stimulus_nr, screens in enumerate(images):
 
-            # before we present the next stimulus, the experiment can recalibrate, pause or quite the experiment
-            # not all the functionality is implemented yet
-            # also, there might be a better way to do this but for now it works
             self._eye_tracker.status_msg(f'show_empty_screen')
             self._eye_tracker.log(f'show_empty_screen')
             self._display.fill(self.other_screens['empty_screen'])
             self._display.show()
 
-            milliseconds = 1000
+            milliseconds = 200
             libtime.pause(milliseconds)
 
-            # if there is no key pressed, there is a timeout, so we can continue
-            key_pressed, keypress_timestamp = self._keyboard.get_key(flush=True, timeout=5000)
+            key_pressed, keypress_timestamp = self._keyboard.get_key()
 
             self.log_file.write(
                 [
@@ -156,14 +178,9 @@ class Experiment:
                 ],
             )
 
-            if key_pressed == 'p':
-                self._pause_experiment()
-
-            elif key_pressed == 'c':
-                self.calibrate()
-
-            elif key_pressed == 'esc':
-                self._quit_experiment()
+            if recalibrate:
+                # TODO add status message
+                self._eye_tracker.calibrate()
 
             if constants.DUMMY_MODE:
                 self._display.fill(screen=self.other_screens['fixation_screen'])
@@ -180,10 +197,9 @@ class Experiment:
             milliseconds = 1000
             libtime.pause(milliseconds)
             self._eye_tracker.status_msg(f'{flag}trial_{stimulus_nr}')
-            self._eye_tracker.log(f'start_{flag}trial_{stimulus_nr}')
+            self._eye_tracker.log(f'{flag}TRIALID {stimulus_nr}')
 
             # show stimulus pages
-
             for page_number, page_dict in enumerate(stimulus_list):
 
                 page_screen = page_dict['screen']
@@ -194,6 +210,13 @@ class Experiment:
                     self._display.fill(screen=self.other_screens['fixation_screen'])
                     self._display.show()
                     self._eye_tracker.log(f"fixation_dot_{flag}trial_{stimulus_nr}_page_{page_number}")
+
+                    self._eye_tracker.log(f'start_recording_{flag}trial_{stimulus_nr}_page_{page_number}_fixation_trigger')
+                    self._eye_tracker.start_recording()
+                    recalibrate = self._fixation_trigger()
+                    self._eye_tracker.stop_recording()
+                    self._eye_tracker.log(f'stop_recording_{flag}trial_{stimulus_nr}_page_{page_number}_fixation_trigger')
+
                     milliseconds = 1000
                     libtime.pause(milliseconds)
 
@@ -210,7 +233,7 @@ class Experiment:
 
                 key_pressed_stimulus = ''
                 keypress_timestamp = -1
-                # add timeout
+
                 while key_pressed_stimulus not in ['space']:
                     key_pressed_stimulus, keypress_timestamp = self._keyboard.get_key(
                         flush=True,
@@ -227,6 +250,13 @@ class Experiment:
                 # stop eye tracking
                 self._eye_tracker.stop_recording()
                 self._eye_tracker.log(f'stop_recording_{flag}trial_{stimulus_nr}_page_{page_number}')
+
+                # TODO
+                # el_tracker.sendMessage('!V TRIAL_VAR condition %s' % cond)
+                # el_tracker.sendMessage('!V TRIAL_VAR image %s' % pic)
+                # el_tracker.sendMessage('!V TRIAL_VAR RT %d' % RT)
+
+            self._eye_tracker.log(f'{flag}TRIAL_RESULT {stimulus_nr}')
 
             for question_number, question_dict in enumerate(questions_list):
                 # fixation dot
@@ -290,17 +320,86 @@ class Experiment:
                 self._display.fill(screen=self.other_screens['empty_screen'])
                 libtime.pause(300)
 
-    def practice_trial(self) -> None:
+    def _fixation_trigger(self) -> bool:
         """
-        Not implemented yet.
+        fixation triggered next page
+        :return: bool: trigger fired or not
         """
-        self.log_file.write([
-            get_time(), 'practice_trial', '1', 'stimulus_timestamp',
-            'keypress_timestamp', 'key_pressed', 'question', pd.NA, pd.NA,
-        ])
+        recalibrate = False
 
-    def _pause_experiment(self):
-        pass
+        event.clearEvents()  # clear cached PsychoPy events
+        old_sample = None
+        trigger_fired = False
+        in_hit_region = False
+        trigger_start_time = core.getTime()
+        # fire the trigger following a 300-ms gaze
+        minimum_duration = 0.3
+        gaze_start = -1
+        while not trigger_fired:
+            # TODO
+            # abort the current trial if the tracker is no longer recording
+            # error = self._eye_tracker.connected()
+            # if error is not pylink.TRIAL_OK:
+            #     self._eye_tracker.log('tracker_disconnected')
+
+            # if the trigger did not fire in 10 seconds, abort trial
+            if core.getTime() - trigger_start_time >= 10.0:
+                self._eye_tracker.log('set_recalibration_true')
+                # re-calibrate in the following trial
+                recalibrate = True
+
+            # check for keyboard events, skip a trial if ESCAPE is pressed
+            # terminate the task is Ctrl-C is pressed
+            for keycode, modifier in event.getKeys(modifiers=True):
+                # Abort a trial and recalibrate if "ESCAPE" is pressed
+                if keycode == 'space' and (modifier['ctrl'] is True):
+                    self._eye_tracker.log('experiment_continued_by_experimenter')
+                    # re-calibrate in the following trial
+                    return True
+
+                # TODO
+                # # Terminate the task if Ctrl-c
+                # if keycode == 'c' and (modifier['ctrl'] is True):
+                #     self._eye_tracker.log('terminated_by_user')
+                #     terminate_task()
+                #     return pylink.ABORT_EXPT
+
+            # Do we have a sample in the sample buffer?
+            # and does it differ from the one we've seen before?
+            new_sample = self._eye_tracker.sample()
+            if new_sample is not None:
+                if old_sample is not None:
+                    if new_sample.getTime() != old_sample.getTime():
+                        # check if the new sample has data for the eye
+                        # currently being tracked; if so, we retrieve the current
+                        # gaze position and PPD (how many pixels correspond to 1
+                        # deg of visual angle, at the current gaze position)
+                        if constants.EYE_USED == 'RIGHT' and new_sample.isRightSample():
+                            g_x, g_y = new_sample.getRightEye().getGaze()
+                        if constants.EYE_USED == 'LEFT' and new_sample.isLeftSample():
+                            g_x, g_y = new_sample.getLeftEye().getGaze()
+
+                        # break the while loop if the current gaze position is
+                        # in a 120 x 120 pixels region around the screen centered
+                        fix_x, fix_y = constants.TOP_LEFT_CORNER
+                        if fabs(g_x - fix_x) < 60 and fabs(g_y - fix_y) < 60:
+                            # record gaze start time
+                            if not in_hit_region:
+                                if gaze_start == -1:
+                                    gaze_start = core.getTime()
+                                    in_hit_region = True
+                            # check the gaze duration and fire
+                            if in_hit_region:
+                                gaze_dur = core.getTime() - gaze_start
+                                if gaze_dur > minimum_duration:
+                                    trigger_fired = True
+                        else:  # gaze outside the hit region, reset variables
+                            in_hit_region = False
+                            gaze_start = -1
+
+                # update the "old_sample"
+                old_sample = new_sample
+        return recalibrate
 
     def _quit_experiment(self) -> None:
         # end the experiment and close all the files + connection to eye-tracker
@@ -310,9 +409,6 @@ class Experiment:
         libtime.expend()
 
     def _drift_correction(self):
-
-        # this is a workaround for now, as the calibration screen would be black as per default
-        # we need to set the background to our color for some eye-trackers
 
         checked = False
         while not checked:
