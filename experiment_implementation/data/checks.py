@@ -38,7 +38,7 @@ list_of_correct_stimuli_images = ['stimulus_id','stimulus_text_title','page_1','
 
 stimuli_file = 'multipleye-stimuli-experiment-en_with_img_paths.csv'
 
-def stimuli_check(stimuli_file, list_of_correct_stimuli_images):   # DONE
+def stimuli_check(stimuli_file, list_of_correct_stimuli_images):
     with open(stimuli_file, 'r') as f:
         data = csv.reader(f)
         list_of_stimuli_images = next(data)
@@ -66,7 +66,7 @@ list_of_correct_screens = ["other_screen_id","other_screen_title","other_screen_
                            "other_screen_img_name","other_screen_img_path"]
 screens_file = 'multipleye-other-screens-en_with_img_paths.csv'
 
-def other_screens_checks (list_of_correct_screens,screens_file):  # DONE
+def other_screens_checks (list_of_correct_screens,screens_file):
     with open(screens_file, 'r') as f:
         data = csv.reader(f)
         screen_images_list = next(data)
@@ -111,7 +111,7 @@ list_of_stimuli_for_practice = ["stimulus_id_practice","stimulus_text_title_prac
 
 practice_file = 'multipleye-stimuli-practice-en_with_img_paths.csv'
 
-def practice_file_check(list_of_stimuli_for_practice, practice_file):  # DONE
+def practice_file_check(list_of_stimuli_for_practice, practice_file):
     with open(practice_file, 'r') as f:
         data = csv.reader(f)
         practice_images_list = next(data)
@@ -133,8 +133,18 @@ def practice_file_check(list_of_stimuli_for_practice, practice_file):  # DONE
             output_f.write("The images for the practical session are complete\n")
 
 
+def main():
+    other_screens_checks(list_of_correct_screens, screens_file)
+    stimuli_check(stimuli_file, list_of_correct_stimuli_images)
+    practice_file_check(list_of_stimuli_for_practice, practice_file)
+
+if __name__ == "__main__":
+    main()
 
 
-other_screens_checks(list_of_correct_screens, screens_file)
-stimuli_check(stimuli_file, list_of_correct_stimuli_images)
-practice_file_check (list_of_stimuli_for_practice, practice_file)
+
+
+
+
+
+

@@ -63,6 +63,11 @@ class Experiment:
         data_file = str(Path(exp_path) / f'{participant_id}.edf')
         print(data_file)
 
+        if data_file.exists():
+            print (f'the data file with {participant_id} already exists, please choose another id')
+        else:
+            pass
+
         self._eye_tracker = EyeTracker(
             self._display,
             screen=self.screen,
