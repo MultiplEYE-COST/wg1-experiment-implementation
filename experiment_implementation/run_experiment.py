@@ -114,7 +114,7 @@ def run_experiment(
 if __name__ == '__main__':
     # to skip the GUI you can run this file directly
     args_dict = {
-        'data_screens_path': constants.DATA_ROOT_PATH + constants.DATA_SCREENS_PATH,
+        'data_screens_path': constants.DATA_ROOT_PATH + constants.MULTIPLY_DATA_PATH,
         'other_screens_path': constants.DATA_ROOT_PATH + constants.OTHER_SCREENS_PATH,
         'session_id': 1,
         'participant_id': 1,

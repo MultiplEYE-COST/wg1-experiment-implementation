@@ -101,18 +101,14 @@ class Experiment:
     def welcome_screen(self):
         self._display.fill(self.other_screens['welcome_screen'])
         self._display.show()
-        timestamp, key = 0, 0
-
-        while key not in ['space']:
-            timestamp, key = self._keyboard.get_key()
+        self._keyboard.get_key(flush=True)
 
     def show_informed_consent(self):
         self._display.fill(self.other_screens['informed_consent_screen'])
         self._display.show()
-        timestamp, key = 0, 0
-
-        while key not in ['space']:
-            timestamp, key = self._keyboard.get_key()
+        self._keyboard.get_key(flush=True)
+        self._display.fill()
+        self._display.show()
 
     def calibrate(self) -> None:
 
@@ -152,9 +148,11 @@ class Experiment:
         if not practice:
             images = self.stimuli_screens
             flag = ''
+            cond = 'real_trial'
         else:
             images = self.practice_screens
             flag = 'PRACTICE_'
+            cond = 'practice_trial'
 
         recalibrate = False
 
@@ -165,21 +163,12 @@ class Experiment:
             self._display.fill(self.other_screens['empty_screen'])
             self._display.show()
 
-            milliseconds = 200
+            milliseconds = 500
             libtime.pause(milliseconds)
 
-            key_pressed, keypress_timestamp = self._keyboard.get_key()
-
-            self.log_file.write(
-                [
-                    get_time(), stimulus_nr, pd.NA, pd.NA, keypress_timestamp,
-                    key_pressed,
-                    False, pd.NA, 'event before drift correction',
-                ],
-            )
-
-            if recalibrate:
-                # TODO add status message
+            if not stimulus_nr == 0:
+                self._eye_tracker.status_msg('validate now')
+                self._eye_tracker.log('validation before stimulus')
                 self._eye_tracker.calibrate()
 
             if constants.DUMMY_MODE:
@@ -204,23 +193,28 @@ class Experiment:
 
                 page_screen = page_dict['screen']
                 page_path = page_dict['path']
+                pic = page_path.split('/')[-1]     #cui
 
                 # present fixation cross before stimulus except for the first page as we have a drift correction then
                 if not page_number == 0:
-                    self._display.fill(screen=self.other_screens['fixation_screen'])
-                    self._display.show()
-                    self._eye_tracker.log(f"fixation_dot_{flag}trial_{stimulus_nr}_page_{page_number}")
+                    self._drift_correction(overwrite=True)
 
-                    self._eye_tracker.log(f'start_recording_{flag}trial_{stimulus_nr}_page_{page_number}_fixation_trigger')
-                    self._eye_tracker.start_recording()
-                    recalibrate = self._fixation_trigger()
-                    self._eye_tracker.stop_recording()
-                    self._eye_tracker.log(f'stop_recording_{flag}trial_{stimulus_nr}_page_{page_number}_fixation_trigger')
+                    # self._display.fill(screen=self.other_screens['fixation_screen'])
+                    # self._display.show()
+                    # self._eye_tracker.log(f"fixation_dot_{flag}trial_{stimulus_nr}_page_{page_number}")
+
+                    # TODO finish fixation trigger
+                    # self._eye_tracker.log(f'start_recording_{flag}trial_{stimulus_nr}_page_{page_number}_fixation_trigger')
+                    # self._eye_tracker.start_recording()
+                    # recalibrate = self._fixation_trigger()
+                    # self._eye_tracker.stop_recording()
+                    # self._eye_tracker.log(f'stop_recording_{flag}trial_{stimulus_nr}_page_{page_number}_fixation_trigger')
 
                     milliseconds = 1000
                     libtime.pause(milliseconds)
 
-                self._eye_tracker.send_backdrop_image(page_path)
+                if not constants.DUMMY_MODE:
+                    self._eye_tracker.send_backdrop_image(page_path)
 
                 # start eye-tracking
                 self._eye_tracker.status_msg(f'{flag}trial_{stimulus_nr}_page_{page_number}')
@@ -229,6 +223,22 @@ class Experiment:
 
                 self._display.fill(screen=page_screen)
                 stimulus_timestamp = self._display.show()
+                self._eye_tracker.log('screen_image_onset')     #cui
+                #img_onset_time = core.getTime()       #cui maybe it is the same as 'stimulus_timestamp'
+                # Send a message to clear the Data Viewer screen, get it ready for   #cui
+                # drawing the pictures during visualization  #cui
+                self._eye_tracker.log('!V CLEAR 116 116 116')   #cui
+
+                # TODO -- TO CHECK SCREEN WIDTH AND HEIGHT -- TO CHECK WHETHER FUNC CORRECT
+                # send over a message to specify where the image is stored relative
+                # to the EDF data file, see Data Viewer User Manual, "Protocol for
+                # EyeLink Data to Viewer Integration"
+                imgload_msg = '!V IMGLOAD CENTER %s %d %d %d %d' % (page_path,
+                                                                    int(1270 / 2.0),    #cui
+                                                                    int(998 / 2.0),
+                                                                    int(1270),
+                                                                    int(998))
+                self._eye_tracker.log(imgload_msg)  #cui
                 libtime.pause(2000)
 
                 key_pressed_stimulus = ''
@@ -247,30 +257,32 @@ class Experiment:
                     ],
                 )
 
+                # send a message to clear the data viewer screen.   #cui
+                self._eye_tracker.log('!V CLEAR 128 128 128')   #cui
                 # stop eye tracking
                 self._eye_tracker.stop_recording()
                 self._eye_tracker.log(f'stop_recording_{flag}trial_{stimulus_nr}_page_{page_number}')
 
-                # TODO
-                # el_tracker.sendMessage('!V TRIAL_VAR condition %s' % cond)
-                # el_tracker.sendMessage('!V TRIAL_VAR image %s' % pic)
-                # el_tracker.sendMessage('!V TRIAL_VAR RT %d' % RT)
+                # TODO use correct class and method and log all necessary variables
+                # self._eye_tracker.log_var()     #cui log_var not correct for data viewer
+                self._eye_tracker.log('!V TRIAL_VAR condition %s' % cond)      #cui use 'practice' and 'real' as cond?
+                self._eye_tracker.log('!V TRIAL_VAR backdrop_image %s' % pic)    #cui
+                self._eye_tracker.log('!V TRIAL_VAR RT %d' % int(core.getTime() - stimulus_timestamp)*1000)   #cui
 
             self._eye_tracker.log(f'{flag}TRIAL_RESULT {stimulus_nr}')
 
             for question_number, question_dict in enumerate(questions_list):
                 # fixation dot
-                self._display.fill(screen=self.other_screens['fixation_screen'])
-                self._display.show()
-                self._eye_tracker.log(f"fixation_dot_{flag}trial_{stimulus_nr}_question_{question_number}")
-                self._keyboard.get_key()
+                self._drift_correction(overwrite=True)
 
                 # start eye-tracking
                 self._eye_tracker.status_msg(f'{flag}trial_{stimulus_nr}_question_{question_number}')
                 self._eye_tracker.log(
                     f'start_recording_{flag}trial_{stimulus_nr}_question_{question_number}',
                 )
-                self._eye_tracker.send_backdrop_image(question_dict['path'])
+
+                if not constants.DUMMY_MODE:
+                    self._eye_tracker.send_backdrop_image(question_dict['path'])
 
                 self._eye_tracker.start_recording()
 
@@ -349,7 +361,7 @@ class Experiment:
                 recalibrate = True
 
             # check for keyboard events, skip a trial if ESCAPE is pressed
-            # terminate the task is Ctrl-C is pressed
+            # terminate the task if Ctrl-C is pressed
             for keycode, modifier in event.getKeys(modifiers=True):
                 # Abort a trial and recalibrate if "ESCAPE" is pressed
                 if keycode == 'space' and (modifier['ctrl'] is True):
@@ -366,7 +378,8 @@ class Experiment:
 
             # Do we have a sample in the sample buffer?
             # and does it differ from the one we've seen before?
-            new_sample = self._eye_tracker.sample()
+            new_sample = self._eye_tracker.get_newest_sample()
+            print(new_sample)
             if new_sample is not None:
                 if old_sample is not None:
                     if new_sample.getTime() != old_sample.getTime():
@@ -408,11 +421,15 @@ class Experiment:
         self._display.close()
         libtime.expend()
 
-    def _drift_correction(self):
+    def _drift_correction(self, overwrite: bool = False) -> None:
 
         checked = False
         while not checked:
             checked = self._eye_tracker.drift_correction(
                 pos=constants.TOP_LEFT_CORNER,
                 fix_triggered=False,
+                overwrite=overwrite,
             )
+
+    def validate(self):
+        self._eye_tracker.calibrate(validation_only=True)

@@ -30,12 +30,12 @@ RESULT_FOLDER_PATH = 'results'
 
 # this is the path to the csv file that contains the stimuli texts
 
-DATA_ROOT_PATH = os.getcwd() + '/data/'
+DATA_ROOT_PATH = os.getcwd() + f'/data/'
 
-MULTIPLY_DATA_PATH = f'multipleye-stimuli-experiment-{LANGUAGE}_with_img_paths.csv'
+MULTIPLY_DATA_PATH = f'stimuli_{LANGUAGE}/multipleye-stimuli-experiment-{LANGUAGE}_with_img_paths.csv'
 # this is the path to the csv for all other messages like welcome message that are shown on the screen
-OTHER_SCREENS_PATH = f'multipleye-other-screens-{LANGUAGE}_with_img_paths.csv'
-PRACTICE_STIMULI_PATH = f'multipleye-stimuli-practice-{LANGUAGE}_with_img_paths.csv'
+OTHER_SCREENS_PATH = f'stimuli_{LANGUAGE}/multipleye-other-screens-{LANGUAGE}_with_img_paths.csv'
+PRACTICE_STIMULI_PATH = f'stimuli_{LANGUAGE}/multipleye-stimuli-practice-{LANGUAGE}_with_img_paths.csv'
 
 FULLSCREEN = True
 
