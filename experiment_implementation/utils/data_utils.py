@@ -220,7 +220,7 @@ def get_stimuli_screens(
         row = data_csv[data_csv[f'stimulus_id{"_practice" if img_type == "practice" else ""}'] == stimulus_id]
         logfile.write([
             get_time(
-            ), 'action', f'preparing screen for practice text {stimulus_id}',
+            ), 'action', f'preparing screen for {"practice " if img_type == "practice" else ""}text {stimulus_id}',
             path_data_csv, f'{row[title_col].to_string()}',
         ])
 
@@ -241,7 +241,7 @@ def get_stimuli_screens(
                 logfile.write([
                     get_time(),
                     'action',
-                    f'preparing screen for practice text {stimulus_id} page {page_id+1}',
+                    f'preparing screen for {"practice " if img_type == "practice" else ""}text {stimulus_id} page {page_id+1}',
                     path_data_csv,
                     f'{row[title_col].to_string(index=False)}',
                 ])

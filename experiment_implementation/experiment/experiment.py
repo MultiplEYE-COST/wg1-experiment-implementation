@@ -61,7 +61,6 @@ class Experiment:
         )
 
         data_file = str(Path(exp_path) / f'{participant_id}.edf')
-        print(data_file)
 
         self._eye_tracker = EyeTracker(
             self._display,
@@ -156,7 +155,7 @@ class Experiment:
 
         recalibrate = False
 
-        for stimulus_nr, screens in enumerate(images):
+        for trial_nr, screens in enumerate(images):
 
             self._eye_tracker.status_msg(f'show_empty_screen')
             self._eye_tracker.log(f'show_empty_screen')
@@ -166,7 +165,7 @@ class Experiment:
             milliseconds = 500
             libtime.pause(milliseconds)
 
-            if not stimulus_nr == 0:
+            if not trial_nr == 0:
                 self._eye_tracker.status_msg('validate now')
                 self._eye_tracker.log('validation before stimulus')
                 self._eye_tracker.calibrate()
@@ -185,8 +184,8 @@ class Experiment:
 
             milliseconds = 1000
             libtime.pause(milliseconds)
-            self._eye_tracker.status_msg(f'{flag}trial_{stimulus_nr}')
-            self._eye_tracker.log(f'{flag}TRIALID {stimulus_nr}')
+            self._eye_tracker.status_msg(f'{flag}trial_{trial_nr}')
+            self._eye_tracker.log(f'{flag}TRIALID {trial_nr}')
 
             # show stimulus pages
             for page_number, page_dict in enumerate(stimulus_list):
@@ -217,8 +216,8 @@ class Experiment:
                     self._eye_tracker.send_backdrop_image(page_path)
 
                 # start eye-tracking
-                self._eye_tracker.status_msg(f'{flag}trial_{stimulus_nr}_page_{page_number}')
-                self._eye_tracker.log(f'start_recording_{flag}trial_{stimulus_nr}_page_{page_number}')
+                self._eye_tracker.status_msg(f'{flag}trial_{trial_nr}_page_{page_number}')
+                self._eye_tracker.log(f'start_recording_{flag}trial_{trial_nr}_page_{page_number}')
                 self._eye_tracker.start_recording()
 
                 self._display.fill(screen=page_screen)
@@ -251,7 +250,7 @@ class Experiment:
 
                 self.log_file.write(
                     [
-                        get_time(), stimulus_nr, page_number, stimulus_timestamp, keypress_timestamp,
+                        get_time(), trial_nr, page_number, stimulus_timestamp, keypress_timestamp,
                         key_pressed_stimulus,
                         False, pd.NA, pd.NA,
                     ],
@@ -261,7 +260,7 @@ class Experiment:
                 self._eye_tracker.log('!V CLEAR 128 128 128')   #cui
                 # stop eye tracking
                 self._eye_tracker.stop_recording()
-                self._eye_tracker.log(f'stop_recording_{flag}trial_{stimulus_nr}_page_{page_number}')
+                self._eye_tracker.log(f'stop_recording_{flag}trial_{trial_nr}_page_{page_number}')
 
                 # TODO use correct class and method and log all necessary variables
                 # self._eye_tracker.log_var()     #cui log_var not correct for data viewer
@@ -269,16 +268,16 @@ class Experiment:
                 self._eye_tracker.log('!V TRIAL_VAR backdrop_image %s' % pic)    #cui
                 self._eye_tracker.log('!V TRIAL_VAR RT %d' % int(core.getTime() - stimulus_timestamp)*1000)   #cui
 
-            self._eye_tracker.log(f'{flag}TRIAL_RESULT {stimulus_nr}')
+            self._eye_tracker.log(f'{flag}TRIAL_RESULT {trial_nr}')
 
             for question_number, question_dict in enumerate(questions_list):
                 # fixation dot
                 self._drift_correction(overwrite=True)
 
                 # start eye-tracking
-                self._eye_tracker.status_msg(f'{flag}trial_{stimulus_nr}_question_{question_number}')
+                self._eye_tracker.status_msg(f'{flag}trial_{trial_nr}_question_{question_number}')
                 self._eye_tracker.log(
-                    f'start_recording_{flag}trial_{stimulus_nr}_question_{question_number}',
+                    f'start_recording_{flag}trial_{trial_nr}_question_{question_number}',
                 )
 
                 if not constants.DUMMY_MODE:
@@ -302,7 +301,7 @@ class Experiment:
 
                 self.log_file.write(
                     [
-                        get_time(), stimulus_nr, question_number, question_timestamp, keypress_timestamp,
+                        get_time(), trial_nr, question_number, question_timestamp, keypress_timestamp,
                         key_pressed_question, True, is_answer_correct, f"correct answer is '{correct_answer_key}' "
                                                                        f"({question_dict['correct_answer']}), participant's answer is "
                                                                        f"{is_answer_correct}",
@@ -310,23 +309,23 @@ class Experiment:
                 )
 
                 self._eye_tracker.status_msg(
-                    f'{flag}trial_{stimulus_nr}_question_{question_number}_answer_given_is_{key_pressed_question}'
+                    f'{flag}trial_{trial_nr}_question_{question_number}_answer_given_is_{key_pressed_question}'
                 )
                 self._eye_tracker.log(
-                    f'{flag}trial_{stimulus_nr}_question_{question_number}_answer_given_is_{key_pressed_question}',
+                    f'{flag}trial_{trial_nr}_question_{question_number}_answer_given_is_{key_pressed_question}',
                 )
 
                 self._eye_tracker.status_msg(
-                    f'{flag}trial_{stimulus_nr}_question_{question_number}_answer_given_is_correct:{is_answer_correct}'
+                    f'{flag}trial_{trial_nr}_question_{question_number}_answer_given_is_correct:{is_answer_correct}'
                 )
                 self._eye_tracker.log(
-                    f'{flag}trial_{stimulus_nr}_question_{question_number}_answer_given_is_correct:{is_answer_correct}',
+                    f'{flag}trial_{trial_nr}_question_{question_number}_answer_given_is_correct:{is_answer_correct}',
                 )
 
                 # stop eye tracking
                 self._eye_tracker.stop_recording()
                 self._eye_tracker.log(
-                    f'stop_recording_{flag}trial_{stimulus_nr}_question_{question_number}',
+                    f'stop_recording_{flag}trial_{trial_nr}_question_{question_number}',
                 )
 
                 self._display.fill(screen=self.other_screens['empty_screen'])
