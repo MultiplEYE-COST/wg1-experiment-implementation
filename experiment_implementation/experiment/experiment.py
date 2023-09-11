@@ -60,7 +60,12 @@ class Experiment:
             scale=1,
         )
 
-        data_file = str(Path(exp_path) / f'{participant_id}.edf')
+        participant_id_str = str(participant_id)
+        while len(participant_id_str) >= 3:
+            participant_id_str = "0" + participant_id_str
+
+        data_file = str(Path(exp_path) /
+                        f'{constants.COUNTRY_CODE}{constants.LAB_NUMBER}{constants.LANGUAGE.upper()}{participant_id_str}.edf')
         print(data_file)
 
         self._eye_tracker = EyeTracker(
@@ -168,7 +173,7 @@ class Experiment:
 
             if not stimulus_nr == 0:
                 self._eye_tracker.status_msg('validate now')
-                self._eye_tracker.log('validation before stimulus')
+                self._eye_tracker.log('validation_before_stimulus')
                 self._eye_tracker.calibrate()
 
             if constants.DUMMY_MODE:

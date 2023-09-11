@@ -18,6 +18,8 @@ TRACKERTYPE = 'eyelink' # or whatever eye-tracker your using
 
 LANGUAGE = 'en'
 FULL_LANGUAGE = 'English'
+LAB_NUMBER = 0
+COUNTRY_CODE = 'GB'
 
 ##############################################################################################################
 # BELOW WE SPECIFY THOSE VARIABLES THAT ARE THE SAME ACROSS ALL LANGUAGES AND DEVICES; DO NOT CHANGE THESE ###
