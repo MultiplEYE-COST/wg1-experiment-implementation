@@ -22,12 +22,12 @@ Then you can navigate to the root folder of your local clone of the repository. 
 python experiment_implementation/start_test_session.py
 ```
 ```bash
-pythonw experiment_implementation/start_session_core_dataset.py
+pythonw experiment_implementation/start_core_dataset_session.py
 ```
 
 You can also run a session where you specify your own data file.
 ```bash
-pythonw experiment_implementation/start_session_additional_dataset.py
+pythonw experiment_implementation/start_additional_dataset_session.py
 ```
 
 ## Check the result files
@@ -59,10 +59,10 @@ The commands to run the experiment will look like this:
 pythonw experiment_implementation/start_test_session.py
 ```
 ```bash
-pythonw experiment_implementation/start_session_core_dataset.py
+pythonw experiment_implementation/start_core_dataset_session.py
 ```
 ```bash
-pythonw experiment_implementation/start_session_additional_dataset.py
+pythonw experiment_implementation/start_additional_dataset_session.py
 ```
 
 ## Run the experiment with an eye-tracker
