@@ -6,10 +6,10 @@ https://github.com/esdalmaijer/PyGaze/blob/master/pygaze/defaults.py
 """
 import os
 
-DUMMY_MODE = True
+DUMMY_MODE = False
 
-#TRACKERTYPE = 'eyelink' # or whatever eye-tracker your using
-TRACKERTYPE = 'dummy'
+TRACKERTYPE = 'eyelink' # or whatever eye-tracker your using
+#TRACKERTYPE = 'dummy'
 
 # tobii trackers
 # TRACKERTYPE = 'tobii'

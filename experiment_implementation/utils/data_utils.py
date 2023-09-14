@@ -19,7 +19,7 @@ from devices.screen import MultiplEyeScreen
 # but will change this later once the data format is clearer.
 # TODO: put all of that information to a config file or so
 
-NUM_STIMULI = 12
+NUM_STIMULI = 2
 
 DATA_FILE_HEADER = [
     'stimulus_id',
@@ -211,7 +211,7 @@ def get_stimuli_screens(
         stimuli_ids = [1] + randomized_stimuli
 
     else:
-        stimuli_ids = [1, 2]
+        stimuli_ids = [1]
 
     for stimulus_id in stimuli_ids:
 
