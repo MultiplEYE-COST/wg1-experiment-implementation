@@ -201,18 +201,14 @@ class Experiment:
 
                 # present fixation cross before stimulus except for the first page as we have a drift correction then
                 if not page_number == 0:
-                    self._drift_correction(overwrite=True)
-
-                    # self._display.fill(screen=self.other_screens['fixation_screen'])
-                    # self._display.show()
-                    # self._eye_tracker.log(f"fixation_dot_{flag}trial_{stimulus_nr}_page_{page_number}")
-
-                    # TODO finish fixation trigger
-                    # self._eye_tracker.log(f'start_recording_{flag}trial_{stimulus_nr}_page_{page_number}_fixation_trigger')
-                    # self._eye_tracker.start_recording()
-                    # recalibrate = self._fixation_trigger()
-                    # self._eye_tracker.stop_recording()
-                    # self._eye_tracker.log(f'stop_recording_{flag}trial_{stimulus_nr}_page_{page_number}_fixation_trigger')
+                    if constants.DUMMY_MODE:
+                        self._display.fill(screen=self.other_screens['fixation_screen'])
+                        self._display.show()
+                        self._eye_tracker.log("dummy_drift_correction")
+                        milliseconds = 1000
+                        libtime.pause(milliseconds)
+                    else:
+                        self._drift_correction(overwrite=True)
 
                     milliseconds = 1000
                     libtime.pause(milliseconds)
@@ -277,7 +273,14 @@ class Experiment:
 
             for question_number, question_dict in enumerate(questions_list):
                 # fixation dot
-                self._drift_correction(overwrite=True)
+                if constants.DUMMY_MODE:
+                    self._display.fill(screen=self.other_screens['fixation_screen'])
+                    self._display.show()
+                    self._eye_tracker.log("dummy_drift_correction")
+                    milliseconds = 1000
+                    libtime.pause(milliseconds)
+                else:
+                    self._drift_correction(overwrite=True)
 
                 # start eye-tracking
                 self._eye_tracker.status_msg(f'{flag}trial_{trial_nr}_question_{question_number}')

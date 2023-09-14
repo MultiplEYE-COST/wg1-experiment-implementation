@@ -6,20 +6,20 @@ https://github.com/esdalmaijer/PyGaze/blob/master/pygaze/defaults.py
 """
 import os
 
-DUMMY_MODE = False
+DUMMY_MODE = True
 
-TRACKERTYPE = 'eyelink' # or whatever eye-tracker your using
-#TRACKERTYPE = 'dummy'
+#TRACKERTYPE = 'eyelink' # or whatever eye-tracker your using
+TRACKERTYPE = 'dummy'
 
 # tobii trackers
 # TRACKERTYPE = 'tobii'
 # TRACKERSERIALNUMBER = 'TPFC2-010202524041'
 
 
-LANGUAGE = 'en'
+LANGUAGE = 'toy'
 FULL_LANGUAGE = 'English'
 LAB_NUMBER = 0
-COUNTRY_CODE = 'GB'
+COUNTRY_CODE = ''
 
 ##############################################################################################################
 # BELOW WE SPECIFY THOSE VARIABLES THAT ARE THE SAME ACROSS ALL LANGUAGES AND DEVICES; DO NOT CHANGE THESE ###
@@ -35,7 +35,6 @@ RESULT_FOLDER_PATH = 'results'
 DATA_ROOT_PATH = os.getcwd() + f'/data/'
 
 MULTIPLY_DATA_PATH = f'stimuli_{LANGUAGE}/multipleye-stimuli-experiment-{LANGUAGE}_with_img_paths.csv'
-# this is the path to the csv for all other messages like welcome message that are shown on the screen
 OTHER_SCREENS_PATH = f'stimuli_{LANGUAGE}/multipleye-other-screens-{LANGUAGE}_with_img_paths.csv'
 PRACTICE_STIMULI_PATH = f'stimuli_{LANGUAGE}/multipleye-stimuli-practice-{LANGUAGE}_with_img_paths.csv'
 
