@@ -44,6 +44,7 @@ class Experiment:
         self.stimuli_screens = stimuli_screens
         self.other_screens = other_screens
         self.practice_screens = practice_screens
+        self.skipped_drift_corrections = {}
 
         self.screen = MultiplEyeScreen(
             dispsize=(constants.IMAGE_WIDTH_PX, constants.IMAGE_HEIGHT_PX),
@@ -162,6 +163,7 @@ class Experiment:
 
         for trial_nr, screens in enumerate(images):
 
+            self.skipped_drift_corrections[str(trial_nr)] = 0
             self._eye_tracker.status_msg(f'show_empty_screen')
             self._eye_tracker.log(f'show_empty_screen')
             self._display.fill(self.other_screens['empty_screen'])
@@ -170,10 +172,14 @@ class Experiment:
             milliseconds = 500
             libtime.pause(milliseconds)
 
-            if not trial_nr == 0:
-                self._eye_tracker.status_msg('validate now')
+            if recalibrate:
+                self._eye_tracker.status_msg('Recalibrate + validate (participant can make a break before if needed)')
+                self._eye_tracker.log('recalibration')
+            else:
+                self._eye_tracker.status_msg('Validate now (participant can make a break before if needed)')
                 self._eye_tracker.log('validation_before_stimulus')
-                self._eye_tracker.calibrate()
+
+            self._eye_tracker.calibrate()
 
             if constants.DUMMY_MODE:
                 self._display.fill(screen=self.other_screens['fixation_screen'])
@@ -208,7 +214,7 @@ class Experiment:
                         milliseconds = 1000
                         libtime.pause(milliseconds)
                     else:
-                        self._drift_correction(overwrite=True)
+                        self._drift_correction(trial_id=trial_nr, overwrite=True)
 
                     milliseconds = 1000
                     libtime.pause(milliseconds)
@@ -263,8 +269,6 @@ class Experiment:
                 self._eye_tracker.stop_recording()
                 self._eye_tracker.log(f'stop_recording_{flag}trial_{trial_nr}_page_{page_number}')
 
-                # TODO use correct class and method and log all necessary variables
-                # self._eye_tracker.log_var()     #cui log_var not correct for data viewer
                 self._eye_tracker.log('!V TRIAL_VAR condition %s' % cond)      #cui use 'practice' and 'real' as cond?
                 self._eye_tracker.log('!V TRIAL_VAR backdrop_image %s' % pic)    #cui
                 self._eye_tracker.log('!V TRIAL_VAR RT %d' % int(core.getTime() - stimulus_timestamp)*1000)   #cui
@@ -280,7 +284,7 @@ class Experiment:
                     milliseconds = 1000
                     libtime.pause(milliseconds)
                 else:
-                    self._drift_correction(overwrite=True)
+                    self._drift_correction(trial_id=trial_nr, overwrite=True)
 
                 # start eye-tracking
                 self._eye_tracker.status_msg(f'{flag}trial_{trial_nr}_question_{question_number}')
@@ -338,6 +342,10 @@ class Experiment:
 
                 self._display.fill(screen=self.other_screens['empty_screen'])
                 libtime.pause(300)
+
+            if self.skipped_drift_corrections[str(trial_nr)] > 1:
+                self._eye_tracker.log(f'trial_{trial_nr}: skipped_drift_corrections_{self.skipped_drift_corrections[str(trial_nr)]}')
+                recalibrate = True
 
     def _fixation_trigger(self) -> bool:
         """
@@ -428,7 +436,7 @@ class Experiment:
         self._display.close()
         libtime.expend()
 
-    def _drift_correction(self, overwrite: bool = False) -> None:
+    def _drift_correction(self, trial_id: int, overwrite: bool = False) -> None:
 
         checked = False
         while not checked:
@@ -437,6 +445,14 @@ class Experiment:
                 fix_triggered=False,
                 overwrite=overwrite,
             )
+            if checked == "skipped":
+                self._eye_tracker.log('drift_correction_skipped')
+                checked = True
+                self.log_file.write(
+                    [get_time(), pd.NA, pd.NA, pd.NA, pd.NA, pd.NA, pd.NA, pd.NA, 'drift_correction_skipped'],
+                )
+                self.skipped_drift_corrections[str(trial_id)] += 1
+                libtime.pause(2000)
 
     def validate(self):
         self._eye_tracker.calibrate(validation_only=True)
