@@ -23,6 +23,7 @@ but it is possible to use another environment if you prefer something else.
 
 **2. Clone this repository.**
 
+   If you received the experiment as a zip folder, you can skip this step and proceed to the next one directly.
    You can clone the repository to your local machine by running the following command in your terminal:
    ```bash
    git clone https://github.com/MultiplEYE-COST/wg1-experiment-implementation.git
@@ -30,7 +31,8 @@ but it is possible to use another environment if you prefer something else.
 
 **3. Create the conda environment**
 
-   Navigate to the root folder of your local clone of the repository and run the below line in your terminal.
+   Navigate to the root folder of your local clone of the repository and run the below line in your terminal. Note: if 
+   you use another eye-tracker than eyelink, you need to use the environment file for your eye-tracker.
 
    ```bash
    conda env create -f environment-eyelink.yml

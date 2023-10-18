@@ -88,7 +88,7 @@ of how to install `pylink` can be found here: [INSTALL_PYLINK.md](guidelines/INS
 ### Develop and run experiments for Tobii
 1. Install Tobii Pro SDK: [link](https://connect.tobii.com/s/sdk-downloads?language=en_US)
 2. Download the SDK
-3. Unzip the folder and copy all files in the either '32' or '64' folder to the experiment_implementation folder
+3. Unzip the folder and copy all files from either the '32' or '64' folder to the experiment_implementation folder
 4. Then you can pip install the package: ``pip install tobii_research``
 
 ### Develop and run experiments for other eye-trackers
