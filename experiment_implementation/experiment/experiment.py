@@ -188,7 +188,7 @@ class Experiment:
                 milliseconds = 1000
                 libtime.pause(milliseconds)
             else:
-                self._drift_correction()
+                self._drift_correction(trial_id=trial_nr)
 
             stimulus_list = screens['pages']
             questions_list = screens['questions']

@@ -19,7 +19,7 @@ from devices.screen import MultiplEyeScreen
 # but will change this later once the data format is clearer.
 # TODO: put all of that information to a config file or so
 
-NUM_STIMULI = 2
+NUM_STIMULI = 12
 
 DATA_FILE_HEADER = [
     'stimulus_id',
