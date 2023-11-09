@@ -7,9 +7,16 @@ but it is possible to use another environment if you prefer something else.
 
 **1. Install anaconda / miniconda**
 
-   You need to install anaconda or miniconda to use the repository with a conda
-   environment. Miniconda should be enough for our purposes.
-   You can download it [here](https://docs.conda.io/en/latest/miniconda.html).
+**1.1 If you haven't worked with Windows PowerShell**
+
+   We highly recommend you to install anaconda instead of miniconda. Anaconda is a full package of python and other useful tools, which can take many disk spaces from your computer, while miniconda is a minimal version of anaconda. You can download anaconda [here](https://www.anaconda.com/products/individual). <br>
+   Anaconda environment will be activated by default after you install it. You can check whether it is activated by opening your anaconda prompt. If you see `(base)` at the beginning of your command line prompt, it means you are in the default environment of conda. <br>
+
+**1.2 If you have worked with Windows PowerShell**
+
+   You can choose to install either anaconda or miniconda to use the repository with a conda
+   environment. Miniconda should be enough for our purposes. You can download it [here](https://docs.conda.io/en/latest/miniconda.html). <br>
+   However, you might have to open your powershell in administrator mode and change the execution policy to be ```RemoteSigned``` in order to activate the conda environment. Please refer to the closed issues of this repository for the solutions of this problem.
 
    When you are prompted to select if you want to install it for all users or only you, select only for me/only this user.
    Then there will be a checkbox where you can select whether you want to add (ana/mini)conda to your path. Tick this checkbox to add it to your path.
