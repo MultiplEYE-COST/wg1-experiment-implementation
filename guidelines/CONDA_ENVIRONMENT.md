@@ -9,7 +9,9 @@ but it is possible to use another environment if you prefer something else.
 
 **1.1 If you haven't worked with Windows PowerShell**
 
-   We highly recommend you to install anaconda instead of miniconda. Anaconda is a full package of python and other useful tools, which can take many disk spaces from your computer, while miniconda is a minimal version of anaconda. You can download anaconda [here](https://www.anaconda.com/products/individual). <br>
+   We highly recommend you to install anaconda instead of miniconda. Anaconda is a full package of python and other useful tools.
+   Anaconda can take up a lot of space on your computer, but you will have everything available and it is easy to use. 
+   Miniconda is a minimal version of anaconda, but it does not come with all the tools you might need. You can download anaconda [here](https://www.anaconda.com/products/individual). <br>
    Anaconda environment will be activated by default after you install it. You can check whether it is activated by opening your anaconda prompt. If you see `(base)` at the beginning of your command line prompt, it means you are in the default environment of conda. <br>
 
 **1.2 If you have worked with Windows PowerShell**
@@ -30,7 +32,7 @@ but it is possible to use another environment if you prefer something else.
 
 **2. Install git**
 
-   You need to install git to clone the repository ect. <br> 
+   In order to set up the experiment correctly, you will have to install git. <br> 
    If you have git installed, you can skip this step.<br>
    If you are not sure, you can check if you have git installed by running the following command in your terminal, E.g. for Windows powershell:
    ```bash
