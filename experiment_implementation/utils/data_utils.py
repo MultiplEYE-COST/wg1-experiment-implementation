@@ -211,7 +211,7 @@ def get_stimuli_screens(
         stimuli_ids = [1] + randomized_stimuli
 
     else:
-        stimuli_ids = [1, 2]
+        stimuli_ids = [1]
 
     for stimulus_id in stimuli_ids:
 

@@ -8,14 +8,15 @@ import os
 
 DUMMY_MODE = True
 
-# TRACKERTYPE = 'eyelink' # or whatever eye-tracker your using
+#TRACKERTYPE = 'eyelink' # or whatever eye-tracker your using
 TRACKERTYPE = 'dummy'
 
 # tobii trackers
 # TRACKERTYPE = 'tobii'
 # TRACKERSERIALNUMBER = 'TPFC2-010202524041'
 
-LANGUAGE = 'toy'
+
+LANGUAGE = 'en'
 FULL_LANGUAGE = 'English'
 LAB_NUMBER = 0
 COUNTRY_CODE = ''
