@@ -2,6 +2,7 @@
   "program_name": "MultiplEYE Data Collection",
   "program_description": "Before we start the experiment we need some information about the participant,\nsession etc. Please fill in the below form and follow the instructions.",
   "help_participant_id": "Enter the participant ID here.",
+  "parser_description": "Information about current data collection",
   "browse": "Browse",
   "cancel": "Cancel",
   "checkbox_label": "Enable",
