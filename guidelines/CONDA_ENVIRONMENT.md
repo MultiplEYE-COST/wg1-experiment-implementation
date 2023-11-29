@@ -1,4 +1,4 @@
-# Set up conda environment with correct PyGaze version
+# Set up conda environment with correct PyGaze version for Windows
 
 Contributing to this repository is easiest if you set up your own virtual conda environment. You'll find a description of how to set up a conda environment below,
 but it is possible to use another environment if you prefer something else.
@@ -36,7 +36,8 @@ but it is possible to use another environment if you prefer something else.
    conda env create -f environment-eyelink.yml
    ```
 
-   This step installs all the necessary requirements and creates a new conda environment. You can activate the environment with:
+   This step installs all the necessary requirements and creates a new conda environment if you intend to run the experiment with an eyelink. 
+   You can activate the environment with:
    ```bash
    conda activate multipleye3.9
    ```
@@ -46,3 +47,12 @@ but it is possible to use another environment if you prefer something else.
 
 **4.** If you work in an IDE, you can open the repository as a project and configure the python interpreter to be the newly
    created env. How you have to do it depends on the IDE. For PyCharm it is explained under this link: [Configure existing conda env as PyCharm interpreter](https://www.jetbrains.com/help/pycharm/conda-support-creating-conda-virtual-environment.html)
+
+
+## For Mac
+Note: we do not recommend, to run the experiment on a Mac as it is not optimized to work for Mac. The instructions to make it run
+are not as straighforward as for windows. If you want to run the experiment on a Mac, you can follow the instructions below. 
+If you have any additions to the instructions or know another possibly easier way to set it up, please let us know. 
+
+Steps 1. and 2. are the same. For step 3. I had to create the conda env separately with python 3.9 installed. In addition, I had to install
+`unixodbc`. I installed it with `brew install unixodbc` and `brew install portautiod`. 

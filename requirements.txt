@@ -4,3 +4,4 @@ pygame==2.1.2
 python-pygaze==0.7.5
 typing-extensions==3.10.0.2
 mypy-extensions==0.4.3
+git+https://github.com/theDebbister/PyGaze
