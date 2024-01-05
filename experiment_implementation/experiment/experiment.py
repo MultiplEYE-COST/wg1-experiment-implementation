@@ -31,7 +31,7 @@ class Experiment:
     def __init__(
             self,
             stimuli_screens: list[dict, dict],
-            other_screens: dict[str, MultiplEyeScreen],
+            instruction_screens: dict[str, MultiplEyeScreen],
             practice_screens: list[dict, dict],
             date: str,
             session_id: int,
@@ -42,7 +42,7 @@ class Experiment:
     ):
 
         self.stimuli_screens = stimuli_screens
-        self.other_screens = other_screens
+        self.other_screens = instruction_screens
         self.practice_screens = practice_screens
         self.skipped_drift_corrections = {}
 
@@ -55,7 +55,7 @@ class Experiment:
         self.screen.draw_image(
             image=Path(
                 Path(
-                    constants.DATA_ROOT_PATH + f'stimuli_{constants.LANGUAGE}/other_screens/empty_screen_{constants.LANGUAGE}.png'
+                    constants.EXP_ROOT_PATH + f'stimuli_{constants.LANGUAGE}/other_screens/empty_screen_{constants.LANGUAGE}.png'
                 )
             ),
             scale=1,

@@ -30,15 +30,6 @@ def parse_args():
         metavar='Participant ID',
         help='Enter the participant ID here.',
     )
-
-    parser.add_argument(
-        'date',
-        metavar='Date',
-        help='Please confirm the date. It defaults to today.',
-        default=str(date.today()),
-        widget='DateChooser',
-    )
-
     args = vars(parser.parse_args())
 
     return args
@@ -53,10 +44,11 @@ if __name__ == '__main__':
     # hardcoded args
     arguments['session_id'] = 1
     arguments['dataset_type'] = 'toy_dataset'
-    arguments['data_screens_path'] = constants.DATA_ROOT_PATH + constants.STIMULI_IMAGES_CSV
-    arguments['practice_screens_path'] = constants.DATA_ROOT_PATH + constants.PRACTICE_STIMULI_PATH
-    arguments['other_screens_path'] = constants.DATA_ROOT_PATH + constants.PARTICIPANT_INSTRUCTIONS_CSV
+    arguments['data_screens_path'] = constants.EXP_ROOT_PATH / constants.STIMULI_IMAGES_CSV
+    arguments['question_screens_path'] = constants.EXP_ROOT_PATH / constants.QUESTION_IMAGES_CSV
+    arguments['other_screens_path'] = constants.EXP_ROOT_PATH / constants.PARTICIPANT_INSTRUCTIONS_CSV
     arguments['test_run'] = False
+    arguments['date'] = str(date.today())
 
     # !!! THIS IMPORT CANNOT BE MOVED SOMEWHERE ELSE; OTHERWISE THE PROGRAM GETS REALLY SLOW !!!
     from run_experiment import run_experiment

@@ -56,9 +56,9 @@ if __name__ == '__main__':
     # there is no session_id in the core dataset, only one session
     arguments['session_id'] = 1
     arguments['dataset_type'] = 'core_dataset'
-    arguments['data_screens_path'] = constants.DATA_ROOT_PATH + constants.STIMULI_IMAGES_CSV
-    arguments['other_screens_path'] = constants.DATA_ROOT_PATH + constants.PARTICIPANT_INSTRUCTIONS_CSV
-    arguments['practice_screens_path'] = constants.DATA_ROOT_PATH + constants.PRACTICE_STIMULI_PATH
+    arguments['data_screens_path'] = constants.EXP_ROOT_PATH + constants.STIMULI_IMAGES_CSV
+    arguments['other_screens_path'] = constants.EXP_ROOT_PATH + constants.PARTICIPANT_INSTRUCTIONS_CSV
+    arguments['practice_screens_path'] = constants.EXP_ROOT_PATH + constants.PRACTICE_STIMULI_PATH
     arguments['test_run'] = False
 
     # !!! THIS IMPORT CANNOT BE MOVED SOMEWHERE ELSE; OTHERWISE THE PROGRAM GETS REALLY SLOW !!!

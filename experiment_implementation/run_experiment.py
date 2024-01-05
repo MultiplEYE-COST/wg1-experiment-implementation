@@ -15,7 +15,7 @@ from utils import data_utils
 def run_experiment(
         data_screens_path: str,
         other_screens_path: str,
-        practice_screens_path: str,
+        question_screens_path: str,
         session_id: int,
         participant_id: int,
         date: str,
@@ -69,14 +69,14 @@ def run_experiment(
     general_log_file.write([get_time(), 'finished preparing practice screens'])
 
     general_log_file.write([get_time(), 'start preparing other screens'])
-    other_screens = data_utils.get_other_screens(
+    instruction_screens = data_utils.get_other_screens(
         other_screens_path, data_logfile,
     )
     general_log_file.write([get_time(), 'finished preparing other screens'])
 
     experiment = Experiment(
         stimuli_screens=stimuli_screens,
-        other_screens=other_screens,
+        instruction_screens=instruction_screens,
         practice_screens=practice_screens,
         date=date,
         session_id=session_id,
@@ -109,8 +109,8 @@ def run_experiment(
 if __name__ == '__main__':
     # to skip the GUI you can run this file directly
     args_dict = {
-        'data_screens_path': constants.DATA_ROOT_PATH + constants.STIMULI_IMAGES_CSV,
-        'other_screens_path': constants.DATA_ROOT_PATH + constants.PARTICIPANT_INSTRUCTIONS_CSV,
+        'data_screens_path': constants.EXP_ROOT_PATH + constants.STIMULI_IMAGES_CSV,
+        'other_screens_path': constants.EXP_ROOT_PATH + constants.PARTICIPANT_INSTRUCTIONS_CSV,
         'session_id': 1,
         'participant_id': 1,
         'date': str(datetime.date.today()),

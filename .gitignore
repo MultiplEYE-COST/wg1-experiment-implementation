@@ -139,5 +139,4 @@ default.txt
 
 tmp.txt
 
-*/stimuli_*/stimulus_images/
-*/stimuli_*/other_screens/
+/experiment_implementation/data/stimuli*/

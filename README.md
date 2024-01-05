@@ -51,18 +51,7 @@ In order to run the experiment including the GUI on Mac you need to do the follo
 -> `Security & Privacy` -> `Privacy` -> `Input Monitoring`. Then you click on the '+' and add PsychoPy. 
 Pick the PsychoPy version that is in your env. For me the path for a anaconda env called 'test' looks like this:
 ```bash
-/Users/[USERNAME]/opt/anaconda3/envs/test/bin/psychopy
-```
-2. You need to run the experiment files using ``pythonw`` instead of ``python``. 
-The commands to run the experiment will look like this:
-```bash
-pythonw experiment_implementation/start_test_session.py
-```
-```bash
-pythonw experiment_implementation/start_core_dataset_session.py
-```
-```bash
-pythonw experiment_implementation/start_additional_dataset_session.py
+/Users/[USERNAME]/opt/anaconda3/envs/multipleye3.9/bin/psychopy
 ```
 
 ## Run the experiment with an eye-tracker

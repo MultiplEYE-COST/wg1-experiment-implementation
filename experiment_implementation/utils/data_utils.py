@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import os
+from collections import defaultdict
 from pathlib import Path
 import random
 from typing import Dict, Any
@@ -46,42 +47,50 @@ def get_stimuli_screens(
     stimulus_df = pd.read_csv(path_data_csv, sep=',', encoding='utf8')
     stimulus_df.dropna(subset=['stimulus_id'], inplace=True)
 
+    blocks = defaultdict(list)
+
     # group by block
     grouped_images = stimulus_df.groupby('block')
 
     # iterate over blocks
-    # there is a practice block that should not be shuffeled, block_1 and block_2 should be shuffled, block_0 should not be shuffled
     for block_id, block in grouped_images:
         logfile.write([
             get_time(), 'action', f'preparing screens for block {block_id}',
             path_data_csv, '',
         ])
 
-        print(block_id)
+        # iterate over rows in the block which are the stimuli
+        for idx, row in block.iterrows():
+            # get the stimulus id and name
+            stimulus_id = row['stimulus_id']
+            stimulus_name = row['stimulus_name']
 
-        # iterate over pages
-        for page_id, page_name in enumerate(PAGE_LIST):
-            # get the page image path
-            img_path = block[page_name]
+            # iterate over all cols in the row,
+            for col in row.keys():
+                # if col name start with page_ and end with _img_path
+                if col.startswith('page_') and col.endswith('_img_path'):
+                    # get the image path
+                    img_path = row[col]
+                    # if the image path is not null
+                    page_num = col.split('_')[1]
+                    if img_path.notnull().values.any():
+                        # get the full path
+                        full_img_path = constants.EXP_ROOT_PATH + img_path.values[0]
 
-            # if the image path is not null
-            if img_path.notnull().values.any():
-                # get the full path
-                full_img_path = constants.DATA_ROOT_PATH + img_path.values[0]
+                        # normalize the path
+                        norm_img_path = os.path.normpath(full_img_path)
 
-                # normalize the path
-                norm_img_path = os.path.normpath(full_img_path)
+                        # create a screen
+                        page_screen = MultiplEyeScreen()
+                        # draw the image on the screen
+                        page_screen.draw_image(
+                            image=Path(norm_img_path),
+                        )
 
-                # create a screen
-                page_screen = MultiplEyeScreen()
-                # draw the image on the screen
-                page_screen.draw_image(
-                    image=Path(norm_img_path),
-                )
-
-                # append the screen to the list of screens
-                screens.append({'screen': page_screen, 'path': norm_img_path})
-
+                        # append the screen to the list of screens, add page number, stimulus id and name
+                        screens.append({'screen': page_screen, 'path': norm_img_path,
+                                        'page_num': page_num, 'stimulus_id': stimulus_id,
+                                        'stimulus_name': stimulus_name})
 
 
     # logfile.write([
@@ -214,7 +223,7 @@ def get_other_screens(
             path_other_screens, row['other_screen_title'],
         ])
 
-        screen_path = constants.DATA_ROOT_PATH + row['other_screen_img_path']
+        screen_path = constants.EXP_ROOT_PATH + row['other_screen_img_path']
         norm_screen_path = os.path.normpath(screen_path)
 
         screen = MultiplEyeScreen()
