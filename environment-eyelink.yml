@@ -1,10 +1,10 @@
-name: test-env
+name: multipleye3.9
 channels:
   - conda-forge
 dependencies:
   - python==3.9
   - pip==22.3.1
-  - pip:   
+  - pip:
       - psychopy==2023.2.3
       - pygame==2.1.2
       - gooey==1.0.8.1
