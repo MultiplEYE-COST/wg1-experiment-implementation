@@ -1,4 +1,4 @@
-name: multipleye3.9
+name: test-env
 channels:
   - conda-forge
 dependencies:
