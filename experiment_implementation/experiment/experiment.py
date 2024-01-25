@@ -30,9 +30,8 @@ class Experiment:
 
     def __init__(
             self,
-            stimuli_screens: list[dict, dict],
+            stimuli_screens: list[dict],
             instruction_screens: dict[str, MultiplEyeScreen],
-            practice_screens: list[dict, dict],
             date: str,
             session_id: int,
             participant_id: int,
@@ -41,9 +40,9 @@ class Experiment:
             exp_path: str,
     ):
 
-        self.stimuli_screens = stimuli_screens
+        self.stimuli_screens = stimuli_screens[2:]
         self.other_screens = instruction_screens
-        self.practice_screens = practice_screens
+        self.practice_screens = stimuli_screens[:2]
         self.skipped_drift_corrections = {}
 
         self.screen = MultiplEyeScreen(
@@ -55,7 +54,7 @@ class Experiment:
         self.screen.draw_image(
             image=Path(
                 Path(
-                    constants.EXP_ROOT_PATH + f'stimuli_{constants.LANGUAGE}/other_screens/empty_screen_{constants.LANGUAGE}.png'
+                    constants.EXP_ROOT_PATH / f'data/stimuli_{constants.LANGUAGE}/participant_instructions_images_{constants.LANGUAGE}/empty_screen_{constants.LANGUAGE}.png'
                 )
             ),
             scale=1,
@@ -122,11 +121,8 @@ class Experiment:
     def run_experiment(self) -> None:
         self._eye_tracker.status_msg(f'start_experiment')
         self._eye_tracker.log(f'start_experiment')
-        self._eye_tracker.status_msg(f'show_instruction_screen')
-        self._eye_tracker.log(f'show_instruction_screen')
-        self._display.fill(self.other_screens['instruction_screen'])
-        self._display.show()
-        self._keyboard.get_key()
+
+        self._show_instruction_screens()
 
         self._display.fill(self.other_screens['practice_screen'])
         self._display.show()
@@ -148,6 +144,14 @@ class Experiment:
 
         # end the experiment
         self._quit_experiment()
+
+    def _show_instruction_screens(self):
+        for i in range(1, 4):
+            self._eye_tracker.status_msg(f'show_instruction_screen_{i}')
+            self._eye_tracker.log(f'show_instruction_screen_{i}')
+            self._display.fill(self.other_screens[f'instruction_screen_{i}'])
+            self._display.show()
+            self._keyboard.get_key()
 
     def _run_trials(self, practice=False) -> None:
         if not practice:
@@ -192,10 +196,12 @@ class Experiment:
 
             stimulus_list = screens['pages']
             questions_list = screens['questions']
+            stimulus_id = screens['stimulus_id']
+            stimulus_name = screens['stimulus_name']
 
             milliseconds = 1000
             libtime.pause(milliseconds)
-            self._eye_tracker.status_msg(f'{flag}trial_{trial_nr}')
+            self._eye_tracker.status_msg(f'{flag}trial_{trial_nr}_{stimulus_id}_{stimulus_name}')
             self._eye_tracker.log(f'{flag}TRIALID {trial_nr}')
 
             # show stimulus pages
@@ -203,7 +209,7 @@ class Experiment:
 
                 page_screen = page_dict['screen']
                 page_path = page_dict['path']
-                pic = page_path.split('/')[-1]     #cui
+                pic = page_path.split('/')[-1]  # cui
 
                 # present fixation cross before stimulus except for the first page as we have a drift correction then
                 if not page_number == 0:
@@ -229,22 +235,22 @@ class Experiment:
 
                 self._display.fill(screen=page_screen)
                 stimulus_timestamp = self._display.show()
-                self._eye_tracker.log('screen_image_onset')     #cui
-                #img_onset_time = core.getTime()       #cui maybe it is the same as 'stimulus_timestamp'
+                self._eye_tracker.log('screen_image_onset')  # cui
+                # img_onset_time = core.getTime()       #cui maybe it is the same as 'stimulus_timestamp'
                 # Send a message to clear the Data Viewer screen, get it ready for   #cui
                 # drawing the pictures during visualization  #cui
-                self._eye_tracker.log('!V CLEAR 116 116 116')   #cui
+                self._eye_tracker.log('!V CLEAR 116 116 116')  # cui
 
                 # TODO -- TO CHECK SCREEN WIDTH AND HEIGHT -- TO CHECK WHETHER FUNC CORRECT
                 # send over a message to specify where the image is stored relative
                 # to the EDF data file, see Data Viewer User Manual, "Protocol for
                 # EyeLink Data to Viewer Integration"
                 imgload_msg = '!V IMGLOAD CENTER %s %d %d %d %d' % (page_path,
-                                                                    int(1270 / 2.0),    #cui
+                                                                    int(1270 / 2.0),  # cui
                                                                     int(998 / 2.0),
                                                                     int(1270),
                                                                     int(998))
-                self._eye_tracker.log(imgload_msg)  #cui
+                self._eye_tracker.log(imgload_msg)  # cui
                 libtime.pause(2000)
 
                 key_pressed_stimulus = ''
@@ -264,14 +270,14 @@ class Experiment:
                 )
 
                 # send a message to clear the data viewer screen.   #cui
-                self._eye_tracker.log('!V CLEAR 128 128 128')   #cui
+                self._eye_tracker.log('!V CLEAR 128 128 128')  # cui
                 # stop eye tracking
                 self._eye_tracker.stop_recording()
                 self._eye_tracker.log(f'stop_recording_{flag}trial_{trial_nr}_page_{page_number}')
 
-                self._eye_tracker.log('!V TRIAL_VAR condition %s' % cond)      #cui use 'practice' and 'real' as cond?
-                self._eye_tracker.log('!V TRIAL_VAR backdrop_image %s' % pic)    #cui
-                self._eye_tracker.log('!V TRIAL_VAR RT %d' % int(core.getTime() - stimulus_timestamp)*1000)   #cui
+                self._eye_tracker.log('!V TRIAL_VAR condition %s' % cond)  # cui use 'practice' and 'real' as cond?
+                self._eye_tracker.log('!V TRIAL_VAR backdrop_image %s' % pic)  # cui
+                self._eye_tracker.log('!V TRIAL_VAR RT %d' % int(core.getTime() - stimulus_timestamp) * 1000)  # cui
 
             self._eye_tracker.log(f'{flag}TRIAL_RESULT {trial_nr}')
 
@@ -297,16 +303,54 @@ class Experiment:
 
                 self._eye_tracker.start_recording()
 
-                self._display.fill(screen=question_dict['question_screen'])
+                question_screen = question_dict['question_screen']
+
+                question_screen.draw_fixation(fixtype='x',
+                                              pos=constants.IMAGE_CENTER,
+                                              colour=constants.HIGHLIGHT_COLOR)
+
+                self._display.fill(screen=question_screen)
                 question_timestamp = self._display.show()
 
                 key_pressed_question = ''
                 keypress_timestamp = -1
                 # add timeout
-                while key_pressed_question not in ['a', 'b', 'c']:
-                    key_pressed_question, keypress_timestamp = self._keyboard.get_key(
-                        flush=True,
-                    )
+                valid_answer = False
+                answer_chosen = ''
+
+                while not valid_answer:
+
+                    while key_pressed_question not in ['left', 'right', 'up', 'down', 'space']:
+                        key_pressed_question, keypress_timestamp = self._keyboard.get_key(
+                            flush=True,
+                        )
+                        print(key_pressed_question)
+
+                    if key_pressed_question == 'left':
+                        question_screen.clear()
+                        self._display.fill(screen=question_dict['question_screen_select_left'])
+                        question_timestamp = self._display.show()
+                        answer_chosen = key_pressed_question
+                    elif key_pressed_question == 'right':
+                        self._display.fill(screen=question_dict['question_screen_select_right'])
+                        question_timestamp = self._display.show()
+                        answer_chosen = key_pressed_question
+
+                    elif key_pressed_question == 'up':
+                        self._display.fill(screen=question_dict['question_screen_select_up'])
+                        question_timestamp = self._display.show()
+                        answer_chosen = key_pressed_question
+
+                    elif key_pressed_question == 'down':
+                        self._display.fill(screen=question_dict['question_screen_select_down'])
+                        question_timestamp = self._display.show()
+                        answer_chosen = key_pressed_question
+
+                    elif key_pressed_question == 'space' and answer_chosen:
+                        valid_answer = True
+
+                    key_pressed_question = ''
+
 
                 correct_answer_key = question_dict['correct_answer_key']
                 is_answer_correct = key_pressed_question == correct_answer_key
@@ -344,7 +388,8 @@ class Experiment:
                 libtime.pause(300)
 
             if self.skipped_drift_corrections[str(trial_nr)] > 1:
-                self._eye_tracker.log(f'trial_{trial_nr}: skipped_drift_corrections_{self.skipped_drift_corrections[str(trial_nr)]}')
+                self._eye_tracker.log(
+                    f'trial_{trial_nr}: skipped_drift_corrections_{self.skipped_drift_corrections[str(trial_nr)]}')
                 recalibrate = True
 
     def _fixation_trigger(self) -> bool:

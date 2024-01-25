@@ -62,8 +62,8 @@ def run_experiment(
     )
 
     general_log_file.write([get_time(), 'start preparing stimuli screens'])
-    stimuli_screens, practice_screens = data_utils.get_stimuli_screens(
-        data_screens_path, data_logfile)
+    stimuli_screens = data_utils.get_stimuli_screens(
+        data_screens_path, question_screens_path, data_logfile)
     general_log_file.write([get_time(), 'finished preparing stimuli screens'])
 
     general_log_file.write([get_time(), 'finished preparing practice screens'])
@@ -77,7 +77,6 @@ def run_experiment(
     experiment = Experiment(
         stimuli_screens=stimuli_screens,
         instruction_screens=instruction_screens,
-        practice_screens=practice_screens,
         date=date,
         session_id=session_id,
         participant_id=participant_id,

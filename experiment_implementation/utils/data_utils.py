@@ -1,20 +1,19 @@
 from __future__ import annotations
 
 import os
-from collections import defaultdict
 from pathlib import Path
-import random
-from typing import Dict, Any
+from typing import Any
 
 import pandas as pd
-from numpy import ndarray
-from pandas import Series
 from pygaze.libtime import get_time
 from pygaze.logfile import Logfile
 from pygaze.screen import Screen
 
-import constants
-from devices.screen import MultiplEyeScreen
+from experiment_implementation import constants
+from experiment_implementation.devices.screen import MultiplEyeScreen
+
+# TODO: change this!!!!
+ITEM_VERSION = 1
 
 
 def create_data_logfile(
@@ -35,10 +34,10 @@ def create_data_logfile(
 
 def get_stimuli_screens(
         path_data_csv: str | Path,
+        path_question_csv: str | Path,
         logfile: Logfile,
-) -> list[dict, dict]:
-
-    screens = []
+) -> list[dict]:
+    all_stimuli_screens = []
 
     logfile.write([
         get_time(), 'action', 'loading data',
@@ -47,155 +46,163 @@ def get_stimuli_screens(
     stimulus_df = pd.read_csv(path_data_csv, sep=',', encoding='utf8')
     stimulus_df.dropna(subset=['stimulus_id'], inplace=True)
 
-    blocks = defaultdict(list)
+    question_df = pd.read_csv(path_question_csv, sep=',', encoding='utf8')
+    question_df.dropna(subset=['item_id'], inplace=True)
 
-    # group by block
-    grouped_images = stimulus_df.groupby('block')
+    randomization_df = pd.read_csv(
+        constants.EXP_ROOT_PATH / constants.RANDOMIZATION_VERSION_CSV,
+        sep='\t',
+        encoding='utf8'
+    )
 
-    # iterate over blocks
-    for block_id, block in grouped_images:
+    items = randomization_df[randomization_df['item_version'] == ITEM_VERSION].drop('item_version', axis=1)
+
+    if not len(items) == 1:
+        raise ValueError(f'The randomization list contains {len(items)} versions with id {ITEM_VERSION}. '
+                         f'Should only be 1!')
+    else:
+        items = items.values[0].flatten().tolist()
+
+    for item_id in items:
+        screens = []
+
         logfile.write([
-            get_time(), 'action', f'preparing screens for block {block_id}',
-            path_data_csv, '',
+            get_time(), 'action', f'preparing screens for stimulus {item_id}',
+            path_data_csv, 'stimuli',
         ])
+        stimulus_row = stimulus_df[stimulus_df['stimulus_id'] == item_id]
+        stimulus_id = stimulus_row['stimulus_id'].values[0]
+        stimulus_name = stimulus_row['stimulus_name'].values[0]
+        stimulus_type = stimulus_row['text_type'].values[0]
 
-        # iterate over rows in the block which are the stimuli
-        for idx, row in block.iterrows():
-            # get the stimulus id and name
-            stimulus_id = row['stimulus_id']
-            stimulus_name = row['stimulus_name']
+        question_sub_df = question_df[(question_df['stimulus_id'] == stimulus_id)
+                                      & (question_df['stimulus_name'] == stimulus_name)]
 
-            # iterate over all cols in the row,
-            for col in row.keys():
-                # if col name start with page_ and end with _img_path
-                if col.startswith('page_') and col.endswith('_img_path'):
-                    # get the image path
-                    img_path = row[col]
-                    # if the image path is not null
-                    page_num = col.split('_')[1]
-                    if img_path.notnull().values.any():
-                        # get the full path
-                        full_img_path = constants.EXP_ROOT_PATH + img_path.values[0]
+        num_questions = len(question_sub_df)
 
-                        # normalize the path
-                        norm_img_path = os.path.normpath(full_img_path)
+        if stimulus_type == 'practice' and not num_questions == 3:
+            print(stimulus_id, stimulus_name)
+            raise ValueError(f'Practice stimulus {stimulus_id} has {num_questions} questions, but should have 3!')
+        elif stimulus_type == 'experiment' and not num_questions == 6:
+            print(stimulus_id, stimulus_name)
+            raise ValueError(f'Experimental stimulus {stimulus_id} has {num_questions} questions, but should have 6!')
 
-                        # create a screen
-                        page_screen = MultiplEyeScreen()
-                        # draw the image on the screen
-                        page_screen.draw_image(
-                            image=Path(norm_img_path),
-                        )
+        for col in sorted(stimulus_row.keys()):
 
-                        # append the screen to the list of screens, add page number, stimulus id and name
-                        screens.append({'screen': page_screen, 'path': norm_img_path,
-                                        'page_num': page_num, 'stimulus_id': stimulus_id,
-                                        'stimulus_name': stimulus_name})
+            # if col name start with page_ and end with _img_path
+            if col.startswith('page_') and col.endswith('_img_path'):
+                # get the image path
+                img_path = stimulus_row[col]
+                # if the image path is not null
+                page_num = col.split('_')[1]
+                if img_path.notnull().values.any():
+                    # get the full path
+                    full_img_path = constants.EXP_ROOT_PATH / img_path.values[0]
 
+                    # normalize the path
+                    norm_img_path = os.path.normpath(full_img_path)
 
-    # logfile.write([
-    #     get_time(), 'action', 'preparing screens',
-    #     path_data_csv, '',
-    # ])
-    #
-    # if img_type == 'stimuli':
-    #     randomized_stimuli = [i for i in range(2, NUM_STIMULI + 1)]
-    #     random.shuffle(randomized_stimuli)
-    #
-    #     stimuli_ids = [1] + randomized_stimuli
-    #
-    # else:
-    #     stimuli_ids = [1]
-    #
-    # for stimulus_id in stimuli_ids:
-    #
-    #     title_col = f'stimulus_text_title{"_practice" if img_type == "practice" else ""}'
-    #
-    #     row = stimulus_df[stimulus_df[f'stimulus_id{"_practice" if img_type == "practice" else ""}'] == stimulus_id]
-    #     logfile.write([
-    #         get_time(
-    #         ), 'action', f'preparing screen for {"practice " if img_type == "practice" else ""}text {stimulus_id}',
-    #         path_data_csv, f'{row[title_col].to_string()}',
-    #     ])
-    #
-    #     pages = []
-    #     for page_id, page_name in enumerate(PAGE_LIST):
-    #
-    #         if img_type == 'practice':
-    #             page_name = f'page_{page_id+1}_practice_img_path'
-    #
-    #         if page_name not in stimulus_df.columns:
-    #             continue
-    #
-    #         img_path = row[page_name]
-    #
-    #         if img_path.notnull().values.any():
-    #             full_img_path = constants.DATA_ROOT_PATH + img_path.values[0]
-    #
-    #             logfile.write([
-    #                 get_time(),
-    #                 'action',
-    #                 f'preparing screen for {"practice " if img_type == "practice" else ""}text {stimulus_id} page {page_id+1}',
-    #                 path_data_csv,
-    #                 f'{row[title_col].to_string(index=False)}',
-    #             ])
-    #
-    #             norm_img_path = os.path.normpath(full_img_path)
-    #
-    #             page_screen = MultiplEyeScreen()
-    #             page_screen.draw_image(
-    #                 image=Path(norm_img_path),
-    #             )
-    #
-    #             pages.append({'screen': page_screen, 'path': norm_img_path})
-    #
-    #     questions = []
-    #     for question_id, question in enumerate(QUESTION_LIST):
-    #
-    #         correct_answer_col_name = f'correct_answer_q{question_id+1}{"_practice" if img_type == "practice" else ""}'
-    #         correct_answer_key_col_name = f'correct_answer_key_q{question_id+1}{"_practice" if img_type == "practice" else ""}'
-    #
-    #         correct_answer = row[correct_answer_col_name].values[0]
-    #         correct_answer_key = row[correct_answer_key_col_name].values[0]
-    #
-    #         if img_type == 'practice':
-    #             question = f'question_{question_id+1}_practice_img_path'
-    #
-    #         if question not in stimulus_df.columns:
-    #             continue
-    #
-    #         img_path = row[question]
-    #
-    #         if img_path.notnull().values.any():
-    #             img_path = constants.DATA_ROOT_PATH + img_path.values[0]
-    #
-    #             logfile.write([
-    #                 get_time(),
-    #                 'action',
-    #                 f'preparing screen for practice text {stimulus_id} question {question_id+1}',
-    #                 path_data_csv,
-    #                 f'{row[title_col].to_string(index=False)}',
-    #             ])
-    #
-    #             norm_img_path = os.path.normpath(img_path)
-    #
-    #             question_screen = MultiplEyeScreen()
-    #             question_screen.draw_image(
-    #                 image=Path(norm_img_path),
-    #             )
-    #
-    #             questions.append(
-    #                 {
-    #                     'question_screen': question_screen,
-    #                     'correct_answer': correct_answer,
-    #                     'correct_answer_key': correct_answer_key,
-    #                     'path': norm_img_path,
-    #                 }
-    #             )
+                    # create a screen
+                    page_screen = MultiplEyeScreen()
+                    # draw the image on the screen
+                    page_screen.draw_image(
+                        image=Path(norm_img_path),
+                    )
 
-        screens.append({'pages': pages, 'questions': questions})
+                    # append the screen to the list of screens, add page number, stimulus id and name
+                    screens.append({'screen': page_screen, 'path': norm_img_path,
+                                    'page_num': page_num})
 
-    return screens
+        questions = []
+
+        for idx, row in question_sub_df.iterrows():
+
+            question_id = row['item_id']
+            question_img_path = row['question_img_path']
+            target = row['target']
+            target_answer_key = row['target_key']
+
+            logfile.write([
+                get_time(),
+                'action',
+                f'preparing screen for text {stimulus_id} question {question_id}',
+                path_data_csv,
+                f'',
+            ])
+
+            if question_img_path:
+                full_img_path = constants.EXP_ROOT_PATH / question_img_path
+                norm_img_path = os.path.normpath(full_img_path)
+
+                question_screen = MultiplEyeScreen()
+
+                question_screen.draw_image(
+                    image=Path(norm_img_path),
+                )
+
+                question_screen_initial = MultiplEyeScreen()
+                question_screen_initial.draw_image(
+                    image=Path(norm_img_path),
+                )
+                question_screen_initial.draw_fixation(fixtype='x',
+                                                      pos=constants.IMAGE_CENTER,
+                                                      colour=constants.HIGHLIGHT_COLOR)
+                question_screen_initial.draw_image(
+                    image=Path(norm_img_path),
+                )
+
+                question_screen_select_up = MultiplEyeScreen()
+                question_screen_select_up.draw_image(image=Path(norm_img_path))
+                question_screen_select_up.draw_rect(
+                    x=constants.ARROW_UP[0], y=constants.ARROW_UP[1],
+                    w=constants.ARROW_UP[2], h=constants.ARROW_UP[3],
+                    colour=constants.HIGHLIGHT_COLOR)
+
+                question_screen_select_down = MultiplEyeScreen()
+                question_screen_select_down.draw_image(image=Path(norm_img_path))
+                question_screen_select_down.draw_rect(
+                    x=constants.ARROW_DOWN[0],
+                    y=constants.ARROW_DOWN[1],
+                    w=constants.ARROW_DOWN[2],
+                    h=constants.ARROW_DOWN[3],
+                    colour=constants.HIGHLIGHT_COLOR)
+
+                question_screen_select_right = MultiplEyeScreen()
+                question_screen_select_right.draw_image(image=Path(norm_img_path))
+                question_screen_select_right.draw_rect(
+                    x=constants.ARROW_RIGHT[0],
+                    y=constants.ARROW_RIGHT[1],
+                    w=constants.ARROW_RIGHT[2],
+                    h=constants.ARROW_RIGHT[3],
+                    colour=constants.HIGHLIGHT_COLOR)
+
+                question_screen_select_left = MultiplEyeScreen()
+                question_screen_select_left.draw_image(image=Path(norm_img_path))
+                question_screen_select_left.draw_rect(
+                    x=constants.ARROW_LEFT[0],
+                    y=constants.ARROW_LEFT[1],
+                    w=constants.ARROW_LEFT[2],
+                    h=constants.ARROW_LEFT[3],
+                    colour=constants.HIGHLIGHT_COLOR)
+
+                questions.append(
+                    {
+                        'question_screen': question_screen,
+                        'question_screen_initial': question_screen_initial,
+                        'question_screen_select_up': question_screen_select_up,
+                        'question_screen_select_down': question_screen_select_down,
+                        'question_screen_select_right': question_screen_select_right,
+                        'question_screen_select_left': question_screen_select_left,
+                        'correct_answer': target,
+                        'correct_answer_key': target_answer_key,
+                        'path': norm_img_path,
+                    }
+                )
+
+        all_stimuli_screens.append({'stimulus_id': stimulus_id, 'stimulus_name': stimulus_name,
+                                    'pages': screens, 'questions': questions})
+
+    return all_stimuli_screens
 
 
 def get_other_screens(
@@ -212,18 +219,18 @@ def get_other_screens(
 
     logfile.write([
         get_time(), 'check', 'header ok',
-        path_other_screens, 'other screens',
+        path_other_screens, 'instruction screens',
     ])
 
     for idx, row in other_screens_csv.iterrows():
         logfile.write([
             get_time(),
             'action',
-            f'loading screen {row["other_screen_id"]}',
-            path_other_screens, row['other_screen_title'],
+            f'loading screen {row["instruction_screen_id"]}',
+            path_other_screens, row['instruction_screen_name'],
         ])
 
-        screen_path = constants.EXP_ROOT_PATH + row['other_screen_img_path']
+        screen_path = constants.EXP_ROOT_PATH / row['instruction_screen_img_path']
         norm_screen_path = os.path.normpath(screen_path)
 
         screen = MultiplEyeScreen()
@@ -231,14 +238,15 @@ def get_other_screens(
             image=Path(norm_screen_path),
         )
 
-        screens[row['other_screen_title']] = screen
+        screens[row['instruction_screen_name']] = screen
 
     return screens
 
 
 if __name__ == '__main__':
+    parent = Path(__file__).parent.parent
+    data_csv = parent / 'data/stimuli_en/multipleye_stimuli_experiment_en_with_img_paths.csv'
+    question_csv = parent / 'data/stimuli_en/multipleye_comprehension_questions_en_with_img_paths.csv'
+    lf = Logfile(filename='dummy_log')
 
-    parent = Path(__file__).parent
-    data_csv = parent / 'data/stimuli_toy/multipleye_stimuli_experiment_toy_with_img_paths.csv'
-
-    get_stimuli_screens(data_csv, None)
+    get_stimuli_screens(data_csv, question_csv, lf)

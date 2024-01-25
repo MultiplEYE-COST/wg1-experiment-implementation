@@ -4,8 +4,6 @@ This file will automatically be loaded by pygaze. We can define default values h
 More on what default values there are can be found in the pygaze git repo:
 https://github.com/esdalmaijer/PyGaze/blob/master/pygaze/defaults.py
 """
-import os
-import sys
 import importlib.util
 from pathlib import Path
 
@@ -19,10 +17,10 @@ TRACKERTYPE = 'dummy'
 # TRACKERSERIALNUMBER = 'TPFC2-010202524041'
 
 
-LANGUAGE = 'toy'
+LANGUAGE = 'en'
 FULL_LANGUAGE = 'English'
 LAB_NUMBER = 0
-COUNTRY_CODE = 'toy'
+COUNTRY_CODE = 'en'
 
 ##############################################################################################################
 # BELOW WE SPECIFY THOSE VARIABLES THAT ARE THE SAME ACROSS ALL LANGUAGES AND DEVICES; DO NOT CHANGE THESE ###
@@ -33,22 +31,26 @@ DISPTYPE = 'psychopy'
 FULLSCREEN = True
 # background color (black bars around the image)
 BGC = (15, 15, 15)
+HIGHLIGHT_COLOR = (185, 65, 40)
 
 RESULT_FOLDER_PATH = 'results'
 EXP_ROOT_PATH = Path(__file__).parent
 
 IMAGE_CONFIG_PATH = f'.config_{LANGUAGE}'
-PACKAGE = f'data.stimuli_{LANGUAGE}.config'
+PACKAGE = f'experiment_implementation.data.stimuli_{LANGUAGE}.config'
 
 IMAGE_CONFIG = importlib.import_module(IMAGE_CONFIG_PATH, package=PACKAGE)
+
+############################################################
+# THESE PROPERTIES ARE DEFINED WHEN THE IMAGES ARE CREATED #
+############################################################
 
 STIMULI_IMAGES_CSV = IMAGE_CONFIG.stimuli_images_csv
 QUESTION_IMAGES_CSV = IMAGE_CONFIG.question_images_csv
 PARTICIPANT_INSTRUCTIONS_CSV = IMAGE_CONFIG.participant_instruction_csv
 
-############################################################
-# THESE PROPERTIES ARE DEFINED WHEN THE IMAGES ARE CREATED #
-############################################################
+RANDOMIZATION_VERSION_CSV = EXP_ROOT_PATH / 'data' / 'randomization' / 'items.tsv'
+
 IMAGE_BGC = IMAGE_CONFIG.IMAGE_BGC
 
 # foreground color (i.e. font color)
@@ -63,7 +65,7 @@ DISPSIZE = IMAGE_CONFIG.RESOLUTION
 # Distance between the eye and the display in centimeters. Float.
 SCREENDIST = float(IMAGE_CONFIG.DISTANCE_CM)
 
-# Physical display size in centimeters as (width,height). Can be floats.aaa
+# Physical display size in centimeters as (width,height). Can be floats
 # SCREENSIZE = (52.1, 29.3)
 SCREENSIZE = IMAGE_CONFIG.SCREEN_SIZE_CM
 
@@ -80,6 +82,14 @@ TOP_LEFT_CORNER = (
     MIN_MARGIN_RIGHT_PX,
     MIN_MARGIN_TOP_PX
 )
+
+IMAGE_CENTER = (IMAGE_WIDTH_PX / 2, IMAGE_HEIGHT_PX / 2)
+
+# box sizes of the answer options for the comprehension questions, the box can be selected by pressing the arrow keys
+ARROW_LEFT = IMAGE_CONFIG.arrow_left
+ARROW_UP = IMAGE_CONFIG.arrow_up
+ARROW_RIGHT = IMAGE_CONFIG.arrow_right
+ARROW_DOWN = IMAGE_CONFIG.arrow_down
 
 #########################################################
 
