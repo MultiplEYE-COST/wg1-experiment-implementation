@@ -317,6 +317,7 @@ class Experiment:
                 # add timeout
                 valid_answer = False
                 answer_chosen = ''
+                correct_answer_key = question_dict['correct_answer_key']
 
                 while not valid_answer:
 
@@ -324,13 +325,13 @@ class Experiment:
                         key_pressed_question, keypress_timestamp = self._keyboard.get_key(
                             flush=True,
                         )
-                        print(key_pressed_question)
 
                     if key_pressed_question == 'left':
                         question_screen.clear()
                         self._display.fill(screen=question_dict['question_screen_select_left'])
                         question_timestamp = self._display.show()
                         answer_chosen = key_pressed_question
+
                     elif key_pressed_question == 'right':
                         self._display.fill(screen=question_dict['question_screen_select_right'])
                         question_timestamp = self._display.show()
@@ -349,30 +350,34 @@ class Experiment:
                     elif key_pressed_question == 'space' and answer_chosen:
                         valid_answer = True
 
+                    is_chosen_answer_correct = answer_chosen == question_dict['correct_answer_key']
+                    self.log_file.write(
+                        [
+                            get_time(), trial_nr, question_number, question_timestamp, keypress_timestamp,
+                            key_pressed_question, True, is_chosen_answer_correct,
+                            f"preliminary answer",
+                        ],
+                    )
+
                     key_pressed_question = ''
 
-
-                correct_answer_key = question_dict['correct_answer_key']
                 is_answer_correct = key_pressed_question == correct_answer_key
 
                 self.log_file.write(
                     [
                         get_time(), trial_nr, question_number, question_timestamp, keypress_timestamp,
-                        key_pressed_question, True, is_answer_correct, f"correct answer is '{correct_answer_key}' "
+                        key_pressed_question, True, is_answer_correct, f"FINAL ANSWER: correct answer is '{correct_answer_key}' "
                                                                        f"({question_dict['correct_answer']}), participant's answer is "
                                                                        f"{is_answer_correct}",
                     ],
                 )
 
-                self._eye_tracker.status_msg(
-                    f'{flag}trial_{trial_nr}_question_{question_number}_answer_given_is_{key_pressed_question}'
-                )
                 self._eye_tracker.log(
                     f'{flag}trial_{trial_nr}_question_{question_number}_answer_given_is_{key_pressed_question}',
                 )
 
                 self._eye_tracker.status_msg(
-                    f'{flag}trial_{trial_nr}_question_{question_number}_answer_given_is_correct:{is_answer_correct}'
+                    f'Answer given is: {is_answer_correct}'
                 )
                 self._eye_tracker.log(
                     f'{flag}trial_{trial_nr}_question_{question_number}_answer_given_is_correct:{is_answer_correct}',
@@ -384,8 +389,22 @@ class Experiment:
                     f'stop_recording_{flag}trial_{trial_nr}_question_{question_number}',
                 )
 
-                self._display.fill(screen=self.other_screens['empty_screen'])
-                libtime.pause(300)
+                break_start = get_time()
+                self._display.fill(screen=self.other_screens['optional_break_screen'])
+                while key_pressed_question not in ['space']:
+                    key_pressed, keypress_timestamp = self._keyboard.get_key(
+                        flush=True,
+                    )
+
+                break_time_ms = keypress_timestamp - break_start
+
+                self.log_file.write(
+                    [
+                        get_time(), trial_nr, question_number, question_timestamp, keypress_timestamp,
+                        pd.NA, False, pd.NA,
+                        f"optional break: {break_time_ms}",
+                    ],
+                )
 
             if self.skipped_drift_corrections[str(trial_nr)] > 1:
                 self._eye_tracker.log(

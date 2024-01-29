@@ -60,7 +60,8 @@ FGC = IMAGE_CONFIG.FGC
 IMAGE_SIZE_CM = IMAGE_CONFIG.IMAGE_SIZE_CM
 
 # Display resolution in pixels as (width,height). Needs to be integers!
-DISPSIZE = IMAGE_CONFIG.RESOLUTION
+#DISPSIZE = IMAGE_CONFIG.RESOLUTION
+DISPSIZE = (IMAGE_CONFIG.IMAGE_WIDTH_PX, IMAGE_CONFIG.IMAGE_HEIGHT_PX)
 
 # Distance between the eye and the display in centimeters. Float.
 SCREENDIST = float(IMAGE_CONFIG.DISTANCE_CM)
@@ -86,10 +87,10 @@ TOP_LEFT_CORNER = (
 IMAGE_CENTER = (IMAGE_WIDTH_PX / 2, IMAGE_HEIGHT_PX / 2)
 
 # box sizes of the answer options for the comprehension questions, the box can be selected by pressing the arrow keys
-ARROW_LEFT = IMAGE_CONFIG.arrow_left
-ARROW_UP = IMAGE_CONFIG.arrow_up
-ARROW_RIGHT = IMAGE_CONFIG.arrow_right
-ARROW_DOWN = IMAGE_CONFIG.arrow_down
+ARROW_LEFT = IMAGE_CONFIG.left
+ARROW_UP = IMAGE_CONFIG.up
+ARROW_RIGHT = IMAGE_CONFIG.right
+ARROW_DOWN = IMAGE_CONFIG.down
 
 #########################################################
 

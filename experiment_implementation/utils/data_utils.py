@@ -151,39 +151,41 @@ def get_stimuli_screens(
                     image=Path(norm_img_path),
                 )
 
+                line_width = 3
+
                 question_screen_select_up = MultiplEyeScreen()
                 question_screen_select_up.draw_image(image=Path(norm_img_path))
                 question_screen_select_up.draw_rect(
                     x=constants.ARROW_UP[0], y=constants.ARROW_UP[1],
-                    w=constants.ARROW_UP[2], h=constants.ARROW_UP[3],
-                    colour=constants.HIGHLIGHT_COLOR)
+                    w=constants.ARROW_UP[2]-constants.ARROW_UP[0], h=constants.ARROW_UP[3]-constants.ARROW_UP[1],
+                    colour=constants.HIGHLIGHT_COLOR, pw=line_width)
 
                 question_screen_select_down = MultiplEyeScreen()
                 question_screen_select_down.draw_image(image=Path(norm_img_path))
                 question_screen_select_down.draw_rect(
                     x=constants.ARROW_DOWN[0],
                     y=constants.ARROW_DOWN[1],
-                    w=constants.ARROW_DOWN[2],
-                    h=constants.ARROW_DOWN[3],
-                    colour=constants.HIGHLIGHT_COLOR)
+                    w=constants.ARROW_DOWN[2]-constants.ARROW_DOWN[0],
+                    h=constants.ARROW_DOWN[3]-constants.ARROW_DOWN[1],
+                    colour=constants.HIGHLIGHT_COLOR, pw=line_width)
 
                 question_screen_select_right = MultiplEyeScreen()
                 question_screen_select_right.draw_image(image=Path(norm_img_path))
                 question_screen_select_right.draw_rect(
                     x=constants.ARROW_RIGHT[0],
                     y=constants.ARROW_RIGHT[1],
-                    w=constants.ARROW_RIGHT[2],
-                    h=constants.ARROW_RIGHT[3],
-                    colour=constants.HIGHLIGHT_COLOR)
+                    w=constants.ARROW_RIGHT[2]-constants.ARROW_RIGHT[0],
+                    h=constants.ARROW_RIGHT[3]-constants.ARROW_RIGHT[1],
+                    colour=constants.HIGHLIGHT_COLOR, pw=line_width)
 
                 question_screen_select_left = MultiplEyeScreen()
                 question_screen_select_left.draw_image(image=Path(norm_img_path))
                 question_screen_select_left.draw_rect(
                     x=constants.ARROW_LEFT[0],
                     y=constants.ARROW_LEFT[1],
-                    w=constants.ARROW_LEFT[2],
-                    h=constants.ARROW_LEFT[3],
-                    colour=constants.HIGHLIGHT_COLOR)
+                    w=constants.ARROW_LEFT[2]-constants.ARROW_LEFT[0],
+                    h=constants.ARROW_LEFT[3]-constants.ARROW_LEFT[1],
+                    colour=constants.HIGHLIGHT_COLOR, pw=line_width)
 
                 questions.append(
                     {
