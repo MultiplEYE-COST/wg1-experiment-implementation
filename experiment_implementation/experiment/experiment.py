@@ -83,7 +83,7 @@ class Experiment:
 
         self.log_file.write(
             [
-                'timestamp', 'trial_number', 'page_number', 'stimulus_timestamp',
+                'timestamp', 'trial_number', 'page_number', 'screen_onset_timestamp',
                 'keypress_timestamp', 'key_pressed', 'question', 'answer_correct', 'message',
             ]
         )
@@ -147,11 +147,26 @@ class Experiment:
 
     def _show_instruction_screens(self):
         for i in range(1, 4):
-            self._eye_tracker.status_msg(f'show_instruction_screen_{i}')
-            self._eye_tracker.log(f'show_instruction_screen_{i}')
-            self._display.fill(self.other_screens[f'instruction_screen_{i}'])
+            name = f'instruction_screen_{i}'
+            self._eye_tracker.status_msg(f'showing {name}')
+            self._eye_tracker.log(f'showing {name}')
+            timestamp = self._display.fill(self.other_screens[name])
             self._display.show()
-            self._keyboard.get_key()
+
+            key_pressed = ''
+            keypress_timestamp = -1
+            while key_pressed not in ['space']:
+                key_pressed, keypress_timestamp = self._keyboard.get_key(
+                    flush=True,
+                )
+
+            self.log_file.write(
+                [
+                    get_time(), pd.NA, name, timestamp, keypress_timestamp,
+                    key_pressed, False, pd.NA,
+                    f"stop showing: {name}",
+                ],
+            )
 
     def _run_trials(self, practice=False) -> None:
         if not practice:
@@ -377,7 +392,7 @@ class Experiment:
                 )
 
                 self._eye_tracker.status_msg(
-                    f'Answer given is: {is_answer_correct}'
+                    f'Chosen answer is {is_answer_correct}'
                 )
                 self._eye_tracker.log(
                     f'{flag}trial_{trial_nr}_question_{question_number}_answer_given_is_correct:{is_answer_correct}',
@@ -389,27 +404,58 @@ class Experiment:
                     f'stop_recording_{flag}trial_{trial_nr}_question_{question_number}',
                 )
 
-                break_start = get_time()
-                self._display.fill(screen=self.other_screens['optional_break_screen'])
-                while key_pressed_question not in ['space']:
-                    key_pressed, keypress_timestamp = self._keyboard.get_key(
-                        flush=True,
-                    )
+            # show three rating screens
+            self.show_rating_screen(name='familiarity_rating_screen_1', trial_number=trial_nr, buttons=['space'])
+            self.show_rating_screen(name='familiarity_rating_screen_2', trial_number=trial_nr, buttons=['space'])
+            self.show_rating_screen(name='subject_difficulty_screen', trial_number=trial_nr, buttons=['space'])
 
-                break_time_ms = keypress_timestamp - break_start
+            break_start = get_time()
+            self._display.fill(screen=self.other_screens['optional_break_screen'])
+            self._display.show()
 
-                self.log_file.write(
-                    [
-                        get_time(), trial_nr, question_number, question_timestamp, keypress_timestamp,
-                        pd.NA, False, pd.NA,
-                        f"optional break: {break_time_ms}",
-                    ],
+            key_pressed_break = ''
+            keypress_timestamp = -1
+            while key_pressed_break not in ['space']:
+                key_pressed_break, keypress_timestamp = self._keyboard.get_key(
+                    flush=True,
                 )
+
+            break_time_ms = keypress_timestamp - break_start
+
+            self.log_file.write(
+                [
+                    get_time(), trial_nr, '', '', keypress_timestamp,
+                    key_pressed_break, False, pd.NA,
+                    f"optional break duration: {break_time_ms}",
+                ],
+            )
 
             if self.skipped_drift_corrections[str(trial_nr)] > 1:
                 self._eye_tracker.log(
                     f'trial_{trial_nr}: skipped_drift_corrections_{self.skipped_drift_corrections[str(trial_nr)]}')
                 recalibrate = True
+
+    def show_rating_screen(self, name: str, trial_number: int, buttons: list[str] = None) -> None:
+        self._eye_tracker.status_msg(f'showing {name}')
+        self._eye_tracker.log(f'showing_{name}')
+
+        key_pressed = ''
+        keypress_timestamp = -1
+        self._display.fill(screen=self.other_screens[name])
+        timestamp = self._display.show()
+
+        while key_pressed not in buttons:
+            key_pressed, keypress_timestamp = self._keyboard.get_key(
+                flush=True,
+            )
+
+        self.log_file.write(
+            [
+                get_time(), trial_number, name, timestamp, keypress_timestamp,
+                key_pressed, False, pd.NA,
+                f"stop showing: {name}",
+            ],
+        )
 
     def _fixation_trigger(self) -> bool:
         """
