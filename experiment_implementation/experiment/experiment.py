@@ -19,7 +19,7 @@ from pygaze.libtime import get_time
 from math import fabs
 
 from devices.screen import MultiplEyeScreen
-
+from participant_questionnaire.pq_layout_file import pq_main_layout
 
 class Experiment:
     _display: Display = Display(
@@ -61,7 +61,7 @@ class Experiment:
         )
 
         participant_id_str = str(participant_id)
-        while len(participant_id_str) >= 3:
+        while len(participant_id_str) < 3:
             participant_id_str = "0" + participant_id_str
 
         data_file = str(Path(exp_path) /
@@ -124,17 +124,17 @@ class Experiment:
 
         self._show_instruction_screens()
 
-        self._display.fill(self.other_screens['practice_screen'])
-        self._display.show()
-        self._keyboard.get_key()
+        #self._display.fill(self.other_screens['practice_screen'])
+        #self._display.show()
+        #self._keyboard.get_key()
 
-        self._run_trials(practice=True)
+        #self._run_trials(practice=True)
 
-        self._display.fill(self.other_screens['transition_screen'])
-        self._display.show()
-        self._keyboard.get_key()
+        #self._display.fill(self.other_screens['transition_screen'])
+        #self._display.show()
+        #self._keyboard.get_key()
 
-        self._run_trials()
+        #self._run_trials()
 
         self._eye_tracker.status_msg(f'show_final_screen')
         self._eye_tracker.log(f'show_final_screen')
@@ -544,6 +544,7 @@ class Experiment:
         self.log_file.close()
         self._eye_tracker.close()
         self._display.close()
+        pq_main_layout()
         libtime.expend()
 
     def _drift_correction(self, trial_id: int, overwrite: bool = False) -> None:

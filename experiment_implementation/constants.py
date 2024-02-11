@@ -9,7 +9,7 @@ from pathlib import Path
 
 DUMMY_MODE = True
 
-#TRACKERTYPE = 'eyelink' # or whatever eye-tracker your using
+# TRACKERTYPE = 'eyelink' # or whatever eye-tracker your using
 TRACKERTYPE = 'dummy'
 
 # tobii trackers
@@ -60,7 +60,7 @@ FGC = IMAGE_CONFIG.FGC
 IMAGE_SIZE_CM = IMAGE_CONFIG.IMAGE_SIZE_CM
 
 # Display resolution in pixels as (width,height). Needs to be integers!
-#DISPSIZE = IMAGE_CONFIG.RESOLUTION
+# DISPSIZE = IMAGE_CONFIG.RESOLUTION
 DISPSIZE = (IMAGE_CONFIG.IMAGE_WIDTH_PX, IMAGE_CONFIG.IMAGE_HEIGHT_PX)
 
 # Distance between the eye and the display in centimeters. Float.
@@ -94,4 +94,22 @@ ARROW_DOWN = IMAGE_CONFIG.down
 
 #########################################################
 
+# participant_questionnaire constants
+
+PQ_ROOT_PATH = Path(__file__).parent
+PQ_RESULT_FOLDER_PATH = PQ_ROOT_PATH / 'participant_questionnaire/pq_results'
+
+PQ_PARTICIPANT_INSTRUCTIONS_CSV = PQ_ROOT_PATH / f'participant_questionnaire/pq_data/questionnaire_{LANGUAGE}' \
+                                                 f'/multipleye_questionnaire_instructions_{LANGUAGE}.csv'
+PQ_QUESTIONS_CSV = PQ_ROOT_PATH / f'participant_questionnaire/pq_data/questionnaire_{LANGUAGE}' \
+                                  f'/multipleye_questionnaire_questions_{LANGUAGE}.csv'
+PQ_LANGUAGES_CSV = PQ_ROOT_PATH / f'participant_questionnaire/pq_data/questionnaire_{LANGUAGE}' \
+                                  f'/language_iso639_1_{LANGUAGE}.csv'
+
+# Opening the file where the data is saved
+PQ_FILE = PQ_ROOT_PATH / 'participant_questionnaire/participants_data.csv'
+
+# fix program icon and image not showing
+PQ_program_icon = PQ_ROOT_PATH / 'data/icons/program_icon.png'
+PQ_image_dir = PQ_ROOT_PATH / 'data/icons/running_icon_copy.png'
 
