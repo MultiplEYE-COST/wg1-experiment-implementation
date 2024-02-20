@@ -50,20 +50,28 @@ but it is possible to use another environment if you prefer something else.
 
 **4. Create the conda environment**
 
-   Navigate to the root folder of your local clone of the repository and run the below line in your terminal. Note: if 
-   you use another eye-tracker than eyelink, you need to use the environment file for your eye-tracker.
+   Navigate to the root folder of your local copy of the experiment and run the lines below in your terminal one after the other. 
+   > Note: you can easily navigate through your directories by using this command `cd [path]`.
+   > For example: if you are in the folder called `MultiplEYE` which contains the folder `wg1-experiment-implementation`, 
+   > you can navigate to the root folder by running the following command in your terminal: `cd wg1-experiment-implementation`.
+   > If you want to go back to the previous folder, you can run the following command in your terminal: `cd ..`.
+   
+   The root folder should end with this path: `.../wg1-experiment-implementation/`. Whatever is before that depends on where you stored the experiment on your local machine.
+
+   Next, we can create the environment. This line creates a conda environment with the name `multipleye3.9` and installs the correct python version. 
 
    ```bash
-   conda env create -f environment-eyelink.yml
+   conda create --name multipleye3.9 python==3.9 
    ```
-
-   This step installs all the necessary requirements and creates a new conda environment if you intend to run the experiment with an eyelink. 
-   You can activate the environment with:
+   After you've done that, you need to activate the environment by running the following command in your terminal:
    ```bash
    conda activate multipleye3.9
    ```
-
-   Note that 3.9 denotes the python version that is used in the env. <br>
+   Now, you can install the necessary packages for you eye-tracker by running the following command in your terminal:
+   ```bash
+    pip install -r requirements-eyelink.txt
+  ```
+  
    If you want to re-create the conda environment with the same name `multipleye3.9` for any reason, you need to remove the existing environment first. You can do this by running the following command in your terminal:
    ```bash
    conda remove --name multipleye3.9 --all

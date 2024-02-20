@@ -11,7 +11,6 @@ from pygaze.logfile import Logfile
 from experiment.experiment import Experiment
 from utils import data_utils
 
-
 def run_experiment(
         data_screens_path: str,
         other_screens_path: str,

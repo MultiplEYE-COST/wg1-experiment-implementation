@@ -61,7 +61,7 @@ class Experiment:
         )
 
         participant_id_str = str(participant_id)
-        while len(participant_id_str) >= 3:
+        while len(participant_id_str) < 3:
             participant_id_str = "0" + participant_id_str
 
         data_file = str(Path(exp_path) /
@@ -124,8 +124,11 @@ class Experiment:
 
         self._show_instruction_screens()
 
+        self.calibrate()
+
         self._display.fill(self.other_screens['practice_screen'])
         self._display.show()
+        # TODO: only allow space
         self._keyboard.get_key()
 
         self._run_trials(practice=True)
@@ -170,17 +173,17 @@ class Experiment:
 
     def _run_trials(self, practice=False) -> None:
         if not practice:
-            images = self.stimuli_screens
+            stimuli_dicts = self.stimuli_screens
             flag = ''
             cond = 'real_trial'
         else:
-            images = self.practice_screens
+            stimuli_dicts = self.practice_screens
             flag = 'PRACTICE_'
             cond = 'practice_trial'
 
         recalibrate = False
 
-        for trial_nr, screens in enumerate(images):
+        for trial_nr, screens in enumerate(stimuli_dicts):
 
             self.skipped_drift_corrections[str(trial_nr)] = 0
             self._eye_tracker.status_msg(f'show_empty_screen')
@@ -209,8 +212,8 @@ class Experiment:
             else:
                 self._drift_correction(trial_id=trial_nr)
 
-            stimulus_list = screens['pages']
-            questions_list = screens['questions']
+            stimulus_pages = screens['pages']
+            questions_pages = screens['questions']
             stimulus_id = screens['stimulus_id']
             stimulus_name = screens['stimulus_name']
 
@@ -220,10 +223,12 @@ class Experiment:
             self._eye_tracker.log(f'{flag}TRIALID {trial_nr}')
 
             # show stimulus pages
-            for page_number, page_dict in enumerate(stimulus_list):
+            for page_number, page_dict in enumerate(stimulus_pages):
 
                 page_screen = page_dict['screen']
                 page_path = page_dict['path']
+                page_number = page_dict['page_num']
+                print(page_path, page_number)
                 pic = page_path.split('/')[-1]  # cui
 
                 # present fixation cross before stimulus except for the first page as we have a drift correction then
@@ -296,7 +301,7 @@ class Experiment:
 
             self._eye_tracker.log(f'{flag}TRIAL_RESULT {trial_nr}')
 
-            for question_number, question_dict in enumerate(questions_list):
+            for question_number, question_dict in enumerate(questions_pages):
                 # fixation dot
                 if constants.DUMMY_MODE:
                     self._display.fill(screen=self.other_screens['fixation_screen'])
@@ -342,7 +347,6 @@ class Experiment:
                         )
 
                     if key_pressed_question == 'left':
-                        question_screen.clear()
                         self._display.fill(screen=question_dict['question_screen_select_left'])
                         question_timestamp = self._display.show()
                         answer_chosen = key_pressed_question

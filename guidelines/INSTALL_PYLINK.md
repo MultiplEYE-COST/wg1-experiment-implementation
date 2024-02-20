@@ -49,7 +49,7 @@ want to paste pylink into:
 It is possible to use the ``cp`` command in the Windows powershell, in other terminals you might not be able to use it.
 But you can always copy and paste it manually.
 ```
-cp -R "C:\Program Files (x86)\SR Research\EyeLink\SampleExperiments\Python\64\3.9\pylink" C:\Users\[USERNAME]\miniconda3\envs\multipleye3.9\Lib\site-packages
+cp -R "C:\Program Files (x86)\SR Research\EyeLink\SampleExperiments\Python\64\3.9\pylink" C:\Users\[USERNAME]\anaconda3\envs\multipleye3.9\Lib\site-packages
 ```
 
 **Mac**
