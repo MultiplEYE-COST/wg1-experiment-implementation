@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import os
 from datetime import date
+from pathlib import Path
 
 import constants
 from gooey import Gooey
@@ -10,15 +11,18 @@ from gooey import GooeyParser
 from utils.experiment_utils import ValidateParticipantIDAction, create_results_folder
 
 
+THIS_FILE_PATH = Path(__file__).parent
+LANG_DIR = THIS_FILE_PATH / 'data/gooey_lang/'
+IMAGE_DIR = THIS_FILE_PATH / 'data/icons/'
 @Gooey(
     language=constants.FULL_LANGUAGE,
     program_name='MultiplEYE Data Collection',
     program_description='Before we start the experiment we need some information about the participant,\n'
                         'session etc. Please fill in the below form and follow the instructions.',
-    image_dir=os.getcwd() + '/data/icons/',
+    image_dir=IMAGE_DIR,
     default_size=(600, 600),
     show_preview_warning=False,
-    language_dir=os.getcwd() + '/data/gooey_lang/',
+    language_dir=LANG_DIR,
 )
 def parse_args():
     parser = GooeyParser(
