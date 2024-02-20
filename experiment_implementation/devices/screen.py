@@ -1,8 +1,9 @@
 import math
+import sys
 
 from pygaze._screen.psychopyscreen import PsychoPyScreen
 
-from experiment_implementation import constants
+import constants
 
 
 class MultiplEyeScreen(PsychoPyScreen):

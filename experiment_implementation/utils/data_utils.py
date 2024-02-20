@@ -9,8 +9,8 @@ from pygaze.libtime import get_time
 from pygaze.logfile import Logfile
 from pygaze.screen import Screen
 
-from experiment_implementation import constants
-from experiment_implementation.devices.screen import MultiplEyeScreen
+import constants
+from devices.screen import MultiplEyeScreen
 
 # TODO: change this!!!!
 ITEM_VERSION = 1
@@ -87,7 +87,7 @@ def get_stimuli_screens(
             print(stimulus_id, stimulus_name)
             raise ValueError(f'Experimental stimulus {stimulus_id} has {num_questions} questions, but should have 6!')
 
-        for col in sorted(stimulus_row.keys()):
+        for col in stimulus_row.keys():
 
             # if col name start with page_ and end with _img_path
             if col.startswith('page_') and col.endswith('_img_path'):
