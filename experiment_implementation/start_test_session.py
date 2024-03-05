@@ -58,7 +58,8 @@ if __name__ == '__main__':
     arguments['session_id'] = 1
     arguments['dataset_type'] = 'test_dataset'
     arguments['data_screens_path'] = constants.EXP_ROOT_PATH / constants.STIMULI_IMAGES_CSV
-    arguments['question_screens_path'] = constants.EXP_ROOT_PATH / constants.QUESTION_IMAGES_CSV
+    arguments['question_screens_path'] = (constants.EXP_ROOT_PATH / f'session_{arguments["session_id"]}'
+                                          / constants.QUESTION_IMAGES_CSV)
     arguments['other_screens_path'] = constants.EXP_ROOT_PATH / constants.PARTICIPANT_INSTRUCTIONS_CSV
     arguments['test_run'] = True
 
