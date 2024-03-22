@@ -4,6 +4,7 @@ import argparse
 import os
 
 import constants
+import pandas as pd
 
 
 class ValidateParticipantIDAction(argparse.Action):
@@ -57,3 +58,33 @@ def read_image_configuration(config_path: str) -> dict:
                 image_config['LAB_NUMBER'] = eval(line.split('=')[1])
 
     return image_config
+
+
+def determine_stimulus_order_version(participant_id: int = None) -> int:
+    """
+    Determine the stimulus order version for the participant.
+    It is chosen randomly from all versions that have not been used previously.
+    if an ID is given, the function will return the stimulus order version for that ID
+    """
+    randomization_df = pd.read_csv(
+        constants.RANDOMIZATION_VERSION_CSV,
+        sep='\t',
+        encoding='utf8'
+    )
+
+    if participant_id:
+        stimulus_order = randomization_df.loc[randomization_df.participant_id == participant_id, 'participant_id']
+        if stimulus_order.empty:
+            print('Are you sure that the participant ID is correct? I cannot find a run with the participant.')
+            raise ValueError(f'The participant ID {participant_id} does not exist in the randomization file.')
+
+    else:
+        stimulus_order = randomization_df[randomization_df.participant_id.isna()].sample(1)
+
+    order_version = stimulus_order['stimulus_order_version'].values[0]
+
+    return order_version
+
+
+
+

@@ -43,7 +43,7 @@ but it is possible to use another environment if you prefer something else.
 **3. Clone this repository**
 
    If you received the experiment as a zip folder, you can skip this step and proceed to the next one directly.
-   You can clone the repository to your local machine by running the following command in your terminal:
+   If not, you can clone the repository to your local machine by running the following command in your terminal:
    ```bash
    git clone https://github.com/MultiplEYE-COST/wg1-experiment-implementation.git
    ```
@@ -67,7 +67,7 @@ but it is possible to use another environment if you prefer something else.
    ```bash
    conda activate multipleye3.9
    ```
-   Now, you can install the necessary packages for you eye-tracker by running the following command in your terminal:
+   Now, you can install the necessary packages for your eye-tracker by running the following command in your terminal:
    ```bash
     pip install -r requirements-eyelink.txt
   ```
@@ -89,7 +89,7 @@ but it is possible to use another environment if you prefer something else.
 
 
 ## For Mac
-Note: we do not recommend, to run the experiment on a Mac as it is not optimized to work for Mac. The instructions to make it run
+Note: we do not recommend to run the experiment on a Mac as it is not optimized to work for Mac. The instructions to make it run
 are not as straighforward as for windows. If you want to run the experiment on a Mac, you can follow the instructions below. 
 If you have any additions to the instructions or know another possibly easier way to set it up, please let us know. 
 

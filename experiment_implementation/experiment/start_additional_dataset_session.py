@@ -11,18 +11,19 @@ from gooey import GooeyParser
 from utils.experiment_utils import ValidateParticipantIDAction, create_results_folder
 
 THIS_FILE_PATH = Path(__file__).parent
-LANG_DIR = THIS_FILE_PATH / 'data/gooey_lang/'
-IMAGE_DIR = THIS_FILE_PATH / 'data/icons/'
+LANG_DIR = THIS_FILE_PATH / 'data/interface_language/'
+IMAGE_DIR = THIS_FILE_PATH / 'data/interface_icons/'
+
 
 @Gooey(
     language=constants.FULL_LANGUAGE,
     program_name='MultiplEYE Data Collection',
-    program_description='Before we start the experiment we need some information about the participant,\n '
+    program_description='Before we start the experiment we need some information about the participant,\n'
                         'session etc. Please fill in the below form and follow the instructions.',
     image_dir=IMAGE_DIR,
-    default_size=(800, 600),
-    language_dir=LANG_DIR,
+    default_size=(600, 600),
     show_preview_warning=False,
+    language_dir=LANG_DIR,
 )
 def parse_args():
     parser = GooeyParser(
@@ -33,27 +34,43 @@ def parse_args():
         'participant_id',
         metavar='Participant ID',
         help='Enter the participant ID here.',
+        action=ValidateParticipantIDAction,
     )
+
+    parser.add_argument(
+        'session_id',
+        metavar='Session ID',
+        default=1,
+        type=int,
+    )
+
+    parser.add_argument(
+        'data_screens_path',
+        metavar='Data file',
+        help='Please select the csv file where the stimuli information is stored.',
+        widget='FileChooser',
+    )
+
     args = vars(parser.parse_args())
 
     return args
 
 
-if __name__ == '__main__':
-
-    create_results_folder(dataset='toy_dataset')
+def start_additional_dataset_session():
+    create_results_folder(dataset='additional_dataset')
 
     arguments = parse_args()
 
     # hardcoded args
-    arguments['session_id'] = 1
-    arguments['dataset_type'] = 'toy_dataset'
-    arguments['data_screens_path'] = constants.EXP_ROOT_PATH / constants.STIMULI_IMAGES_CSV
-    arguments['question_screens_path'] = constants.EXP_ROOT_PATH / constants.QUESTION_IMAGES_CSV
-    arguments['other_screens_path'] = constants.EXP_ROOT_PATH / constants.PARTICIPANT_INSTRUCTIONS_CSV
-    arguments['test_run'] = False
-    arguments['date'] = str(date.today())
+    arguments['dataset_type'] = 'additional_dataset'
+    arguments['test_run'] = True
+    arguments['other_screens_path'] = constants.EXP_ROOT_PATH + constants.PARTICIPANT_INSTRUCTIONS_CSV
+    arguments['practice_screens_path'] = constants.EXP_ROOT_PATH + constants.PRACTICE_STIMULI_PATH
 
     # !!! THIS IMPORT CANNOT BE MOVED SOMEWHERE ELSE; OTHERWISE THE PROGRAM GETS REALLY SLOW !!!
     from run_experiment import run_experiment
     run_experiment(**arguments)
+
+
+if __name__ == '__main__':
+    start_additional_dataset_session()
