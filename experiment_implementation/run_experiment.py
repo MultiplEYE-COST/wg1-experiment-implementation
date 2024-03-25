@@ -11,7 +11,7 @@ from pygaze.libtime import get_time
 from pygaze.logfile import Logfile
 from experiment.experiment import Experiment
 from start_session import SessionMode, end_session
-from utils import data_utils
+from utils import data_utils, experiment_utils
 
 
 def run_experiment(
@@ -34,7 +34,9 @@ def run_experiment(
 
     participant_id = participant_id_str
 
-    last_completed_stimulus = None
+    experiment_utils.mark_stimulus_order_version_used(item_version, participant_id, session_mode)
+
+    not_completed_stimulus = None
 
     # if it is a testrun, we create a folder with the name of the participant ID and the suffix "_testrun"
     # if the folder already exists we just dump the test files to that same folder
@@ -46,24 +48,24 @@ def run_experiment(
             os.makedirs(absolute_exp_result_path)
 
     # it has already been checked that there is no folder with the same participant ID, so we can create a new folder
-    elif continue_core_session:
-        relative_exp_result_path = f'{constants.RESULT_FOLDER_PATH}/{dataset_type.lower()}/{participant_id}'
-        absolute_exp_result_path = os.path.abspath(relative_exp_result_path)
-
-
     else:
         relative_exp_result_path = f'{constants.RESULT_FOLDER_PATH}/{dataset_type.lower()}/{participant_id}'
 
         if continue_core_session:
             completed_stimuli_df = pd.read_csv(f'{relative_exp_result_path}/logfiles/completed_stimuli.csv',
-                                            sep='\t')
+                                            sep=',')
 
-            last_completed_stimulus = completed_stimuli_df[
-                completed_stimuli_df['completed' == True]
-            ]['stimulus_id'].values.tolist()[-1]
+            not_completed_stimulus = completed_stimuli_df[completed_stimuli_df['completed'] == 0]['stimulus_id']
+            not_completed_stimulus = not_completed_stimulus.values.tolist()
+
+            if not not_completed_stimulus:
+                # if no entry is found, this means the participants has not yet started with an item
+                not_completed_stimulus = '-_(full_restart)'
+            else:
+                not_completed_stimulus = not_completed_stimulus[0]
 
             relative_exp_result_path = (f'{constants.RESULT_FOLDER_PATH}/{dataset_type.lower()}/'
-                                        f'{participant_id}_continued_after_id_{last_completed_stimulus}')
+                                        f'{participant_id}_continued_with_id_{not_completed_stimulus}')
 
             absolute_exp_result_path = os.path.abspath(relative_exp_result_path)
 
@@ -101,7 +103,7 @@ def run_experiment(
     general_log_file.write([get_time(), 'start preparing stimuli screens'])
     stimuli_screens, total_num_pages = data_utils.get_stimuli_screens(
         data_screens_path, question_screens_path, data_logfile, session_mode, item_version,
-        last_completed_stimulus)
+        not_completed_stimulus)
     general_log_file.write([get_time(), 'finished preparing stimuli screens'])
 
     general_log_file.write([get_time(), 'finished preparing practice screens'])
@@ -135,10 +137,6 @@ def run_experiment(
     general_log_file.write([get_time(), 'start initial calibration'])
     experiment.calibrate()
     general_log_file.write([get_time(), 'finished initial calibration'])
-
-    # before the experiment starts, the participant id is written to the stimulus order file
-    # to make sure the stimulus order is only used once
-    data_utils.mark_stimulus_order_version_used(item_version, participant_id, session_mode)
 
     general_log_file.write([get_time(), 'start experiment'])
     experiment.run_experiment()

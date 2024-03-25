@@ -6,6 +6,8 @@ import os
 import constants
 import pandas as pd
 
+from experiment_implementation.start_session import SessionMode
+
 
 class ValidateParticipantIDAction(argparse.Action):
 
@@ -35,13 +37,11 @@ class ValidateParticipantIDAction(argparse.Action):
 
 
 def create_results_folder(dataset) -> None:
-
     if not os.path.isdir(f'{constants.RESULT_FOLDER_PATH}/{dataset}/'):
         os.makedirs(f'{constants.RESULT_FOLDER_PATH}/{dataset}/')
 
 
 def read_image_configuration(config_path: str) -> dict:
-
     image_config = {}
 
     with open(config_path, 'r', encoding='utf8') as configfile:
@@ -73,7 +73,7 @@ def determine_stimulus_order_version(participant_id: int = None) -> int:
     )
 
     if participant_id:
-        stimulus_order = randomization_df.loc[randomization_df.participant_id == participant_id, 'participant_id']
+        stimulus_order = randomization_df[randomization_df.participant_id == participant_id]
         if stimulus_order.empty:
             print('Are you sure that the participant ID is correct? I cannot find a run with the participant.')
             raise ValueError(f'The participant ID {participant_id} does not exist in the randomization file.')
@@ -86,5 +86,20 @@ def determine_stimulus_order_version(participant_id: int = None) -> int:
     return order_version
 
 
+def mark_stimulus_order_version_used(order_version: int, participant_id: int, session_mode: SessionMode) -> None:
+    """
+    Mark the stimulus order version as used by the participant.
+    """
+    randomization_df = pd.read_csv(
+        constants.RANDOMIZATION_VERSION_CSV,
+        sep='\t',
+        encoding='utf8'
+    )
 
+    if not session_mode.value == 'test' and not session_mode.value == 'minimal':
+        randomization_df.loc[
+            randomization_df.stimulus_order_version == order_version,
+            'participant_id'
+        ] = participant_id
 
+        randomization_df.to_csv(constants.RANDOMIZATION_VERSION_CSV, sep='\t', index=False, encoding='utf8')

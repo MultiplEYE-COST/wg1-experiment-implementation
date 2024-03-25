@@ -189,15 +189,17 @@ def parse_args():
         action='store_true',
         default=False,
         widget='BlockCheckbox',
-        help='In case that a core session was interrupted unexpectedly after the first screen of the first stimulus '
-             'has already been shown. In that case,  '
+        help='In case that a core session was interrupted unexpectedly after the experiment has already started.'
+             ' In that case,  '
              'you can continue the session by selecting this option.',
     )
 
     danger_zone.add_argument(
         '--participant-id-continued',
         metavar='Participant ID',
-        help='Please select the participant ID that you want to continue the session for.',
+        help='Please select the participant ID that you want to continue the session for. '
+             'If the one you are looking for does not appear,'
+             'you have to start a new session with a new participant ID.',
         type=int,
         widget='Dropdown',
         choices=PARTICIPANT_IDS,

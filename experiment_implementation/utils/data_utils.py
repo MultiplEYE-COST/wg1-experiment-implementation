@@ -23,7 +23,7 @@ def create_data_logfile(
         exp_path: str,
 ) -> Logfile:
     lf = Logfile(
-        filename=f'{exp_path}/logfiles'
+        filename=f'{exp_path}/logfiles/'
                  f'DATA_LOGFILE_{session_id}_{participant_id}_{date}_{experiment_start_timestamp}',
     )
     lf.write(['timestamp', 'message_type', 'message', 'data_path', 'data_name'])
@@ -37,7 +37,7 @@ def get_stimuli_screens(
         logfile: Logfile,
         session_mode: SessionMode,
         order_version: int,
-        last_completed_stimulus: int = None
+        not_completed_stimulus: int = None
 ) -> (list[dict], int):
     all_stimuli_screens = []
 
@@ -74,10 +74,10 @@ def get_stimuli_screens(
     for item_id in stimulus_order:
 
         # if the session has been restarted after abortion, we need to skip the stimuli that have already been completed
-        if last_completed_stimulus and not continue_now:
-            if item_id == last_completed_stimulus:
-                continue_now = True
+        if not_completed_stimulus != item_id and not continue_now:
             continue
+        else:
+            continue_now = True
 
         screens = []
 
@@ -360,23 +360,6 @@ def get_instruction_screens(
     return screens
 
 
-def mark_stimulus_order_version_used(order_version: int, participant_id: int, session_mode: SessionMode) -> None:
-    """
-    Mark the stimulus order version as used by the participant.
-    """
-    randomization_df = pd.read_csv(
-        constants.RANDOMIZATION_VERSION_CSV,
-        sep='\t',
-        encoding='utf8'
-    )
-
-    if not session_mode.value == 'test' and not session_mode.value == 'minimal':
-        randomization_df.loc[
-            randomization_df.stimulus_order_version == order_version,
-            'participant_id'
-        ] = participant_id
-
-        randomization_df.to_csv(constants.RANDOMIZATION_VERSION_CSV, sep='\t', index=False, encoding='utf8')
 
 
 if __name__ == '__main__':

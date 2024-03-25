@@ -241,8 +241,9 @@ class Experiment:
             self._eye_tracker.log(f'{flag}TRIALID {trial_nr}')
 
             stimulus_dict = {'timestamp_started': get_time(), 'timestamp_completed': pd.NA,
-                             'stimulus_id': stimulus_id, 'completed': False}
+                             'stimulus_id': stimulus_id, 'completed': 0}
 
+            # log which stimulus has started so that we can restart the session
             self.log_completed_stimuli = pd.concat([self.log_completed_stimuli,
                                                     pd.DataFrame(
                                                         stimulus_dict,
@@ -250,6 +251,7 @@ class Experiment:
                                                         index=[0]
                                                     )],
                                                    ignore_index=True)
+            self.log_completed_stimuli.to_csv(f'{self.abs_exp_path}/logfiles/completed_stimuli.csv', index=False, sep=',')
 
             # show stimulus pages
             for page_number, page_dict in enumerate(stimulus_pages):
@@ -260,7 +262,6 @@ class Experiment:
                 page_path = page_dict['path']
                 relative_img_path = page_dict['relative_path']
                 page_number = page_dict['page_num']
-                pic = page_path.split('/')[-1]  # cui
 
                 # present fixation cross before stimulus except for the first page as we have a drift correction then
                 if not page_number == 0:
@@ -321,7 +322,7 @@ class Experiment:
                 self._eye_tracker.log(f'stop_recording_{flag}trial_{trial_nr}_page_{page_number}')
 
                 self._eye_tracker.log('!V TRIAL_VAR condition %s' % cond)  # cui use 'practice' and 'real' as cond?
-                self._eye_tracker.log('!V TRIAL_VAR backdrop_image %s' % pic)  # cui
+                self._eye_tracker.log('!V TRIAL_VAR backdrop_image %s' % relative_img_path)  # cui
                 self._eye_tracker.log('!V TRIAL_VAR RT %d' % int(core.getTime() - stimulus_timestamp) * 1000)  # cui
 
             self._eye_tracker.log(f'{flag}TRIAL_RESULT {trial_nr}')
@@ -332,7 +333,7 @@ class Experiment:
                     self._display.fill(screen=self.instruction_screens['fixation_screen']['screen'])
                     self._display.show()
                     self._eye_tracker.log("dummy_drift_correction")
-                    milliseconds = 200
+                    milliseconds = 300
                     libtime.pause(milliseconds)
                 else:
                     self._drift_correction(trial_id=trial_nr, overwrite=True)
@@ -349,6 +350,7 @@ class Experiment:
                 self._eye_tracker.start_recording()
 
                 question_screen = question_dict['question_screen_initial']
+                question_page_path = question_dict['path']
 
                 self._display.fill(screen=question_screen)
                 question_timestamp = self._display.show()
@@ -358,7 +360,7 @@ class Experiment:
                 # send over a message to specify where the image is stored relative
                 # to the EDF data file
                 # first specify the relative path
-                img_path_relative_to_edf = os.path.relpath(page_path, self.relative_edf_file_path)
+                img_path_relative_to_edf = os.path.relpath(question_page_path, self.relative_edf_file_path)
                 imgload_msg = '!V IMGLOAD CENTER %s %d %d %d %d' % (img_path_relative_to_edf,
                                                                     int(constants.IMAGE_WIDTH_PX / 2.0),
                                                                     int(constants.IMAGE_HEIGHT_PX / 2.0),
@@ -481,13 +483,14 @@ class Experiment:
                     f'trial_{trial_nr}: skipped_drift_corrections_{self.skipped_drift_corrections[str(trial_nr)]}')
                 recalibrate = True
 
+            # log completed stimuli and write to file
             self.log_completed_stimuli.loc[
                 self.log_completed_stimuli['stimulus_id'] == stimulus_id, 'completed'
-            ] = True
+            ] = 1
             self.log_completed_stimuli.loc[
                 self.log_completed_stimuli['stimulus_id'] == stimulus_id, 'timestamp_completed'
             ] = get_time()
-            self.log_completed_stimuli.to_csv(f'{self.abs_exp_path}/logfiles/completed_stimuli.csv')
+            self.log_completed_stimuli.to_csv(f'{self.abs_exp_path}/logfiles/completed_stimuli.csv', index=False, sep=',')
 
     def show_rating_screen(self, name: str, trial_number: int, screens: dict,
                            num_options: int, flag: str) -> None:
