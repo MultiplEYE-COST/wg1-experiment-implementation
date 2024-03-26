@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import os
+import time
 from datetime import date
 from enum import Enum
 from pathlib import Path
@@ -57,7 +58,7 @@ FULL_LANG_OPTIONS = [
     program_description='Before we start the experiment we need some information about the participant,\n '
                         'session etc. Please fill in the below form and follow the instructions.',
     image_dir=str(IMAGE_DIR),
-    default_size=(1100, 1000),
+    default_size=(900, 800),
     language_dir=str(LANG_DIR),
     show_preview_warning=False,
 
@@ -68,7 +69,8 @@ def parse_args():
     )
 
     language = parser.add_argument_group('Lab Settings',
-                                         description='Please confirm the lab settings that are shown below.',
+                                         description='Please make sure that you have entered the correct '
+                                                     'lab information in the `local_config.py` file.'
                                          )
     language.add_argument(
         '--language',
@@ -78,6 +80,7 @@ def parse_args():
         choices=LANG_OPTIONS,
         help='Please select the language. It should be a two-letter code (e.g. "en" for English, "de" for German).',
         required=True,
+        gooey_options={'visible': False},
     )
 
     language.add_argument(
@@ -88,6 +91,7 @@ def parse_args():
         default=local_config.FULL_LANGUAGE,
         help='Please select the full language name (e.g. "English", "German").',
         required=True,
+        gooey_options={'visible': False},
     )
 
     language.add_argument(
@@ -99,6 +103,7 @@ def parse_args():
         help='Please select the country code. It should be a two-letter code '
              '(e.g. "gb" for Great Britain, "de" for Germany).',
         required=True,
+        gooey_options={'visible': False},
     )
 
     language.add_argument(
@@ -108,6 +113,7 @@ def parse_args():
         type=int,
         help='Please enter the lab number. It most of the cases this number will be 1.',
         required=True,
+        gooey_options={'visible': False},
     )
 
     group = parser.add_argument_group('Session Mode')
@@ -226,15 +232,19 @@ def start_experiment_session():
 
     arguments.pop('participant_id_continued', None)
 
-    with open(PARENT_FOLDER / 'local_config.py', 'r', encoding='utf-8') as f:
-        arguments['original_lines'] = f.readlines()
+    if arguments['session_mode'].value == 'minimal':
+        with open(PARENT_FOLDER / 'local_config.py', 'r', encoding='utf-8') as f:
+            arguments['original_lines'] = f.readlines()
 
-    with open(PARENT_FOLDER / 'local_config.py', 'w', encoding='utf-8') as f:
-        f.write(f'LANGUAGE = "{arguments["language"]}"\n')
-        f.write(f'FULL_LANGUAGE = "{arguments["full_language"]}"\n')
-        f.write(f'COUNTRY_CODE = "{arguments["country_code"]}"\n')
-        f.write(f'LAB_NUMBER = {arguments["lab_number"]}\n')
-        f.write(f'DUMMY_MODE = {arguments["dummy_mode"]}\n')
+        with open(PARENT_FOLDER / 'local_config.py', 'w', encoding='utf-8') as f:
+            f.write(f'LANGUAGE = "toy"\n')
+            f.write(f'FULL_LANGUAGE = "{arguments["full_language"]}"\n')
+            f.write(f'COUNTRY_CODE = "x"\n')
+            f.write(f'LAB_NUMBER = {arguments["lab_number"]}\n')
+            f.write(f'DUMMY_MODE = {arguments["dummy_mode"]}\n')
+
+        # add timeout such that file will be written correctly
+        time.sleep(5)
 
     arguments['date'] = str(date.today())
 

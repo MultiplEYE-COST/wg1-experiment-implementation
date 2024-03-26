@@ -316,7 +316,6 @@ def get_instruction_screens(
             }
 
             if not row['instruction_screen_name'] == 'familiarity_rating_screen_1':
-
                 screen_select_4 = MultiplEyeScreen()
                 screen_select_4.draw_image(
                     image=Path(norm_screen_path),
@@ -358,8 +357,6 @@ def get_instruction_screens(
         screens[row['instruction_screen_name']] = screen_dict
 
     return screens
-
-
 
 
 if __name__ == '__main__':
