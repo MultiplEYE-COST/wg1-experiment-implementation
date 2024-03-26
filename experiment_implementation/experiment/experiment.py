@@ -113,21 +113,11 @@ class Experiment:
         self.abs_exp_path = abs_exp_path
 
     def welcome_screen(self):
-
-        page_path = self.instruction_screens['welcome_screen']['path']
-        if not constants.DUMMY_MODE:
-            self._eye_tracker.send_backdrop_image(page_path)
-
         self._display.fill(self.instruction_screens['welcome_screen']['screen'])
         self._display.show()
         self._keyboard.get_key(flush=True)
 
     def show_informed_consent(self):
-
-        page_path = self.instruction_screens['informed_consent_screen']['path']
-        if not constants.DUMMY_MODE:
-            self._eye_tracker.send_backdrop_image(page_path)
-
         self._display.fill(self.instruction_screens['informed_consent_screen']['screen'])
         self._display.show()
         self._keyboard.get_key(flush=True)
@@ -143,7 +133,7 @@ class Experiment:
 
         self._show_instruction_screens()
 
-        self.calibrate()
+        # self.calibrate()
 
         self._display.fill(self.instruction_screens['practice_screen']['screen'])
         self._display.show()
@@ -172,10 +162,6 @@ class Experiment:
 
         for i in range(1, 4):
             name = f'instruction_screen_{i}'
-
-            page_path = self.instruction_screens[name]['path']
-            if not constants.DUMMY_MODE:
-                self._eye_tracker.send_backdrop_image(page_path)
 
             self._eye_tracker.status_msg(f'{name}')
             self._eye_tracker.log(f'showing_{name}')
@@ -266,7 +252,7 @@ class Experiment:
                 page_screen = page_dict['screen']
                 page_path = page_dict['path']
                 relative_img_path = page_dict['relative_path']
-                page_number = page_dict['page_num']
+                page_number_start_at_1 = page_dict['page_num']
 
                 if constants.DUMMY_MODE:
                     self._display.fill(screen=self.instruction_screens['fixation_screen']['screen'])
@@ -279,7 +265,7 @@ class Experiment:
                     self._eye_tracker.send_backdrop_image(page_path)
 
                 # start eye-tracking
-                self._eye_tracker.status_msg(f'{flag}trial {trial_nr} {stimulus_name} page {page_number + 1}')
+                self._eye_tracker.status_msg(f'{flag}trial {trial_nr} {stimulus_name} page {page_number_start_at_1}')
                 self._eye_tracker.log(f'start_recording_{flag}trial_{trial_nr}_page_{page_number}')
                 self._eye_tracker.start_recording()
 
