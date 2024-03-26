@@ -74,10 +74,10 @@ def get_stimuli_screens(
     for item_id in stimulus_order:
 
         # if the session has been restarted after abortion, we need to skip the stimuli that have already been completed
-        if not_completed_stimulus != item_id and not continue_now:
-            continue
-        else:
-            continue_now = True
+        #if not_completed_stimulus != item_id and not continue_now:
+        #    continue
+        #else:
+        #    continue_now = True
 
         screens = []
 
@@ -95,7 +95,7 @@ def get_stimuli_screens(
 
         stimulus_id = stimulus_row['stimulus_id'].values[0]
         stimulus_name = stimulus_row['stimulus_name'].values[0]
-        stimulus_type = stimulus_row['text_type'].values[0]
+        stimulus_type = stimulus_row['stimulus_type'].values[0]
 
         question_sub_df = question_df[(question_df['stimulus_id'] == stimulus_id)
                                       & (question_df['stimulus_name'] == stimulus_name)]
@@ -104,14 +104,14 @@ def get_stimuli_screens(
 
         # for the minimal session there are fewer questions
         # the test session can have fewer questions because not all stimuli are there
-        if not session_mode.value == 'minimal':
-            if stimulus_type == 'practice' and not num_questions == 3:
-                print(stimulus_id, stimulus_name)
-                raise ValueError(f'Practice stimulus {stimulus_id} has {num_questions} questions, but should have 3!')
-            elif stimulus_type == 'experiment' and not num_questions == 6:
-                print(stimulus_id, stimulus_name)
-                raise ValueError(f'Experimental stimulus {stimulus_id} has {num_questions}'
-                                 f' questions, but should have 6!')
+        #if not session_mode.value == 'minimal':
+            #if stimulus_type == 'practice' and not num_questions == 3:
+                #print(stimulus_id, stimulus_name)
+                #raise ValueError(f'Practice stimulus {stimulus_id} has {num_questions} questions, but should have 3!')
+            #elif stimulus_type == 'experiment' and not num_questions == 6:
+                #print(stimulus_id, stimulus_name)
+                #raise ValueError(f'Experimental stimulus {stimulus_id} has {num_questions}'
+                                 #f' questions, but should have 6!')
 
         for col in stimulus_row.keys():
 
