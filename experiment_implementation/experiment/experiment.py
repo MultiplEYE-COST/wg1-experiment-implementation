@@ -205,11 +205,31 @@ class Experiment:
             if (((total_page_count >= self.num_pages // 2 and trial_nr >= half_num_stimuli - 1)
                  or trial_nr == half_num_stimuli + 2)
                     and not obligatory_break_made and not practice):
+
+                break_start = get_time()
+
                 self._eye_tracker.log('obligatory_break')
-                self._display.fill(self.instruction_screens['obligatory_break_screen']['screen'])
-                self._display.show()
-                self._keyboard.get_key()
                 obligatory_break_made = True
+
+                self._display.fill(screen=self.instruction_screens['optional_break_screen']['screen'])
+                self._display.show()
+
+                key_pressed_break = ''
+                keypress_timestamp = -1
+                while key_pressed_break not in ['space']:
+                    key_pressed_break, keypress_timestamp = self._keyboard.get_key(
+                        flush=True,
+                    )
+
+                break_time_ms = keypress_timestamp - break_start
+
+                self.write_to_logfile(
+                    timestamp=get_time(), trial_number=trial_nr, stimulus_identifier=stimulus_id,
+                    page_number=pd.NA, screen_onset_timestamp=break_start,
+                    keypress_timestamp=keypress_timestamp, key_pressed=key_pressed_break,
+                    question=False, answer_correct=pd.NA,
+                    message=f"obligatory break duration: {break_time_ms}",
+                )
 
             self.skipped_drift_corrections[str(trial_nr)] = 0
 
@@ -287,7 +307,7 @@ class Experiment:
                 self.write_to_logfile(timestamp=get_time(), trial_number=trial_nr, stimulus_identifier=stimulus_id,
                                       page_number=page_number, screen_onset_timestamp=stimulus_timestamp,
                                       keypress_timestamp=keypress_timestamp, key_pressed=key_pressed_stimulus,
-                                      question=False, answer_correct=pd.NA, message=f"stop showing: {stimulus_name}")
+                                      question=False, answer_correct=pd.NA, message=f"showing: {stimulus_name}")
 
                 # send a message to clear the data viewer screen.   #cui
                 self._eye_tracker.log('!V CLEAR 128 128 128')  # cui
@@ -325,7 +345,7 @@ class Experiment:
                 relative_question_page_path = question_dict['relative_path']
 
                 self._display.fill(screen=question_screen)
-                question_timestamp = self._display.show()
+                initial_question_timestamp = self._display.show()
                 self._eye_tracker.log('screen_image_onset')
                 self._eye_tracker.log('!V CLEAR 116 116 116')
 
@@ -338,6 +358,8 @@ class Experiment:
                 correct_answer_key = question_dict['correct_answer_key']
 
                 while not valid_answer:
+
+                    key_pressed_question = ''
 
                     while key_pressed_question not in ['left', 'right', 'up', 'down', 'space']:
                         key_pressed_question, keypress_timestamp = self._keyboard.get_key(
@@ -377,14 +399,12 @@ class Experiment:
                                           message='preliminary answer'
                                           )
 
-                    key_pressed_question = ''
-
-                is_answer_correct = key_pressed_question == correct_answer_key
+                is_answer_correct = answer_chosen == correct_answer_key
 
                 self.write_to_logfile(
                     timestamp=get_time(), trial_number=trial_nr, stimulus_identifier=stimulus_id,
-                    page_number=question_number, screen_onset_timestamp=question_timestamp,
-                    keypress_timestamp=keypress_timestamp, key_pressed=key_pressed_question,
+                    page_number=question_number, screen_onset_timestamp=initial_question_timestamp,
+                    keypress_timestamp=keypress_timestamp, key_pressed=answer_chosen,
                     question=True, answer_correct=is_answer_correct,
                     message=f"FINAL ANSWER: correct answer is '{correct_answer_key}' "
                             f"({question_dict['correct_answer']}), participant's answer is "

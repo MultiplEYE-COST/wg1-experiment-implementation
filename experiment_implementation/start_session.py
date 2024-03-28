@@ -219,6 +219,20 @@ def parse_args():
 def start_experiment_session():
     arguments = parse_args()
 
+    if arguments['session_mode'].value == 'minimal':
+        with open(PARENT_FOLDER / 'local_config.py', 'r', encoding='utf-8') as f:
+            arguments['original_lines'] = f.readlines()
+
+        with open(PARENT_FOLDER / 'local_config.py', 'w', encoding='utf-8') as f:
+            f.write(f'LANGUAGE = "toy"\n')
+            f.write(f'FULL_LANGUAGE = "{arguments["full_language"]}"\n')
+            f.write(f'COUNTRY_CODE = "x"\n')
+            f.write(f'LAB_NUMBER = {arguments["lab_number"]}\n')
+            f.write(f'DUMMY_MODE = {arguments["dummy_mode"]}\n')
+
+    # add timeout such that file will be written correctly
+    time.sleep(5)
+
     from utils.experiment_utils import determine_stimulus_order_version
 
     if arguments['continue_core_session']:
@@ -231,20 +245,6 @@ def start_experiment_session():
         )
 
     arguments.pop('participant_id_continued', None)
-
-    if arguments['session_mode'].value == 'minimal':
-        with open(PARENT_FOLDER / 'local_config.py', 'r', encoding='utf-8') as f:
-            arguments['original_lines'] = f.readlines()
-
-        with open(PARENT_FOLDER / 'local_config.py', 'w', encoding='utf-8') as f:
-            f.write(f'LANGUAGE = "toy"\n')
-            f.write(f'FULL_LANGUAGE = "{arguments["full_language"]}"\n')
-            f.write(f'COUNTRY_CODE = "x"\n')
-            f.write(f'LAB_NUMBER = {arguments["lab_number"]}\n')
-            f.write(f'DUMMY_MODE = {arguments["dummy_mode"]}\n')
-
-        # add timeout such that file will be written correctly
-        time.sleep(5)
 
     arguments['date'] = str(date.today())
 
@@ -273,6 +273,10 @@ def start_experiment_session():
         pass
 
     elif arguments['session_mode'].value == 'core' and not arguments['continue_core_session']:
+
+        if arguments['language'] == 'toy':
+            raise ValueError('Please make sure that the settings in the `local_config.py` file are correct. Currently '
+                             'the language is set to "toy" which is not allowed for the core dataset.')
 
         create_results_folder(dataset='core_dataset')
 

@@ -33,6 +33,8 @@ DISPTYPE = 'psychopy'
 FULLSCREEN = True
 # background color (black bars around the image)
 BGC = (15, 15, 15)
+
+# used to highlight the selected answer option
 HIGHLIGHT_COLOR = (185, 65, 40)
 
 RESULT_FOLDER_PATH = f'data/eye_tracking_data_{LANGUAGE}_{COUNTRY_CODE}_{LAB_NUMBER}'
@@ -62,8 +64,7 @@ FGC = IMAGE_CONFIG['FGC']
 IMAGE_SIZE_CM = IMAGE_CONFIG['IMAGE_SIZE_CM']
 
 # Display resolution in pixels as (width,height). Needs to be integers!
-#DISPSIZE = IMAGE_CONFIG.RESOLUTION
-DISPSIZE = (IMAGE_CONFIG['IMAGE_WIDTH_PX'], IMAGE_CONFIG['IMAGE_HEIGHT_PX'])
+DISPSIZE = IMAGE_CONFIG['RESOLUTION']
 
 # Distance between the eye and the display in centimeters. Float.
 SCREENDIST = float(IMAGE_CONFIG['DISTANCE_CM'])
@@ -94,7 +95,7 @@ ARROW_UP = IMAGE_CONFIG['up']
 ARROW_RIGHT = IMAGE_CONFIG['right']
 ARROW_DOWN = IMAGE_CONFIG['down']
 
-# rating screens options
+# rating screens option boxes to be drawn
 OPTION_1 = IMAGE_CONFIG['option_1']
 OPTION_2 = IMAGE_CONFIG['option_2']
 OPTION_3 = IMAGE_CONFIG['option_3']

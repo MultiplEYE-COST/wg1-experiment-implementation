@@ -24,7 +24,7 @@ def run_experiment(
         dataset_type: str,
         session_mode: SessionMode,
         item_version: int,
-        original_lines: list[str],
+        original_lines: list[str] = None,
         continue_core_session: bool = False,
 
 ) -> None:
@@ -53,7 +53,7 @@ def run_experiment(
 
         if continue_core_session:
             completed_stimuli_df = pd.read_csv(f'{relative_exp_result_path}/logfiles/completed_stimuli.csv',
-                                            sep=',')
+                                               sep=',')
 
             not_completed_stimulus = completed_stimuli_df[completed_stimuli_df['completed'] == 0]['stimulus_id']
             not_completed_stimulus = not_completed_stimulus.values.tolist()
@@ -75,7 +75,6 @@ def run_experiment(
 
     if not os.path.isdir(f'{absolute_exp_result_path}/logfiles/'):
         os.makedirs(f'{absolute_exp_result_path}/logfiles/')
-
 
     # all logfile name include the timestamp of the experiment start, such that we do not accidentally overwrite
     # something
