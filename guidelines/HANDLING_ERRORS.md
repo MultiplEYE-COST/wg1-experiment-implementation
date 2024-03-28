@@ -8,9 +8,9 @@ messages contain some useful information that can help you debug the issue.
 
 
 
-## 1. Error: `No such file or directory`
+## Error: `No such file or directory`
 If this is in the error message, it means that the program cannot find the file specified. This can be due to different reasons.
-Some of them you can solve yourself, other not.
+Some of them you can solve yourself, others not.
 
 Sometimes, it is helpful to click `edit` on the interface and then check again that everything was entered correctly and then
 click `run` again. Even if everything was entered correctly previously, sometimes it can help to simply restart the experiment.
@@ -23,3 +23,11 @@ If you test the experiment and it does not immediately react to your keypress, t
   (2 seconds are enough) and then press the key. 
 
 - if an error occurs in a core session before the experiment starts, you cannot restart the experiment.
+
+## Image is blurry
+If your presentation PC is a windows machine it is possible that you have to adjust the display settings like in the screenshot below.
+Make sure that you select the display that you will run the experiment on! 
+![image](images/Windows_display_setting.png)
+
+Another reason for blurry images is that the images were not adjusted to the resolution and size of your display.
+Please read the MultiplEYE guidelines on how to create the images adjusted to your display.

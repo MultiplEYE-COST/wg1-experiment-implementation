@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import os
 from pathlib import Path
+from typing import Any
 
 import pandas as pd
 import pylink
@@ -33,7 +34,7 @@ class Experiment:
     def __init__(
             self,
             stimuli_screens: list[dict],
-            instruction_screens: dict[str, MultiplEyeScreen],
+            instruction_screens: dict[str, dict[str, Any]],
             date: str,
             session_id: int,
             participant_id: int,
@@ -65,7 +66,6 @@ class Experiment:
                 constants.EXP_ROOT_PATH / constants.PARTICIPANT_INSTRUCTIONS_DIR /
                 f'empty_screen_{constants.LANGUAGE}.png'
             ),
-            scale=1,
         )
 
         edf_file_path = (f'{constants.COUNTRY_CODE.lower()}'
@@ -165,8 +165,8 @@ class Experiment:
 
             self._eye_tracker.status_msg(f'{name}')
             self._eye_tracker.log(f'showing_{name}')
-            timestamp = self._display.fill(self.instruction_screens[name]['screen'])
-            self._display.show()
+            self._display.fill(self.instruction_screens[name]['screen'])
+            onset_timestamp = self._display.show()
 
             key_pressed = ''
             keypress_timestamp = -1
@@ -177,7 +177,7 @@ class Experiment:
 
             self.write_to_logfile(
                 timestamp=get_time(), trial_number=pd.NA, stimulus_identifier=pd.NA, page_number=name,
-                screen_onset_timestamp=timestamp, keypress_timestamp=keypress_timestamp,
+                screen_onset_timestamp=onset_timestamp, keypress_timestamp=keypress_timestamp,
                 key_pressed=key_pressed, question=False, answer_correct=pd.NA,
                 message=f"stop showing: {name}",
             )
@@ -206,13 +206,11 @@ class Experiment:
                  or trial_nr == half_num_stimuli + 2)
                     and not obligatory_break_made and not practice):
 
-                break_start = get_time()
-
                 self._eye_tracker.log('obligatory_break')
                 obligatory_break_made = True
 
                 self._display.fill(screen=self.instruction_screens['optional_break_screen']['screen'])
-                self._display.show()
+                onset_timestamp = self._display.show()
 
                 key_pressed_break = ''
                 keypress_timestamp = -1
@@ -221,11 +219,11 @@ class Experiment:
                         flush=True,
                     )
 
-                break_time_ms = keypress_timestamp - break_start
+                break_time_ms = keypress_timestamp - onset_timestamp
 
                 self.write_to_logfile(
                     timestamp=get_time(), trial_number=trial_nr, stimulus_identifier=stimulus_id,
-                    page_number=pd.NA, screen_onset_timestamp=break_start,
+                    page_number=pd.NA, screen_onset_timestamp=onset_timestamp,
                     keypress_timestamp=keypress_timestamp, key_pressed=key_pressed_break,
                     question=False, answer_correct=pd.NA,
                     message=f"obligatory break duration: {break_time_ms}",
@@ -346,6 +344,9 @@ class Experiment:
 
                 self._display.fill(screen=question_screen)
                 initial_question_timestamp = self._display.show()
+
+                # in order to log on and off set of each screen
+                question_timestamp = initial_question_timestamp
                 self._eye_tracker.log('screen_image_onset')
                 self._eye_tracker.log('!V CLEAR 116 116 116')
 
@@ -391,6 +392,7 @@ class Experiment:
 
                     is_chosen_answer_correct = answer_chosen == question_dict['correct_answer_key']
 
+                    # log on and off set of each question screen
                     self.write_to_logfile(timestamp=get_time(), trial_number=trial_nr, stimulus_identifier=stimulus_id,
                                           page_number=question_number, screen_onset_timestamp=question_timestamp,
                                           keypress_timestamp=keypress_timestamp,
@@ -401,6 +403,7 @@ class Experiment:
 
                 is_answer_correct = answer_chosen == correct_answer_key
 
+                # overall question screen duration including answer
                 self.write_to_logfile(
                     timestamp=get_time(), trial_number=trial_nr, stimulus_identifier=stimulus_id,
                     page_number=question_number, screen_onset_timestamp=initial_question_timestamp,
@@ -501,7 +504,7 @@ class Experiment:
         self._eye_tracker.log(f'showing_{name}')
 
         self._display.fill(screen=screens['initial'])
-        timestamp = self._display.show()
+        initial_onset_timestamp = self._display.show()
 
         self._send_img_path_to_edf(screens['relative_path'])
 
@@ -524,7 +527,7 @@ class Experiment:
                     option_num = 1
                     answer_chosen = f'option_{option_num}'
                     self._display.fill(screen=screens[f'option_{option_num}'])
-                    timestamp = self._display.show()
+                    self._display.show()
 
                 elif option_num == 1:
                     pass
@@ -533,7 +536,7 @@ class Experiment:
                     option_num -= 1
                     answer_chosen = f'option_{option_num}'
                     self._display.fill(screen=screens[f'option_{option_num}'])
-                    timestamp = self._display.show()
+                    self._display.show()
 
             elif key_pressed == 'down':
 
@@ -541,7 +544,7 @@ class Experiment:
                     option_num = 1
                     answer_chosen = f'option_{option_num}'
                     self._display.fill(screen=screens[f'option_{option_num}'])
-                    timestamp = self._display.show()
+                    self._display.show()
 
                 elif option_num == num_options:
                     pass
@@ -550,7 +553,7 @@ class Experiment:
                     option_num += 1
                     answer_chosen = f'option_{option_num}'
                     self._display.fill(screen=screens[f'option_{option_num}'])
-                    timestamp = self._display.show()
+                    self._display.show()
 
             elif key_pressed == 'space' and answer_chosen:
                 valid_answer = True
@@ -559,9 +562,9 @@ class Experiment:
 
         self.write_to_logfile(
             timestamp=get_time(), trial_number=trial_number, stimulus_identifier=pd.NA,
-            page_number=name, screen_onset_timestamp=timestamp, keypress_timestamp=keypress_timestamp,
+            page_number=name, screen_onset_timestamp=initial_onset_timestamp, keypress_timestamp=keypress_timestamp,
             key_pressed=answer_chosen, question=False, answer_correct=pd.NA,
-            message=f"stop showing: {name}",
+            message=f"rating screen: {name}",
         )
 
         self._eye_tracker.stop_recording()

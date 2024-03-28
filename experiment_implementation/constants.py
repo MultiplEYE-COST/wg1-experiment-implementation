@@ -60,11 +60,11 @@ IMAGE_BGC = IMAGE_CONFIG['IMAGE_BGC']
 # foreground color (i.e. font color)
 FGC = IMAGE_CONFIG['FGC']
 
-# these settings are now adapted to deborah's laptop in the dili lab
 IMAGE_SIZE_CM = IMAGE_CONFIG['IMAGE_SIZE_CM']
 
 # Display resolution in pixels as (width,height). Needs to be integers!
 DISPSIZE = IMAGE_CONFIG['RESOLUTION']
+print(DISPSIZE)
 
 # Distance between the eye and the display in centimeters. Float.
 SCREENDIST = float(IMAGE_CONFIG['DISTANCE_CM'])
