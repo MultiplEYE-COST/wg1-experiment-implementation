@@ -5,3 +5,4 @@ mypy-extensions==0.4.3
 git+https://github.com/theDebbister/PyGaze
 pandas==2.2.0
 gooey==1.0.8.1
+pyarrow==15.0.2

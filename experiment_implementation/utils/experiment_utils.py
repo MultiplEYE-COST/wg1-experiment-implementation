@@ -6,7 +6,7 @@ import os
 import constants
 import pandas as pd
 
-from experiment_implementation.start_session import SessionMode
+from start_session import SessionMode
 
 
 class ValidateParticipantIDAction(argparse.Action):

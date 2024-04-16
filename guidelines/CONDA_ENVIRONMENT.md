@@ -83,8 +83,12 @@ but it is possible to use another environment if you prefer something else.
    Please change ``/Users/[USERNAME]/`` to the path of where you installed your miniconda. Please change ``miniconda3`` to ``anaconda3`` if you installed anaconda instead of miniconda. <br>
    Then you can create the environment again by running the command in the above.
 
+**5. Install Eye-tracker specific libraries** 
 
-**5.** If you work in an IDE, you can open the repository as a project and configure the python interpreter to be the newly
+If you work with an EyeLink eye-tracker, you need to install the EyeLink libraries. You can find the instructions on how to do this [here](INSTALL_PYLINK.md).
+
+
+**6.** If you work in an IDE, you can open the repository as a project and configure the python interpreter to be the newly
    created env. How you have to do it depends on the IDE. For PyCharm it is explained under this link: [Configure existing conda env as PyCharm interpreter](https://www.jetbrains.com/help/pycharm/conda-support-creating-conda-virtual-environment.html)
 
 

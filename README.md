@@ -27,7 +27,8 @@ python experiment_implementation/start_session.py
 ```
 
 ## Check the result files
-The experiment will write log files to a newly created ``results`` folder. In there it will create folder depending on 
+The experiment will write log and data files to a newly created results folder in the data folder (``eye_tracking_data...``). 
+In there it will create a folder depending on 
 the experiment type. For example, if you run the test session, it will create a folder called ``test_dataset``. Within those
 folders it will simply create a new folder for each participant. The folder name is the participant ID. If you run the
 script for the core dataset, it will prevent you from running the experiment twice for the same participant. 
@@ -52,13 +53,10 @@ Pick the PsychoPy version that is in your env. For me the path for a anaconda en
 
 ## Run the experiment with an eye-tracker
 In order to run the experiment with an actual eye-tracker you need to adjust the following lines in 
-[ ``constants.py``](experiment_implementation/constants.py):
+[ ``local_config.py``](experiment_implementation/local_config.py):
 
 ```python
-DUMMY_MODE = False # line 9
-
-TRACKERTYPE = 'eyelink' # line 11
-# TRACKERTYPE = 'dummy' # line 12
+DUMMY_MODE = False
 ```
 
 Depending on what eye-tracker you intend to use you need to install the software that comes with the eye-tracker. You 
