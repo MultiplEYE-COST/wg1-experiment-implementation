@@ -201,7 +201,7 @@ class Experiment:
 
         for trial_nr, screens in enumerate(stimuli_dicts):
 
-            # the break is made after half of the stimuli (+-1), as close to the middle of the pages as possible
+            # the obligatory break is made after half of the stimuli (+-1), as close to the middle of the pages as possible
             if (((total_page_count >= self.num_pages // 2 and trial_nr >= half_num_stimuli - 1)
                  or trial_nr == half_num_stimuli + 2)
                     and not obligatory_break_made and not practice):
@@ -209,7 +209,7 @@ class Experiment:
                 self._eye_tracker.log('obligatory_break')
                 obligatory_break_made = True
 
-                self._display.fill(screen=self.instruction_screens['optional_break_screen']['screen'])
+                self._display.fill(screen=self.instruction_screens['obligatory_break_screen']['screen'])
                 onset_timestamp = self._display.show()
 
                 key_pressed_break = ''
@@ -227,6 +227,27 @@ class Experiment:
                     keypress_timestamp=keypress_timestamp, key_pressed=key_pressed_break,
                     question=False, answer_correct=pd.NA,
                     message=f"obligatory break duration: {break_time_ms}",
+                )
+            else:
+                break_start = get_time()
+                self._display.fill(screen=self.instruction_screens['optional_break_screen']['screen'])
+                self._display.show()
+
+                key_pressed_break = ''
+                keypress_timestamp = -1
+                while key_pressed_break not in ['space']:
+                    key_pressed_break, keypress_timestamp = self._keyboard.get_key(
+                        flush=True,
+                    )
+
+                break_time_ms = keypress_timestamp - break_start
+
+                self.write_to_logfile(
+                    timestamp=get_time(), trial_number=trial_nr, stimulus_identifier=stimulus_id,
+                    page_number=pd.NA, screen_onset_timestamp=break_start,
+                    keypress_timestamp=keypress_timestamp, key_pressed=key_pressed_break,
+                    question=False, answer_correct=pd.NA,
+                    message=f"optional break duration: {break_time_ms}",
                 )
 
             self.skipped_drift_corrections[str(trial_nr)] = 0
@@ -442,26 +463,7 @@ class Experiment:
                                     screens=self.instruction_screens['subject_difficulty_screen'],
                                     num_options=5, flag=flag)
 
-            break_start = get_time()
-            self._display.fill(screen=self.instruction_screens['optional_break_screen']['screen'])
-            self._display.show()
 
-            key_pressed_break = ''
-            keypress_timestamp = -1
-            while key_pressed_break not in ['space']:
-                key_pressed_break, keypress_timestamp = self._keyboard.get_key(
-                    flush=True,
-                )
-
-            break_time_ms = keypress_timestamp - break_start
-
-            self.write_to_logfile(
-                timestamp=get_time(), trial_number=trial_nr, stimulus_identifier=stimulus_id,
-                page_number=pd.NA, screen_onset_timestamp=break_start,
-                keypress_timestamp=keypress_timestamp, key_pressed=key_pressed_break,
-                question=False, answer_correct=pd.NA,
-                message=f"optional break duration: {break_time_ms}",
-            )
 
             if self.skipped_drift_corrections[str(trial_nr)] > 1:
                 self._eye_tracker.log(

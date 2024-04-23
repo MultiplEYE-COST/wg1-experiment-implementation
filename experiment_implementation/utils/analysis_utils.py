@@ -1,19 +1,7 @@
+import os
 import re
 
 import pandas as pd
-
-STIMULUS_NAMES = {
-    'PRACTICE_trial_0': 'Enc_WikiMoon',
-    'PRACTICE_trial_1': 'Lit_HarryPotter',
-    'trial_0': 'Lit_NorthWind',
-    'trial_1': 'Lit_Solaris',
-    'trial_2': 'Lit_EmperorClothes',
-    'trial_3': 'Lit_MagicMountain',
-    'trial_4': 'Arg_PISARapaNui',
-    'trial_5': 'PopSci_Caveman',
-    'trial_6': 'Lit_BrokenApril',
-    'trial_7': 'Arg_PISACowsMilk',
-}
 
 
 def compute_reading_times():
@@ -85,7 +73,7 @@ def compute_reading_times():
 
     reading_time_df = pd.DataFrame({
         'text': page_name,
-        'duration-HH:MM:SS': page_duration,
+        'duration-hh:mm:ss': page_duration,
         'duration-ms': page_duration_ms
 
     })
@@ -101,7 +89,9 @@ def compute_reading_times():
     print('Overall duration:', convert_to_time_str(overall_duration_ms))
 
 
-def analyse_asc(asc_file: str):
+def analyse_asc(asc_file: str,
+                num: int,
+                stimuli_trial_mapping: dict):
     start_ts = []
     stop_ts = []
     start_msg = []
@@ -126,8 +116,8 @@ def analyse_asc(asc_file: str):
                 start_msg.append(match.groupdict()['type'])
                 trials.append(match.groupdict()['trial'])
 
-                if match.groupdict()['trial'] in STIMULUS_NAMES:
-                    stimulus_name.append(STIMULUS_NAMES[match.groupdict()['trial']])
+                if match.groupdict()['trial'] in stimuli_trial_mapping:
+                    stimulus_name.append(stimuli_trial_mapping[match.groupdict()['trial']])
 
                 pages.append(match.groupdict()['page'])
                 status.append('reading time')
@@ -135,21 +125,22 @@ def analyse_asc(asc_file: str):
                 stop_ts.append(match.groupdict()['timestamp'])
                 stop_msg.append(match.groupdict()['type'])
 
-    total_duration_ms = 0
+    total_reading_duration_ms = 0
     for start, stop in zip(start_ts, stop_ts):
         time_ms = int(stop) - int(start)
         time_str = convert_to_time_str(time_ms)
         duration_ms.append(time_ms)
         duration_str.append(time_str)
-        total_duration_ms += time_ms
+        total_reading_duration_ms += time_ms
 
-    print('Total duration:', convert_to_time_str(total_duration_ms))
+    print('Total reading duration:', convert_to_time_str(total_reading_duration_ms))
 
     # calcualte duration between pages
     temp_stop_ts = stop_ts.copy()
     temp_stop_ts.insert(0, 1262133)
     temp_stop_ts = temp_stop_ts[:-1]
 
+    total_set_up_time_ms = 0
     for stop, start, page, trial in zip(temp_stop_ts, start_ts, pages, trials):
         time_ms = int(start) - int(stop)
         time_str = convert_to_time_str(time_ms)
@@ -160,12 +151,15 @@ def analyse_asc(asc_file: str):
         start_ts.append(stop)
         stop_ts.append(start)
         trials.append(trial)
+        total_set_up_time_ms += time_ms
 
-        if trial in STIMULUS_NAMES:
-            stimulus_name.append(STIMULUS_NAMES[trial])
+        if trial in stimuli_trial_mapping:
+            stimulus_name.append(stimuli_trial_mapping[trial])
 
         pages.append(page)
-        status.append('time between pages or breaks')
+        status.append('time before pages and breaks')
+
+    print('Total set up and break time:', convert_to_time_str(total_set_up_time_ms))
 
     df = pd.DataFrame({
         'start_ts': start_ts,
@@ -173,12 +167,42 @@ def analyse_asc(asc_file: str):
         'trial': trials,
         'stimulus': stimulus_name,
         'page': pages,
-        'status': status,
+        'type': status,
         'duration_ms': duration_ms,
-        'duration-HH:MM:SS': duration_str
+        'duration-hh:mm:ss': duration_str
     })
 
-    df.to_csv('asc_analysis.tsv', sep='\t', index=False)
+    df.to_csv(f'reading_times/times_per_page_pilot_{num}.tsv', sep='\t', index=False)
+
+    sum_df = df[['stimulus', 'trial', 'type', 'duration_ms']].dropna()
+    sum_df['duration_ms'] = sum_df['duration_ms'].astype(float)
+    sum_df = sum_df.groupby(by=['stimulus', 'trial', 'type']).sum().reset_index()
+    duration = sum_df['duration_ms'].apply(lambda x: convert_to_time_str(x))
+    sum_df['duration-hh:mm:ss'] = duration
+    sum_df.to_csv(f'reading_times/times_per_trial_pilot_{num}.tsv', index=False, sep='\t')
+
+    print('Total exp time: ', convert_to_time_str(total_reading_duration_ms + total_set_up_time_ms))
+
+    # write total times to csv
+    total_times = pd.DataFrame({
+        'pilot': num,
+        'lab': 'dili-zh',
+        'language': 'en',
+        'total_trials': [len(sum_df) / 2],
+        'total_pages': [len(df) / 2],
+        'total_reading_time': [convert_to_time_str(total_reading_duration_ms)],
+        'total_non-reading_time': [convert_to_time_str(total_set_up_time_ms)],
+        'total_exp_time': [convert_to_time_str(total_reading_duration_ms + total_set_up_time_ms)]
+    })
+    if os.path.exists('reading_times/total_times.tsv'):
+        temp_total_times = pd.read_csv('reading_times/total_times.tsv', sep='\t')
+        total_times = pd.concat([temp_total_times, total_times], ignore_index=True)
+
+    total_times.to_csv('reading_times/total_times.tsv', sep='\t', index=False)
+
+    total_times.to_excel('reading_times/total_times.xlsx', index=False)
+    sum_df.to_excel(f'reading_times/times_per_trial_pilot_{num}.xlsx', index=False)
+    df.to_excel(f'reading_times/times_per_page_pilot_{num}.xlsx', index=False)
 
 
 def convert_to_time_str(duration_ms: float) -> str:
@@ -191,5 +215,42 @@ def convert_to_time_str(duration_ms: float) -> str:
 
 if __name__ == '__main__':
     # compute_reading_times()
+    # pilot 1
     analyse_asc(
-        '/Users/debor/repos/wg1-experiment-implementation/experiment_implementation/multipleye_ET_data_en_Andreas/eye_tracking_data_en_gb_1/core_dataset/666/gb1en666.asc')
+        '/Users/debor/repos/wg1-experiment-implementation/experiment_implementation/multipleye_pilot_1/eye_tracking_data_en_gb_1/core_dataset/666/gb1en666.asc',
+        num=1,
+        stimuli_trial_mapping={
+            'PRACTICE_trial_0': 'Enc_WikiMoon',
+            'PRACTICE_trial_1': 'Lit_HarryPotter',
+            'trial_0': 'Lit_NorthWind',
+            'trial_1': 'Lit_Solaris',
+            'trial_2': 'Lit_EmperorClothes',
+            'trial_3': 'Lit_MagicMountain',
+            'trial_4': 'Arg_PISARapaNui',
+            'trial_5': 'PopSci_Caveman',
+            'trial_6': 'Lit_BrokenApril',
+            'trial_7': 'Arg_PISACowsMilk',
+        }
+    )
+
+    # pilot 2
+    analyse_asc(
+        '/Users/debor/repos/wg1-experiment-implementation/experiment_implementation/multipleye_pilot_2/eye_tracking_data_en_gb_1/core_dataset/002/gb1en002.asc',
+        num=2,
+        stimuli_trial_mapping={
+            'PRACTICE_trial_0': 'Enc_WikiMoon',
+            'PRACTICE_trial_1': 'Lit_HarryPotter',
+            'trial_0': 'Lit_MagicMountain',
+            'trial_1': 'Lit_EmperorClothes',
+            'trial_2': 'Lit_Solaris',
+            'trial_3': 'Lit_NorthWindSun',
+            'trial_4': 'Arg_PISACowsMilk',
+            'trial_5': 'Lit_BrokenApril',
+            'trial_6': 'PopSci_Caveman',
+            'trial_7': 'Arg_PISARapaNui',
+            'trial_8': 'Ins_HumanRights',
+            'trial_9': 'PopSci_Multipleye',
+            'trial_10': 'Lit_Alchemist',
+            'trial_11': 'Ins_Mobility',
+        }
+    )
