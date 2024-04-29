@@ -107,12 +107,11 @@ def get_stimuli_screens(
         # for the minimal session there are fewer questions
         # the test session can have fewer questions because not all stimuli are there
         if not session_mode.value == 'minimal' and not session_mode.value == 'test':
-            if stimulus_type == 'practice' and not num_questions == 3:
-                print(stimulus_id, stimulus_name)
-                raise ValueError(f'Practice stimulus {stimulus_id} has {num_questions} questions, but should have 3!')
+            if stimulus_type == 'practice' and not num_questions == 2:
+                raise ValueError(f'Practice stimulus {stimulus_id, stimulus_name} has {num_questions} questions, '
+                                 f'but should have 2!')
             elif stimulus_type == 'experiment' and not num_questions == 6:
-                print(stimulus_id, stimulus_name)
-                raise ValueError(f'Experimental stimulus {stimulus_id} has {num_questions}'
+                raise ValueError(f'Experimental stimulus {stimulus_id, stimulus_name} has {num_questions}'
                                  f' questions, but should have 6!')
 
         for col in stimulus_row.keys():
