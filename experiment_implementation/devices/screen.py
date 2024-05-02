@@ -1,15 +1,23 @@
 import math
+import sys
 
 from pygaze._screen.psychopyscreen import PsychoPyScreen
 
-from experiment_implementation import constants
+import constants
 
 
 class MultiplEyeScreen(PsychoPyScreen):
 
-    def __init__(self, **args):
+    def __init__(self, disptype=constants.DISPTYPE,
+                 dispsize=(constants.IMAGE_WIDTH_PX, constants.IMAGE_HEIGHT_PX),
+                 mousevisible=False,
+                 **args):
 
-        super().__init__(dispytpe=constants.DISPTYPE, **args)
+        super().__init__(dispytpe=disptype,
+                         dispsize=dispsize,
+                         mouse_visible=mousevisible,
+                         **args)
+
         self.screen = []
 
     def draw_fixation(self, fixtype="circle", colour=None, color=None,

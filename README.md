@@ -12,26 +12,23 @@ do so: [CONDA_ENVIRONMENT.md](guidelines/CONDA_ENVIRONMENT.md)
 The version of the experiment which is currently on main is a dummy version that can be run without an actual eye-tracker.
 If you'd like to run it, make sure you have completed the above steps, and you have your conda environment activated.
 
+To be sure that you are running the dummy version, check the following things:
+
+
 ```bash
 conda activate multipleye3.9
 ```
 
-Then you can navigate to the root folder of your local clone of the repository. Run one of the following commands to run the dummy experiment:
+Then you can navigate to the root folder of your local clone of the repository (your path should now end with 
+`wg1-experiment-implementation`. Run the following command to run the dummy experiment:
 
 ```bash
-python experiment_implementation/start_test_session.py
-```
-```bash
-pythonw experiment_implementation/start_core_dataset_session.py
-```
-
-You can also run a session where you specify your own data file.
-```bash
-pythonw experiment_implementation/start_additional_dataset_session.py
+python experiment_implementation/start_multipleye_session.py
 ```
 
 ## Check the result files
-The experiment will write log files to a newly created ``results`` folder. In there it will create folder depending on 
+The experiment will write log and data files to a newly created results folder in the data folder (``eye_tracking_data...``). 
+In there it will create a folder depending on 
 the experiment type. For example, if you run the test session, it will create a folder called ``test_dataset``. Within those
 folders it will simply create a new folder for each participant. The folder name is the participant ID. If you run the
 script for the core dataset, it will prevent you from running the experiment twice for the same participant. 
@@ -56,13 +53,10 @@ Pick the PsychoPy version that is in your env. For me the path for a anaconda en
 
 ## Run the experiment with an eye-tracker
 In order to run the experiment with an actual eye-tracker you need to adjust the following lines in 
-[ ``constants.py``](experiment_implementation/constants.py):
+[ ``local_config.py``](experiment_implementation/local_config.py):
 
 ```python
-DUMMY_MODE = False # line 9
-
-TRACKERTYPE = 'eyelink' # line 11
-# TRACKERTYPE = 'dummy' # line 12
+DUMMY_MODE = False
 ```
 
 Depending on what eye-tracker you intend to use you need to install the software that comes with the eye-tracker. You 

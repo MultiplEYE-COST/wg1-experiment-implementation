@@ -7,17 +7,21 @@ but it is possible to use another environment if you prefer something else.
 
 **1. Install anaconda / miniconda**
 
+Note: to install ana/miniconda it might ask you to register, but you should be able to skip this step. It usually says so at the bottom of the form, in a really small font size.
+
 **1.1 If you haven't worked with Windows PowerShell**
 
    We highly recommend you to install anaconda instead of miniconda. Anaconda is a full package of python and other useful tools.
    Anaconda can take up a lot of space on your computer, but you will have everything available and it is easy to use. 
    Miniconda is a minimal version of anaconda, but it does not come with all the tools you might need. You can download anaconda [here](https://www.anaconda.com/products/individual). <br>
+   When you go through the installation process please make sure to install it for the current user only ("just me"). You will have to tick a box that says so at one point. 
    Anaconda environment will be activated by default after you install it. You can check whether it is activated by opening your anaconda prompt. If you see `(base)` at the beginning of your command line prompt, it means you are in the default environment of conda. <br>
 
 **1.2 If you have worked with Windows PowerShell**
 
    You can choose to install either anaconda or miniconda to use the repository with a conda
    environment. Miniconda should be enough for our purposes. You can download it [here](https://docs.conda.io/en/latest/miniconda.html). <br>
+   When you go through the installation process please make sure to install it for the current user only ("just me"). You will have to tick a box that says so at one point. 
    However, you might have to open your powershell in administrator mode and change the execution policy to be ```RemoteSigned``` in order to activate the conda environment. Please refer to the closed issues of this repository for the solutions of this problem.
 
    When you are prompted to select if you want to install it for all users or only you, select only for me/only this user.
@@ -43,27 +47,35 @@ but it is possible to use another environment if you prefer something else.
 **3. Clone this repository**
 
    If you received the experiment as a zip folder, you can skip this step and proceed to the next one directly.
-   You can clone the repository to your local machine by running the following command in your terminal:
+   If not, you can clone the repository to your local machine by running the following command in your terminal:
    ```bash
    git clone https://github.com/MultiplEYE-COST/wg1-experiment-implementation.git
    ```
 
 **4. Create the conda environment**
 
-   Navigate to the root folder of your local clone of the repository and run the below line in your terminal. Note: if 
-   you use another eye-tracker than eyelink, you need to use the environment file for your eye-tracker.
+   Navigate to the root folder of your local copy of the experiment and run the lines below in your terminal one after the other. 
+   > Note: you can easily navigate through your directories by using this command `cd [path]`.
+   > For example: if you are in the folder called `MultiplEYE` which contains the folder `wg1-experiment-implementation`, 
+   > you can navigate to the root folder by running the following command in your terminal: `cd wg1-experiment-implementation`.
+   > If you want to go back to the previous folder, you can run the following command in your terminal: `cd ..`.
+   
+   The root folder should end with this path: `.../wg1-experiment-implementation/`. Whatever is before that depends on where you stored the experiment on your local machine.
+
+   Next, we can create the environment. This line creates a conda environment with the name `multipleye3.9` and installs the correct python version. 
 
    ```bash
-   conda env create -f environment-eyelink.yml
+   conda create --name multipleye3.9 python==3.9 
    ```
-
-   This step installs all the necessary requirements and creates a new conda environment if you intend to run the experiment with an eyelink. 
-   You can activate the environment with:
+   After you've done that, you need to activate the environment by running the following command in your terminal:
    ```bash
    conda activate multipleye3.9
    ```
-
-   Note that 3.9 denotes the python version that is used in the env. <br>
+   Now, you can install the necessary packages for your eye-tracker by running the following command in your terminal:
+   ```bash
+    pip install -r requirements-eyelink.txt
+  ```
+  
    If you want to re-create the conda environment with the same name `multipleye3.9` for any reason, you need to remove the existing environment first. You can do this by running the following command in your terminal:
    ```bash
    conda remove --name multipleye3.9 --all
@@ -75,13 +87,17 @@ but it is possible to use another environment if you prefer something else.
    Please change ``/Users/[USERNAME]/`` to the path of where you installed your miniconda. Please change ``miniconda3`` to ``anaconda3`` if you installed anaconda instead of miniconda. <br>
    Then you can create the environment again by running the command in the above.
 
+**5. Install Eye-tracker specific libraries** 
 
-**5.** If you work in an IDE, you can open the repository as a project and configure the python interpreter to be the newly
+If you work with an EyeLink eye-tracker, you need to install the EyeLink libraries. You can find the instructions on how to do this [here](INSTALL_PYLINK.md).
+
+
+**6.** If you work in an IDE, you can open the repository as a project and configure the python interpreter to be the newly
    created env. How you have to do it depends on the IDE. For PyCharm it is explained under this link: [Configure existing conda env as PyCharm interpreter](https://www.jetbrains.com/help/pycharm/conda-support-creating-conda-virtual-environment.html)
 
 
 ## For Mac
-Note: we do not recommend, to run the experiment on a Mac as it is not optimized to work for Mac. The instructions to make it run
+Note: we do not recommend to run the experiment on a Mac as it is not optimized to work for Mac. The instructions to make it run
 are not as straighforward as for windows. If you want to run the experiment on a Mac, you can follow the instructions below. 
 If you have any additions to the instructions or know another possibly easier way to set it up, please let us know. 
 

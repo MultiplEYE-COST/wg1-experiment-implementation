@@ -3,6 +3,7 @@ pygame==2.5.2
 typing-extensions==3.10.0.2
 mypy-extensions==0.4.3
 git+https://github.com/theDebbister/PyGaze
+pyarrow==15.0.2
 pandas~=2.2.0
 gooey~=1.0.8.1
 PySimpleGUI==4.60.5
