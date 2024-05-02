@@ -21,7 +21,7 @@ from math import fabs
 
 from devices.screen import MultiplEyeScreen
 
-from start_session import SessionMode
+from start_multipleye_session import SessionMode
 
 
 class Experiment:
@@ -61,15 +61,22 @@ class Experiment:
             mousevisible=False,
         )
 
+        if session_mode.value != 'minimal':
+            self.language = constants.LANGUAGE
+            self.country_code = constants.COUNTRY_CODE
+        else:
+            self.language = 'toy'
+            self.country_code = 'x'
+
         self.screen.draw_image(
             image=Path(
                 constants.EXP_ROOT_PATH / constants.PARTICIPANT_INSTRUCTIONS_DIR /
-                f'empty_screen_{constants.LANGUAGE}.png'
+                f'empty_screen_{self.language}.png'
             ),
         )
 
-        edf_file_path = (f'{constants.COUNTRY_CODE.lower()}'
-                         f'{constants.LAB_NUMBER}{constants.LANGUAGE.lower()}{participant_id}.edf')
+        edf_file_path = (f'{self.country_code.lower()}'
+                         f'{constants.LAB_NUMBER}{self.language.lower()}{participant_id}.edf')
 
         absolute_edf_file_path = f'{abs_exp_path}/{edf_file_path}'
         self.relative_edf_file_path = f'{rel_exp_path}/{edf_file_path}'
@@ -201,7 +208,13 @@ class Experiment:
 
         for trial_nr, screens in enumerate(stimuli_dicts):
 
-            # the obligatory break is made after half of the stimuli (+-1), as close to the middle of the pages as possible
+            stimulus_pages = screens['pages']
+            questions_pages = screens['questions']
+            stimulus_id = screens['stimulus_id']
+            stimulus_name = screens['stimulus_name']
+
+            # the obligatory break is made after half of the stimuli (+-1),
+            # as close to the middle of the pages as possible
             if (((total_page_count >= self.num_pages // 2 and trial_nr >= half_num_stimuli - 1)
                  or trial_nr == half_num_stimuli + 2)
                     and not obligatory_break_made and not practice):
@@ -228,7 +241,7 @@ class Experiment:
                     question=False, answer_correct=pd.NA,
                     message=f"obligatory break duration: {break_time_ms}",
                 )
-            else:
+            elif not practice and not trial_nr == 0:
                 break_start = get_time()
                 self._display.fill(screen=self.instruction_screens['optional_break_screen']['screen'])
                 self._display.show()
@@ -256,15 +269,10 @@ class Experiment:
                 self._eye_tracker.status_msg('Recalibrate + validate')
                 self._eye_tracker.log('recalibration')
             else:
-                self._eye_tracker.status_msg('Validate now')
+                self._eye_tracker.status_msg('VALIDATE NOW')
                 self._eye_tracker.log('validation_before_stimulus')
 
             self._eye_tracker.calibrate()
-
-            stimulus_pages = screens['pages']
-            questions_pages = screens['questions']
-            stimulus_id = screens['stimulus_id']
-            stimulus_name = screens['stimulus_name']
 
             self._eye_tracker.status_msg(f'{flag}trial {trial_nr}, id: {stimulus_id} {stimulus_name}')
             self._eye_tracker.log(f'{flag}TRIALID {trial_nr}')
@@ -487,8 +495,8 @@ class Experiment:
         """
         path_relativ_to_edf = os.path.relpath(page_path, self.relative_edf_file_path)
         imgload_msg = '!V IMGLOAD CENTER %s %d %d %d %d' % (path_relativ_to_edf,
-                                                            int(constants.IMAGE_WIDTH_PX / 2.0),
-                                                            int(constants.IMAGE_HEIGHT_PX / 2.0),
+                                                            int(constants.IMAGE_CENTER[0]),
+                                                            int(constants.IMAGE_CENTER[1]),
                                                             int(constants.IMAGE_WIDTH_PX),
                                                             int(constants.IMAGE_HEIGHT_PX))
         self._eye_tracker.log(imgload_msg)

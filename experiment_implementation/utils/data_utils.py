@@ -12,7 +12,7 @@ from pygaze.screen import Screen
 import constants
 from devices.screen import MultiplEyeScreen
 
-from start_session import SessionMode
+from start_multipleye_session import SessionMode
 
 
 def create_data_logfile(

@@ -4,18 +4,18 @@ This file will automatically be loaded by pygaze. We can define default values h
 More on what default values there are can be found in the pygaze git repo:
 https://github.com/esdalmaijer/PyGaze/blob/master/pygaze/defaults.py
 """
-import importlib.util
-import re
 from pathlib import Path
 from runpy import run_path
+
 
 REPO_ROOT = Path(__file__).parent
 LOCAL_CONFIGS = run_path(str(REPO_ROOT / 'local_config.py'))
 
 LANGUAGE = LOCAL_CONFIGS['LANGUAGE']
+COUNTRY_CODE = LOCAL_CONFIGS['COUNTRY_CODE']
 FULL_LANGUAGE = LOCAL_CONFIGS['FULL_LANGUAGE']
 LAB_NUMBER = LOCAL_CONFIGS['LAB_NUMBER']
-COUNTRY_CODE = LOCAL_CONFIGS['COUNTRY_CODE']
+
 
 DUMMY_MODE = LOCAL_CONFIGS['DUMMY_MODE']
 
@@ -64,7 +64,6 @@ IMAGE_SIZE_CM = IMAGE_CONFIG['IMAGE_SIZE_CM']
 
 # Display resolution in pixels as (width,height). Needs to be integers!
 DISPSIZE = IMAGE_CONFIG['RESOLUTION']
-print(DISPSIZE)
 
 # Distance between the eye and the display in centimeters. Float.
 SCREENDIST = float(IMAGE_CONFIG['DISTANCE_CM'])
@@ -87,7 +86,7 @@ TOP_LEFT_CORNER = (
     MIN_MARGIN_TOP_PX
 )
 
-IMAGE_CENTER = (IMAGE_WIDTH_PX / 2, IMAGE_HEIGHT_PX / 2)
+IMAGE_CENTER = (IMAGE_WIDTH_PX // 2, IMAGE_HEIGHT_PX // 2)
 
 # box sizes of the answer options for the comprehension questions, the box can be selected by pressing the arrow keys
 ARROW_LEFT = IMAGE_CONFIG['left']

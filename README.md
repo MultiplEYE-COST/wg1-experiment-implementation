@@ -23,7 +23,7 @@ Then you can navigate to the root folder of your local clone of the repository (
 `wg1-experiment-implementation`. Run the following command to run the dummy experiment:
 
 ```bash
-python experiment_implementation/start_session.py
+python experiment_implementation/start_multipleye_session.py
 ```
 
 ## Check the result files

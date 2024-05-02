@@ -10,7 +10,7 @@ import pandas as pd
 from pygaze.libtime import get_time
 from pygaze.logfile import Logfile
 from experiment.experiment import Experiment
-from start_session import SessionMode, end_session
+from start_multipleye_session import SessionMode
 from utils import data_utils, experiment_utils
 
 
@@ -140,8 +140,6 @@ def run_experiment(
     general_log_file.write([get_time(), 'start experiment'])
     experiment.run_experiment()
     general_log_file.write([get_time(), 'finished experiment'])
-
-    end_session(session_mode, original_lines)
 
     experiment.quit_experiment()
 
