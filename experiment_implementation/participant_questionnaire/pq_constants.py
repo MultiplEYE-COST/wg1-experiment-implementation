@@ -7,8 +7,8 @@ import constants
 default_size = (1000, 700)
 
 # Reading from questionnaire instructions
-pq_program_name = rq.pq_instructions[0][1]
-pq_program_description = rq.pq_instructions[1][1] + '\n' + rq.pq_instructions[1][2]
+pq_program_name = rq.pq_instructions[1][1]
+pq_program_description = rq.pq_instructions[2][1]
 
 # TODO: Change based on experiment implementation
 sg.LOOK_AND_FEEL_TABLE['Native'] = {

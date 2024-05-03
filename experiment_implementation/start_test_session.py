@@ -50,6 +50,8 @@ if __name__ == '__main__':
 
     arguments = parse_args()
 
+    constants.PQ_Participant_ID=arguments['participant_id']
+
     # hardcoded args
     arguments['session_id'] = 1
     arguments['dataset_type'] = 'test_dataset'

@@ -124,17 +124,17 @@ class Experiment:
 
         self._show_instruction_screens()
 
-        #self._display.fill(self.other_screens['practice_screen'])
-        #self._display.show()
-        #self._keyboard.get_key()
+        self._display.fill(self.other_screens['practice_screen'])
+        self._display.show()
+        self._keyboard.get_key()
 
-        #self._run_trials(practice=True)
+        self._run_trials(practice=True)
 
-        #self._display.fill(self.other_screens['transition_screen'])
-        #self._display.show()
-        #self._keyboard.get_key()
+        self._display.fill(self.other_screens['transition_screen'])
+        self._display.show()
+        self._keyboard.get_key()
 
-        #self._run_trials()
+        self._run_trials()
 
         self._eye_tracker.status_msg(f'show_final_screen')
         self._eye_tracker.log(f'show_final_screen')
