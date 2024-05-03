@@ -171,7 +171,7 @@ def pq_main_layout():
                    font=("Times New Roman", 14, "italic"))]
     layout10 = [c71, c72, c73, c74, c75, c76]
 
-    # Creating the layout for the eighth frame
+   # Creating the layout for the eighth frame
     layout11 = [[sg.Text("" + read_questions.pq_instructions[19][1], size=(75, None),
                          justification='center')]]
 
