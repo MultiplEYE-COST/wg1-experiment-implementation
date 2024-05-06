@@ -1,6 +1,7 @@
 #! /usr/bin/env python
 from __future__ import annotations
 
+import json
 import os
 from datetime import date
 from enum import Enum
@@ -13,14 +14,22 @@ from gooey import GooeyParser
 import local_config
 
 PARENT_FOLDER = Path(__file__).parent
-LANG_DIR = PARENT_FOLDER / 'data/interface_language/'
-IMAGE_DIR = PARENT_FOLDER / 'data/interface_icons/'
+LANG_DIR = PARENT_FOLDER / 'ui_data/interface_language/'
+IMAGE_DIR = PARENT_FOLDER / 'ui_data/interface_icons/'
 if os.path.exists(PARENT_FOLDER / 'data/randomization/stimulus_order_versions.tsv'):
     df = pd.read_csv(PARENT_FOLDER / 'data/randomization/stimulus_order_versions.tsv', sep='\t', encoding='utf8')
 
     PARTICIPANT_IDS = df.participant_id.dropna().astype(int).values.tolist()
 else:
     PARTICIPANT_IDS = sorted(list(range(1, 300)))
+
+if not os.path.exists(LANG_DIR / f'{local_config.FULL_LANGUAGE.lower()}.json'):
+    GUI_LANG = 'English'
+else:
+    GUI_LANG = local_config.FULL_LANGUAGE
+
+with open(LANG_DIR / f'{GUI_LANG}.json', 'r', encoding='utf8') as translation_file:
+    translations = json.load(translation_file)
 
 
 class SessionMode(Enum):
@@ -31,10 +40,9 @@ class SessionMode(Enum):
 
 
 @Gooey(
-    language=local_config.FULL_LANGUAGE,
-    program_name='MultiplEYE Data Collection',
-    program_description='Before we start the experiment we need some information about the participant,\n '
-                        'session etc. Please fill in the below form and follow the instructions.',
+    language=GUI_LANG,
+    program_name=translations['program_name'],
+    program_description=translations['program_description'],
     image_dir=str(IMAGE_DIR),
     default_size=(900, 800),
     language_dir=str(LANG_DIR),
@@ -42,13 +50,15 @@ class SessionMode(Enum):
 )
 def parse_args():
     parser = GooeyParser(
-        description='Information about current data collection',
+        description=translations['parser_description'],
     )
 
     lab_settings = parser.add_argument_group(
         'Lab Settings',
-        description=f'At the moment you will run the experiment with the settings below. '
-                    f'If you want to change them, please do so here. To run the minimal experiment, please enter "toy" '
+        description=f'At the moment you will run the experiment with the language settings below. '
+                    f'They should be the same as the values you have entered in the pre-registration form.'
+                    f'If that is not the case, please change them here. To run the minimal experiment, '
+                    f'please enter "toy" '
                     f'as the language and "x" as the country code.',
         gooey_options={
             'show_underline': False,
@@ -58,6 +68,7 @@ def parse_args():
         '--language',
         widget='TextField',
         metavar='Language',
+        help='The 2 letter ISO-639-1 language code that you also specified in the pre-registration form.',
         default=local_config.LANGUAGE,
         required=True,
         gooey_options={'visible': True},
@@ -66,6 +77,7 @@ def parse_args():
     lab_settings.add_argument(
         '--full_language',
         widget='TextField',
+        help='The full language name that you run the experiment in (e.g. English).',
         metavar='Full language',
         default=local_config.FULL_LANGUAGE,
         required=True,
@@ -74,6 +86,7 @@ def parse_args():
 
     lab_settings.add_argument(
         '--country_code',
+        help='The 2 letter ISO-639-1 country code that you also specified in the pre-registration form.',
         metavar='Country code',
         widget='TextField',
         default=local_config.COUNTRY_CODE,
@@ -84,7 +97,8 @@ def parse_args():
     lab_settings.add_argument(
         '--lab_number',
         metavar='Lab number',
-        widget='Textarea',
+        help='The lab number that you also specified in the pre-registration form.',
+        widget='TextField',
         default=1,
         type=int,
         required=True,
@@ -99,7 +113,7 @@ def parse_args():
         action='store_true',
         default=local_config.DUMMY_MODE,
         widget='CheckBox',
-        help='Please (un)select this if you (don\'t) want to run the experiment in dummy mode. '
+        help='Please (un)select this if you (do not) want to run the experiment in dummy mode. '
              'This mode is used for testing the experiment without an eye tracker.',
     )
 
@@ -165,7 +179,13 @@ def parse_args():
         gooey_options={'visible': False},
     )
 
-    danger_zone = parser.add_argument_group('!!! Danger Zone !!!')
+    danger_zone = parser.add_argument_group(
+        '!!! Danger Zone !!!',
+        description='If you need to continue a core session please follow the following procedure:\n'
+                    '1. Save a copy the .edf file from the result folder to another location on your PC '
+                    'but do not delete the file  in the result folder. For participant ID 1 the result folder is '
+                    'located at "data/eye_tracking_data_[LANGUAGE_CODE]_[COUNTRY_CODE]_[LAB_NUMBER]"'
+    )
     danger_zone.add_argument(
         '--continue-core-session',
         metavar='Continue core session',
@@ -234,7 +254,7 @@ def start_experiment_session():
             f'The dummy mode is {arguments["dummy_mode"]}.\n\n'
             'Please restart the program to apply the changes and run the experiment.\n'
             'Otherwise please click edit or close and restart the script.'
-            )
+        )
 
     else:
         import constants

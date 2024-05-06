@@ -140,4 +140,7 @@ default.txt
 tmp.txt
 
 /experiment_implementation/data/stimuli*/
+!/experiment_implementation/data/stimuli_toy_x_1
 experiment_implementation/multipleye_ET_data_en_Andreas
+eye_tracking_data*/
+experiment_implementation/utils/reading_times

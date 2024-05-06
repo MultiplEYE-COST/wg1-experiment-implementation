@@ -140,8 +140,6 @@ class Experiment:
 
         self._show_instruction_screens()
 
-        # self.calibrate()
-
         self._display.fill(self.instruction_screens['practice_screen']['screen'])
         self._display.show()
         self._keyboard.get_key()
@@ -220,6 +218,7 @@ class Experiment:
                     and not obligatory_break_made and not practice):
 
                 self._eye_tracker.log('obligatory_break')
+                self._eye_tracker.status_msg('OBLIGATORY BREAK')
                 obligatory_break_made = True
 
                 self._display.fill(screen=self.instruction_screens['obligatory_break_screen']['screen'])
@@ -241,8 +240,16 @@ class Experiment:
                     question=False, answer_correct=pd.NA,
                     message=f"obligatory break duration: {break_time_ms}",
                 )
+
+                self._eye_tracker.log('obligatory_break_end')
+                self._eye_tracker.log(f'obligatory_break_duration: {break_time_ms}')
+
+            # there won't be a break within the practice stimuli or before the first trial
             elif not practice and not trial_nr == 0:
                 break_start = get_time()
+                self._eye_tracker.log('optional_break')
+                self._eye_tracker.status_msg('OPTIONAL BREAK')
+
                 self._display.fill(screen=self.instruction_screens['optional_break_screen']['screen'])
                 self._display.show()
 
@@ -262,6 +269,8 @@ class Experiment:
                     question=False, answer_correct=pd.NA,
                     message=f"optional break duration: {break_time_ms}",
                 )
+                self._eye_tracker.log('optional_break_end')
+                self._eye_tracker.log(f'optional_break_duration: {break_time_ms}')
 
             self.skipped_drift_corrections[str(trial_nr)] = 0
 
@@ -274,11 +283,14 @@ class Experiment:
 
             self._eye_tracker.calibrate()
 
-            self._eye_tracker.status_msg(f'{flag}trial {trial_nr}, id: {stimulus_id} {stimulus_name}')
+            self._eye_tracker.status_msg(f'{flag}trial {trial_nr + 1}, id: {stimulus_id} {stimulus_name}')
             self._eye_tracker.log(f'{flag}TRIALID {trial_nr}')
+            self._eye_tracker.log(f'!V TRIAL_VAR trial_number {trial_nr}')
+            self._eye_tracker.log(f'!V TRIAL_VAR stimulus_id {stimulus_id}')
+            self._eye_tracker.log(f'!V TRIAL_VAR stimulus_name {stimulus_name}')
 
             stimulus_dict = {'timestamp_started': get_time(), 'timestamp_completed': pd.NA,
-                             'stimulus_id': stimulus_id, 'completed': 0}
+                             'stimulus_id': stimulus_id, 'stimulus_name': stimulus_name, 'completed': 0}
 
             # log which stimulus has started so that we can restart the session
             self.log_completed_stimuli = pd.concat([self.log_completed_stimuli,
@@ -326,6 +338,10 @@ class Experiment:
                 key_pressed_stimulus = ''
                 keypress_timestamp = -1
 
+                # add delay so that people cannot accidentally skip a page
+                milliseconds = 2000
+                libtime.pause(milliseconds)
+
                 while key_pressed_stimulus not in ['space']:
                     key_pressed_stimulus, keypress_timestamp = self._keyboard.get_key(
                         flush=True,
@@ -342,7 +358,7 @@ class Experiment:
                 self._eye_tracker.stop_recording()
                 self._eye_tracker.log(f'stop_recording_{flag}trial_{trial_nr}_page_{page_number}')
 
-                self._eye_tracker.log('!V TRIAL_VAR condition %s' % cond)  # cui use 'practice' and 'real' as cond?
+                self._eye_tracker.log('!V TRIAL_VAR condition %s' % cond)
                 self._eye_tracker.log('!V TRIAL_VAR backdrop_image %s' % relative_img_path)
                 self._eye_tracker.log('!V TRIAL_VAR RT %d' % int(core.getTime() - stimulus_timestamp) * 1000)  # cui
 
@@ -361,7 +377,7 @@ class Experiment:
                     self._eye_tracker.send_backdrop_image(question_dict['path'])
 
                 # start eye-tracking
-                self._eye_tracker.status_msg(f'{flag}trial {trial_nr} {stimulus_name} Q{question_number + 1}')
+                self._eye_tracker.status_msg(f'{flag}trial {trial_nr + 1} {stimulus_name} Q{question_number + 1}')
                 self._eye_tracker.log(
                     f'start_recording_{flag}trial_{trial_nr}_question_{question_number}',
                 )
@@ -471,8 +487,6 @@ class Experiment:
                                     screens=self.instruction_screens['subject_difficulty_screen'],
                                     num_options=5, flag=flag)
 
-
-
             if self.skipped_drift_corrections[str(trial_nr)] > 1:
                 self._eye_tracker.log(
                     f'trial_{trial_nr}: skipped_drift_corrections_{self.skipped_drift_corrections[str(trial_nr)]}')
@@ -508,10 +522,11 @@ class Experiment:
         if not constants.DUMMY_MODE:
             self._eye_tracker.send_backdrop_image(page_path)
 
-        self._eye_tracker.start_recording()
         self._eye_tracker.log(f'start_recording_{flag}trial_{trial_number}_{name}')
         self._eye_tracker.status_msg(f'showing {name}')
         self._eye_tracker.log(f'showing_{name}')
+
+        self._eye_tracker.start_recording()
 
         self._display.fill(screen=screens['initial'])
         initial_onset_timestamp = self._display.show()

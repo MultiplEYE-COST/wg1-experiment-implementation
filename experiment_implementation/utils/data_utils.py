@@ -1,10 +1,12 @@
 from __future__ import annotations
 
 import os
+import time
 from pathlib import Path
 from typing import Any
 
 import pandas as pd
+from PIL import Image
 from pygaze.libtime import get_time
 from pygaze.logfile import Logfile
 from pygaze.screen import Screen
@@ -41,23 +43,31 @@ def get_stimuli_screens(
 ) -> (list[dict], int):
     all_stimuli_screens = []
 
-    logfile.write([
-        get_time(), 'action', 'loading data',
-        path_data_csv, '',
-    ])
+    logfile.write(
+        [
+            get_time(), 'action', 'loading data',
+            path_data_csv, '',
+        ]
+    )
     stimulus_df = pd.read_csv(path_data_csv, sep=',', encoding='utf8')
     stimulus_df.dropna(subset=['stimulus_id'], inplace=True)
 
     question_df = pd.read_csv(path_question_csv, sep=',', encoding='utf8')
     question_df.dropna(subset=['stimulus_id'], inplace=True)
 
-    randomization_df = pd.read_csv(
-        constants.RANDOMIZATION_VERSION_CSV,
+    stimulus_randomization_df = pd.read_csv(
+        constants.STIMULUS_RANDOMIZATION_CSV,
         sep='\t',
         encoding='utf8'
     )
 
-    stimulus_order = randomization_df[randomization_df.stimulus_order_version == order_version]
+    question_randomization_df = pd.read_csv(
+        constants.QUESTION_RANDOMIZATION_CSV,
+        sep=',',
+        encoding='utf8'
+    )
+
+    stimulus_order = stimulus_randomization_df[stimulus_randomization_df.stimulus_order_version == order_version]
     try:
         stimulus_order = stimulus_order[[c for c in stimulus_order.columns if c.startswith('text')]].values[0].tolist()
     except IndexError:
@@ -71,7 +81,7 @@ def get_stimuli_screens(
     continue_now = False
     total_page_count = 0
 
-    for item_id in stimulus_order:
+    for trial_id, item_id in enumerate(stimulus_order):
 
         # if the session has been restarted after abortion, we need to skip the stimuli that have already been completed
         if last_completed_stimulus:
@@ -83,10 +93,12 @@ def get_stimuli_screens(
 
         screens = []
 
-        logfile.write([
-            get_time(), 'action', f'preparing screens for stimulus {item_id}',
-            path_data_csv, 'stimuli',
-        ])
+        logfile.write(
+            [
+                get_time(), 'action', f'preparing screens for stimulus {item_id}',
+                path_data_csv, 'stimuli',
+            ]
+        )
         stimulus_row = stimulus_df[stimulus_df['stimulus_id'] == item_id]
 
         # if the stimulus id is not found
@@ -108,11 +120,15 @@ def get_stimuli_screens(
         # the test session can have fewer questions because not all stimuli are there
         if not session_mode.value == 'minimal' and not session_mode.value == 'test':
             if stimulus_type == 'practice' and not num_questions == 2:
-                raise ValueError(f'Practice stimulus {stimulus_id, stimulus_name} has {num_questions} questions, '
-                                 f'but should have 2!')
+                raise ValueError(
+                    f'Practice stimulus {stimulus_id, stimulus_name} has {num_questions} questions, '
+                    f'but should have 2!'
+                    )
             elif stimulus_type == 'experiment' and not num_questions == 6:
-                raise ValueError(f'Experimental stimulus {stimulus_id, stimulus_name} has {num_questions}'
-                                 f' questions, but should have 6!')
+                raise ValueError(
+                    f'Experimental stimulus {stimulus_id, stimulus_name} has {num_questions}'
+                    f' questions, but should have 6!'
+                    )
 
         for col in stimulus_row.keys():
 
@@ -137,19 +153,61 @@ def get_stimuli_screens(
                     )
 
                     # append the screen to the list of screens, add page number, stimulus id and name
-                    screens.append({'screen': page_screen, 'path': norm_img_path,
-                                    'page_num': page_num, 'relative_path': img_path.values[0]})
+                    screens.append(
+                        {'screen': page_screen, 'path': norm_img_path,
+                         'page_num': page_num, 'relative_path': img_path.values[0]}
+                        )
 
                     if stimulus_type == 'experiment':
                         total_page_count += 1
 
         questions = []
 
-        for idx, row in question_sub_df.iterrows():
+        # sample one question order for this trial
+        question_order = question_randomization_df.sample(1)
+
+        question_order_version = question_order['question_order_version'].values[0]
+        logfile.write(
+            [
+                get_time(),
+                'action',
+                f'using question order version {question_order_version} for stimulus {stimulus_id}, trial {trial_id}',
+                path_question_csv, 'question order',
+            ]
+        )
+
+        question_order.drop(columns=['question_order_version'], inplace=True)
+
+        # convert the question order to a list
+        question_order = question_order.values[0].tolist()
+
+        for question_number in question_order:
+
+            question_number = str(question_number)
+            condition_no = question_number[0]
+            question_no = question_number[1]
+
+            # get the question row
+            row = question_sub_df[(question_sub_df['condition_no'] == int(condition_no))
+                                  & (question_sub_df['question_no'] == int(question_no))]
+
+            if len(row) > 1 and not session_mode.value == 'minimal' and not session_mode.value == 'test':
+                raise ValueError(f'There seems to be more than one question with question_no {question_no} and '
+                                 f'condition_no {condition_no} for stimulus_id {stimulus_id}!')
+
+            # for practice stimuli, test and minimal sessions, there are not 6 questions, so we need
+            # to skip the ones that are not there
+            # for the core dataset it is checked previously that there is the correct number of questions
+            if len(row) == 0:
+                if session_mode.value == 'minimal' or session_mode.value == 'test' or stimulus_type == 'practice':
+                    continue
+                raise ValueError(f'There seems to be no question with no {question_no} and '
+                                 f'condition {condition_no} for stimulus {stimulus_id}!')
+
+            # get the question row
+            row = row.iloc[0]
 
             snippet_no = row['snippet_no']
-            condition_no = row['condition_no']
-            question_no = row['question_no']
 
             # the question id is a 4 or 5 digit number that is unique for each question
             question_id = str(stimulus_id) + str(snippet_no) + str(condition_no) + str(question_no)
@@ -158,25 +216,44 @@ def get_stimuli_screens(
             target = row['target']
             target_answer_key = row['target_key']
 
-            logfile.write([
-                get_time(),
-                'action',
-                f'preparing screen for text {stimulus_id} question {question_id}',
-                path_data_csv,
-                f'',
-            ])
+            logfile.write(
+                [
+                    get_time(),
+                    'action',
+                    f'preparing screen for text {stimulus_id} question {question_id}',
+                    path_data_csv,
+                    f'',
+                ]
+            )
 
             if question_img_path:
                 full_img_path = constants.EXP_ROOT_PATH / question_img_path
                 norm_img_path = os.path.normpath(full_img_path)
 
                 question_screen_initial = MultiplEyeScreen()
+
                 question_screen_initial.draw_image(
                     image=Path(norm_img_path),
                 )
-                question_screen_initial.draw_image(
-                    image=Path(norm_img_path),
-                )
+
+                if ((trial_id == 0 and (question_number == '11' or question_number == '12'))
+                        or stimulus_type == 'practice' and question_number == '11'):
+                    arrow_img_path = constants.EXP_ROOT_PATH / 'ui_data/arrows.png'
+                    # resize arrow image to fit between the tow answer options
+                    right_x = constants.ARROW_RIGHT[0]
+                    left_x = constants.ARROW_LEFT[2]
+
+                    arrow_width = 0.9 * (right_x - left_x)
+
+                    # read the image and resize it
+                    arrow_image = Image.open(arrow_img_path)
+                    arrow_image = arrow_image.resize((int(arrow_width), int(arrow_width)))
+                    arrow_image.save(arrow_img_path)
+
+                    question_screen_initial.draw_image(
+                        arrow_img_path,
+                        pos=(constants.DISPSIZE[0] // 2, (constants.DISPSIZE[1] // 5) * 3),
+                    )
 
                 line_width = 3
 
@@ -186,7 +263,8 @@ def get_stimuli_screens(
                 question_screen_select_up.draw_rect(
                     x=constants.ARROW_UP[0], y=constants.ARROW_UP[1],
                     w=constants.ARROW_UP[2] - constants.ARROW_UP[0], h=constants.ARROW_UP[3] - constants.ARROW_UP[1],
-                    colour=constants.HIGHLIGHT_COLOR, pw=line_width)
+                    colour=constants.HIGHLIGHT_COLOR, pw=line_width
+                )
 
                 question_screen_select_down = MultiplEyeScreen()
                 question_screen_select_down.draw_image(image=Path(norm_img_path))
@@ -195,7 +273,8 @@ def get_stimuli_screens(
                     y=constants.ARROW_DOWN[1],
                     w=constants.ARROW_DOWN[2] - constants.ARROW_DOWN[0],
                     h=constants.ARROW_DOWN[3] - constants.ARROW_DOWN[1],
-                    colour=constants.HIGHLIGHT_COLOR, pw=line_width)
+                    colour=constants.HIGHLIGHT_COLOR, pw=line_width
+                )
 
                 question_screen_select_right = MultiplEyeScreen()
                 question_screen_select_right.draw_image(image=Path(norm_img_path))
@@ -204,7 +283,8 @@ def get_stimuli_screens(
                     y=constants.ARROW_RIGHT[1],
                     w=constants.ARROW_RIGHT[2] - constants.ARROW_RIGHT[0],
                     h=constants.ARROW_RIGHT[3] - constants.ARROW_RIGHT[1],
-                    colour=constants.HIGHLIGHT_COLOR, pw=line_width)
+                    colour=constants.HIGHLIGHT_COLOR, pw=line_width
+                )
 
                 question_screen_select_left = MultiplEyeScreen()
                 question_screen_select_left.draw_image(image=Path(norm_img_path))
@@ -213,7 +293,8 @@ def get_stimuli_screens(
                     y=constants.ARROW_LEFT[1],
                     w=constants.ARROW_LEFT[2] - constants.ARROW_LEFT[0],
                     h=constants.ARROW_LEFT[3] - constants.ARROW_LEFT[1],
-                    colour=constants.HIGHLIGHT_COLOR, pw=line_width)
+                    colour=constants.HIGHLIGHT_COLOR, pw=line_width
+                )
 
                 questions.append(
                     {
@@ -229,8 +310,10 @@ def get_stimuli_screens(
                     }
                 )
 
-        all_stimuli_screens.append({'stimulus_id': stimulus_id, 'stimulus_name': stimulus_name,
-                                    'pages': screens, 'questions': questions, 'stimulus_type': stimulus_type})
+        all_stimuli_screens.append(
+            {'stimulus_id': stimulus_id, 'stimulus_name': stimulus_name,
+             'pages': screens, 'questions': questions, 'stimulus_type': stimulus_type}
+            )
 
     return all_stimuli_screens, total_page_count
 
@@ -241,24 +324,30 @@ def get_instruction_screens(
 ) -> dict[Any, MultiplEyeScreen]:
     screens = {}
 
-    logfile.write([
-        get_time(), 'action', 'loading data',
-        path_other_screens, 'other screens',
-    ])
+    logfile.write(
+        [
+            get_time(), 'action', 'loading data',
+            path_other_screens, 'other screens',
+        ]
+    )
     other_screens_csv = pd.read_csv(path_other_screens, sep=',')
 
-    logfile.write([
-        get_time(), 'check', 'header ok',
-        path_other_screens, 'instruction screens',
-    ])
+    logfile.write(
+        [
+            get_time(), 'check', 'header ok',
+            path_other_screens, 'instruction screens',
+        ]
+    )
 
     for idx, row in other_screens_csv.iterrows():
-        logfile.write([
-            get_time(),
-            'action',
-            f'loading screen {row["instruction_screen_id"]}',
-            path_other_screens, row['instruction_screen_name'],
-        ])
+        logfile.write(
+            [
+                get_time(),
+                'action',
+                f'loading screen {row["instruction_screen_id"]}',
+                path_other_screens, row['instruction_screen_name'],
+            ]
+        )
 
         screen_path = constants.EXP_ROOT_PATH / row['instruction_screen_img_path']
         relative_img_path = row['instruction_screen_img_path']
@@ -283,7 +372,8 @@ def get_instruction_screens(
                 y=constants.OPTION_1[1],
                 w=constants.OPTION_1[2] - constants.OPTION_1[0],
                 h=constants.OPTION_1[3] - constants.OPTION_1[1],
-                colour=constants.HIGHLIGHT_COLOR, pw=3)
+                colour=constants.HIGHLIGHT_COLOR, pw=3
+            )
 
             screen_select_2 = MultiplEyeScreen()
             screen_select_2.draw_image(
@@ -294,7 +384,8 @@ def get_instruction_screens(
                 y=constants.OPTION_2[1],
                 w=constants.OPTION_2[2] - constants.OPTION_2[0],
                 h=constants.OPTION_2[3] - constants.OPTION_2[1],
-                colour=constants.HIGHLIGHT_COLOR, pw=3)
+                colour=constants.HIGHLIGHT_COLOR, pw=3
+            )
 
             screen_select_3 = MultiplEyeScreen()
             screen_select_3.draw_image(
@@ -305,7 +396,8 @@ def get_instruction_screens(
                 y=constants.OPTION_3[1],
                 w=constants.OPTION_3[2] - constants.OPTION_3[0],
                 h=constants.OPTION_3[3] - constants.OPTION_3[1],
-                colour=constants.HIGHLIGHT_COLOR, pw=3)
+                colour=constants.HIGHLIGHT_COLOR, pw=3
+            )
 
             screens[row['instruction_screen_name']] = {
                 'initial': initial_screen,
@@ -326,7 +418,8 @@ def get_instruction_screens(
                     y=constants.OPTION_4[1],
                     w=constants.OPTION_4[2] - constants.OPTION_4[0],
                     h=constants.OPTION_4[3] - constants.OPTION_4[1],
-                    colour=constants.HIGHLIGHT_COLOR, pw=3)
+                    colour=constants.HIGHLIGHT_COLOR, pw=3
+                )
 
                 screen_select_5 = MultiplEyeScreen()
                 screen_select_5.draw_image(
@@ -337,7 +430,8 @@ def get_instruction_screens(
                     y=constants.OPTION_5[1],
                     w=constants.OPTION_5[2] - constants.OPTION_5[0],
                     h=constants.OPTION_5[3] - constants.OPTION_5[1],
-                    colour=constants.HIGHLIGHT_COLOR, pw=3)
+                    colour=constants.HIGHLIGHT_COLOR, pw=3
+                )
 
                 screens[row['instruction_screen_name']]['option_4'] = screen_select_4
                 screens[row['instruction_screen_name']]['option_5'] = screen_select_5

@@ -53,7 +53,8 @@ STIMULI_IMAGES_CSV = IMAGE_CONFIG['stimuli_images_csv']
 PARTICIPANT_INSTRUCTIONS_CSV = IMAGE_CONFIG['participant_instruction_csv']
 PARTICIPANT_INSTRUCTIONS_DIR = IMAGE_CONFIG['other_screens_dir']
 
-RANDOMIZATION_VERSION_CSV = EXP_ROOT_PATH / 'data' / 'randomization' / 'stimulus_order_versions.tsv'
+STIMULUS_RANDOMIZATION_CSV = EXP_ROOT_PATH / 'data' / 'randomization' / 'stimulus_order_versions.tsv'
+QUESTION_RANDOMIZATION_CSV = EXP_ROOT_PATH / 'data' / 'randomization' / 'question_order_versions.csv'
 
 IMAGE_BGC = IMAGE_CONFIG['IMAGE_BGC']
 
@@ -63,7 +64,7 @@ FGC = IMAGE_CONFIG['FGC']
 IMAGE_SIZE_CM = IMAGE_CONFIG['IMAGE_SIZE_CM']
 
 # Display resolution in pixels as (width,height). Needs to be integers!
-DISPSIZE = IMAGE_CONFIG['RESOLUTION']
+DISPSIZE = IMAGE_CONFIG['IMAGE_WIDTH_PX'], IMAGE_CONFIG['IMAGE_HEIGHT_PX']
 
 # Distance between the eye and the display in centimeters. Float.
 SCREENDIST = float(IMAGE_CONFIG['DISTANCE_CM'])

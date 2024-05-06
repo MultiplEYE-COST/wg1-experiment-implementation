@@ -1,5 +1,6 @@
 import os
 import re
+from pathlib import Path
 
 import pandas as pd
 
@@ -102,6 +103,9 @@ def analyse_asc(asc_file: str,
     pages = []
     status = []
     stimulus_name = []
+
+    parent_folder = Path(__file__).parent.parent
+    asc_file = parent_folder / asc_file
 
     with open(asc_file, 'r', encoding='utf8') as f:
 
@@ -217,7 +221,9 @@ if __name__ == '__main__':
     # compute_reading_times()
     # pilot 1
     analyse_asc(
-        '/Users/debor/repos/wg1-experiment-implementation/experiment_implementation/multipleye_pilot_1/eye_tracking_data_en_gb_1/core_dataset/666/gb1en666.asc',
+        #'/Users/debor/repos/wg1-experiment-implementation/experiment_implementation/multipleye_pilot_1/'
+        #'eye_tracking_data_en_gb_1/core_dataset/666/gb1en666.asc',
+        "data/eye_tracking_data_en_gb_1/core_dataset/666/gb1en666.asc",
         num=1,
         stimuli_trial_mapping={
             'PRACTICE_trial_0': 'Enc_WikiMoon',
@@ -235,7 +241,9 @@ if __name__ == '__main__':
 
     # pilot 2
     analyse_asc(
-        '/Users/debor/repos/wg1-experiment-implementation/experiment_implementation/multipleye_pilot_2/eye_tracking_data_en_gb_1/core_dataset/002/gb1en002.asc',
+        #'/Users/debor/repos/wg1-experiment-implementation/experiment_implementation/multipleye_pilot_2/'
+        #'eye_tracking_data_en_gb_1/core_dataset/002/gb1en002.asc',
+        "data/eye_tracking_data_en_gb_1/core_dataset/002/gb1en002.asc",
         num=2,
         stimuli_trial_mapping={
             'PRACTICE_trial_0': 'Enc_WikiMoon',
@@ -252,5 +260,26 @@ if __name__ == '__main__':
             'trial_9': 'PopSci_Multipleye',
             'trial_10': 'Lit_Alchemist',
             'trial_11': 'Ins_Mobility',
+        }
+    )
+
+    analyse_asc(
+        "C:\\Users\debor\\repos\wg1-experiment-implementation\experiment_implementation\data\\"
+        "eye_tracking_data_en_gb_1\core_dataset\\00"
+        "9\gb1en009.asc",
+        num=3,
+        stimuli_trial_mapping={
+            'PRACTICE_trial_0': 'Enc_WikiMoon',
+            'PRACTICE_trial_1': 'Lit_NorthWind',
+            'trial_0': 'Lit_MagicMountain',
+            'trial_1': 'Lit_Solaris',
+            'trial_2': 'Lit_BrokenApril',
+            'trial_3': 'Arg_PISACowsMilk',
+            'trial_4': 'Arg_PISARapaNui',
+            'trial_5': 'PopSci_Caveman',
+            'trial_6': 'PopSci_Multipleye',
+            'trial_7': 'Ins_HumanRights',
+            'trial_8': 'Ins_Mobility',
+            'trial_9': 'Lit_Alchemist',
         }
     )

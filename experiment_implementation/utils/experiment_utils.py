@@ -67,7 +67,7 @@ def determine_stimulus_order_version(participant_id: int = None) -> int:
     if an ID is given, the function will return the stimulus order version for that ID
     """
     randomization_df = pd.read_csv(
-        constants.RANDOMIZATION_VERSION_CSV,
+        constants.STIMULUS_RANDOMIZATION_CSV,
         sep='\t',
         encoding='utf8'
     )
@@ -96,7 +96,7 @@ def mark_stimulus_order_version_used(order_version: int, participant_id: int, se
     Mark the stimulus order version as used by the participant.
     """
     randomization_df = pd.read_csv(
-        constants.RANDOMIZATION_VERSION_CSV,
+        constants.STIMULUS_RANDOMIZATION_CSV,
         sep='\t',
         encoding='utf8'
     )
@@ -116,4 +116,4 @@ def mark_stimulus_order_version_used(order_version: int, participant_id: int, se
             'participant_id'
         ] = participant_id
 
-        randomization_df.to_csv(constants.RANDOMIZATION_VERSION_CSV, sep='\t', index=False, encoding='utf8')
+        randomization_df.to_csv(constants.STIMULUS_RANDOMIZATION_CSV, sep='\t', index=False, encoding='utf8')
