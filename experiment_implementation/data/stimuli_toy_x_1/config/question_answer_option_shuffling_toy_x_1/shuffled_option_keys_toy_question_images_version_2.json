@@ -1,0 +1,26 @@
+{
+    "question_1111_stimulus_1": {
+        "target": "left",
+        "distractor_a": "right",
+        "distractor_b": "down",
+        "distractor_c": "up"
+    },
+    "question_5111_stimulus_5": {
+        "target": "right",
+        "distractor_a": "left",
+        "distractor_b": "down",
+        "distractor_c": "up"
+    },
+    "question_5112_stimulus_5": {
+        "target": "left",
+        "distractor_a": "right",
+        "distractor_b": "up",
+        "distractor_c": "down"
+    },
+    "question_8111_stimulus_8": {
+        "target": "left",
+        "distractor_a": "up",
+        "distractor_b": "right",
+        "distractor_c": "down"
+    }
+}
