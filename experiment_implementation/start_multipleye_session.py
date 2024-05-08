@@ -56,7 +56,7 @@ def parse_args():
     lab_settings = parser.add_argument_group(
         'Lab Settings',
         description=f'At the moment you will run the experiment with the language settings below. '
-                    f'They should be the same as the values you have entered in the pre-registration form.'
+                    f'They should be the same as the values you have entered in the pre-registration form. '
                     f'If that is not the case, please change them here. To run the minimal experiment, '
                     f'please enter "toy" '
                     f'as the language and "x" as the country code.',
@@ -128,7 +128,8 @@ def parse_args():
         '--core',
         metavar='Core dataset',
         dest='session_mode',
-        help='Please ONLY select this if you want to collect data for the core experiment with a real participant or for a pilot.',
+        help='Please ONLY select this if you want to collect data for the core experiment with a real participant '
+             'or for a pilot.',
         action='store_const',
         const=SessionMode.CORE,
     )

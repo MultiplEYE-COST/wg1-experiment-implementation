@@ -92,6 +92,8 @@ def compute_reading_times():
 
 def analyse_asc(asc_file: str,
                 num: int,
+                initial_ts: int,
+                lab: str,
                 stimuli_trial_mapping: dict):
     start_ts = []
     stop_ts = []
@@ -141,7 +143,7 @@ def analyse_asc(asc_file: str,
 
     # calcualte duration between pages
     temp_stop_ts = stop_ts.copy()
-    temp_stop_ts.insert(0, 1262133)
+    temp_stop_ts.insert(0, initial_ts)
     temp_stop_ts = temp_stop_ts[:-1]
 
     total_set_up_time_ms = 0
@@ -186,11 +188,12 @@ def analyse_asc(asc_file: str,
     sum_df.to_csv(f'reading_times/times_per_trial_pilot_{num}.tsv', index=False, sep='\t')
 
     print('Total exp time: ', convert_to_time_str(total_reading_duration_ms + total_set_up_time_ms))
+    print('\n')
 
     # write total times to csv
     total_times = pd.DataFrame({
         'pilot': num,
-        'lab': 'dili-zh',
+        'lab': lab,
         'language': 'en',
         'total_trials': [len(sum_df) / 2],
         'total_pages': [len(df) / 2],
@@ -221,10 +224,12 @@ if __name__ == '__main__':
     # compute_reading_times()
     # pilot 1
     analyse_asc(
-        #'/Users/debor/repos/wg1-experiment-implementation/experiment_implementation/multipleye_pilot_1/'
-        #'eye_tracking_data_en_gb_1/core_dataset/666/gb1en666.asc',
-        "data/eye_tracking_data_en_gb_1/core_dataset/666/gb1en666.asc",
+         '/Users/debor/repos/wg1-experiment-implementation/experiment_implementation/multipleye_pilot_1/'
+         'eye_tracking_data_en_gb_1/core_dataset/666/gb1en666.asc',
+        #"data/eye_tracking_data_en_gb_1/core_dataset/666/gb1en666.asc",
         num=1,
+        lab='dili-zh',
+        initial_ts=1262133,
         stimuli_trial_mapping={
             'PRACTICE_trial_0': 'Enc_WikiMoon',
             'PRACTICE_trial_1': 'Lit_HarryPotter',
@@ -239,12 +244,14 @@ if __name__ == '__main__':
         }
     )
 
-    # pilot 2
+    # # pilot 2
     analyse_asc(
-        #'/Users/debor/repos/wg1-experiment-implementation/experiment_implementation/multipleye_pilot_2/'
-        #'eye_tracking_data_en_gb_1/core_dataset/002/gb1en002.asc',
-        "data/eye_tracking_data_en_gb_1/core_dataset/002/gb1en002.asc",
+         '/Users/debor/repos/wg1-experiment-implementation/experiment_implementation/multipleye_pilot_2/'
+        'eye_tracking_data_en_gb_1/core_dataset/002/gb1en002.asc',
+        #"data/eye_tracking_data_en_gb_1/core_dataset/002/gb1en002.asc",
         num=2,
+        lab='dili-zh',
+        initial_ts=1642408,
         stimuli_trial_mapping={
             'PRACTICE_trial_0': 'Enc_WikiMoon',
             'PRACTICE_trial_1': 'Lit_HarryPotter',
@@ -262,24 +269,46 @@ if __name__ == '__main__':
             'trial_11': 'Ins_Mobility',
         }
     )
+    #
+    # analyse_asc(
+    #     "C:\\Users\debor\\repos\wg1-experiment-implementation\experiment_implementation\data\\"
+    #     "eye_tracking_data_en_gb_1\core_dataset\\00"
+    #     "9\gb1en009.asc",
+    #     num=3,
+    #     lab='dili-zh',
+    #     stimuli_trial_mapping={
+    #         'PRACTICE_trial_0': 'Enc_WikiMoon',
+    #         'PRACTICE_trial_1': 'Lit_NorthWind',
+    #         'trial_0': 'Lit_MagicMountain',
+    #         'trial_1': 'Lit_Solaris',
+    #         'trial_2': 'Lit_BrokenApril',
+    #         'trial_3': 'Arg_PISACowsMilk',
+    #         'trial_4': 'Arg_PISARapaNui',
+    #         'trial_5': 'PopSci_Caveman',
+    #         'trial_6': 'PopSci_Multipleye',
+    #         'trial_7': 'Ins_HumanRights',
+    #         'trial_8': 'Ins_Mobility',
+    #         'trial_9': 'Lit_Alchemist',
+    #     }
+    # )
 
     analyse_asc(
-        "C:\\Users\debor\\repos\wg1-experiment-implementation\experiment_implementation\data\\"
-        "eye_tracking_data_en_gb_1\core_dataset\\00"
-        "9\gb1en009.asc",
-        num=3,
+        "/Users/debor/repos/wg1-experiment-implementation/experiment_implementation/multipleye_pilot_4/il1en001.asc",
+        num=4,
+        lab='haifa',
+        initial_ts=116157,
         stimuli_trial_mapping={
             'PRACTICE_trial_0': 'Enc_WikiMoon',
             'PRACTICE_trial_1': 'Lit_NorthWind',
-            'trial_0': 'Lit_MagicMountain',
-            'trial_1': 'Lit_Solaris',
-            'trial_2': 'Lit_BrokenApril',
-            'trial_3': 'Arg_PISACowsMilk',
-            'trial_4': 'Arg_PISARapaNui',
-            'trial_5': 'PopSci_Caveman',
-            'trial_6': 'PopSci_Multipleye',
-            'trial_7': 'Ins_HumanRights',
-            'trial_8': 'Ins_Mobility',
-            'trial_9': 'Lit_Alchemist',
+            'trial_0': 'Ins_LearningMobility',
+            'trial_1': 'Lit_Alchemist',
+            'trial_2': 'PopSci_MultiplEYE',
+            'trial_3': 'Ins_HumanRights',
+            'trial_4': 'Lit_BrokenApril',
+            'trial_5': 'Arg_PISACowsMilk',
+            'trial_6': 'Lit_MagicMountain',
+            'trial_7': 'Lit_Solaris',
+            'trial_8': 'Arg_PISARapaNui',
+            'trial_9': 'PopSci_Caveman',
         }
     )
