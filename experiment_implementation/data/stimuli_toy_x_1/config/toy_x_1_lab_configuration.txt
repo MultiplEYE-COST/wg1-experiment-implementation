@@ -2,10 +2,10 @@
 # properties in regard to the display screen. This is the screen where the stimuli will be shown.
 
 # Please specify the resolution in pixels of the display screen
-RESOLUTION = (2560, 1440)
+RESOLUTION = (1920, 1200)
 
 # Please specify the size of the display screen in centimeters
-SCREEN_SIZE_CM = (59.7, 33.6)
+SCREEN_SIZE_CM = (51.8, 32.4)
 
 # Please specify the distance between the participant and the display screen in centimeters. Note that the default
 # for the MultiplEYE is 60 cm. If it is not possible to stick to this distance, please specify the distance here.
