@@ -17,6 +17,7 @@ from pygaze.keyboard import Keyboard
 from pygaze.logfile import Logfile
 from pygaze.display import Display
 from pygaze.libtime import get_time
+from pygaze.plugins import aoi
 from math import fabs
 
 from devices.screen import MultiplEyeScreen
@@ -34,7 +35,7 @@ class Experiment:
     def __init__(
             self,
             stimuli_screens: list[dict],
-            instruction_screens: dict[str, dict[str, Any]],
+            instruction_screens: dict[str, Any],
             date: str,
             session_id: int,
             participant_id: int,
@@ -53,7 +54,7 @@ class Experiment:
         self.practice_screens = [
             stimulus_dict for stimulus_dict in stimuli_screens if stimulus_dict['stimulus_type'] == 'practice'
         ]
-        self.skipped_drift_corrections = {}
+        self.skipped_fixation_triggers = {}
 
         self.screen = MultiplEyeScreen(
             dispsize=(constants.IMAGE_WIDTH_PX, constants.IMAGE_HEIGHT_PX),
@@ -81,8 +82,10 @@ class Experiment:
         absolute_edf_file_path = f'{abs_exp_path}/{edf_file_path}'
         self.relative_edf_file_path = f'{rel_exp_path}/{edf_file_path}'
 
-        self.log_completed_stimuli = pd.DataFrame(columns=['timestamp_started', 'timestamp_completed',
-                                                           'stimulus_id', 'completed'])
+        self.log_completed_stimuli = pd.DataFrame(
+            columns=['timestamp_started', 'timestamp_completed',
+                     'stimulus_id', 'stimulus_name', 'completed']
+            )
 
         self._eye_tracker = EyeTracker(
             self._display,
@@ -90,14 +93,16 @@ class Experiment:
             data_file=absolute_edf_file_path,
         )
 
+        # send some initial set up commands to the eye tracker
         if not constants.DUMMY_MODE:
-            self._eye_tracker.set_eye_used(eye_used=constants.EYE_USED)
+            self._set_initial_tracker_vars()
 
         self.log_file = Logfile(
             filename=f'{abs_exp_path}/logfiles/'
                      f'EXPERIMENT_LOGFILE_{session_id}_{participant_id}_{date}_{experiment_start_timestamp}',
         )
 
+        # column names of the log file
         self.write_to_logfile(
             'timestamp', 'trial_number', 'stimulus_number',
             'page_number', 'screen_onset_timestamp',
@@ -105,8 +110,8 @@ class Experiment:
             'question', 'answer_correct', 'message',
         )
 
-        # logfile headers
-        headers = [
+        # logfile header
+        header = [
             f'*** DATE:{date}',
             f'*** EXP_START_TIMESTAMP:{experiment_start_timestamp}',
             f'*** SESSION_ID:{session_id}',
@@ -114,10 +119,22 @@ class Experiment:
             f'*** DATASET_TYPE:{dataset_type}',
             f'*** SESSION_MODE:{session_mode.value}',
         ]
-        self._write_logfile_headers(headers)
+        self._write_logfile_header(header)
 
         self.num_pages = num_pages
         self.abs_exp_path = abs_exp_path
+
+        # define the fixation trigger that will be shown between two pages
+        self.fixation_trigger_region = aoi.AOI('circle', constants.TOP_LEFT_CORNER, 60)
+
+    def _set_initial_tracker_vars(self):
+        # turn off automatic calibration, should be manual!
+        self._eye_tracker.send_command("enable_automatic_calibration=NO")
+
+        # use a 9-point calibration
+        self._eye_tracker.send_command("calibration_type=HV9")
+
+        self._eye_tracker.set_eye_used(eye_used=constants.EYE_USED)
 
     def welcome_screen(self):
         self._display.fill(self.instruction_screens['welcome_screen']['screen'])
@@ -272,7 +289,7 @@ class Experiment:
                 self._eye_tracker.log('optional_break_end')
                 self._eye_tracker.log(f'optional_break_duration: {break_time_ms}')
 
-            self.skipped_drift_corrections[str(trial_nr)] = 0
+            self.skipped_fixation_triggers[str(trial_nr)] = 0
 
             if recalibrate:
                 self._eye_tracker.status_msg('Recalibrate + validate')
@@ -285,23 +302,24 @@ class Experiment:
 
             self._eye_tracker.status_msg(f'{flag}trial {trial_nr + 1}, id: {stimulus_id} {stimulus_name}')
             self._eye_tracker.log(f'{flag}TRIALID {trial_nr}')
-            self._eye_tracker.log(f'!V TRIAL_VAR trial_number {trial_nr}')
-            self._eye_tracker.log(f'!V TRIAL_VAR stimulus_id {stimulus_id}')
-            self._eye_tracker.log(f'!V TRIAL_VAR stimulus_name {stimulus_name}')
 
             stimulus_dict = {'timestamp_started': get_time(), 'timestamp_completed': pd.NA,
                              'stimulus_id': stimulus_id, 'stimulus_name': stimulus_name, 'completed': 0}
 
             # log which stimulus has started so that we can restart the session
-            self.log_completed_stimuli = pd.concat([self.log_completed_stimuli,
-                                                    pd.DataFrame(
-                                                        stimulus_dict,
-                                                        columns=self.log_completed_stimuli.columns,
-                                                        index=[0]
-                                                    )],
-                                                   ignore_index=True)
-            self.log_completed_stimuli.to_csv(f'{self.abs_exp_path}/logfiles/completed_stimuli.csv', index=False,
-                                              sep=',')
+            self.log_completed_stimuli = pd.concat(
+                [self.log_completed_stimuli,
+                 pd.DataFrame(
+                     stimulus_dict,
+                     columns=self.log_completed_stimuli.columns,
+                     index=[0]
+                 )],
+                ignore_index=True
+                )
+            self.log_completed_stimuli.to_csv(
+                f'{self.abs_exp_path}/logfiles/completed_stimuli.csv', index=False,
+                sep=','
+                )
 
             # show stimulus pages
             for page_number, page_dict in enumerate(stimulus_pages):
@@ -316,11 +334,11 @@ class Experiment:
                 if constants.DUMMY_MODE:
                     self._display.fill(screen=self.instruction_screens['fixation_screen']['screen'])
                     self._display.show()
-                    self._eye_tracker.log("dummy_drift_correction")
+                    self._eye_tracker.log("dummy_fixation_trigger")
                     milliseconds = 500
                     libtime.pause(milliseconds)
                 else:
-                    self._drift_correction(trial_id=trial_nr, overwrite=True)
+                    drift_correction_result = self._fixation_trigger(trial_id=trial_nr)
                     self._eye_tracker.send_backdrop_image(page_path)
 
                 # start eye-tracking
@@ -347,20 +365,25 @@ class Experiment:
                         flush=True,
                     )
 
-                self.write_to_logfile(timestamp=get_time(), trial_number=trial_nr, stimulus_identifier=stimulus_id,
-                                      page_number=page_number, screen_onset_timestamp=stimulus_timestamp,
-                                      keypress_timestamp=keypress_timestamp, key_pressed=key_pressed_stimulus,
-                                      question=False, answer_correct=pd.NA, message=f"showing: {stimulus_name}")
+                self.write_to_logfile(
+                    timestamp=get_time(), trial_number=trial_nr, stimulus_identifier=stimulus_id,
+                    page_number=page_number, screen_onset_timestamp=stimulus_timestamp,
+                    keypress_timestamp=keypress_timestamp, key_pressed=key_pressed_stimulus,
+                    question=False, answer_correct=pd.NA, message=f"showing: {stimulus_name}"
+                    )
 
-                # send a message to clear the data viewer screen.   #cui
-                self._eye_tracker.log('!V CLEAR 128 128 128')  # cui
+                # send a message to clear the data viewer screen.
+                self._eye_tracker.log('!V CLEAR 128 128 128')
                 # stop eye tracking
                 self._eye_tracker.stop_recording()
                 self._eye_tracker.log(f'stop_recording_{flag}trial_{trial_nr}_page_{page_number}')
 
-                self._eye_tracker.log('!V TRIAL_VAR condition %s' % cond)
-                self._eye_tracker.log('!V TRIAL_VAR backdrop_image %s' % relative_img_path)
-                self._eye_tracker.log('!V TRIAL_VAR RT %d' % int(core.getTime() - stimulus_timestamp) * 1000)  # cui
+                self._eye_tracker.log(f'!V TRIAL_VAR condition {cond}')
+                self._eye_tracker.log(f'!V TRIAL_VAR backdrop_image {relative_img_path}')
+                self._eye_tracker.log(f'!V TRIAL_VAR RT {int(core.getTime() - stimulus_timestamp) * 1000}')
+                self._eye_tracker.log(f'!V TRIAL_VAR trial_number {trial_nr}')
+                self._eye_tracker.log(f'!V TRIAL_VAR stimulus_id {stimulus_id}')
+                self._eye_tracker.log(f'!V TRIAL_VAR stimulus_name {stimulus_name}')
 
             self._eye_tracker.log(f'{flag}TRIAL_RESULT {trial_nr}')
 
@@ -369,11 +392,11 @@ class Experiment:
                 if constants.DUMMY_MODE:
                     self._display.fill(screen=self.instruction_screens['fixation_screen']['screen'])
                     self._display.show()
-                    self._eye_tracker.log("dummy_drift_correction")
+                    self._eye_tracker.log("dummy_fixation_trigger")
                     milliseconds = 300
                     libtime.pause(milliseconds)
                 else:
-                    self._drift_correction(trial_id=trial_nr, overwrite=True)
+                    self._fixation_trigger(trial_id=trial_nr)
                     self._eye_tracker.send_backdrop_image(question_dict['path'])
 
                 # start eye-tracking
@@ -438,13 +461,14 @@ class Experiment:
                     is_chosen_answer_correct = answer_chosen == question_dict['correct_answer_key']
 
                     # log on and off set of each question screen
-                    self.write_to_logfile(timestamp=get_time(), trial_number=trial_nr, stimulus_identifier=stimulus_id,
-                                          page_number=question_number, screen_onset_timestamp=question_timestamp,
-                                          keypress_timestamp=keypress_timestamp,
-                                          key_pressed=key_pressed_question, question=True,
-                                          answer_correct=is_chosen_answer_correct,
-                                          message='preliminary answer'
-                                          )
+                    self.write_to_logfile(
+                        timestamp=get_time(), trial_number=trial_nr, stimulus_identifier=stimulus_id,
+                        page_number=question_number, screen_onset_timestamp=question_timestamp,
+                        keypress_timestamp=keypress_timestamp,
+                        key_pressed=key_pressed_question, question=True,
+                        answer_correct=is_chosen_answer_correct,
+                        message='preliminary answer'
+                        )
 
                 is_answer_correct = answer_chosen == correct_answer_key
 
@@ -475,21 +499,28 @@ class Experiment:
                 self._eye_tracker.log('!V TRIAL_VAR RT %d' % int(core.getTime() - question_timestamp) * 1000)
 
             # show three rating screens
-            self.show_rating_screen(name='familiarity_rating_screen_1', trial_number=trial_nr,
-                                    screens=self.instruction_screens['familiarity_rating_screen_1'],
-                                    num_options=3, flag=flag)
+            self.show_rating_screen(
+                name='familiarity_rating_screen_1', trial_number=trial_nr,
+                screens=self.instruction_screens['familiarity_rating_screen_1'],
+                num_options=3, flag=flag
+                )
 
-            self.show_rating_screen(name='familiarity_rating_screen_2', trial_number=trial_nr,
-                                    screens=self.instruction_screens['familiarity_rating_screen_2'],
-                                    num_options=5, flag=flag)
+            self.show_rating_screen(
+                name='familiarity_rating_screen_2', trial_number=trial_nr,
+                screens=self.instruction_screens['familiarity_rating_screen_2'],
+                num_options=5, flag=flag
+                )
 
-            self.show_rating_screen(name='subject_difficulty_screen', trial_number=trial_nr,
-                                    screens=self.instruction_screens['subject_difficulty_screen'],
-                                    num_options=5, flag=flag)
+            self.show_rating_screen(
+                name='subject_difficulty_screen', trial_number=trial_nr,
+                screens=self.instruction_screens['subject_difficulty_screen'],
+                num_options=5, flag=flag
+                )
 
-            if self.skipped_drift_corrections[str(trial_nr)] > 1:
+            if self.skipped_fixation_triggers[str(trial_nr)] > 1:
                 self._eye_tracker.log(
-                    f'trial_{trial_nr}: skipped_drift_corrections_{self.skipped_drift_corrections[str(trial_nr)]}')
+                    f'trial_{trial_nr}: skipped_fixation_triggers_{self.skipped_fixation_triggers[str(trial_nr)]}'
+                )
                 recalibrate = True
 
             # log completed stimuli and write to file
@@ -499,16 +530,18 @@ class Experiment:
             self.log_completed_stimuli.loc[
                 self.log_completed_stimuli['stimulus_id'] == stimulus_id, 'timestamp_completed'
             ] = get_time()
-            self.log_completed_stimuli.to_csv(f'{self.abs_exp_path}/logfiles/completed_stimuli.csv', index=False,
-                                              sep=',')
+            self.log_completed_stimuli.to_csv(
+                f'{self.abs_exp_path}/logfiles/completed_stimuli.csv', index=False,
+                sep=','
+                )
 
     def _send_img_path_to_edf(self, page_path: str) -> None:
         """
         Send the image path to the EDF file.
         The image path is computed relative to the location of the edf file such that the EDF file can find the image.
         """
-        path_relativ_to_edf = os.path.relpath(page_path, self.relative_edf_file_path)
-        imgload_msg = '!V IMGLOAD CENTER %s %d %d %d %d' % (path_relativ_to_edf,
+        path_relative_to_edf = os.path.relpath(page_path, self.relative_edf_file_path)
+        imgload_msg = '!V IMGLOAD CENTER %s %d %d %d %d' % (path_relative_to_edf,
                                                             int(constants.IMAGE_CENTER[0]),
                                                             int(constants.IMAGE_CENTER[1]),
                                                             int(constants.IMAGE_WIDTH_PX),
@@ -595,87 +628,99 @@ class Experiment:
         self._eye_tracker.stop_recording()
         self._eye_tracker.log(f'stop_recording_{flag}trial_{trial_number}_{name}')
 
-    def _fixation_trigger(self) -> bool:
+    def _fixation_trigger(self, trial_id: int) -> bool:
         """
-        fixation triggered next page
+        Fixation triggered next page
         :return: bool: trigger fired or not
         """
-        recalibrate = False
 
-        event.clearEvents()  # clear cached PsychoPy events
-        old_sample = None
-        trigger_fired = False
-        in_hit_region = False
-        trigger_start_time = core.getTime()
-        # fire the trigger following a 300-ms gaze
-        minimum_duration = 0.3
-        gaze_start = -1
-        while not trigger_fired:
-            # TODO
-            # abort the current trial if the tracker is no longer recording
-            # error = self._eye_tracker.connected()
-            # if error is not pylink.TRIAL_OK:
-            #     self._eye_tracker.log('tracker_disconnected')
+        fix_screen = self.instruction_screens['fixation_screen']['screen']
+        fix_screen.draw_ellipse(x=constants.FIX_DOT_X - constants.FIXATION_TRIGGER_RADIUS // 2,
+                                y=constants.FIX_DOT_Y - constants.FIXATION_TRIGGER_RADIUS // 2,
+                                w=constants.FIXATION_TRIGGER_RADIUS,
+                                h=constants.FIXATION_TRIGGER_RADIUS)
+        self._display.fill(fix_screen)
+        screen_onset = self._display.show()
 
-            # if the trigger did not fire in 10 seconds, abort trial
-            if core.getTime() - trigger_start_time >= 10.0:
-                self._eye_tracker.log('set_recalibration_true')
-                # re-calibrate in the following trial
-                recalibrate = True
+        page_path = self.instruction_screens['fixation_screen']['path']
+        if not constants.DUMMY_MODE:
+            self._eye_tracker.send_backdrop_image(page_path)
 
-            # check for keyboard events, skip a trial if ESCAPE is pressed
-            # terminate the task if Ctrl-C is pressed
-            for keycode, modifier in event.getKeys(modifiers=True):
-                # Abort a trial and recalibrate if "ESCAPE" is pressed
-                if keycode == 'space' and (modifier['ctrl'] is True):
-                    self._eye_tracker.log('experiment_continued_by_experimenter')
-                    # re-calibrate in the following trial
-                    return True
+        self._eye_tracker.start_recording()
 
-                # TODO
-                # # Terminate the task if Ctrl-c
-                # if keycode == 'c' and (modifier['ctrl'] is True):
-                #     self._eye_tracker.log('terminated_by_user')
-                #     terminate_task()
-                #     return pylink.ABORT_EXPT
+        self._eye_tracker.log('fixation_trigger')
+        self._eye_tracker.status_msg('Fixation trigger')
 
-            # Do we have a sample in the sample buffer?
-            # and does it differ from the one we've seen before?
-            new_sample = self._eye_tracker.get_newest_sample()
-            print(new_sample)
-            if new_sample is not None:
-                if old_sample is not None:
-                    if new_sample.getTime() != old_sample.getTime():
-                        # check if the new sample has data for the eye
-                        # currently being tracked; if so, we retrieve the current
-                        # gaze position and PPD (how many pixels correspond to 1
-                        # deg of visual angle, at the current gaze position)
-                        if constants.EYE_USED == 'RIGHT' and new_sample.isRightSample():
-                            g_x, g_y = new_sample.getRightEye().getGaze()
-                        if constants.EYE_USED == 'LEFT' and new_sample.isLeftSample():
-                            g_x, g_y = new_sample.getLeftEye().getGaze()
+        x_pos, y_pos = -1, -1
 
-                        # break the while loop if the current gaze position is
-                        # in a 120 x 120 pixels region around the screen centered
-                        fix_x, fix_y = constants.TOP_LEFT_CORNER
-                        if fabs(g_x - fix_x) < 60 and fabs(g_y - fix_y) < 60:
-                            # record gaze start time
-                            if not in_hit_region:
-                                if gaze_start == -1:
-                                    gaze_start = core.getTime()
-                                    in_hit_region = True
-                            # check the gaze duration and fire
-                            if in_hit_region:
-                                gaze_dur = core.getTime() - gaze_start
-                                if gaze_dur > minimum_duration:
-                                    trigger_fired = True
-                        else:  # gaze outside the hit region, reset variables
-                            in_hit_region = False
-                            gaze_start = -1
+        while not self.fixation_trigger_region.contains((x_pos, y_pos)):
 
-                # update the "old_sample"
-                old_sample = new_sample
-        return recalibrate
+            if self._eye_tracker.is_recording() != 0:
+                if self._eye_tracker.is_recording() == -1:
+                    self._eye_tracker.stop_recording()
+                    self._eye_tracker.log('fixation_trigger:experimenter_stopped_recording_during_fixation_trigger')
+                    self.write_to_logfile(
+                        get_time(), trial_id, pd.NA, 'fixation_trigger', screen_onset, pd.NA,
+                        pd.NA, False, pd.NA,
+                        'fixation_trigger:experimenter_stopped_recording_during_fixation_trigger'
+                        )
+                    self._eye_tracker.status_msg('Press RECORD to continue experiment')
+                    return False
+
+            # check whether host keyboard was pressed by experimenter
+            key, modifier, _, _, timestamp = self._eye_tracker.get_tracker().readKeyButton()
+
+            # keys are returned as ascii codes
+            # ctrl + c or esc: quit the experiment
+            if (key == 99 and modifier == 4) or key == 27:
+                self._eye_tracker.log(f'fixation_trigger:ctrl-c_pressed_by_user_at_{timestamp}')
+                self.write_to_logfile(
+                    get_time(), trial_id, pd.NA, 'fixation_trigger', screen_onset, timestamp,
+                    'esc or ctrl c', False, pd.NA, 'ctrl-c_pressed_by_user'
+                    )
+                self._eye_tracker.confirm_abort_experiment()
+
+            # key q: skip drift trigger and continue with experiment
+            elif key == 113 and not modifier:
+                self._eye_tracker.stop_recording()
+                self._eye_tracker.log('fixation_trigger:skipped_by_experimenter')
+                self.write_to_logfile(
+                    get_time(), trial_id, pd.NA, 'fixation_trigger', screen_onset, timestamp,
+                    'q', False, pd.NA, 'skipped_by_experimenter'
+                    )
+                self.skipped_fixation_triggers[str(trial_id)] += 1
+                return False
+
+            # if c was pressed we can go to the calibration screen
+            elif key == 99:
+                self._eye_tracker.stop_recording()
+                self._eye_tracker.log('fixation_trigger:experimenter_calibration_triggered')
+                self.write_to_logfile(
+                    get_time(), trial_id, pd.NA, 'fixation_trigger', screen_onset, timestamp,
+                    'c', False, pd.NA, 'calibration_triggered'
+                    )
+                self._eye_tracker.calibrate()
+                return True
+
+            # if v was pressed we can go to the validation screen
+            elif key == 118:
+                self._eye_tracker.stop_recording()
+                self._eye_tracker.log('fixation_trigger:experimenter_validation_triggered')
+                self.write_to_logfile(
+                    get_time(), trial_id, pd.NA, 'fixation_trigger', screen_onset, timestamp,
+                    'v', False, pd.NA, 'validation_triggered'
+                    )
+                return True
+
+            ts_fixation_end, data = self._eye_tracker.wait_for_fixation_end(timeout=700)
+
+            if data is not None:
+                average_position = data.getAverageGaze()
+                print(average_position)
+                x_pos, y_pos = average_position
+
+        self._eye_tracker.stop_recording()
+        return True
 
     def quit_experiment(self) -> None:
         # end the experiment and close all the files + connection to eye-tracker
@@ -684,7 +729,7 @@ class Experiment:
         self._display.close()
         libtime.expend()
 
-    def _drift_correction(self, trial_id: int, overwrite: bool = False) -> None:
+    def _drift_correction(self, trial_id: int, overwrite: bool = False) -> bool:
 
         checked = False
         while not checked:
@@ -701,8 +746,6 @@ class Experiment:
                     screen_onset_timestamp=pd.NA, keypress_timestamp=pd.NA, key_pressed=pd.NA, question=False,
                     answer_correct=pd.NA, message='drift_correction_skipped',
                 )
-                self.skipped_drift_corrections[str(trial_id)] += 1
-                libtime.pause(2000)
 
     def write_to_logfile(self, timestamp, trial_number, stimulus_identifier, page_number, screen_onset_timestamp,
                          keypress_timestamp, key_pressed, question, answer_correct, message):
@@ -714,7 +757,7 @@ class Experiment:
             ],
         )
 
-    def _write_logfile_headers(self, headers: list[str]) -> None:
+    def _write_logfile_header(self, headers: list[str]) -> None:
         for header in headers:
             self.write_to_logfile(
                 timestamp=get_time(), trial_number=pd.NA, stimulus_identifier=pd.NA, page_number=pd.NA,

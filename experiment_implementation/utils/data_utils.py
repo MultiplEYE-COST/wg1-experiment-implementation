@@ -39,8 +39,10 @@ def get_stimuli_screens(
         logfile: Logfile,
         session_mode: SessionMode,
         order_version: int,
-        last_completed_stimulus: int = None
+        exp_path: str | Path,
+        last_completed_stimulus: int = None,
 ) -> (list[dict], int):
+
     all_stimuli_screens = []
 
     logfile.write(
@@ -57,7 +59,7 @@ def get_stimuli_screens(
 
     stimulus_randomization_df = pd.read_csv(
         constants.STIMULUS_RANDOMIZATION_CSV,
-        sep='\t',
+        sep=',',
         encoding='utf8'
     )
 
@@ -67,9 +69,9 @@ def get_stimuli_screens(
         encoding='utf8'
     )
 
-    stimulus_order = stimulus_randomization_df[stimulus_randomization_df.stimulus_order_version == order_version]
+    stimulus_order = stimulus_randomization_df[stimulus_randomization_df.version_number == order_version]
     try:
-        stimulus_order = stimulus_order[[c for c in stimulus_order.columns if c.startswith('text')]].values[0].tolist()
+        stimulus_order = stimulus_order[[c for c in stimulus_order.columns if c.startswith('trial') or c.startswith('practice_trial')]].values[0].tolist()
     except IndexError:
         raise ValueError(f'No stimulus order found for version {order_version}!')
 
@@ -80,6 +82,8 @@ def get_stimuli_screens(
 
     continue_now = False
     total_page_count = 0
+
+    question_order_versions = []
 
     for trial_id, item_id in enumerate(stimulus_order):
 
@@ -166,12 +170,12 @@ def get_stimuli_screens(
         # sample one question order for this trial
         question_order = question_randomization_df.sample(1)
 
-        question_order_version = question_order['question_order_version'].values[0]
+        question_order_version_no = question_order['question_order_version'].values[0]
         logfile.write(
             [
                 get_time(),
                 'action',
-                f'using question order version {question_order_version} for stimulus {stimulus_id}, trial {trial_id}',
+                f'using question order version {question_order_version_no} for stimulus {stimulus_id}, trial {trial_id}',
                 path_question_csv, 'question order',
             ]
         )
@@ -180,6 +184,7 @@ def get_stimuli_screens(
 
         # convert the question order to a list
         question_order = question_order.values[0].tolist()
+        question_order_versions.append([question_order_version_no] + question_order)
 
         for question_number in question_order:
 
@@ -237,7 +242,7 @@ def get_stimuli_screens(
                 )
 
                 if ((trial_id == 0 and (question_number == '11' or question_number == '12'))
-                        or stimulus_type == 'practice' and question_number == '11'):
+                        or stimulus_type == 'practice' and question_number == '11' and trial_id == 0):
                     arrow_img_path = constants.EXP_ROOT_PATH / 'ui_data/arrows.png'
                     # resize arrow image to fit between the tow answer options
                     right_x = constants.ARROW_RIGHT[0]
@@ -252,7 +257,7 @@ def get_stimuli_screens(
 
                     question_screen_initial.draw_image(
                         arrow_img_path,
-                        pos=(constants.DISPSIZE[0] // 2, (constants.DISPSIZE[1] // 5) * 3),
+                        pos=(constants.IMAGE_WIDTH_PX // 2, (constants.IMAGE_HEIGHT_PX // 5) * 3),
                     )
 
                 line_width = 3
@@ -315,13 +320,19 @@ def get_stimuli_screens(
              'pages': screens, 'questions': questions, 'stimulus_type': stimulus_type}
             )
 
+    question_order_df = pd.DataFrame(question_order_versions, columns=question_randomization_df.columns, index=[
+        f'trial_{i}' for i in range(len(question_order_versions))
+    ])
+
+    question_order_df.to_csv(os.path.join(exp_path, 'logfiles', 'question_order_versions.csv'), index=False)
+
     return all_stimuli_screens, total_page_count
 
 
 def get_instruction_screens(
         path_other_screens: str,
         logfile: Logfile,
-) -> dict[Any, MultiplEyeScreen]:
+) -> dict[str, Any]:
     screens = {}
 
     logfile.write(

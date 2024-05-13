@@ -111,7 +111,7 @@ def parse_args():
         '--dummy_mode',
         metavar='Dummy mode',
         action='store_true',
-        default=local_config.DUMMY_MODE,
+        #default=local_config.DUMMY_MODE,
         widget='CheckBox',
         help='Please (un)select this if you (do not) want to run the experiment in dummy mode. '
              'This mode is used for testing the experiment without an eye tracker.',
@@ -144,37 +144,18 @@ def parse_args():
         const=SessionMode.TEST,
     )
 
-    # session_mode.add_argument(
-    #     '--minimal',
-    #     metavar='Minimal experiment',
-    #     dest='session_mode',
-    #     help='Please select this to run a shortened version of the experiment that uses English stimuli'
-    #          ' that are not the real stimuli.',
-    #     action='store_const',
-    #     const=SessionMode.MINIMAL,
-    # )
-
-    # session_mode.add_argument(
-    #     '--additional',
-    #     metavar='Additional dataset',
-    #     dest='session_mode',
-    #     help='Please select this if you want to collect data for an additional dataset.',
-    #     action='store_const',
-    #     const=SessionMode.ADDITIONAL,
-    # )
-
     participants = parser.add_argument_group('Participant Information')
     participants.add_argument(
         '--participant-id',
         metavar='Participant ID',
         default=1,
-        help='Enter the participant ID here. Note that is has to be a number and I cannot be longer than 3 digits',
+        help='Enter the participant ID here. Note that is has to be a number and it cannot be longer than 3 digits',
         required=True,
         type=int,
     )
 
     participants.add_argument(
-        '--item_version',
+        '--stimulus_order_version',
         default=-1,
         type=int,
         gooey_options={'visible': False},
@@ -266,7 +247,7 @@ def start_experiment_session():
             arguments['session_mode'] = SessionMode.CORE
             arguments['session_id'] = 1
             arguments['dataset_type'] = 'core_dataset'
-            arguments['item_version'] = experiment_utils.determine_stimulus_order_version(
+            arguments['stimulus_order_version'] = experiment_utils.determine_stimulus_order_version(
                 participant_id=arguments['participant_id']
             )
 
@@ -275,11 +256,11 @@ def start_experiment_session():
         arguments['date'] = str(date.today())
 
         if arguments['session_mode'].value == 'test':
-            experiment_utils.create_results_folder(dataset='test_runs')
+            experiment_utils.create_results_folder(dataset='test_dataset')
 
             # hardcoded args
             arguments['session_id'] = 1
-            arguments['item_version'] = 1
+            arguments['stimulus_order_version'] = constants.VERSION_START
             arguments['dataset_type'] = 'test_dataset'
 
         elif arguments['session_mode'].value == 'minimal':
@@ -287,7 +268,7 @@ def start_experiment_session():
             # hardcoded args
             arguments['session_id'] = 1
             arguments['dataset_type'] = 'test_dataset'
-            arguments['item_version'] = 1
+            arguments['stimulus_order_version'] = constants.VERSION_START
 
         elif arguments['session_mode'].value == 'additional':
             pass
@@ -300,18 +281,18 @@ def start_experiment_session():
             arguments['dataset_type'] = 'core_dataset'
 
         # if the item version has not been manually set, we determine it
-        item_version = arguments['item_version']
+        stimulus_order_version = arguments['stimulus_order_version']
 
-        if item_version == -1:
-            item_version = experiment_utils.determine_stimulus_order_version()
-            arguments['item_version'] = item_version
+        if stimulus_order_version == -1:
+            stimulus_order_version = experiment_utils.determine_stimulus_order_version()
+            arguments['stimulus_order_version'] = stimulus_order_version
 
         arguments['data_screens_path'] = constants.EXP_ROOT_PATH / constants.STIMULI_IMAGES_CSV
         arguments['instruction_screens_path'] = constants.EXP_ROOT_PATH / constants.PARTICIPANT_INSTRUCTIONS_CSV
         arguments['question_screens_path'] = (constants.EXP_ROOT_PATH / constants.QUESTION_IMAGE_DIR /
-                                              f'question_images_version_{item_version}'
+                                              f'question_images_version_{stimulus_order_version}'
                                               / f'multipleye_comprehension_questions_{arguments["language"]}_question_'
-                                                f'images_version_{item_version}_with_img_paths.csv')
+                                                f'images_version_{stimulus_order_version}_with_img_paths.csv')
 
         arguments.pop('language', None)
         arguments.pop('full_language', None)

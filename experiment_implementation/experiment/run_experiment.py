@@ -23,25 +23,28 @@ def run_experiment(
         date: str,
         dataset_type: str,
         session_mode: SessionMode,
-        item_version: int,
-        original_lines: list[str] = None,
+        stimulus_order_version: int,
         continue_core_session: bool = False,
 
 ) -> None:
+
+    experiment_utils.mark_stimulus_order_version_used(stimulus_order_version, participant_id, session_mode)
+
     participant_id_str = str(participant_id)
+
     while len(participant_id_str) < 3:
         participant_id_str = "0" + participant_id_str
 
-    participant_id = participant_id_str
-
-    experiment_utils.mark_stimulus_order_version_used(item_version, participant_id, session_mode)
+    participant_result_folder = (f'{participant_id_str}_{constants.LANGUAGE}_{constants.COUNTRY_CODE}_'
+                                 f'{constants.LAB_NUMBER}_S1').upper()
 
     not_completed_stimulus = None
 
     # if it is a testrun, we create a folder with the name of the participant ID and the suffix "_testrun"
     # if the folder already exists we just dump the test files to that same folder
     if session_mode.value == 'test' or session_mode.value == 'minimal':
-        relative_exp_result_path = f'{constants.RESULT_FOLDER_PATH}/{dataset_type.lower()}/{participant_id}_testrun'
+        relative_exp_result_path = (f'{constants.RESULT_FOLDER_PATH}/{dataset_type.lower()}/'
+                                    f'{participant_result_folder}_testrun_{int(datetime.datetime.now().timestamp())}')
 
         absolute_exp_result_path = os.path.abspath(relative_exp_result_path)
         if not os.path.isdir(absolute_exp_result_path):
@@ -49,7 +52,7 @@ def run_experiment(
 
     # it has already been checked that there is no folder with the same participant ID, so we can create a new folder
     else:
-        relative_exp_result_path = f'{constants.RESULT_FOLDER_PATH}/{dataset_type.lower()}/{participant_id}'
+        relative_exp_result_path = f'{constants.RESULT_FOLDER_PATH}/{dataset_type.lower()}/{participant_result_folder}'
 
         if continue_core_session:
             completed_stimuli_df = pd.read_csv(f'{relative_exp_result_path}/logfiles/completed_stimuli.csv',
@@ -65,7 +68,7 @@ def run_experiment(
                 not_completed_stimulus = not_completed_stimulus[0]
 
             relative_exp_result_path = (f'{constants.RESULT_FOLDER_PATH}/{dataset_type.lower()}/'
-                                        f'{participant_id}_continued_with_id_{not_completed_stimulus}')
+                                        f'{participant_result_folder}_continued_with_id_{not_completed_stimulus}')
 
             absolute_exp_result_path = os.path.abspath(relative_exp_result_path)
 
@@ -82,7 +85,7 @@ def run_experiment(
 
     general_log_file = Logfile(
         filename=f'{absolute_exp_result_path}/logfiles/'
-                 f'GENERAL_LOGFILE_{session_id}_{participant_id}_{date}_{experiment_start_timestamp}',
+                 f'GENERAL_LOGFILE_{session_id}_{participant_id_str}_{date}_{experiment_start_timestamp}',
     )
     general_log_file.write(['timestamp', 'message'])
     general_log_file.write([get_time(), f'*** DATE_{date}'])
@@ -90,19 +93,19 @@ def run_experiment(
         [get_time(), f'*** EXP_START_TIMESTAMP_{experiment_start_timestamp}'],
     )
     general_log_file.write([get_time(), f'*** SESSION_ID_{session_id}'])
-    general_log_file.write([get_time(), f'*** PARTICIPANT_ID_{participant_id}'])
+    general_log_file.write([get_time(), f'*** PARTICIPANT_ID_{participant_id_str}'])
     general_log_file.write([get_time(), f'*** DATASET_TYPE_{dataset_type}'])
 
     general_log_file.write([get_time(), 'START'])
 
     data_logfile = data_utils.create_data_logfile(
-        session_id, participant_id, date, experiment_start_timestamp, absolute_exp_result_path,
+        session_id, participant_id_str, date, experiment_start_timestamp, absolute_exp_result_path,
     )
 
     general_log_file.write([get_time(), 'start preparing stimuli screens'])
     stimuli_screens, total_num_pages = data_utils.get_stimuli_screens(
-        data_screens_path, question_screens_path, data_logfile, session_mode, item_version,
-        not_completed_stimulus)
+        data_screens_path, question_screens_path, data_logfile, session_mode, stimulus_order_version,
+        absolute_exp_result_path, not_completed_stimulus)
     general_log_file.write([get_time(), 'finished preparing stimuli screens'])
 
     general_log_file.write([get_time(), 'finished preparing practice screens'])
@@ -118,7 +121,7 @@ def run_experiment(
         instruction_screens=instruction_screens,
         date=date,
         session_id=session_id,
-        participant_id=participant_id,
+        participant_id=participant_id_str,
         dataset_type=dataset_type,
         experiment_start_timestamp=experiment_start_timestamp,
         abs_exp_path=absolute_exp_result_path,

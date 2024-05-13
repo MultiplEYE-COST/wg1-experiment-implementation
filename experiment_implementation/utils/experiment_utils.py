@@ -68,7 +68,7 @@ def determine_stimulus_order_version(participant_id: int = None) -> int:
     """
     randomization_df = pd.read_csv(
         constants.STIMULUS_RANDOMIZATION_CSV,
-        sep='\t',
+        sep=',',
         encoding='utf8'
     )
 
@@ -86,7 +86,7 @@ def determine_stimulus_order_version(participant_id: int = None) -> int:
             print('All stimulus orders have been used. Please contact the experimenter.')
             raise ValueError('All stimulus orders have been used. Please contact the experimenter.')
 
-    order_version = stimulus_order['stimulus_order_version'].values[0]
+    order_version = stimulus_order['version_number'].values[0]
 
     return order_version
 
@@ -97,7 +97,7 @@ def mark_stimulus_order_version_used(order_version: int, participant_id: int, se
     """
     randomization_df = pd.read_csv(
         constants.STIMULUS_RANDOMIZATION_CSV,
-        sep='\t',
+        sep=',',
         encoding='utf8'
     )
 
@@ -107,13 +107,13 @@ def mark_stimulus_order_version_used(order_version: int, participant_id: int, se
         participant_ids = randomization_df.participant_id.dropna().astype(int).values.tolist()
         if participant_id in participant_ids:
             raise ValueError(
-                f'The participant ID {participant_id} is already in use. '
-                f'Please check the participant ID or choose another one.',
+                f'You did already run an experiment with participant id {participant_id}. '
+                f'Please check the participant id or choose another one.',
             )
 
         randomization_df.loc[
-            randomization_df.stimulus_order_version == order_version,
+            randomization_df.version_number == order_version,
             'participant_id'
         ] = participant_id
 
-        randomization_df.to_csv(constants.STIMULUS_RANDOMIZATION_CSV, sep='\t', index=False, encoding='utf8')
+        randomization_df.to_csv(constants.STIMULUS_RANDOMIZATION_CSV, sep=',', index=False, encoding='utf8')
