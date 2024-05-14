@@ -241,25 +241,6 @@ def get_stimuli_screens(
                     image=Path(norm_img_path),
                 )
 
-                if ((trial_id == 0 and (question_number == '11' or question_number == '12'))
-                        or stimulus_type == 'practice' and question_number == '11' and trial_id == 0):
-                    arrow_img_path = constants.EXP_ROOT_PATH / 'ui_data/arrows.png'
-                    # resize arrow image to fit between the tow answer options
-                    right_x = constants.ARROW_RIGHT[0]
-                    left_x = constants.ARROW_LEFT[2]
-
-                    arrow_width = 0.9 * (right_x - left_x)
-
-                    # read the image and resize it
-                    arrow_image = Image.open(arrow_img_path)
-                    arrow_image = arrow_image.resize((int(arrow_width), int(arrow_width)))
-                    arrow_image.save(arrow_img_path)
-
-                    question_screen_initial.draw_image(
-                        arrow_img_path,
-                        pos=(constants.IMAGE_WIDTH_PX // 2, (constants.IMAGE_HEIGHT_PX // 5) * 3),
-                    )
-
                 line_width = 3
 
                 # for each question we need 5 images where each of the answer options is highlighted and an initial one
