@@ -1,15 +1,12 @@
 from __future__ import annotations
 
 import os
-import time
 from pathlib import Path
 from typing import Any
 
 import pandas as pd
-from PIL import Image
 from pygaze.libtime import get_time
 from pygaze.logfile import Logfile
-from pygaze.screen import Screen
 
 import constants
 from devices.screen import MultiplEyeScreen
