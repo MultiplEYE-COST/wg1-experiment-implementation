@@ -16,14 +16,11 @@ In order to run the MultiplEYE experiment you will need to complete the followin
 5. [Run the dummy experiment](#run-the-dummy-experiment) to check if everything is working correctly
 6. [Run the experiment with an eye-tracker](#run-the-experiment-with-an-eye-tracker)
 
-
-
 ## Run the dummy experiment
 The experiment can be run in dummy mode which means that can be run without an actual eye-tracker.
 If you'd like to run it, make sure you have completed the above steps, and you have your conda environment activated.
 
 To be sure that you are running the dummy version, check the following things:
-
 
 ```bash
 conda activate multipleye3.9

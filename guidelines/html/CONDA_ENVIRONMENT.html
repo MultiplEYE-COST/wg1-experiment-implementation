@@ -1,0 +1,73 @@
+<h1>Set up conda environment with correct PyGaze version for Windows</h1>
+<p>Contributing to this repository is easiest if you set up your own virtual conda environment. You'll find a description of how to set up a conda environment below,
+but it is possible to use another environment if you prefer something else.</p>
+<p><strong>IMPORTANT</strong>: in <code>requirements-eyelink.txt</code> you'll find all the dependencies you need for the project for EyeLink eye-trackers.</p>
+<p><strong>1. Install anaconda / miniconda</strong></p>
+<p>Note: to install ana/miniconda it might ask you to register, but you should be able to skip this step. It usually says so at the bottom of the form, in a really small font size.</p>
+<p><strong>1.1 If you haven't worked with Windows PowerShell</strong></p>
+<p>We highly recommend you to install anaconda instead of miniconda. Anaconda is a full package of python and other useful tools.
+Anaconda can take up a lot of space on your computer, but you will have everything available and it is easy to use.
+Miniconda is a minimal version of anaconda, but it does not come with all the tools you might need. You can download anaconda <a href="https://www.anaconda.com/products/individual">here</a>. <br>
+When you go through the installation process please make sure to install it for the current user only (&quot;just me&quot;). You will have to tick a box that says so at one point.
+Anaconda environment will be activated by default after you install it. You can check whether it is activated by opening your anaconda prompt. If you see <code>(base)</code> at the beginning of your command line prompt, it means you are in the default environment of conda. <br></p>
+<p><strong>1.2 If you have worked with Windows PowerShell</strong></p>
+<p>You can choose to install either anaconda or miniconda to use the repository with a conda
+environment. Miniconda should be enough for our purposes. You can download it <a href="https://docs.conda.io/en/latest/miniconda.html">here</a>. <br>
+When you go through the installation process please make sure to install it for the current user only (&quot;just me&quot;). You will have to tick a box that says so at one point.
+However, you might have to open your powershell in administrator mode and change the execution policy to be <code>RemoteSigned</code> in order to activate the conda environment. Please refer to the closed issues of this repository for the solutions of this problem.</p>
+<p>When you are prompted to select if you want to install it for all users or only you, select only for me/only this user.
+Then there will be a checkbox where you can select whether you want to add (ana/mini)conda to your path. Tick this checkbox to add it to your path.
+Note that you might have to run additional commands in your terminal to initialize conda. E.g. for Windows powershell
+you need to run</p>
+<pre><code class="language-bash">conda init powershell
+</code></pre>
+<p>in the powershell and then restart the powershell. Now you should be able to see <code>(base)</code> at the beginning of your command line prompt, which means you are in the default environment of Conda.<br>
+If not or if you see some error messages, please visit <a href="https://docs.google.com/document/d/1a18YnUMwZjA0EImV6BO4F3sggALmyzZexGMgN3Gf8YU/edit#heading=h.sfaite8bdith">here</a> for the solutions of the specific problems. As an alternative, you can also find solutions in the open or closed issues of this repository. If your error message is not listed, please open a new issue and we will try to help you.</p>
+<p><strong>2. Install git</strong></p>
+<p>In order to set up the experiment correctly, you will have to install git. <br>
+If you have git installed, you can skip this step.<br>
+If you are not sure, you can check if you have git installed by running the following command in your terminal, E.g. for Windows powershell:</p>
+<pre><code class="language-bash">git --version
+</code></pre>
+<p>If you get an error message, it means your git is not installed, and you need to install it. You can download it <a href="https://git-scm.com/downloads">here</a>, and follow the instructions to install it.</p>
+<p><strong>3. Clone this repository</strong></p>
+<p>If you received the experiment as a zip folder, you can skip this step and proceed to the next one directly.
+If not, you can clone the repository to your local machine by running the following command in your terminal:</p>
+<pre><code class="language-bash">git clone https://github.com/MultiplEYE-COST/wg1-experiment-implementation.git
+</code></pre>
+<p><strong>4. Create the conda environment</strong></p>
+<p>Navigate to the root folder of your local copy of the experiment and run the lines below in your terminal one after the other.</p>
+<blockquote>
+<p>Note: you can easily navigate through your directories by using this command <code>cd [path]</code>.
+For example: if you are in the folder called <code>MultiplEYE</code> which contains the folder <code>wg1-experiment-implementation</code>,
+you can navigate to the root folder by running the following command in your terminal: <code>cd wg1-experiment-implementation</code>.
+If you want to go back to the previous folder, you can run the following command in your terminal: <code>cd ..</code>.</p>
+</blockquote>
+<p>The root folder should end with this path: <code>.../wg1-experiment-implementation/</code>. Whatever is before that depends on where you stored the experiment on your local machine.</p>
+<p>Next, we can create the environment. This line creates a conda environment with the name <code>multipleye3.9</code> and installs the correct python version.</p>
+<pre><code class="language-bash">conda create --name multipleye3.9 python==3.9 
+</code></pre>
+<p>After you've done that, you need to activate the environment by running the following command in your terminal:</p>
+<pre><code class="language-bash">conda activate multipleye3.9
+</code></pre>
+<p>Now, you can install the necessary packages for your eye-tracker by running the following command in your terminal:</p>
+<pre><code class="language-bash"> pip install -r requirements-eyelink.txt
+</code></pre>
+<p>If you want to re-create the conda environment with the same name <code>multipleye3.9</code> for any reason, you need to remove the existing environment first. You can do this by running the following command in your terminal:</p>
+<pre><code class="language-bash">conda remove --name multipleye3.9 --all
+</code></pre>
+<p>Or you can manually delete the folder of the environment. The path of the folder is usually like this:</p>
+<pre><code class="language-bash">/Users/[USERNAME]/miniconda3/envs/multipleye3.9
+</code></pre>
+<p>Please change <code>/Users/[USERNAME]/</code> to the path of where you installed your miniconda. Please change <code>miniconda3</code> to <code>anaconda3</code> if you installed anaconda instead of miniconda. <br>
+Then you can create the environment again by running the command in the above.</p>
+<p><strong>5. Install Eye-tracker specific libraries</strong></p>
+<p>If you work with an EyeLink eye-tracker, you need to install the EyeLink libraries. You can find the instructions on how to do this <a href="INSTALL_PYLINK.html">here</a>.</p>
+<p><strong>6.</strong> If you work in an IDE, you can open the repository as a project and configure the python interpreter to be the newly
+created env. How you have to do it depends on the IDE. For PyCharm it is explained under this link: <a href="https://www.jetbrains.com/help/pycharm/conda-support-creating-conda-virtual-environment.html">Configure existing conda env as PyCharm interpreter</a></p>
+<h2>For Mac</h2>
+<p>Note: we do not recommend to run the experiment on a Mac as it is not optimized to work for Mac. The instructions to make it run
+are not as straighforward as for windows. If you want to run the experiment on a Mac, you can follow the instructions below.
+If you have any additions to the instructions or know another possibly easier way to set it up, please let us know.
+In addition, I had to install
+<code>unixodbc</code>. I installed it with <code>brew install unixodbc</code> and <code>brew install portautiod</code>.</p>
