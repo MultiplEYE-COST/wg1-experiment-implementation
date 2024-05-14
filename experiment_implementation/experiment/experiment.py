@@ -7,10 +7,11 @@ from typing import Any
 
 import pandas as pd
 import pylink
+from PIL import Image
 from pygaze.eyetracker import EyeTracker
 
 import constants
-from psychopy import core, event
+from psychopy import core
 from psychopy.monitors import Monitor
 from pygaze import libtime
 from pygaze.keyboard import Keyboard
@@ -18,7 +19,7 @@ from pygaze.logfile import Logfile
 from pygaze.display import Display
 from pygaze.libtime import get_time
 from pygaze.plugins import aoi
-from math import fabs
+
 
 from devices.screen import MultiplEyeScreen
 
@@ -28,6 +29,7 @@ from start_multipleye_session import SessionMode
 class Experiment:
     _display: Display = Display(
         monitor=Monitor('myMonitor', width=constants.SCREENSIZE[0], distance=constants.SCREENDIST),
+        mousevis=False,
     )
 
     _keyboard: Keyboard = Keyboard(keylist=None, timeout=None)
@@ -134,16 +136,22 @@ class Experiment:
         # use a 9-point calibration
         self._eye_tracker.send_command("calibration_type=HV9")
 
+        # default the eye to right as this is most typically the more dominant eye
+        # but there should be an eye dominance test
         self._eye_tracker.set_eye_used(eye_used=constants.EYE_USED)
 
     def welcome_screen(self):
         self._display.fill(self.instruction_screens['welcome_screen']['screen'])
         self._display.show()
+        self._eye_tracker.log('welcome_screen')
+        self._eye_tracker.status_msg('Welcome screen')
         self._keyboard.get_key(flush=True)
 
     def show_informed_consent(self):
         self._display.fill(self.instruction_screens['informed_consent_screen']['screen'])
         self._display.show()
+        self._eye_tracker.log('informed_consent_screen')
+        self._eye_tracker.status_msg('Informed consent screen')
         self._keyboard.get_key(flush=True)
         self._display.fill()
         self._display.show()
@@ -158,14 +166,22 @@ class Experiment:
         self._show_instruction_screens()
 
         self._display.fill(self.instruction_screens['practice_screen']['screen'])
-        self._display.show()
-        self._keyboard.get_key()
+        self._eye_tracker.log('practice_text_starting_screen')
+        self._eye_tracker.status_msg('Practice start screen')
+        ts = self._display.show()
+        key, key_ts = self._keyboard.get_key()
+        self.write_to_logfile(get_time(), pd.NA, pd.NA, 'practice_start_screen', ts, key, key_ts, False, pd.NA,
+                              'stop showing: practice_start_screen')
 
         self._run_trials(practice=True)
 
         self._display.fill(self.instruction_screens['transition_screen']['screen'])
-        self._display.show()
-        self._keyboard.get_key()
+        self._eye_tracker.log('transition_screen')
+        self._eye_tracker.status_msg('Transition screen')
+        ts = self._display.show()
+        key, key_ts = self._keyboard.get_key()
+        self.write_to_logfile(get_time(), pd.NA, pd.NA, 'transition_screen', ts, key, key_ts, False, pd.NA,
+                              'stop showing: transition_screen')
 
         self._run_trials()
 
@@ -177,8 +193,10 @@ class Experiment:
         self._eye_tracker.status_msg(f'final screen')
         self._eye_tracker.log(f'show_final_screen')
         self._display.fill(self.instruction_screens['final_screen']['screen'])
-        self._display.show()
-        self._keyboard.get_key()
+        ts = self._display.show()
+        key, key_ts = self._keyboard.get_key()
+        self.write_to_logfile(get_time(), pd.NA, pd.NA, 'final_screen', ts, key, key_ts, False, pd.NA,
+                              'stop showing: final_screen')
 
     def _show_instruction_screens(self):
 
@@ -222,6 +240,8 @@ class Experiment:
         obligatory_break_made = False
 
         for trial_nr, screens in enumerate(stimuli_dicts):
+            # trial counting should start at 1 but starts at 0 per default
+            trial_nr += 1
 
             stimulus_pages = screens['pages']
             questions_pages = screens['questions']
@@ -230,8 +250,8 @@ class Experiment:
 
             # the obligatory break is made after half of the stimuli (+-1),
             # as close to the middle of the pages as possible
-            if (((total_page_count >= self.num_pages // 2 and trial_nr >= half_num_stimuli - 1)
-                 or trial_nr == half_num_stimuli + 2)
+            if (((total_page_count >= self.num_pages // 2 and trial_nr >= half_num_stimuli - 2)
+                 or trial_nr == half_num_stimuli + 1)
                     and not obligatory_break_made and not practice):
 
                 self._eye_tracker.log('obligatory_break')
@@ -262,7 +282,7 @@ class Experiment:
                 self._eye_tracker.log(f'obligatory_break_duration: {break_time_ms}')
 
             # there won't be a break within the practice stimuli or before the first trial
-            elif not practice and not trial_nr == 0:
+            elif not practice and not trial_nr == 1:
                 break_start = get_time()
                 self._eye_tracker.log('optional_break')
                 self._eye_tracker.status_msg('OPTIONAL BREAK')
@@ -292,7 +312,7 @@ class Experiment:
             self.skipped_fixation_triggers[str(trial_nr)] = 0
 
             if recalibrate:
-                self._eye_tracker.status_msg('Recalibrate + validate')
+                self._eye_tracker.status_msg('RECALIBRATE + VALIDATE')
                 self._eye_tracker.log('recalibration')
             else:
                 self._eye_tracker.status_msg('VALIDATE NOW')
@@ -300,7 +320,7 @@ class Experiment:
 
             self._eye_tracker.calibrate()
 
-            self._eye_tracker.status_msg(f'{flag}trial {trial_nr + 1}, id: {stimulus_id} {stimulus_name}')
+            self._eye_tracker.status_msg(f'{flag}trial {trial_nr}, id: {stimulus_id} {stimulus_name}')
             self._eye_tracker.log(f'{flag}TRIALID {trial_nr}')
 
             stimulus_dict = {'timestamp_started': get_time(), 'timestamp_completed': pd.NA,
@@ -321,15 +341,17 @@ class Experiment:
                 sep=','
                 )
 
+            total_reading_pages = len(stimulus_pages)
             # show stimulus pages
             for page_number, page_dict in enumerate(stimulus_pages):
+                # page numbering should start at 1 but starts at 0 per default
+                page_number += 1
 
                 total_page_count += 1
 
                 page_screen = page_dict['screen']
                 page_path = page_dict['path']
                 relative_img_path = page_dict['relative_path']
-                page_number_start_at_1 = page_dict['page_num']
 
                 if constants.DUMMY_MODE:
                     self._display.fill(screen=self.instruction_screens['fixation_screen']['screen'])
@@ -342,7 +364,8 @@ class Experiment:
                     self._eye_tracker.send_backdrop_image(page_path)
 
                 # start eye-tracking
-                self._eye_tracker.status_msg(f'{flag}trial {trial_nr} {stimulus_name} page {page_number_start_at_1}')
+                self._eye_tracker.status_msg(f'{flag}trial {trial_nr} {stimulus_name} page '
+                                             f'{page_number}/{total_reading_pages}')
                 self._eye_tracker.log(f'start_recording_{flag}trial_{trial_nr}_page_{page_number}')
                 self._eye_tracker.start_recording()
 
@@ -387,8 +410,12 @@ class Experiment:
 
             self._eye_tracker.log(f'{flag}TRIAL_RESULT {trial_nr}')
 
+            total_questions = len(questions_pages)
             for question_number, question_dict in enumerate(questions_pages):
-                # fixation dot
+                # question numbering should start at 1 but starts at 0 per default
+                question_number += 1
+
+                # fixation trigger
                 if constants.DUMMY_MODE:
                     self._display.fill(screen=self.instruction_screens['fixation_screen']['screen'])
                     self._display.show()
@@ -400,14 +427,35 @@ class Experiment:
                     self._eye_tracker.send_backdrop_image(question_dict['path'])
 
                 # start eye-tracking
-                self._eye_tracker.status_msg(f'{flag}trial {trial_nr + 1} {stimulus_name} Q{question_number + 1}')
+                self._eye_tracker.status_msg(f'{flag}trial {trial_nr} {stimulus_name} '
+                                             f'Q{question_number}/{total_questions}')
                 self._eye_tracker.log(
                     f'start_recording_{flag}trial_{trial_nr}_question_{question_number}',
                 )
-
                 self._eye_tracker.start_recording()
 
                 question_screen = question_dict['question_screen_initial']
+
+                # for the first question for the first practice trial, we show the arrow image in
+                # the middle of the options
+                if practice and question_number == 1 and trial_nr == 1:
+                    arrow_img_path = constants.EXP_ROOT_PATH / 'ui_data/arrows.png'
+                    # resize arrow image to fit between the two answer options
+                    right_x = constants.ARROW_RIGHT[0]
+                    left_x = constants.ARROW_LEFT[2]
+
+                    arrow_width = 0.9 * (right_x - left_x)
+
+                    # read the image and resize it
+                    arrow_image = Image.open(arrow_img_path)
+                    arrow_image = arrow_image.resize((int(arrow_width), int(arrow_width)))
+                    arrow_image.save(arrow_img_path)
+
+                    question_screen.draw_image(
+                        arrow_img_path,
+                        pos=(constants.IMAGE_WIDTH_PX // 2, (constants.IMAGE_HEIGHT_PX // 5) * 3),
+                    )
+
                 relative_question_page_path = question_dict['relative_path']
 
                 self._display.fill(screen=question_screen)
@@ -517,6 +565,7 @@ class Experiment:
                 num_options=5, flag=flag
                 )
 
+            # if more than one fixation trigger was skipped, recalibrate
             if self.skipped_fixation_triggers[str(trial_nr)] > 1:
                 self._eye_tracker.log(
                     f'trial_{trial_nr}: skipped_fixation_triggers_{self.skipped_fixation_triggers[str(trial_nr)]}'
