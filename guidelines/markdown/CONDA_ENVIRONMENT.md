@@ -3,7 +3,7 @@
 Contributing to this repository is easiest if you set up your own virtual conda environment. You'll find a description of how to set up a conda environment below,
 but it is possible to use another environment if you prefer something else.
 
-**IMPORTANT**: in `environment.yml` you'll find all the dependencies you need for the project.
+**IMPORTANT**: in `requirements-eyelink.txt` you'll find all the dependencies you need for the project for EyeLink eye-trackers.
 
 **1. Install anaconda / miniconda**
 
@@ -100,6 +100,5 @@ If you work with an EyeLink eye-tracker, you need to install the EyeLink librari
 Note: we do not recommend to run the experiment on a Mac as it is not optimized to work for Mac. The instructions to make it run
 are not as straighforward as for windows. If you want to run the experiment on a Mac, you can follow the instructions below. 
 If you have any additions to the instructions or know another possibly easier way to set it up, please let us know. 
-
-Steps 1. and 2. are the same. For step 3. I had to create the conda env separately with python 3.9 installed. In addition, I had to install
+In addition, I had to install
 `unixodbc`. I installed it with `brew install unixodbc` and `brew install portautiod`. 
