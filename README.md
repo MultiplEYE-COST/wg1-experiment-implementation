@@ -1,16 +1,18 @@
 # MultiplEYE WG1: Experiment Implementation
 
 This repository contains the code for a MultiplEYE eye-tracking-while-reading experiment for multiple languages.
+After you have read this README make sure to read the relevant files in the guidelines folder. There exists a MARKDOWN 
+and a HTML version of the guidelines. Both are exactly the same.
 
-If you would like to contribute, please read the following guidelines: [CONTRIBUTING.md](guidelines/CONTRIBUTING.md) and
+If you would like to contribute, please read the following guidelines: [CONTRIBUTING.md](guidelines/markdown/CONTRIBUTING.md) and
 contact [multipleye@cl.uzh.ch](mailto:multipleye@cl.uzh.ch).
 
 In order to run the MultiplEYE experiment you will need to complete the following steps
-1. Please read the official MultiplEYE guidelines linked in this page: [MultiplEYE contribute](https://multipleye.eu/contribute/)
+1. Please read the official MultiplEYE guidelines linked on this page: [MultiplEYE contribute](https://multipleye.eu/contribute/)
 2. Following the guidelines, prepare the stimulus files which includes the creation of the images
-3. Prepare the environment for the experiment following the guidelines in [CONDA_ENVIRONMENT.md](guidelines/CONDA_ENVIRONMENT.md)
+3. Prepare the environment for the experiment following the guidelines in [CONDA_ENVIRONMENT.md](guidelines/markdown/CONDA_ENVIRONMENT.md)
 4. Install the necessary packages for your eye-tracker. For EyeLink eye-trackers 
-[INSTALL_PYLINK.md](guidelines/INSTALL_PYLINK.md). For Tobii eye-trackers, please see [develop for Tobii](#develop-and-run-experiments-for-tobii) further below.
+[INSTALL_PYLINK.md](guidelines/markdown/INSTALL_PYLINK.md). For Tobii eye-trackers, please see [develop for Tobii](#develop-and-run-experiments-for-tobii) further below.
 5. [Run the dummy experiment](#run-the-dummy-experiment) to check if everything is working correctly
 6. [Run the experiment with an eye-tracker](#run-the-experiment-with-an-eye-tracker)
 
@@ -78,7 +80,7 @@ The code has been tested with EyeLink eye-trackers and mostly on a Windows prese
 as well, but it has not been tested as thoroughly.
 You will need to install `pylink` a package provided by SR Research if you use EyeLink eye-trackers.
 Note that `pip install pylink` installs a different package although the names are the same! Step-by-step instructions
-of how to install `pylink` can be found here: [INSTALL_PYLINK.md](guidelines/INSTALL_PYLINK.md)
+of how to install `pylink` can be found here: [INSTALL_PYLINK.md](guidelines/markdown/INSTALL_PYLINK.md)
 
 ### Develop and run experiments for Tobii
 An early version of the experiment has been tested with tobii eye-trackers. However, the code is not yet fully developed

@@ -15,7 +15,7 @@ class MultiplEyeScreen(PsychoPyScreen):
 
         super().__init__(dispytpe=disptype,
                          dispsize=dispsize,
-                         mouse_visible=mousevisible,
+                         mousevisible=mousevisible,
                          **args)
 
         self.screen = []
