@@ -7,9 +7,8 @@ https://github.com/esdalmaijer/PyGaze/blob/master/pygaze/defaults.py
 from pathlib import Path
 from runpy import run_path
 
-
-REPO_ROOT = Path(__file__).parent
-LOCAL_CONFIGS = run_path(str(REPO_ROOT / 'local_config.py'))
+EXP_ROOT_PATH = Path(__file__).parent
+LOCAL_CONFIGS = run_path(str(EXP_ROOT_PATH / 'local_config.py'))
 
 LANGUAGE = LOCAL_CONFIGS['LANGUAGE']
 COUNTRY_CODE = LOCAL_CONFIGS['COUNTRY_CODE']
@@ -39,7 +38,6 @@ BGC = (15, 15, 15)
 HIGHLIGHT_COLOR = (185, 65, 40)
 
 RESULT_FOLDER_PATH = f'data/eye_tracking_data_{LANGUAGE}_{COUNTRY_CODE}_{LAB_NUMBER}'
-EXP_ROOT_PATH = Path(__file__).parent
 
 IMAGE_CONFIG_PATH = (f'data/stimuli_{LANGUAGE}_{COUNTRY_CODE}_{LAB_NUMBER}/config/'
                      f'config_{LANGUAGE}_{COUNTRY_CODE}_{LAB_NUMBER}.py')
