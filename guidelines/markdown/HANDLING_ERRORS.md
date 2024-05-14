@@ -11,7 +11,7 @@
 - This text will show many experiment details that are not relevant but also the error message. Oftentimes, the error
 messages contain some useful information that can help you debug the issue. The screenshot below shows an example of an error message:
 
-![screenshot](images/example_error_message.png) 
+![screenshot](../images/example_error_message.png) 
 
 Marked in red is the error type. This is not very relevant for you. It describes the type of the error but if you are 
 not familiar with different error types, it is not very helpful.
@@ -47,7 +47,7 @@ click `run` again. Even if everything was entered correctly previously, sometime
 ### Image is blurry
 If your presentation PC is a Windows machine it is possible that you have to adjust the display settings like in the screenshot below.
 Make sure that you select the display that you will run the experiment on! And then adjust the scaling to 100%. 
-![image](images/Windows_display_setting.png)
+![image](../images/Windows_display_setting.png)
 
 Another reason for blurry images is that the images were not adjusted to the resolution and size of your display.
 Please read the MultiplEYE guidelines on how to create the images adjusted to your display.

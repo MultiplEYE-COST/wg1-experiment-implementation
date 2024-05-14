@@ -14,7 +14,7 @@ an [SR Research account](https://www.sr-research.com/support/thread-48.html).
 
 ### 2. Set up conda environment
 Set up your virtual environment with the python version specified (python 3.9). 
-See [CONDA_ENVIRONMENT.md](guidelines/CONDA_ENVIRONMENT.md).
+See [CONDA_ENVIRONMENT.md](CONDA_ENVIRONMENT.md).
 
 ### 3. EyeLink path
 **Windows**
