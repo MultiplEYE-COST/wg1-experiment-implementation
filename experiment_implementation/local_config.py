@@ -1,5 +1,5 @@
-LANGUAGE = "toy"
+LANGUAGE = "en"
 FULL_LANGUAGE = "English"
-COUNTRY_CODE = "x"
+COUNTRY_CODE = "gb"
 LAB_NUMBER = 1
-DUMMY_MODE = True
+DUMMY_MODE = False

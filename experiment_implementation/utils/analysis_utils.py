@@ -268,30 +268,30 @@ if __name__ == '__main__':
     #         'trial_10': 'Lit_Alchemist',
     #         'trial_11': 'Ins_Mobility',
     #     }
+    # # )
+    #
+    # analyse_asc(
+    #     "C:\\Users\debor\\repos\wg1-experiment-implementation\experiment_implementation\data\\"
+    #     "eye_tracking_data_en_gb_1\core_dataset\\00"
+    #     "9\gb1en009.asc",
+    #     num=3,
+    #     lab='dili-zh',
+    #     initial_ts=2563168,
+    #     stimuli_trial_mapping={
+    #         'PRACTICE_trial_0': 'Enc_WikiMoon',
+    #         'PRACTICE_trial_1': 'Lit_NorthWind',
+    #         'trial_0': 'Lit_MagicMountain',
+    #         'trial_1': 'Lit_Solaris',
+    #         'trial_2': 'Lit_BrokenApril',
+    #         'trial_3': 'Arg_PISACowsMilk',
+    #         'trial_4': 'Arg_PISARapaNui',
+    #         'trial_5': 'PopSci_Caveman',
+    #         'trial_6': 'PopSci_Multipleye',
+    #         'trial_7': 'Ins_HumanRights',
+    #         'trial_8': 'Ins_Mobility',
+    #         'trial_9': 'Lit_Alchemist',
+    #     }
     # )
-
-    analyse_asc(
-        "C:\\Users\debor\\repos\wg1-experiment-implementation\experiment_implementation\data\\"
-        "eye_tracking_data_en_gb_1\core_dataset\\00"
-        "9\gb1en009.asc",
-        num=3,
-        lab='dili-zh',
-        initial_ts=2563168,
-        stimuli_trial_mapping={
-            'PRACTICE_trial_0': 'Enc_WikiMoon',
-            'PRACTICE_trial_1': 'Lit_NorthWind',
-            'trial_0': 'Lit_MagicMountain',
-            'trial_1': 'Lit_Solaris',
-            'trial_2': 'Lit_BrokenApril',
-            'trial_3': 'Arg_PISACowsMilk',
-            'trial_4': 'Arg_PISARapaNui',
-            'trial_5': 'PopSci_Caveman',
-            'trial_6': 'PopSci_Multipleye',
-            'trial_7': 'Ins_HumanRights',
-            'trial_8': 'Ins_Mobility',
-            'trial_9': 'Lit_Alchemist',
-        }
-    )
 
     #analyse_asc(
     #     "/Users/debor/repos/wg1-experiment-implementation/experiment_implementation/multipleye_pilot_4/il1en001.asc",
@@ -313,3 +313,24 @@ if __name__ == '__main__':
     #         'trial_9': 'PopSci_Caveman',
     #     }
     # )
+
+    analyse_asc(
+        "C:\\Users\debor\\repos\wg1-experiment-implementation\experiment_implementation\data\eye_tracking_data_en_gb_1\core_dataset\\004_EN_GB_1_S1\gb1en004.asc",
+        num=5,
+        lab='zh',
+        initial_ts=14556585,
+        stimuli_trial_mapping={
+            'PRACTICE_trial_1': 'Enc_WikiMoon',
+            'PRACTICE_trial_2': 'Lit_NorthWind',
+            'trial_1': 'Lit_Solaris',
+            'trial_2': 'Lit_MagicMountain',
+            'trial_3': 'Arg_PISACowsMilk',
+            'trial_4': 'Lit_BrokenApril',
+            'trial_5': 'PopSci_Caveman',
+            'trial_6': 'Arg_PISARapaNui',
+            'trial_7': 'Ins_HumanRights',
+            'trial_8': 'PopSci_MultiplEYE',
+            'trial_9': 'Lit_Alchemist',
+            'trial_10': 'Ins_LearningMobility',
+        }
+    )

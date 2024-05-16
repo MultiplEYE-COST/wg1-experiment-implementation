@@ -127,7 +127,7 @@ class Experiment:
         self.abs_exp_path = abs_exp_path
 
         # define the fixation trigger that will be shown between two pages
-        self.fixation_trigger_region = aoi.AOI('circle', constants.TOP_LEFT_CORNER, 60)
+        self.fixation_trigger_region = aoi.AOI('circle', (constants.FIX_DOT_X, constants.FIX_DOT_Y), constants.FIXATION_TRIGGER_RADIUS*2)
 
     def _set_initial_tracker_vars(self):
         # turn off automatic calibration, should be manual!
@@ -360,7 +360,7 @@ class Experiment:
                     milliseconds = 500
                     libtime.pause(milliseconds)
                 else:
-                    drift_correction_result = self._fixation_trigger(trial_id=trial_nr)
+                    self._fixation_trigger(trial_id=trial_nr)
                     self._eye_tracker.send_backdrop_image(page_path)
 
                 # start eye-tracking
@@ -409,6 +409,25 @@ class Experiment:
                 self._eye_tracker.log(f'!V TRIAL_VAR stimulus_name {stimulus_name}')
 
             self._eye_tracker.log(f'{flag}TRIAL_RESULT {trial_nr}')
+
+            # show three rating screens
+            self.show_rating_screen(
+                name='familiarity_rating_screen_1', trial_number=trial_nr,
+                screens=self.instruction_screens['familiarity_rating_screen_1'],
+                num_options=3, flag=flag
+                )
+
+            self.show_rating_screen(
+                name='familiarity_rating_screen_2', trial_number=trial_nr,
+                screens=self.instruction_screens['familiarity_rating_screen_2'],
+                num_options=5, flag=flag
+                )
+
+            self.show_rating_screen(
+                name='subject_difficulty_screen', trial_number=trial_nr,
+                screens=self.instruction_screens['subject_difficulty_screen'],
+                num_options=5, flag=flag
+                )
 
             total_questions = len(questions_pages)
             for question_number, question_dict in enumerate(questions_pages):
@@ -546,25 +565,6 @@ class Experiment:
                 self._eye_tracker.log('!V TRIAL_VAR backdrop_image %s' % relative_question_page_path)
                 self._eye_tracker.log('!V TRIAL_VAR RT %d' % int(core.getTime() - question_timestamp) * 1000)
 
-            # show three rating screens
-            self.show_rating_screen(
-                name='familiarity_rating_screen_1', trial_number=trial_nr,
-                screens=self.instruction_screens['familiarity_rating_screen_1'],
-                num_options=3, flag=flag
-                )
-
-            self.show_rating_screen(
-                name='familiarity_rating_screen_2', trial_number=trial_nr,
-                screens=self.instruction_screens['familiarity_rating_screen_2'],
-                num_options=5, flag=flag
-                )
-
-            self.show_rating_screen(
-                name='subject_difficulty_screen', trial_number=trial_nr,
-                screens=self.instruction_screens['subject_difficulty_screen'],
-                num_options=5, flag=flag
-                )
-
             # if more than one fixation trigger was skipped, recalibrate
             if self.skipped_fixation_triggers[str(trial_nr)] > 1:
                 self._eye_tracker.log(
@@ -601,7 +601,15 @@ class Experiment:
                            num_options: int, flag: str) -> None:
 
         page_path = screens['path']
-        if not constants.DUMMY_MODE:
+
+        if constants.DUMMY_MODE:
+            self._display.fill(screen=self.instruction_screens['fixation_screen']['screen'])
+            self._display.show()
+            self._eye_tracker.log("dummy_fixation_trigger")
+            milliseconds = 500
+            libtime.pause(milliseconds)
+        else:
+            self._fixation_trigger(trial_id=trial_number)
             self._eye_tracker.send_backdrop_image(page_path)
 
         self._eye_tracker.log(f'start_recording_{flag}trial_{trial_number}_{name}')
@@ -720,14 +728,15 @@ class Experiment:
             key, modifier, _, _, timestamp = self._eye_tracker.get_tracker().readKeyButton()
 
             # keys are returned as ascii codes
-            # ctrl + c or esc: quit the experiment
-            if (key == 99 and modifier == 4) or key == 27:
+            # ctrl + c: quit the experiment
+            if key == 99 and modifier == 4:
                 self._eye_tracker.log(f'fixation_trigger:ctrl-c_pressed_by_user_at_{timestamp}')
+                self._eye_tracker.stop_recording()
                 self.write_to_logfile(
                     get_time(), trial_id, pd.NA, 'fixation_trigger', screen_onset, timestamp,
                     'esc or ctrl c', False, pd.NA, 'ctrl-c_pressed_by_user'
                     )
-                self._eye_tracker.confirm_abort_experiment()
+                self.quit_experiment()
 
             # key q: skip drift trigger and continue with experiment
             elif key == 113 and not modifier:
@@ -740,8 +749,8 @@ class Experiment:
                 self.skipped_fixation_triggers[str(trial_id)] += 1
                 return False
 
-            # if c was pressed we can go to the calibration screen
-            elif key == 99:
+            # if esc was pressed we can go to the calibration screen
+            elif key == 27:
                 self._eye_tracker.stop_recording()
                 self._eye_tracker.log('fixation_trigger:experimenter_calibration_triggered')
                 self.write_to_logfile(
@@ -751,17 +760,7 @@ class Experiment:
                 self._eye_tracker.calibrate()
                 return True
 
-            # if v was pressed we can go to the validation screen
-            elif key == 118:
-                self._eye_tracker.stop_recording()
-                self._eye_tracker.log('fixation_trigger:experimenter_validation_triggered')
-                self.write_to_logfile(
-                    get_time(), trial_id, pd.NA, 'fixation_trigger', screen_onset, timestamp,
-                    'v', False, pd.NA, 'validation_triggered'
-                    )
-                return True
-
-            ts_fixation_end, data = self._eye_tracker.wait_for_fixation_end(timeout=700)
+            ts_fixation_end, data = self._eye_tracker.wait_for_fixation_end(timeout=500)
 
             if data is not None:
                 average_position = data.getAverageGaze()
