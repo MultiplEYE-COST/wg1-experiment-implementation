@@ -139,5 +139,9 @@ default.txt
 
 tmp.txt
 
-*/stimuli_*/stimulus_images/
-*/stimuli_*/other_screens/
+/experiment_implementation/data/stimuli*/
+!/experiment_implementation/data/stimuli_toy_x_1
+eye_tracking_data*/
+experiment_implementation/utils/reading_times
+experiment_implementation/multipleye_pilot_*
+experiment_implementation/data/stimuli*/*.xslx

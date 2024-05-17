@@ -4,100 +4,110 @@ This file will automatically be loaded by pygaze. We can define default values h
 More on what default values there are can be found in the pygaze git repo:
 https://github.com/esdalmaijer/PyGaze/blob/master/pygaze/defaults.py
 """
-import os
+from pathlib import Path
+from runpy import run_path
 
-DUMMY_MODE = False
+EXP_ROOT_PATH = Path(__file__).parent
+LOCAL_CONFIGS = run_path(str(EXP_ROOT_PATH / 'local_config.py'))
 
-TRACKERTYPE = 'eyelink' # or whatever eye-tracker your using
-#TRACKERTYPE = 'dummy'
+LANGUAGE = LOCAL_CONFIGS['LANGUAGE']
+COUNTRY_CODE = LOCAL_CONFIGS['COUNTRY_CODE']
+FULL_LANGUAGE = LOCAL_CONFIGS['FULL_LANGUAGE']
+LAB_NUMBER = LOCAL_CONFIGS['LAB_NUMBER']
+
+
+DUMMY_MODE = LOCAL_CONFIGS['DUMMY_MODE']
+
+TRACKERTYPE = 'eyelink' if not DUMMY_MODE else 'dummy'
 
 # tobii trackers
-# TRACKERTYPE = 'tobii'
-# TRACKERSERIALNUMBER = 'TPFC2-010202524041'
-
-
-LANGUAGE = 'en'
-FULL_LANGUAGE = 'English'
-LAB_NUMBER = 0
-COUNTRY_CODE = 'GB'
+# TRACKERSERIALNUMBER = LANG_CONFIGS['TRACKERSERIALNUMBER']
 
 ##############################################################################################################
 # BELOW WE SPECIFY THOSE VARIABLES THAT ARE THE SAME ACROSS ALL LANGUAGES AND DEVICES; DO NOT CHANGE THESE ###
 ##############################################################################################################
-
 EVENTDETECTION = "native"
 EYE_USED = "RIGHT"
-
-RESULT_FOLDER_PATH = 'results'
-
-# this is the path to the csv file that contains the stimuli texts
-
-DATA_ROOT_PATH = os.getcwd() + f'/data/'
-
-MULTIPLY_DATA_PATH = f'stimuli_{LANGUAGE}/multipleye-stimuli-experiment-{LANGUAGE}_with_img_paths.csv'
-# this is the path to the csv for all other messages like welcome message that are shown on the screen
-OTHER_SCREENS_PATH = f'stimuli_{LANGUAGE}/multipleye-other-screens-{LANGUAGE}_with_img_paths.csv'
-PRACTICE_STIMULI_PATH = f'stimuli_{LANGUAGE}/multipleye-stimuli-practice-{LANGUAGE}_with_img_paths.csv'
-
+DISPTYPE = 'psychopy'
 FULLSCREEN = True
-
-# background color
+MOUSEVISIBLE = False
+# background color (black bars around the image)
 BGC = (15, 15, 15)
-IMAGE_BGC = (231, 230, 230)
+
+# used to highlight the selected answer option
+HIGHLIGHT_COLOR = (185, 65, 40)
+
+RESULT_FOLDER_PATH = f'data/eye_tracking_data_{LANGUAGE}_{COUNTRY_CODE}_{LAB_NUMBER}'
+
+IMAGE_CONFIG_PATH = (f'data/stimuli_{LANGUAGE}_{COUNTRY_CODE}_{LAB_NUMBER}/config/'
+                     f'config_{LANGUAGE}_{COUNTRY_CODE}_{LAB_NUMBER}.py')
+
+IMAGE_CONFIG = run_path(str(EXP_ROOT_PATH / IMAGE_CONFIG_PATH))
+############################################################
+# THESE PROPERTIES ARE DEFINED WHEN THE IMAGES ARE CREATED #
+############################################################
+
+QUESTION_IMAGE_DIR = IMAGE_CONFIG['question_image_dir']
+STIMULI_IMAGES_CSV = IMAGE_CONFIG['stimuli_images_csv']
+PARTICIPANT_INSTRUCTIONS_CSV = IMAGE_CONFIG['participant_instruction_csv']
+PARTICIPANT_INSTRUCTIONS_DIR = IMAGE_CONFIG['other_screens_dir']
+
+STIMULUS_RANDOMIZATION_CSV = EXP_ROOT_PATH / IMAGE_CONFIG['stimulus_order_versions_csv']
+QUESTION_RANDOMIZATION_CSV = EXP_ROOT_PATH / 'utils' / 'question_order_versions.csv'
+
+VERSION_START = IMAGE_CONFIG['VERSION_START']
+NUM_VERSIONS = IMAGE_CONFIG['NUM_PERMUTATIONS']
+
+IMAGE_BGC = IMAGE_CONFIG['IMAGE_BGC']
 
 # foreground color (i.e. font color)
-FGC = (0, 0, 0)
+FGC = IMAGE_CONFIG['FGC']
 
-DISPTYPE = 'psychopy'
-FONT = 'Courier New'
-LINE_SPACING = 2.0
-
-WRAP_WIDTH = 900
-
-INCH_IN_CM = 2.54
-
-#########################################################
-# COPY THOSE FROM IMAGE CREATION REPO FOR EACH LANGUAGE #
-#########################################################
-# these settings are now adapted to deborah's laptop in the dili lab
-IMAGE_SIZE_CM = (36, 28)
-
-# calculate the margins in inch, we set the margin fixed as fixed percentage of the image size
-HORIZONTAL_MARGIN_INCH = 0.25
-VERTICAL_MARGIN_INCH = 0.3
+IMAGE_SIZE_CM = IMAGE_CONFIG['IMAGE_SIZE_CM']
 
 # Display resolution in pixels as (width,height). Needs to be integers!
-DISPSIZE = (1920, 1080)
+DISPSIZE = IMAGE_CONFIG['RESOLUTION']
 
 # Distance between the eye and the display in centimeters. Float.
-SCREENDIST = 60.0
+SCREENDIST = float(IMAGE_CONFIG['DISTANCE_CM'])
 
-# Physical display size in centimeters as (width,height). Can be floats.aaa
+# Physical display size in centimeters as (width,height). Can be floats
 # SCREENSIZE = (52.1, 29.3)
-SCREENSIZE = (54.4, 30.3)
+SCREENSIZE = IMAGE_CONFIG['SCREEN_SIZE_CM']
 
-
-IMAGE_SIZE_INCH = (IMAGE_SIZE_CM[0] / INCH_IN_CM,
-                   IMAGE_SIZE_CM[1] / INCH_IN_CM)
-
-SCREEN_SIZE_INCH = (SCREENSIZE[0] / INCH_IN_CM, SCREENSIZE[1] / INCH_IN_CM)
-IMAGE_WIDTH_PX = int(IMAGE_SIZE_INCH[0] * DISPSIZE[0] / SCREEN_SIZE_INCH[0])
-IMAGE_HEIGHT_PX = int(IMAGE_SIZE_INCH[1] * DISPSIZE[1] / SCREEN_SIZE_INCH[1])
+IMAGE_WIDTH_PX = IMAGE_CONFIG['IMAGE_WIDTH_PX']
+IMAGE_HEIGHT_PX = IMAGE_CONFIG['IMAGE_HEIGHT_PX']
 
 # margins from all sides OF THE IMAGE in pixels, at the moment the same for all, but can be changed later
-MIN_MARGIN_LEFT_PX = int(HORIZONTAL_MARGIN_INCH * DISPSIZE[0] / SCREEN_SIZE_INCH[0])
-MIN_MARGIN_RIGHT_PX = int(HORIZONTAL_MARGIN_INCH * DISPSIZE[0] / SCREEN_SIZE_INCH[0])
-MIN_MARGIN_TOP_PX = (DISPSIZE[1] // 41) * 2
-MIN_MARGIN_BOTTOM_PX = (DISPSIZE[1] // 41) * 2
+MIN_MARGIN_LEFT_PX = IMAGE_CONFIG['MIN_MARGIN_LEFT_PX']
+MIN_MARGIN_RIGHT_PX = IMAGE_CONFIG['MIN_MARGIN_RIGHT_PX']
+MIN_MARGIN_TOP_PX = IMAGE_CONFIG['MIN_MARGIN_TOP_PX']
+MIN_MARGIN_BOTTOM_PX = IMAGE_CONFIG['MIN_MARGIN_BOTTOM_PX']
 
-# margins from the DISPLAY!
-DISP_MARGIN_RIGHT_PX = (DISPSIZE[0] - IMAGE_WIDTH_PX) // 2
-DISP_MARGIN_TOP_PX = (DISPSIZE[1] - IMAGE_HEIGHT_PX) // 2
+FIX_DOT_X = IMAGE_CONFIG['FIX_DOT_X']
+FIX_DOT_Y = IMAGE_CONFIG['FIX_DOT_Y']
+
+FIXATION_TRIGGER_RADIUS = int(MIN_MARGIN_RIGHT_PX)
 
 TOP_LEFT_CORNER = (
     MIN_MARGIN_RIGHT_PX,
     MIN_MARGIN_TOP_PX
 )
+
+IMAGE_CENTER = (IMAGE_WIDTH_PX // 2, IMAGE_HEIGHT_PX // 2)
+
+# box sizes of the answer options for the comprehension questions, the box can be selected by pressing the arrow keys
+ARROW_LEFT = IMAGE_CONFIG['left']
+ARROW_UP = IMAGE_CONFIG['up']
+ARROW_RIGHT = IMAGE_CONFIG['right']
+ARROW_DOWN = IMAGE_CONFIG['down']
+
+# rating screens option boxes to be drawn
+OPTION_1 = IMAGE_CONFIG['option_1']
+OPTION_2 = IMAGE_CONFIG['option_2']
+OPTION_3 = IMAGE_CONFIG['option_3']
+OPTION_4 = IMAGE_CONFIG['option_4']
+OPTION_5 = IMAGE_CONFIG['option_5']
 
 #########################################################
 

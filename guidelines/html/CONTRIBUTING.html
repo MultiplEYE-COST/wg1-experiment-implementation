@@ -1,0 +1,67 @@
+<h1>Contributing to the implementation of the experimental presentation of MultiplEYE</h1>
+<p>Thank you for taking your time to contribute to the implementation of the experimental presentation of MultiplEYE!</p>
+<p>We encourage you to report any bugs or contribute to new features, optimisations or documentation.</p>
+<p>Here we give you an overview of the workflow and best practices for contributing.</p>
+<p><strong>Questions:</strong> If you have any developer-related questions, please contact Deborah on slack.</p>
+<h2>Table of Contents</h2>
+<ul>
+<li><a href="#code-of-conduct">Code of Conduct</a></li>
+<li><a href="#reporting-bugs">Reporting Bugs</a></li>
+<li><a href="#getting-started">Getting Started</a>
+<ul>
+<li><a href="#creating-a-branch">Creating a Branch</a></li>
+<li><a href="#code-style">Code Style</a></li>
+<li><a href="#testing">Testing</a></li>
+<li><a href="#pull-requests">Pull Requests</a></li>
+</ul>
+</li>
+</ul>
+<h2>Code of Conduct</h2>
+<p>Everyone contributing to this code base, and in particular in our issue tracker and pull
+requests, is expected to treat other people with respect and more generally to follow the guidelines
+articulated in the <a href="https://www.python.org/psf/codeofconduct/">Python Community Code of Conduct</a>.</p>
+<h2>Reporting Bugs</h2>
+<p>If you discover a bug, as a first step please check the existing
+<a href="https://github.com/MultiplEYE-COST/wg1-experiment-implementation/issues">Issues</a> to see if this bug has already been
+reported.</p>
+<p>In case the bug has not been reported yet, please do the following:</p>
+<ul>
+<li><a href="https://github.com/MultiplEYE-COST/wg1-experiment-implementation/issues">Open an issue</a>.</li>
+<li>Add a descriptive title to the issue and write a short summary of the problem.</li>
+<li>We provide you with a default template to guide you through a typical reporting process.</li>
+<li>Adding more context, including error messages and references to the problematic parts of the code,
+would be very helpful to us.</li>
+</ul>
+<p>Once a bug is reported, our development team will try to address the issue as quickly as possible.</p>
+<h2>Getting Started</h2>
+<p>This is a general guide to contributing changes to the experimental presentation.</p>
+<h3>Creating a Branch</h3>
+<p>Before you start making changes to the code, create a local branch from the latest version of the
+<code>main</code> branch.</p>
+<pre><code class="language-bash">git checkout main
+git pull origin main
+git checkout -b feature/your-feature-branch
+</code></pre>
+<p>We do not allow for pushing directly to the <code>main</code> branch and merge changes exclusively by
+<a href="#pull-requests">pull requests</a>.</p>
+<h3>Code Style</h3>
+<p>We write our code to follow <a href="https://www.python.org/dev/peps/pep-0008">PEP-8</a> with a maximum
+line-width of 100 characters. We additionally use type annotations as in <a href="https://peps.python.org/pep-0484">PEP-484</a>.</p>
+<h3>Testing</h3>
+<p>It is probably not possible to write meaningful unittests for the implementation. For certain methods or classes
+it might be possible but not for all. Therefore:</p>
+<ul>
+<li>please make sure you test your code at least by running the dummy experiment or if possible with an actual eye-tracker</li>
+<li>if there are methods where you think it is possible to add unittests, please do so</li>
+</ul>
+<h3>Pull Requests</h3>
+<p>Once you are ready to publish your changes:</p>
+<ul>
+<li>Create a <a href="https://github.com/MultiplEYE-COST/wg1-experiment-implementation/pulls">pull request (PR)</a>.</li>
+<li>Provide a summary of the changes you are introducing according to the default template.</li>
+<li>In case you are resolving an issue, don't forget to add a reference in the description.</li>
+</ul>
+<p>The best pull requests are focused, clearly describe what they're for and why they're correct, and
+contain tests for whatever changes they make to the code's behavior (but see note on testing). As a bonus these are easiest
+for someone to review, which helps your pull request get merged quickly. Standard advice about good
+pull requests for open-source projects applies.</p>
