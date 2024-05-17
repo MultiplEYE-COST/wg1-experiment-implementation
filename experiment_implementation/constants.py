@@ -18,10 +18,11 @@ LAB_NUMBER = LOCAL_CONFIGS['LAB_NUMBER']
 
 DUMMY_MODE = LOCAL_CONFIGS['DUMMY_MODE']
 
-TRACKERTYPE = 'eyelink' if not DUMMY_MODE else 'dummy'
+#TRACKERTYPE = 'eyelink' if not DUMMY_MODE else 'dummy'
+TRACKERTYPE = 'tobii' if not DUMMY_MODE else 'dummy'
 
 # tobii trackers
-# TRACKERSERIALNUMBER = LANG_CONFIGS['TRACKERSERIALNUMBER']
+TRACKERSERIALNUMBER = 'TPFC2-010202524041'
 
 ##############################################################################################################
 # BELOW WE SPECIFY THOSE VARIABLES THAT ARE THE SAME ACROSS ALL LANGUAGES AND DEVICES; DO NOT CHANGE THESE ###

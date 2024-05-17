@@ -138,7 +138,9 @@ class Experiment:
 
         # default the eye to right as this is most typically the more dominant eye
         # but there should be an eye dominance test
-        self._eye_tracker.set_eye_used(eye_used=constants.EYE_USED)
+
+        # TODO tobii: see if possible otherwise it does not matter
+        # self._eye_tracker.set_eye_used(eye_used=constants.EYE_USED)
 
     def welcome_screen(self):
         self._display.fill(self.instruction_screens['welcome_screen']['screen'])
@@ -158,6 +160,7 @@ class Experiment:
 
     def calibrate(self) -> None:
 
+        # TODO tobii: make sure that it is a 9 point procedure
         self._eye_tracker.calibrate()
 
     def run_experiment(self) -> None:
@@ -401,6 +404,7 @@ class Experiment:
                 self._eye_tracker.stop_recording()
                 self._eye_tracker.log(f'stop_recording_{flag}trial_{trial_nr}_page_{page_number}')
 
+                # TODO tobii: see other TODO below for other trial vars and log messages in general
                 self._eye_tracker.log(f'!V TRIAL_VAR condition {cond}')
                 self._eye_tracker.log(f'!V TRIAL_VAR backdrop_image {relative_img_path}')
                 self._eye_tracker.log(f'!V TRIAL_VAR RT {int(core.getTime() - stimulus_timestamp) * 1000}')
@@ -561,6 +565,8 @@ class Experiment:
                 self._eye_tracker.stop_recording()
                 self._eye_tracker.log(f'stop_recording_{flag}trial_{trial_nr}_question_{question_number}')
 
+                # TODO tobii: all of this VARS are eyelink specific, but as tobii is a tsv file, maybe we can leave it?
+                #  Dataviewer requires this format but tobii will be analyzed differently anyways
                 self._eye_tracker.log('!V TRIAL_VAR condition %s' % cond)  # cui use 'practice' and 'real' as cond?
                 self._eye_tracker.log('!V TRIAL_VAR backdrop_image %s' % relative_question_page_path)
                 self._eye_tracker.log('!V TRIAL_VAR RT %d' % int(core.getTime() - question_timestamp) * 1000)
@@ -691,11 +697,15 @@ class Experiment:
         :return: bool: trigger fired or not
         """
 
+        # TODO tobii: check how to do this --> needs PyGaze adaptation
         fix_screen = self.instruction_screens['fixation_screen']['screen']
+
+        # for debugging purposes, show trigger region
         fix_screen.draw_ellipse(x=constants.FIX_DOT_X - constants.FIXATION_TRIGGER_RADIUS // 2,
                                 y=constants.FIX_DOT_Y - constants.FIXATION_TRIGGER_RADIUS // 2,
                                 w=constants.FIXATION_TRIGGER_RADIUS,
                                 h=constants.FIXATION_TRIGGER_RADIUS)
+
         self._display.fill(fix_screen)
         screen_onset = self._display.show()
 
@@ -725,6 +735,8 @@ class Experiment:
                     return False
 
             # check whether host keyboard was pressed by experimenter
+            # TODO tobii: not sure how this works, I have added get_tracker() to get the EyeLink object
+            #  and readKeyButton() is pylink specific
             key, modifier, _, _, timestamp = self._eye_tracker.get_tracker().readKeyButton()
 
             # keys are returned as ascii codes
@@ -760,9 +772,11 @@ class Experiment:
                 self._eye_tracker.calibrate()
                 return True
 
+            # TODO tobii: check how this is implemented for tobii
             ts_fixation_end, data = self._eye_tracker.wait_for_fixation_end(timeout=500)
 
             if data is not None:
+                # TODO tobii: getAverageGaze() is pylink specific
                 average_position = data.getAverageGaze()
                 print(average_position)
                 x_pos, y_pos = average_position
