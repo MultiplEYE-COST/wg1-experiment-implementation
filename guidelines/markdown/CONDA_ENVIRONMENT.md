@@ -7,32 +7,44 @@ but it is possible to use another environment if you prefer something else.
 
 **1. Install anaconda / miniconda**
 
-Note: to install ana/miniconda it might ask you to register, but you should be able to skip this step. It usually says so at the bottom of the form, in a really small font size.
+Note: to install ana/miniconda it might ask you to register, but you should be able to skip this step. 
+It usually says so at the bottom of the form, in a really small font size.
 
 **1.1 If you haven't worked with Windows PowerShell**
 
-   We highly recommend you to install anaconda instead of miniconda. Anaconda is a full package of python and other useful tools.
+   We highly recommend you to install anaconda instead of miniconda.
    Anaconda can take up a lot of space on your computer, but you will have everything available and it is easy to use. 
    Miniconda is a minimal version of anaconda, but it does not come with all the tools you might need. You can download anaconda [here](https://www.anaconda.com/products/individual). <br>
-   When you go through the installation process please make sure to install it for the current user only ("just me"). You will have to tick a box that says so at one point. 
-   Anaconda environment will be activated by default after you install it. You can check whether it is activated by opening your anaconda prompt. If you see `(base)` at the beginning of your command line prompt, it means you are in the default environment of conda. <br>
+   When you go through the installation process please make sure to tick two boxes:
+   - install it for the current user only ("just me").
+   - add anaconda to your path.
+
+   Anaconda environment will be activated by default after you install it. 
+   Using the search function of your Mac or Windows, you can search for `anaconda prompt` and open it. 
+   Alternatively you can search for terminal or command prompt.
+   If you see `(base)` at the beginning of your command line prompt, it means you are in the default environment of conda which is good. <br>
 
 **1.2 If you have worked with Windows PowerShell**
 
    You can choose to install either anaconda or miniconda to use the repository with a conda
    environment. Miniconda should be enough for our purposes. You can download it [here](https://docs.conda.io/en/latest/miniconda.html). <br>
-   When you go through the installation process please make sure to install it for the current user only ("just me"). You will have to tick a box that says so at one point. 
-   However, you might have to open your powershell in administrator mode and change the execution policy to be ```RemoteSigned``` in order to activate the conda environment. Please refer to the closed issues of this repository for the solutions of this problem.
+   When you go through the installation process please make sure to install it for the current user only ("just me"). 
+   You will have to tick a box that says so at one point. Then there will be a checkbox where you can select whether 
+   you want to add (ana/mini)conda to your path. Tick this checkbox to add it to your path.
+   However, you might have to open your powershell in administrator mode and 
+   change the execution policy to be ```RemoteSigned``` in order to activate the conda environment. 
+   Please refer to the closed issues of this repository for the solutions of this problem.
 
-   When you are prompted to select if you want to install it for all users or only you, select only for me/only this user.
-   Then there will be a checkbox where you can select whether you want to add (ana/mini)conda to your path. Tick this checkbox to add it to your path.
    Note that you might have to run additional commands in your terminal to initialize conda. E.g. for Windows powershell
    you need to run
    ```bash
    conda init powershell
    ```
-   in the powershell and then restart the powershell. Now you should be able to see `(base)` at the beginning of your command line prompt, which means you are in the default environment of Conda.<br>
-   If not or if you see some error messages, please visit [here](https://docs.google.com/document/d/1a18YnUMwZjA0EImV6BO4F3sggALmyzZexGMgN3Gf8YU/edit#heading=h.sfaite8bdith) for the solutions of the specific problems. As an alternative, you can also find solutions in the open or closed issues of this repository. If your error message is not listed, please open a new issue and we will try to help you.
+   in the powershell and then restart the powershell. Now you should be able to see `(base)` at the beginning of 
+   your command line prompt, which means you are in the default environment of Conda.<br>
+   If not or if you see some error messages, please visit [here](https://docs.google.com/document/d/1a18YnUMwZjA0EImV6BO4F3sggALmyzZexGMgN3Gf8YU/edit#heading=h.sfaite8bdith) for the solutions of the specific problems. 
+   As an alternative, you can also find solutions in the open or closed issues of this repository. 
+   If your error message is not listed, please open a new issue and we will try to help you.
 
 **2. Install git**
 

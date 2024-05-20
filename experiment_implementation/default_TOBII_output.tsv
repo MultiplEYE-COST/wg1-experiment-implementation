@@ -1,0 +1,36 @@
+pygaze initiation report start
+display resolution: 1920x1200
+display size in cm: 51.8x32.4
+fixation threshold: 1.5 degrees
+speed threshold: 35 degrees/second
+acceleration threshold: 9500 degrees/second**2
+pygaze initiation report end
+TimeStamp	Event	GazePointXLeft	GazePointYLeft	ValidityLeft	GazePointXRight	GazePointYRight	ValidityRight	GazePointX	GazePointY	PupilSizeLeft	PupilValidityLeft	PupilSizeRight	PupilValidityRight
+0.0	welcome_screen
+5858.244	informed_consent_screen
+pygaze calibration report start
+samplerate: 119 Hz
+sampletime: 8.333501305969891 ms
+accuracy (in pixels): LX=694.1971690729822, LY=475.41068812692384, RX=686.2161191320237, RY=466.30634543674387
+precision (RMS noise in pixels): X=18.64893049736773, Y=107.99637675081672
+distance between participant and display: 60.0 cm
+fixation threshold: 58.21340436358932 pixels
+speed threshold: 1.3580025989209614 pixels/ms
+accuracy threshold: 372.01604472754883 pixels/ms**2
+pygaze calibration report end
+68845.468	start_experiment
+68845.629	showing_instruction_screen_1
+70047.685	showing_instruction_screen_2
+71027.264	showing_instruction_screen_3
+71947.765	practice_text_starting_screen
+72954.182	validation_before_stimulus
+pygaze calibration report start
+samplerate: 119 Hz
+sampletime: 8.33352172928884 ms
+accuracy (in pixels): LX=676.2940254053277, LY=431.4503380662576, RX=677.3805108523618, RY=432.506067965046
+precision (RMS noise in pixels): X=36.52475451399629, Y=22.02839077191069
+distance between participant and display: 60.0 cm
+fixation threshold: 58.21340436358932 pixels
+speed threshold: 1.3580025989209614 pixels/ms
+accuracy threshold: 372.01604472754883 pixels/ms**2
+pygaze calibration report end
