@@ -96,9 +96,16 @@ If you work with an EyeLink eye-tracker, you need to install the EyeLink librari
    created env. How you have to do it depends on the IDE. For PyCharm it is explained under this link: [Configure existing conda env as PyCharm interpreter](https://www.jetbrains.com/help/pycharm/conda-support-creating-conda-virtual-environment.html)
 
 
-## For Mac
-Note: we do not recommend to run the experiment on a Mac as it is not optimized to work for Mac. The instructions to make it run
-are not as straighforward as for windows. If you want to run the experiment on a Mac, you can follow the instructions below. 
-If you have any additions to the instructions or know another possibly easier way to set it up, please let us know. 
-In addition, I had to install
-`unixodbc`. I installed it with `brew install unixodbc` and `brew install portautiod`. 
+## For MacOS
+The experiment has been tested on Mac as well but not as thoroughly as on Windows. The creation of the conda 
+environment is the same as on Windows. **However, you might have to install some additional Mac-specific programs in 
+order to make it run**. If you had to install additional programs, please let us know so we can add them to this guide.
+
+In order to run the experiment including the GUI on Mac you need to do the following things:
+
+1. You need to allow PsychoPy to access your input. In order to do that go to `System Preferences` 
+-> `Security & Privacy` -> `Privacy` -> `Input Monitoring`. Then you click on the '+' and add PsychoPy. 
+Pick the PsychoPy version that is in your env. For me the path for a anaconda env called 'test' looks like this:
+```bash
+/Users/[USERNAME]/opt/anaconda3/envs/multipleye3.9/bin/psychopy
+```

@@ -8,14 +8,37 @@ there exist two versions.
 If you would like to contribute, please read the following guidelines: [CONTRIBUTING.md](guidelines/markdown/CONTRIBUTING.md) and
 contact [multipleye@cl.uzh.ch](mailto:multipleye@cl.uzh.ch).
 
+## Contents
+[Installation](#installation)
+[Run the experiment without an eye-tracker](#run-the-dummy-experiment)
+[The result files](#the-result-files)
+[Run the experiment with an eye-tracker](#run-the-experiment-with-an-eye-tracker)
+
+
+## Installation
+
 In order to run the MultiplEYE experiment you will need to complete the following steps
 1. Please read the official MultiplEYE guidelines linked on this page: [MultiplEYE contribute](https://multipleye.eu/contribute/)
-2. Following the guidelines, prepare the stimulus files which includes the creation of the images
-3. Prepare the environment for the experiment following the guidelines in [CONDA_ENVIRONMENT.md](guidelines/markdown/CONDA_ENVIRONMENT.md)
-4. Install the necessary packages for your eye-tracker. For EyeLink eye-trackers 
+2. Download the experiment code from this repository. Either clone via git or download the zip file (see [download as zip](#download-the-experiment-code-as-zip-file)).
+3. Following the guidelines, prepare the stimulus files which includes the creation of the images
+4. Copy the stimulus files to the correct location in the experiment data folder: `experiment_implementation/data/[your stimulus folder]`
+5. Prepare the environment for the experiment following the guidelines in [CONDA_ENVIRONMENT.md](guidelines/markdown/CONDA_ENVIRONMENT.md)
+6. Install the necessary packages for your eye-tracker. For EyeLink eye-trackers 
 [INSTALL_PYLINK.md](guidelines/markdown/INSTALL_PYLINK.md). For Tobii eye-trackers, please see [develop for Tobii](#develop-and-run-experiments-for-tobii) further below.
-5. [Run the dummy experiment](#run-the-dummy-experiment) to check if everything is working correctly
-6. [Run the experiment with an eye-tracker](#run-the-experiment-with-an-eye-tracker)
+7. [Run the dummy experiment](#run-the-dummy-experiment) to check if everything is working correctly
+8. [Run the experiment with an eye-tracker](#run-the-experiment-with-an-eye-tracker)
+
+### Download the experiment code as zip file
+If you do not have git installed, you can download the code as a zip file from this website.
+Click on the green button `Code` and then click on `Download ZIP`. Unzip the folder in our preferred location.
+
+> Note: The repository contains a folder with toy stimuli to test the experiment. Sometimes you cannot unzip these files because the path gets too long.
+> In this case, you can either move the folder to a different location closer to the root or unzip and ignore the files
+> in the toy stimuli folder (i.e. skip the error message that pops up during unzipping). To use the 
+> toy stimuli, please contact [multipleye@cl.uzh.ch](mailto:multipleye@cl.uzh.ch) and we can provide them and you can 
+> copy them to the correct location.
+
+![Download](guidelines/images/download-as-zip.png)
 
 ## Run the dummy experiment
 The experiment can be run in dummy mode which means that can be run without an actual eye-tracker.
@@ -36,7 +59,7 @@ python experiment_implementation/start_multipleye_session.py
 
 In the GUI that will pop up you can tick the box `Dummy version` to run the experiment in dummy mode.
 
-## Check the result files
+## The result files
 The experiment will write log and data files to a newly created results folder for your language and country
 in the data folder (``data/eye_tracking_data...``). 
 In there it will create a folder depending on the experiment type. For example, if you run the test session, 
@@ -52,16 +75,6 @@ The naming scheme of the log files is a follows:
 
 All logfiles are csv files. Note that the timestamps are relative to the start of the experiment. The experiment starts
 at timestamp 0.
-
-## Run the experiment on macOS
-In order to run the experiment including the GUI on Mac you need to do the following things:
-
-1. You need to allow PsychoPy to access your input. In order to do that go to `System Preferences` 
--> `Security & Privacy` -> `Privacy` -> `Input Monitoring`. Then you click on the '+' and add PsychoPy. 
-Pick the PsychoPy version that is in your env. For me the path for a anaconda env called 'test' looks like this:
-```bash
-/Users/[USERNAME]/opt/anaconda3/envs/multipleye3.9/bin/psychopy
-```
 
 ## Run the experiment with an eye-tracker
 In order to run the experiment with an actual eye-tracker you can tick the respective box in the GUI in the lab settings 
