@@ -17,14 +17,18 @@ PARENT_FOLDER = Path(__file__).parent
 LANG_DIR = PARENT_FOLDER / 'ui_data/interface_language/'
 IMAGE_DIR = PARENT_FOLDER / 'ui_data/interface_icons/'
 
-if os.path.exists(PARENT_FOLDER / f'data/stimuli_{local_config.LANGUAGE}_{local_config.COUNTRY_CODE}_'
-                                  f'{local_config.LAB_NUMBER}/config/stimulus_order_versions_{local_config.LANGUAGE}_'
-                                  f'{local_config.COUNTRY_CODE}_'
-                                  f'{local_config.LAB_NUMBER}.csv'):
-    df = pd.read_csv(PARENT_FOLDER / f'data/stimuli_{local_config.LANGUAGE}_{local_config.COUNTRY_CODE}_'
-                                  f'{local_config.LAB_NUMBER}/config/stimulus_order_versions_{local_config.LANGUAGE}_'
-                                  f'{local_config.COUNTRY_CODE}_'
-                                  f'{local_config.LAB_NUMBER}.csv', sep=',', encoding='utf8')
+if os.path.exists(
+        PARENT_FOLDER / f'data/stimuli_{local_config.LANGUAGE}_{local_config.COUNTRY_CODE}_'
+                        f'{local_config.LAB_NUMBER}/config/stimulus_order_versions_{local_config.LANGUAGE}_'
+                        f'{local_config.COUNTRY_CODE}_'
+                        f'{local_config.LAB_NUMBER}.csv'
+        ):
+    df = pd.read_csv(
+        PARENT_FOLDER / f'data/stimuli_{local_config.LANGUAGE}_{local_config.COUNTRY_CODE}_'
+                        f'{local_config.LAB_NUMBER}/config/stimulus_order_versions_{local_config.LANGUAGE}_'
+                        f'{local_config.COUNTRY_CODE}_'
+                        f'{local_config.LAB_NUMBER}.csv', sep=',', encoding='utf8'
+        )
     PARTICIPANT_IDS = sorted(df.participant_id.dropna().astype(int).values.tolist())
 else:
     PARTICIPANT_IDS = []
@@ -60,12 +64,8 @@ def parse_args():
     )
 
     lab_settings = parser.add_argument_group(
-        'Lab Settings',
-        description=f'At the moment you will run the experiment with the language settings below. '
-                    f'They should be the same as the values you have entered in the pre-registration form. '
-                    f'If that is not the case, please change them here. To run the minimal experiment, '
-                    f'please enter "toy" '
-                    f'as the language and "x" as the country code.',
+        translations['lab_settings'],
+        description=translations['lab_settings_desc'],
         gooey_options={
             'show_underline': False,
         },
@@ -73,8 +73,8 @@ def parse_args():
     lab_settings.add_argument(
         '--language',
         widget='TextField',
-        metavar='Language',
-        help='The 2 letter ISO-639-1 language code that you also specified in the pre-registration form.',
+        metavar=translations['language'],
+        help=translations['language_help'],
         default=local_config.LANGUAGE,
         required=True,
         gooey_options={'visible': True},
@@ -83,8 +83,8 @@ def parse_args():
     lab_settings.add_argument(
         '--full_language',
         widget='TextField',
-        help='The full language name that you run the experiment in (e.g. English).',
-        metavar='Full language',
+        help=translations['full_language_help'],
+        metavar=translations['full_language'],
         default=local_config.FULL_LANGUAGE,
         required=True,
         gooey_options={'visible': True},
@@ -92,8 +92,8 @@ def parse_args():
 
     lab_settings.add_argument(
         '--country_code',
-        help='The 2 letter ISO-639-1 country code that you also specified in the pre-registration form.',
-        metavar='Country code',
+        help=translations['country_code_help'],
+        metavar=translations['country_code'],
         widget='TextField',
         default=local_config.COUNTRY_CODE,
         required=True,
@@ -117,7 +117,7 @@ def parse_args():
         '--dummy_mode',
         metavar='Dummy mode',
         action='store_true',
-        #default=local_config.DUMMY_MODE,
+        # default=local_config.DUMMY_MODE,
         widget='CheckBox',
         help='Please (un)select this if you (do not) want to run the experiment in dummy mode. '
              'This mode is used for testing the experiment without an eye tracker.',
@@ -153,9 +153,9 @@ def parse_args():
     participants = parser.add_argument_group('Participant Information')
     participants.add_argument(
         '--participant-id',
-        metavar='Participant ID',
+        metavar=translations['participant_id'],
         default=1,
-        help='Enter the participant ID here. Note that is has to be a number and it cannot be longer than 3 digits',
+        help=translations['participant_id_help'],
         required=True,
         type=int,
     )
@@ -171,8 +171,9 @@ def parse_args():
         '!!! Danger Zone !!!',
         description='If you need to continue a core session please follow the following procedure:\n'
                     '1. Save a copy the .edf file from the result folder to another location on your PC '
-                    'but do not delete the file  in the result folder. For participant ID 1 the result folder is '
-                    'located at "data/eye_tracking_data_[LANGUAGE_CODE]_[COUNTRY_CODE]_[LAB_NUMBER]"'
+                    'but do not delete the file in the result folder.\nFor participant ID 1 the result folder is '
+                    'located at\n"data > eye_tracking_data_[LANGUAGE_CODE]_[COUNTRY_CODE]_[LAB_NUMBER] >\n'
+                    'core_dataset > [PARTICIPANT_ID]..."'
     )
     danger_zone.add_argument(
         '--continue-core-session',
@@ -291,9 +292,11 @@ def start_experiment_session():
             if constants.MULTIPLE_DEVICES:
                 if (not arguments['participant_id'] >= constants.VERSION_START
                         and arguments['participant_id'] <= constants.NUM_VERSIONS):
-                    raise ValueError(f'The participant ID has to be between {constants.VERSION_START} and '
-                                     f'{constants.NUM_VERSIONS}, as you are using multiple devices to'
-                                     f' collect the data.')
+                    raise ValueError(
+                        f'The participant ID has to be between {constants.VERSION_START} and '
+                        f'{constants.NUM_VERSIONS}, as you are using multiple devices to'
+                        f' collect the data.'
+                        )
 
         # if the item version has not been manually set, we determine it
         stimulus_order_version = arguments['stimulus_order_version']
