@@ -16,12 +16,18 @@ import local_config
 PARENT_FOLDER = Path(__file__).parent
 LANG_DIR = PARENT_FOLDER / 'ui_data/interface_language/'
 IMAGE_DIR = PARENT_FOLDER / 'ui_data/interface_icons/'
-if os.path.exists(PARENT_FOLDER / 'data/randomization/stimulus_order_versions.tsv'):
-    df = pd.read_csv(PARENT_FOLDER / 'data/randomization/stimulus_order_versions.tsv', sep='\t', encoding='utf8')
 
-    PARTICIPANT_IDS = df.participant_id.dropna().astype(int).values.tolist()
+if os.path.exists(PARENT_FOLDER / f'data/stimuli_{local_config.LANGUAGE}_{local_config.COUNTRY_CODE}_'
+                                  f'{local_config.LAB_NUMBER}/config/stimulus_order_versions_{local_config.LANGUAGE}_'
+                                  f'{local_config.COUNTRY_CODE}_'
+                                  f'{local_config.LAB_NUMBER}.csv'):
+    df = pd.read_csv(PARENT_FOLDER / f'data/stimuli_{local_config.LANGUAGE}_{local_config.COUNTRY_CODE}_'
+                                  f'{local_config.LAB_NUMBER}/config/stimulus_order_versions_{local_config.LANGUAGE}_'
+                                  f'{local_config.COUNTRY_CODE}_'
+                                  f'{local_config.LAB_NUMBER}.csv', sep=',', encoding='utf8')
+    PARTICIPANT_IDS = sorted(df.participant_id.dropna().astype(int).values.tolist())
 else:
-    PARTICIPANT_IDS = sorted(list(range(1, 300)))
+    PARTICIPANT_IDS = []
 
 if not os.path.exists(LANG_DIR / f'{local_config.FULL_LANGUAGE.lower()}.json'):
     GUI_LANG = 'English'
@@ -218,7 +224,7 @@ def start_experiment_session():
     if arguments['dummy_mode'] != local_config.DUMMY_MODE:
         settings_changed = True
 
-    if settings_changed:
+    if settings_changed and not arguments['continue_core_session']:
         with open(PARENT_FOLDER / 'local_config.py', 'w') as f:
             f.write(f'LANGUAGE = "{arguments["language"]}"\n')
             f.write(f'FULL_LANGUAGE = "{arguments["full_language"]}"\n')
@@ -279,6 +285,15 @@ def start_experiment_session():
 
             arguments['session_id'] = 1
             arguments['dataset_type'] = 'core_dataset'
+
+            # check if the participant ID is within the range of the number of versions for data collections that
+            # are using multiple devices
+            if constants.MULTIPLE_DEVICES:
+                if (not arguments['participant_id'] >= constants.VERSION_START
+                        and arguments['participant_id'] <= constants.NUM_VERSIONS):
+                    raise ValueError(f'The participant ID has to be between {constants.VERSION_START} and '
+                                     f'{constants.NUM_VERSIONS}, as you are using multiple devices to'
+                                     f' collect the data.')
 
         # if the item version has not been manually set, we determine it
         stimulus_order_version = arguments['stimulus_order_version']

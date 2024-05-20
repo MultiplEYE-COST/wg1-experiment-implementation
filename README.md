@@ -21,7 +21,7 @@ In order to run the MultiplEYE experiment you will need to complete the followin
 The experiment can be run in dummy mode which means that can be run without an actual eye-tracker.
 If you'd like to run it, make sure you have completed the above steps, and you have your conda environment activated.
 
-To be sure that you are running the dummy version, check the following things:
+To be sure that you are running the dummy version, activate the environment:
 
 ```bash
 conda activate multipleye3.9
@@ -33,6 +33,8 @@ Then you can navigate to the root folder of your local clone of the repository (
 ```bash
 python experiment_implementation/start_multipleye_session.py
 ```
+
+In the GUI that will pop up you can tick the box `Dummy version` to run the experiment in dummy mode.
 
 ## Check the result files
 The experiment will write log and data files to a newly created results folder for your language and country
@@ -51,7 +53,7 @@ The naming scheme of the log files is a follows:
 All logfiles are csv files. Note that the timestamps are relative to the start of the experiment. The experiment starts
 at timestamp 0.
 
-### Run the experiment on macOS
+## Run the experiment on macOS
 In order to run the experiment including the GUI on Mac you need to do the following things:
 
 1. You need to allow PsychoPy to access your input. In order to do that go to `System Preferences` 
@@ -62,22 +64,18 @@ Pick the PsychoPy version that is in your env. For me the path for a anaconda en
 ```
 
 ## Run the experiment with an eye-tracker
-In order to run the experiment with an actual eye-tracker you need to adjust the following lines in 
-[ ``local_config.py``](experiment_implementation/local_config.py):
+In order to run the experiment with an actual eye-tracker you can tick the respective box in the GUI in the lab settings 
+section. The box `Dummy version` should be **un-ticked**.
 
-```python
-DUMMY_MODE = False
-```
-
-Depending on what eye-tracker you intend to use you need to install the software that comes with the eye-tracker. You 
-don't always need a license for that. E.g. for tobii trackers there is a free software available 
-[here](https://www.tobii.com/products/software/applications-and-developer-kits/tobii-pro-eye-tracker-manager).
+Depending on what eye-tracker you intend to use you need to install the software that comes with the eye-tracker. For 
+EyeLink and tobii you can download the software online for free.
 
 ### Develop and run experiments for EyeLink
 The code has been tested with EyeLink eye-trackers and mostly on a Windows presentation PC. However, MacOS should work 
 as well, but it has not been tested as thoroughly.
 You will need to install `pylink` a package provided by SR Research if you use EyeLink eye-trackers.
-Note that `pip install pylink` installs a different package although the names are the same! Step-by-step instructions
+Note that using pip to install pylink installs a different package although the names are the same! You have to follow 
+these step-by-step instructions
 of how to install `pylink` can be found here: [INSTALL_PYLINK.md](guidelines/markdown/INSTALL_PYLINK.md)
 
 ### Develop and run experiments for Tobii

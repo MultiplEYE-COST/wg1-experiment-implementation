@@ -86,7 +86,7 @@ class Experiment:
 
         self.log_completed_stimuli = pd.DataFrame(
             columns=['timestamp_started', 'timestamp_completed',
-                     'stimulus_id', 'stimulus_name', 'completed']
+                     'trial_id', 'stimulus_id', 'stimulus_name', 'completed']
             )
 
         self._eye_tracker = EyeTracker(
@@ -125,6 +125,7 @@ class Experiment:
 
         self.num_pages = num_pages
         self.abs_exp_path = abs_exp_path
+        self.session_mode = session_mode
 
         # define the fixation trigger that will be shown between two pages
         self.fixation_trigger_region = aoi.AOI('circle', (constants.FIX_DOT_X, constants.FIX_DOT_Y), constants.FIXATION_TRIGGER_RADIUS*2)
@@ -239,9 +240,18 @@ class Experiment:
         total_page_count = 0
         obligatory_break_made = False
 
+        # if a core session has been restarted we need to update the trial numbering
+        start_trial = 0
+        if self.session_mode.value == 'core':
+            if practice:
+                start_trial = 2 - len(stimuli_dicts)
+            else:
+                start_trial = 10 - len(stimuli_dicts)
+
         for trial_nr, screens in enumerate(stimuli_dicts):
+
             # trial counting should start at 1 but starts at 0 per default
-            trial_nr += 1
+            trial_nr += 1 + start_trial
 
             stimulus_pages = screens['pages']
             questions_pages = screens['questions']
@@ -324,7 +334,8 @@ class Experiment:
             self._eye_tracker.log(f'{flag}TRIALID {trial_nr}')
 
             stimulus_dict = {'timestamp_started': get_time(), 'timestamp_completed': pd.NA,
-                             'stimulus_id': stimulus_id, 'stimulus_name': stimulus_name, 'completed': 0}
+                             'trial_id': f'{flag}{trial_nr}', 'stimulus_id': stimulus_id,
+                             'stimulus_name': stimulus_name, 'completed': 0}
 
             # log which stimulus has started so that we can restart the session
             self.log_completed_stimuli = pd.concat(
