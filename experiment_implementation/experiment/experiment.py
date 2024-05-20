@@ -139,7 +139,7 @@ class Experiment:
         # default the eye to right as this is most typically the more dominant eye
         # but there should be an eye dominance test
 
-        # TODO tobii: see if possible otherwise it does not matter
+        # TODO tobii: see if possible otherwise it does not matter, probably var needs to change for tobii
         # self._eye_tracker.set_eye_used(eye_used=constants.EYE_USED)
 
     def welcome_screen(self):
