@@ -261,13 +261,13 @@ def start_experiment_session():
             # hardcoded args
             arguments['session_id'] = 1
             arguments['stimulus_order_version'] = constants.VERSION_START
-            arguments['dataset_type'] = 'test_dataset'
+            arguments['dataset_type'] = 'test_sessions'
 
         elif arguments['session_mode'].value == 'minimal':
 
             # hardcoded args
             arguments['session_id'] = 1
-            arguments['dataset_type'] = 'test_dataset'
+            arguments['dataset_type'] = 'test_sessions'
             arguments['stimulus_order_version'] = constants.VERSION_START
 
         elif arguments['session_mode'].value == 'additional':

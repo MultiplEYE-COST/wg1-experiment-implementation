@@ -43,7 +43,7 @@ def run_experiment(
     # if it is a testrun, we create a folder with the name of the participant ID and the suffix "_testrun"
     # if the folder already exists we just dump the test files to that same folder
     if session_mode.value == 'test' or session_mode.value == 'minimal':
-        relative_exp_result_path = (f'{constants.RESULT_FOLDER_PATH}/{dataset_type.lower()}/'
+        relative_exp_result_path = (f'{constants.DATA_FOLDER_PATH}/{dataset_type.lower()}/'
                                     f'{participant_result_folder}_testrun_{int(datetime.datetime.now().timestamp())}')
 
         absolute_exp_result_path = os.path.abspath(relative_exp_result_path)
