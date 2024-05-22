@@ -3,7 +3,6 @@ import pandas as pd
 
 from participant_questionnaire import pq_read_files as read_questions
 from participant_questionnaire import pq_constants as pq_constants
-
 import constants
 
 
@@ -28,8 +27,8 @@ def pq_main_layout():
     # Creating the layout for the first frame
     # ID_1 need to be replaced with the Participant ID from the experiment implementation
     c11 = [
-        sg.Text('' + read_questions.pq_instructions[2][1] + '\n\n', font=("Times New Roman", 14, "bold", "italic")),
-        sg.Text('ID_1\n\n', font=("Times New Roman", 14, "bold", "italic"))]
+        sg.Text('' + read_questions.pq_instructions[3][1] + '\n\n', font=("Times New Roman", 20, "bold", "italic")),
+        sg.Text('' + constants.PQ_Participant_ID + '\n\n', font=("Times New Roman", 20, "bold", "italic"))]
 
     c12 = [sg.Text('1. ' + read_questions.pq_questions[0][1], size=(50, None)),
            sg.Combo([read_questions.pq_questions[0][2], read_questions.pq_questions[0][3],
@@ -40,13 +39,13 @@ def pq_main_layout():
     c13 = [sg.Text('2. ' + read_questions.pq_questions[1][1], size=(50, None)),
            sg.Combo(list(range(1, 21)), size=(25, 1), pad=(50, 0), key='years_education')]
 
-    c14 = [sg.Text(' ' + read_questions.pq_questions[1][11], size=(50, None), pad=(20, 0),
+    c14 = [sg.Text(' ' + read_questions.pq_questions[1][11], size=(70, None), pad=(25, 0),
                    font=("Times New Roman", 14, "italic"))]
 
     c15 = [sg.Text('3. ' + read_questions.pq_questions[2][1], size=(50, None)),
            sg.In(pad=(50, 0), size=26, key='age')]
 
-    c16 = [sg.Text(' ' + read_questions.pq_questions[2][11], size=(50, None), pad=(20, 0),
+    c16 = [sg.Text(' ' + read_questions.pq_questions[2][11], size=(70, None), pad=(25, 0),
                    font=("Times New Roman", 14, "italic"))]
 
     c17 = [sg.Text('4. ' + read_questions.pq_questions[3][1], size=(50, None)),
@@ -63,7 +62,7 @@ def pq_main_layout():
                      read_questions.pq_questions[4][4]], size=25, pad=(50, 0), key='childhood_languages',
                     enable_events=True, readonly=False)]
 
-    c22 = [sg.Text(' ' + read_questions.pq_questions[4][11], size=(50, None), pad=(20, 0),
+    c22 = [sg.Text(' ' + read_questions.pq_questions[4][11], size=(70, None), pad=(20, 0),
                    font=("Times New Roman", 14, "italic"))]
 
     c23 = [sg.Text('6. ' + read_questions.pq_questions[5][1], size=(50, None)),
@@ -75,13 +74,13 @@ def pq_main_layout():
     # These elements are made visible depending on the answer to question 5
     c24 = [[sg.Text('7. ' + read_questions.pq_questions[6][1], size=(50, None))]]
     c25 = [
-        [sg.Text('' + read_questions.pq_instructions[10][1], size=(25, None)),
+        [sg.Text('' + read_questions.pq_instructions[11][1], size=(25, None)),
          sg.Combo(read_questions.pq_language_list,
                   size=22,
                   key='second_native_language',
                   enable_events=True)]]
     c26 = [
-        [sg.Text('' + read_questions.pq_instructions[11][1], size=(25, None)),
+        [sg.Text('' + read_questions.pq_instructions[12][1], size=(25, None)),
          sg.Combo(read_questions.pq_language_list,
                   size=22,
                   key='third_native_language',
@@ -107,9 +106,9 @@ def pq_main_layout():
            ]
     col3 = [c31, c32, c33]
 
-    c34 = [[sg.Text('' + read_questions.pq_instructions[14][1]), sg.B('+', key='add_dialect', enable_events=True)]]
+    c34 = [[sg.Text('' + read_questions.pq_instructions[15][1]), sg.B('+', key='add_dialect', enable_events=True)]]
 
-    c35 = [[sg.Frame('' + read_questions.pq_instructions[15][1], [[sg.T('')]], key='frame_dialect')]]
+    c35 = [[sg.Frame('' + read_questions.pq_instructions[16][1], [[sg.T('')]], key='frame_dialect')]]
 
     layout3 = [[sg.Column(col3, element_justification='l')],
                [sg.Column(c34, element_justification='l', key='adding_dialect', visible=False)],
@@ -127,14 +126,14 @@ def pq_main_layout():
     # Creating the layout for the fifth frame
 
     # TODO Fix adding again languages after having removed them
-    c51 = [[sg.Text('12. ' + read_questions.pq_questions[19][1], size=(50, 1)),
+    c51 = [[sg.Text('12. ' + read_questions.pq_questions[19][1], size=(50, None)),
             sg.Combo([read_questions.pq_questions[19][2], read_questions.pq_questions[19][3]], size=(22, 1),
                      key='read_language', enable_events=True)]]
     c52 = [[sg.Text(' ' + read_questions.pq_questions[19][11], size=(50, None), pad=(20, 0),
                     font=("Times New Roman", 14, "italic"))]]
-    c53 = [[sg.Text('' + read_questions.pq_instructions[7][1]), sg.B('+', key='add_language', enable_events=True)]]
+    c53 = [[sg.Text('' + read_questions.pq_instructions[8][1]), sg.B('+', key='add_language', enable_events=True)]]
 
-    c54 = [[sg.Frame('' + read_questions.pq_instructions[9][1], [[sg.T('')]], key='frame_reading_language')]]
+    c54 = [[sg.Frame('' + read_questions.pq_instructions[10][1], [[sg.T('')]], key='frame_reading_language')]]
 
     layout9 = [[sg.Column(c51, element_justification='l')],
                [sg.Column(c52, element_justification='l')],
@@ -172,8 +171,8 @@ def pq_main_layout():
                    font=("Times New Roman", 14, "italic"))]
     layout10 = [c71, c72, c73, c74, c75, c76]
 
-    # Creating the layout for the eighth frame
-    layout11 = [[sg.Text("" + read_questions.pq_instructions[18][1], size=(75, None),
+   # Creating the layout for the eighth frame
+    layout11 = [[sg.Text("" + read_questions.pq_instructions[19][1], size=(75, None),
                          justification='center')]]
 
     # Changing layout visibility to True/False depending on the selection of Prev/Next buttons
@@ -192,16 +191,18 @@ def pq_main_layout():
          sg.VPush()]
 
     layout_questions = [
-        [sg.Frame("", [q], size=(1000, 350), key='layout_questions', element_justification='c', pad=0, expand_x=True, expand_y=True)]]
+        [sg.Frame("", [q], size=(1000, 350), key='layout_questions', element_justification='c', pad=0, expand_x=True,
+                  expand_y=True)]]
 
     # Create layout for the buttons (prev, next, submit)
-    b = [sg.Button('' + read_questions.pq_instructions[4][1], key='prev', size=(10, 1), mouseover_colors='grey',
-                   use_ttk_buttons=True),
+    b = [sg.pin(sg.Button('' + read_questions.pq_instructions[5][1], key='prev', size=(10, 1), mouseover_colors='grey',
+                          use_ttk_buttons=True, visible=False)),
          sg.Push(),
-         sg.Button('' + read_questions.pq_instructions[3][1], key='next', size=(10, 1), mouseover_colors='grey',
-                   use_ttk_buttons=True),
-         sg.Button('' + read_questions.pq_instructions[5][1], key='submit', size=(10, 1), mouseover_colors='grey',
-                   use_ttk_buttons=True, visible=False)
+         sg.pin(sg.Button('' + read_questions.pq_instructions[4][1], key='next', size=(10, 1), mouseover_colors='grey',
+                          use_ttk_buttons=True)),
+         sg.pin(
+             sg.Button('' + read_questions.pq_instructions[6][1], key='submit', size=(10, 1), mouseover_colors='grey',
+                       use_ttk_buttons=True, visible=False))
          ]
 
     layout_b = [[sg.Frame("", [b], size=(1000, 55), pad=0, expand_x=True)]]
@@ -237,19 +238,19 @@ def pq_main_layout():
         if len(values['gender']) == 0:
             invalid_fields.append('Gender')
             is_valid = False
-        if len(values['age']) == 0:
+        if int(values['age']) < 18 or int(values['age']) > 120:
             invalid_fields.append('Age')
             is_valid = False
         if values['years_education'] == 0:
             invalid_fields.append('Years of education')
             is_valid = False
+            '''
         if len(values['first_native_language']) == 0:
             invalid_fields.append('First native language')
             is_valid = False
         if len(values['dominant_language']) == 0:
             invalid_fields.append('Dominant language')
             is_valid = False
-            '''
         if len(values['academic_reading_time']) == 0:
             invalid_fields.append('Academic reading time')
             is_valid = False
@@ -268,9 +269,9 @@ def pq_main_layout():
         if len(values['nonfiction_reading_time']) == 0:
             invalid_fields.append('Nonfiction reading time')
             is_valid = False
-        if len(values['other_reading_time']) == 0: 
+        if len(values['other_reading_time']) == 0:
             invalid_fields.append('Other reading time')
-            is_valid = False   '''
+            is_valid = False
         if len(values['socio_economic_status']) == 0:
             invalid_fields.append('Socio-economic status')
             is_valid = False
@@ -280,40 +281,43 @@ def pq_main_layout():
         if len(values['tiredness']) == 0:
             invalid_fields.append('Tiredness')
             is_valid = False
+            '''
         result = [is_valid, invalid_fields]
         return result
 
     # The error message shown due to field validation
     def generate_error_message(values_invalid):
-        pq_error_message = read_questions.pq_instructions[19][1]
+        pq_error_message = read_questions.pq_instructions[20][1]
         for value_invalid in values_invalid:
             pq_error_message += ('\n' + value_invalid)
         return pq_error_message
 
     # Elements shown when inserting dialects
     def item_dialect(item_d):
-        row = [sg.pin(sg.Col([[sg.Text('' + read_questions.pq_instructions[16][1]),
+        row = [sg.pin(sg.Col([[sg.Text('' + read_questions.pq_instructions[17][1]),
                                sg.Combo(pq_languages, key=f'language_{item_d}'),
-                               sg.Text('' + read_questions.pq_instructions[17][1]),
+                               sg.Text('' + read_questions.pq_instructions[18][1]),
                                sg.In(size=22, key=f'dialect_language_{item_d}'),
-                               sg.B('Delete', k=('delete_dialect', item_d), enable_events=True,
+                               sg.B(read_questions.pq_instructions[26][1], k=('delete_dialect', item_d),
+                                    enable_events=True,
                                     tooltip='Delete this item')]], k=('row_dialect', item_d)))]
         return row
 
     # Elements shown when inserting new reading languages
     def item_read_language(item_read):
-        row_language = [sg.pin(sg.Col([[sg.Text('' + read_questions.pq_instructions[12][1] + ' ' + f'{item_read}',
+        row_language = [sg.pin(sg.Col([[sg.Text('' + read_questions.pq_instructions[13][1] + ' ' + f'{item_read}',
                                                 key=f'language_number_{item_read}'),
                                         sg.Combo(read_questions.pq_language_list, size=22,
                                                  key=f'read_language_{item_read}'),
-                                        sg.B('Delete', k=('delete_read_language', item_read), enable_events=True,
+                                        sg.B(read_questions.pq_instructions[26][1],
+                                             k=('delete_read_language', item_read), enable_events=True,
                                              tooltip='Delete this item')]],
                                       k=('row_read_language', item_read), visible=True))]
         return row_language
 
     # Repeat layout for each language
     def repeating_layout(language_name):
-        c41 = [[sg.Text(' ' + read_questions.pq_questions[4][11] + '\n', size=(80, None), pad=(20, 0),
+        c41 = [[sg.Text(' ' + read_questions.pq_questions[10][11] + '\n', size=(None, None), pad=(20, 0),
                         font=("Times New Roman", 14, "italic"))]]
 
         row4 = [sg.pin(sg.Col([
@@ -329,49 +333,49 @@ def pq_main_layout():
                  [read_questions.pq_questions[11][2], read_questions.pq_questions[11][3],
                   read_questions.pq_questions[11][4],
                   read_questions.pq_questions[11][5], read_questions.pq_questions[11][6]],
-                 key='academic_reading_time'),
+                 key=f'academic_reading_time_{no_repeating_layout}'),
              sg.Text(read_questions.pq_questions[12][1], size=(18, 1), justification='right'),
              sg.Combo(
                  [read_questions.pq_questions[12][2], read_questions.pq_questions[12][3],
                   read_questions.pq_questions[12][4],
                   read_questions.pq_questions[12][5], read_questions.pq_questions[12][6]],
-                 key='magazine_reading_time')],
+                 key=f'magazine_reading_time_{no_repeating_layout}')],
             [sg.Text(read_questions.pq_questions[13][1], size=(18, 1), justification='right'),
              sg.Combo(
                  [read_questions.pq_questions[13][2], read_questions.pq_questions[13][3],
                   read_questions.pq_questions[13][4],
                   read_questions.pq_questions[13][5], read_questions.pq_questions[13][6]],
-                 key='newspaper_reading_time'),
+                 key=f'newspaper_reading_time_{no_repeating_layout}'),
              sg.Text(read_questions.pq_questions[14][1], size=(18, 1), justification='right'),
              sg.Combo(
                  [read_questions.pq_questions[14][2], read_questions.pq_questions[14][3],
                   read_questions.pq_questions[14][4],
                   read_questions.pq_questions[14][5], read_questions.pq_questions[14][6]],
-                 key='email_reading_time')],
+                 key=f'email_reading_time_{no_repeating_layout}')],
             [sg.Text(read_questions.pq_questions[15][1], size=(18, 1), justification='right'),
              sg.Combo(
                  [read_questions.pq_questions[15][2], read_questions.pq_questions[15][3],
                   read_questions.pq_questions[15][4],
                   read_questions.pq_questions[15][5], read_questions.pq_questions[15][6]],
-                 key='fiction_reading_time'),
+                 key=f'fiction_reading_time_{no_repeating_layout}'),
              sg.Text(read_questions.pq_questions[16][1], size=(18, 2), justification='right'),
              sg.Combo(
                  [read_questions.pq_questions[16][2], read_questions.pq_questions[16][3],
                   read_questions.pq_questions[16][4],
                   read_questions.pq_questions[16][5], read_questions.pq_questions[16][6]],
-                 key='nonfiction_reading_time')],
-            [sg.Text(read_questions.pq_questions[17][1], size=(18, 2), justification='right'),
+                 key=f'nonfiction_reading_time_{no_repeating_layout}')],
+            [sg.Text(read_questions.pq_questions[17][1], size=(18, None), justification='right'),
              sg.Combo(
                  [read_questions.pq_questions[17][2], read_questions.pq_questions[17][3],
                   read_questions.pq_questions[17][4],
                   read_questions.pq_questions[17][5], read_questions.pq_questions[17][6]],
-                 key='internet_reading_time'),
+                 key=f'internet_reading_time_{no_repeating_layout}'),
              sg.Text(read_questions.pq_questions[18][1], size=(18, 1), justification='right'),
              sg.Combo(
                  [read_questions.pq_questions[18][2], read_questions.pq_questions[18][3],
                   read_questions.pq_questions[18][4],
                   read_questions.pq_questions[18][5], read_questions.pq_questions[18][6]],
-                 key='other_reading_time')]
+                 key=f'other_reading_time_{no_repeating_layout}')]
         ], key=f'row_time_{language_name}'))]
         return row4
 
@@ -381,7 +385,7 @@ def pq_main_layout():
     copy_pq_languages = pq_languages  # copy of languages selected so far (to be used when removing from combobox)
     no_repeating_layout = 0  # to iterate between selected languages (to repeat layout)
     no_dialects = 0  # to iterate between selected languages (to determine dialects)
-    i = 0  # for autocomplete tet
+    i = 0  # for autocomplete text
 
     # Event to show autocomplete depending on key pressed
     combo = window['second_native_language']
@@ -435,8 +439,7 @@ def pq_main_layout():
                 window['adding_dialect'].update(visible=False)
                 window['column_dialect'].update(visible=False)
             if len(pq_languages) == 0:
-                sg.popup_ok("No languages selected so far. "
-                            "Please select any languages you speak from the previous questions.", title="Error")
+                sg.popup_ok(read_questions.pq_instructions[22][1], title=read_questions.pq_instructions[24][1])
 
         # TODO: the removal from combo box of the selected items
         if event == 'add_dialect':
@@ -444,9 +447,10 @@ def pq_main_layout():
                 no_dialects += 1
                 window.extend_layout(window['frame_dialect'], [item_dialect(no_dialects)])
             else:
-                sg.popup_ok("You can not add anymore dialects.", title="Error")
+                sg.popup_ok(read_questions.pq_instructions[23][1], title=read_questions.pq_instructions[24][1])
         if event[0] == 'delete_dialect':
             window[('row_dialect', event[1])].update(visible=False)
+            no_dialects -= 1
 
         # Does not work (supposed to remove from combo the selected languages)
         # if event == f'language_{no_dialects}':
@@ -521,6 +525,10 @@ def pq_main_layout():
 
             window[f'-COL{layout}-'].update(visible=True)
 
+            if layout == 1:
+                window['prev'].update(visible=False)
+            else:
+                window['prev'].update(visible=True)
             if layout == 11:
                 window['next'].update(visible=False)
                 window['submit'].update(visible=True)
@@ -532,54 +540,44 @@ def pq_main_layout():
             window[f'-COL{layout}-'].update(visible=False)
             layout = layout - 1 if layout > 1 else 1
 
-            if layout == 4 and no_repeating_layout < len(pq_languages):
+            if layout == 8 and no_repeating_layout == 5:
                 window[f'-COL{layout}-'].update(visible=True)
-                window.extend_layout(window['layout_4'], [repeating_layout(pq_languages[no_repeating_layout])])
-                no_repeating_layout += 1
-            elif layout == 4 and no_repeating_layout == 0:
-                print(layout)
+            elif layout == 8 and no_repeating_layout < 5:
                 window[f'-COL{layout}-'].update(visible=False)
-                layout = layout - 1
-            if layout == 5 and no_repeating_layout < len(pq_languages):
-                window[f'-COL{layout}-'].update(visible=True)
-                window.extend_layout(window['layout_5'], [repeating_layout(pq_languages[no_repeating_layout])])
-                no_repeating_layout += 1
-            elif layout == 5 and (no_repeating_layout == 0 or no_repeating_layout == 1):
-                print(layout)
-                window[f'-COL{layout}-'].update(visible=False)
-                layout = layout - 1
+                layout -= 1
 
-            if layout == 6 and no_repeating_layout < len(pq_languages):
-                print(layout)
+            if layout == 7 and no_repeating_layout >= 4:
                 window[f'-COL{layout}-'].update(visible=True)
-                window.extend_layout(window['layout_6'], [repeating_layout(pq_languages[no_repeating_layout])])
-                no_repeating_layout += 1
-            elif layout == 6 and (no_repeating_layout == 0 or no_repeating_layout == 1 or no_repeating_layout == 2):
-                print(layout)
+            elif layout == 7 and no_repeating_layout < 4:
                 window[f'-COL{layout}-'].update(visible=False)
-                layout = layout - 1
-            if layout == 7 and no_repeating_layout < len(pq_languages):
+                layout -= 1
+
+            if layout == 6 and no_repeating_layout >= 3:
                 window[f'-COL{layout}-'].update(visible=True)
-                window.extend_layout(window['layout_7'], [repeating_layout(pq_languages[no_repeating_layout])])
-                no_repeating_layout += 1
-            elif layout == 7 and (
-                    no_repeating_layout == 0 or no_repeating_layout == 1 or no_repeating_layout == 2 or no_repeating_layout == 3):
-                print(layout)
+                layout -= 1
+            elif layout == 6 and no_repeating_layout < 3:
                 window[f'-COL{layout}-'].update(visible=False)
-                layout = layout - 1
+                layout -= 1
 
-            if layout == 8 and i < len(pq_languages):
+            if layout == 5 and no_repeating_layout >= 2:
                 window[f'-COL{layout}-'].update(visible=True)
-                window.extend_layout(window['layout_8'], [repeating_layout(pq_languages[no_repeating_layout])])
-                no_repeating_layout += 1
-            elif layout == 8 and (
-                    no_repeating_layout == 0 or no_repeating_layout == 1 or no_repeating_layout == 2 or no_repeating_layout == 3 or no_repeating_layout == 4):
-                print(layout)
+            elif layout == 5 and no_repeating_layout < 2:
                 window[f'-COL{layout}-'].update(visible=False)
-                layout = layout - 1
+                layout -= 1
 
-            window[f'-COL{layout}-'].update(visible=True)
+            if layout == 4 and no_repeating_layout >= 1:
+                window[f'-COL{layout}-'].update(visible=True)
+            elif layout == 4 and no_repeating_layout < 1:
+                window[f'-COL{layout}-'].update(visible=False)
+                layout -= 1
 
+            if layout != 4 or layout != 5 or layout != 6 or layout != 7 or layout != 8:
+                window[f'-COL{layout}-'].update(visible=True)
+
+            if layout == 1:
+                window['prev'].update(visible=False)
+            else:
+                window['prev'].update(visible=True)
             if layout == 11:
                 window['next'].update(visible=False)
                 window['submit'].update(visible=True)
@@ -595,11 +593,11 @@ def pq_main_layout():
                 df = pd.concat([load_data(), new_record], ignore_index=True)
                 df.to_csv(constants.PQ_FILE,
                           index=False)  # This will create the file if it doesn't exist ->should be changed
-                sg.popup(read_questions.pq_instructions[20][1])
+                sg.popup(read_questions.pq_instructions[21][1], title=read_questions.pq_instructions[25][1])
                 window.close()
             else:
                 error_message = generate_error_message(validation_result[1])
-                sg.popup(error_message)
+                sg.popup(error_message, title=read_questions.pq_instructions[24][1])
 
         if event == 'second_native_language Enter':
             combo.Widget.select_range(0, 'end')

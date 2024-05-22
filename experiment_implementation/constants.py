@@ -122,3 +122,4 @@ PQ_FILE = PQ_ROOT_PATH / 'participant_questionnaire/participants_data.csv'
 PQ_program_icon = PQ_ROOT_PATH / 'data/icons/program_icon.png'
 PQ_image_dir = PQ_ROOT_PATH / 'data/icons/running_icon_copy.png'
 
+PQ_Participant_ID = 0
