@@ -20,7 +20,6 @@ from pygaze.display import Display
 from pygaze.libtime import get_time
 from pygaze.plugins import aoi
 
-
 from devices.screen import MultiplEyeScreen
 
 from start_multipleye_session import SessionMode
@@ -86,7 +85,7 @@ class Experiment:
 
         self.log_completed_stimuli = pd.DataFrame(
             columns=['timestamp_started', 'timestamp_completed',
-                     'trial_id', 'stimulus_id', 'stimulus_name', 'completed']
+                     'stimulus_id', 'stimulus_name', 'completed']
             )
 
         self._eye_tracker = EyeTracker(
@@ -128,7 +127,8 @@ class Experiment:
         self.session_mode = session_mode
 
         # define the fixation trigger that will be shown between two pages
-        self.fixation_trigger_region = aoi.AOI('circle', (constants.FIX_DOT_X, constants.FIX_DOT_Y), constants.FIXATION_TRIGGER_RADIUS*2)
+        self.fixation_trigger_region = aoi.AOI('circle', (constants.FIX_DOT_X, constants.FIX_DOT_Y),
+                                               constants.FIXATION_TRIGGER_RADIUS * 2)
 
     def _set_initial_tracker_vars(self):
         # turn off automatic calibration, should be manual!
@@ -260,64 +260,8 @@ class Experiment:
 
             # the obligatory break is made after half of the stimuli (+-1),
             # as close to the middle of the pages as possible
-            if (((total_page_count >= self.num_pages // 2 and trial_nr >= half_num_stimuli - 2)
-                 or trial_nr == half_num_stimuli + 1)
-                    and not obligatory_break_made and not practice):
-
-                self._eye_tracker.log('obligatory_break')
-                self._eye_tracker.status_msg('OBLIGATORY BREAK')
-                obligatory_break_made = True
-
-                self._display.fill(screen=self.instruction_screens['obligatory_break_screen']['screen'])
-                onset_timestamp = self._display.show()
-
-                key_pressed_break = ''
-                keypress_timestamp = -1
-                while key_pressed_break not in ['space']:
-                    key_pressed_break, keypress_timestamp = self._keyboard.get_key(
-                        flush=True,
-                    )
-
-                break_time_ms = keypress_timestamp - onset_timestamp
-
-                self.write_to_logfile(
-                    timestamp=get_time(), trial_number=trial_nr, stimulus_identifier=stimulus_id,
-                    page_number=pd.NA, screen_onset_timestamp=onset_timestamp,
-                    keypress_timestamp=keypress_timestamp, key_pressed=key_pressed_break,
-                    question=False, answer_correct=pd.NA,
-                    message=f"obligatory break duration: {break_time_ms}",
-                )
-
-                self._eye_tracker.log('obligatory_break_end')
-                self._eye_tracker.log(f'obligatory_break_duration: {break_time_ms}')
-
-            # there won't be a break within the practice stimuli or before the first trial
-            elif not practice and not trial_nr == 1:
-                break_start = get_time()
-                self._eye_tracker.log('optional_break')
-                self._eye_tracker.status_msg('OPTIONAL BREAK')
-
-                self._display.fill(screen=self.instruction_screens['optional_break_screen']['screen'])
-                self._display.show()
-
-                key_pressed_break = ''
-                keypress_timestamp = -1
-                while key_pressed_break not in ['space']:
-                    key_pressed_break, keypress_timestamp = self._keyboard.get_key(
-                        flush=True,
-                    )
-
-                break_time_ms = keypress_timestamp - break_start
-
-                self.write_to_logfile(
-                    timestamp=get_time(), trial_number=trial_nr, stimulus_identifier=stimulus_id,
-                    page_number=pd.NA, screen_onset_timestamp=break_start,
-                    keypress_timestamp=keypress_timestamp, key_pressed=key_pressed_break,
-                    question=False, answer_correct=pd.NA,
-                    message=f"optional break duration: {break_time_ms}",
-                )
-                self._eye_tracker.log('optional_break_end')
-                self._eye_tracker.log(f'optional_break_duration: {break_time_ms}')
+            self.determine_break(half_num_stimuli, obligatory_break_made, practice, stimulus_id, total_page_count,
+                                 trial_nr)
 
             self.skipped_fixation_triggers[str(trial_nr)] = 0
 
@@ -330,8 +274,12 @@ class Experiment:
 
             self._eye_tracker.calibrate()
 
+            self._eye_tracker.log(f'TRIAL_VAR_LABELS group RT trial_number stimulus_id stimulus_name')
+            self._eye_tracker.log(f'V_TRIAL_GROUPING group')
+
+            # start the trial
             self._eye_tracker.status_msg(f'{flag}trial {trial_nr}, id: {stimulus_id} {stimulus_name}')
-            self._eye_tracker.log(f'{flag}TRIALID {trial_nr}')
+            self._eye_tracker.log(f'TRIALID {flag}{trial_nr}')
 
             stimulus_dict = {'timestamp_started': get_time(), 'timestamp_completed': pd.NA,
                              'trial_id': f'{flag}{trial_nr}', 'stimulus_id': stimulus_id,
@@ -346,11 +294,11 @@ class Experiment:
                      index=[0]
                  )],
                 ignore_index=True
-                )
+            )
             self.log_completed_stimuli.to_csv(
                 f'{self.abs_exp_path}/logfiles/completed_stimuli.csv', index=False,
                 sep=','
-                )
+            )
 
             total_reading_pages = len(stimulus_pages)
             # show stimulus pages
@@ -382,9 +330,10 @@ class Experiment:
 
                 self._display.fill(screen=page_screen)
                 stimulus_timestamp = self._display.show()
-                self._eye_tracker.log('screen_image_onset')
-                self._eye_tracker.log('!V CLEAR 116 116 116')
 
+                # send image information
+                self._eye_tracker.log('page_screen_image_onset')
+                self._eye_tracker.log('!V CLEAR 116 116 116')
                 self._send_img_path_to_edf(relative_img_path)
 
                 key_pressed_stimulus = ''
@@ -404,41 +353,34 @@ class Experiment:
                     page_number=page_number, screen_onset_timestamp=stimulus_timestamp,
                     keypress_timestamp=keypress_timestamp, key_pressed=key_pressed_stimulus,
                     question=False, answer_correct=pd.NA, message=f"showing: {stimulus_name}"
-                    )
+                )
 
                 # send a message to clear the data viewer screen.
-                self._eye_tracker.log('!V CLEAR 128 128 128')
+                # self._eye_tracker.log('!V CLEAR 128 128 128')
                 # stop eye tracking
                 self._eye_tracker.stop_recording()
                 self._eye_tracker.log(f'stop_recording_{flag}trial_{trial_nr}_page_{page_number}')
 
-                self._eye_tracker.log(f'!V TRIAL_VAR condition {cond}')
-                self._eye_tracker.log(f'!V TRIAL_VAR backdrop_image {relative_img_path}')
-                self._eye_tracker.log(f'!V TRIAL_VAR RT {int(core.getTime() - stimulus_timestamp) * 1000}')
-                self._eye_tracker.log(f'!V TRIAL_VAR trial_number {trial_nr}')
-                self._eye_tracker.log(f'!V TRIAL_VAR stimulus_id {stimulus_id}')
-                self._eye_tracker.log(f'!V TRIAL_VAR stimulus_name {stimulus_name}')
-
-            self._eye_tracker.log(f'{flag}TRIAL_RESULT {trial_nr}')
+            # self._eye_tracker.log(f'!V TRIAL_VAR RT {int(core.getTime() - stimulus_timestamp) * 1000}')
 
             # show three rating screens
             self.show_rating_screen(
                 name='familiarity_rating_screen_1', trial_number=trial_nr,
                 screens=self.instruction_screens['familiarity_rating_screen_1'],
                 num_options=3, flag=flag
-                )
+            )
 
             self.show_rating_screen(
                 name='familiarity_rating_screen_2', trial_number=trial_nr,
                 screens=self.instruction_screens['familiarity_rating_screen_2'],
                 num_options=5, flag=flag
-                )
+            )
 
             self.show_rating_screen(
                 name='subject_difficulty_screen', trial_number=trial_nr,
                 screens=self.instruction_screens['subject_difficulty_screen'],
                 num_options=5, flag=flag
-                )
+            )
 
             total_questions = len(questions_pages)
             for question_number, question_dict in enumerate(questions_pages):
@@ -493,9 +435,8 @@ class Experiment:
 
                 # in order to log on and off set of each screen
                 question_timestamp = initial_question_timestamp
-                self._eye_tracker.log('screen_image_onset')
+                self._eye_tracker.log('question_screen_image_onset')
                 self._eye_tracker.log('!V CLEAR 116 116 116')
-
                 self._send_img_path_to_edf(relative_question_page_path)
 
                 key_pressed_question = ''
@@ -546,7 +487,7 @@ class Experiment:
                         key_pressed=key_pressed_question, question=True,
                         answer_correct=is_chosen_answer_correct,
                         message='preliminary answer'
-                        )
+                    )
 
                 is_answer_correct = answer_chosen == correct_answer_key
 
@@ -572,9 +513,13 @@ class Experiment:
                 self._eye_tracker.stop_recording()
                 self._eye_tracker.log(f'stop_recording_{flag}trial_{trial_nr}_question_{question_number}')
 
-                self._eye_tracker.log('!V TRIAL_VAR condition %s' % cond)  # cui use 'practice' and 'real' as cond?
-                self._eye_tracker.log('!V TRIAL_VAR backdrop_image %s' % relative_question_page_path)
-                self._eye_tracker.log('!V TRIAL_VAR RT %d' % int(core.getTime() - question_timestamp) * 1000)
+            self._eye_tracker.log(f'!V TRIAL_VAR trial_number {flag}{trial_nr}')
+            self._eye_tracker.log(f'!V TRIAL_VAR stimulus_id {stimulus_id}')
+            self._eye_tracker.log(f'!V TRIAL_VAR stimulus_name {stimulus_name}')
+            self._eye_tracker.log(f'!V TRIAL_VAR group {cond}')
+
+            # data viewer end of trial
+            self._eye_tracker.log(f'TRIAL_RESULT {flag}{trial_nr}')
 
             # if more than one fixation trigger was skipped, recalibrate
             if self.skipped_fixation_triggers[str(trial_nr)] > 1:
@@ -593,7 +538,68 @@ class Experiment:
             self.log_completed_stimuli.to_csv(
                 f'{self.abs_exp_path}/logfiles/completed_stimuli.csv', index=False,
                 sep=','
+            )
+
+    def determine_break(self, half_num_stimuli, obligatory_break_made, practice, stimulus_id, total_page_count,
+                        trial_nr):
+        if (((total_page_count >= self.num_pages // 2 and trial_nr >= half_num_stimuli - 2)
+             or trial_nr == half_num_stimuli + 1)
+                and not obligatory_break_made and not practice):
+
+            self._eye_tracker.log('obligatory_break')
+            self._eye_tracker.status_msg('OBLIGATORY BREAK')
+            obligatory_break_made = True
+
+            self._display.fill(screen=self.instruction_screens['obligatory_break_screen']['screen'])
+            onset_timestamp = self._display.show()
+
+            key_pressed_break = ''
+            keypress_timestamp = -1
+            while key_pressed_break not in ['space']:
+                key_pressed_break, keypress_timestamp = self._keyboard.get_key(
+                    flush=True,
                 )
+
+            break_time_ms = keypress_timestamp - onset_timestamp
+
+            self.write_to_logfile(
+                timestamp=get_time(), trial_number=trial_nr, stimulus_identifier=stimulus_id,
+                page_number=pd.NA, screen_onset_timestamp=onset_timestamp,
+                keypress_timestamp=keypress_timestamp, key_pressed=key_pressed_break,
+                question=False, answer_correct=pd.NA,
+                message=f"obligatory break duration: {break_time_ms}",
+            )
+
+            self._eye_tracker.log('obligatory_break_end')
+            self._eye_tracker.log(f'obligatory_break_duration: {break_time_ms}')
+
+        # there won't be a break within the practice stimuli or before the first trial
+        elif not practice and not trial_nr == 1:
+            break_start = get_time()
+            self._eye_tracker.log('optional_break')
+            self._eye_tracker.status_msg('OPTIONAL BREAK')
+
+            self._display.fill(screen=self.instruction_screens['optional_break_screen']['screen'])
+            self._display.show()
+
+            key_pressed_break = ''
+            keypress_timestamp = -1
+            while key_pressed_break not in ['space']:
+                key_pressed_break, keypress_timestamp = self._keyboard.get_key(
+                    flush=True,
+                )
+
+            break_time_ms = keypress_timestamp - break_start
+
+            self.write_to_logfile(
+                timestamp=get_time(), trial_number=trial_nr, stimulus_identifier=stimulus_id,
+                page_number=pd.NA, screen_onset_timestamp=break_start,
+                keypress_timestamp=keypress_timestamp, key_pressed=key_pressed_break,
+                question=False, answer_correct=pd.NA,
+                message=f"optional break duration: {break_time_ms}",
+            )
+            self._eye_tracker.log('optional_break_end')
+            self._eye_tracker.log(f'optional_break_duration: {break_time_ms}')
 
     def _send_img_path_to_edf(self, page_path: str) -> None:
         """
@@ -607,9 +613,12 @@ class Experiment:
                                                             int(constants.IMAGE_WIDTH_PX),
                                                             int(constants.IMAGE_HEIGHT_PX))
         self._eye_tracker.log(imgload_msg)
+        self._eye_tracker.log(f'!V image_path {page_path}')
 
     def show_rating_screen(self, name: str, trial_number: int, screens: dict,
                            num_options: int, flag: str) -> None:
+
+        self._fixation_trigger(trial_number)
 
         page_path = screens['path']
 
@@ -631,7 +640,7 @@ class Experiment:
 
         self._display.fill(screen=screens['initial'])
         initial_onset_timestamp = self._display.show()
-
+        self._eye_tracker.log('rating_screen_image_onset')
         self._send_img_path_to_edf(screens['relative_path'])
 
         key_pressed = ''
@@ -731,7 +740,7 @@ class Experiment:
                         get_time(), trial_id, pd.NA, 'fixation_trigger', screen_onset, pd.NA,
                         pd.NA, False, pd.NA,
                         'fixation_trigger:experimenter_stopped_recording_during_fixation_trigger'
-                        )
+                    )
                     self._eye_tracker.status_msg('Press RECORD to continue experiment')
                     return False
 
@@ -746,7 +755,7 @@ class Experiment:
                 self.write_to_logfile(
                     get_time(), trial_id, pd.NA, 'fixation_trigger', screen_onset, timestamp,
                     'esc or ctrl c', False, pd.NA, 'ctrl-c_pressed_by_user'
-                    )
+                )
                 self.quit_experiment()
 
             # key q: skip drift trigger and continue with experiment
@@ -756,7 +765,7 @@ class Experiment:
                 self.write_to_logfile(
                     get_time(), trial_id, pd.NA, 'fixation_trigger', screen_onset, timestamp,
                     'q', False, pd.NA, 'skipped_by_experimenter'
-                    )
+                )
                 self.skipped_fixation_triggers[str(trial_id)] += 1
                 return False
 
@@ -767,7 +776,7 @@ class Experiment:
                 self.write_to_logfile(
                     get_time(), trial_id, pd.NA, 'fixation_trigger', screen_onset, timestamp,
                     'c', False, pd.NA, 'calibration_triggered'
-                    )
+                )
                 self._eye_tracker.calibrate()
                 return True
 

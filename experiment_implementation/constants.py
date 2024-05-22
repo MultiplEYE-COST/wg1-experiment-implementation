@@ -37,6 +37,7 @@ BGC = (15, 15, 15)
 # used to highlight the selected answer option
 HIGHLIGHT_COLOR = (185, 65, 40)
 
+DATA_FOLDER_PATH = f'data'
 RESULT_FOLDER_PATH = f'data/eye_tracking_data_{LANGUAGE}_{COUNTRY_CODE}_{LAB_NUMBER}'
 
 IMAGE_CONFIG_PATH = (f'data/stimuli_{LANGUAGE}_{COUNTRY_CODE}_{LAB_NUMBER}/config/'
