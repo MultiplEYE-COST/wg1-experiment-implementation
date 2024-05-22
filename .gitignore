@@ -145,3 +145,4 @@ eye_tracking_data*/
 experiment_implementation/utils/reading_times
 experiment_implementation/multipleye_pilot_*
 experiment_implementation/data/stimuli*/*.xslx
+experiment_implementation/data/test_sessions
