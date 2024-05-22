@@ -21,6 +21,7 @@ from pygaze.libtime import get_time
 from pygaze.plugins import aoi
 
 from devices.screen import MultiplEyeScreen
+from participant_questionnaire.pq_layout_file import pq_main_layout
 
 from start_multipleye_session import SessionMode
 
@@ -795,6 +796,7 @@ class Experiment:
         self.log_file.close()
         self._eye_tracker.close()
         self._display.close()
+        pq_main_layout()
         libtime.expend()
 
     def _drift_correction(self, trial_id: int, overwrite: bool = False) -> bool:
