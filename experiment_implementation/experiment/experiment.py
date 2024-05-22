@@ -275,7 +275,7 @@ class Experiment:
             self._eye_tracker.calibrate()
 
             self._eye_tracker.log(f'TRIAL_VAR_LABELS group RT trial_number stimulus_id stimulus_name')
-            self._eye_tracker.log(f'V_TRIAL_GROUPING group')
+            self._eye_tracker.log(f'V_TRIAL_GROUPING group trial_number stimulus_id stimulus_name')
 
             # start the trial
             self._eye_tracker.status_msg(f'{flag}trial {trial_nr}, id: {stimulus_id} {stimulus_name}')
@@ -712,10 +712,10 @@ class Experiment:
         """
 
         fix_screen = self.instruction_screens['fixation_screen']['screen']
-        fix_screen.draw_ellipse(x=constants.FIX_DOT_X - constants.FIXATION_TRIGGER_RADIUS // 2,
-                                y=constants.FIX_DOT_Y - constants.FIXATION_TRIGGER_RADIUS // 2,
-                                w=constants.FIXATION_TRIGGER_RADIUS,
-                                h=constants.FIXATION_TRIGGER_RADIUS)
+        # fix_screen.draw_ellipse(x=constants.FIX_DOT_X - constants.FIXATION_TRIGGER_RADIUS // 2,
+        #                         y=constants.FIX_DOT_Y - constants.FIXATION_TRIGGER_RADIUS // 2,
+        #                         w=constants.FIXATION_TRIGGER_RADIUS,
+        #                         h=constants.FIXATION_TRIGGER_RADIUS)
         self._display.fill(fix_screen)
         screen_onset = self._display.show()
 

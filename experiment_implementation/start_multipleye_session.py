@@ -33,10 +33,10 @@ if os.path.exists(
 else:
     PARTICIPANT_IDS = []
 
-if not os.path.exists(LANG_DIR / f'{local_config.FULL_LANGUAGE.lower()}.json'):
-    GUI_LANG = 'English'
+if not os.path.exists(LANG_DIR / f'experiment_interface_{local_config.LANGUAGE.lower()}.json'):
+    GUI_LANG = 'experiment_interface_en'
 else:
-    GUI_LANG = local_config.FULL_LANGUAGE
+    GUI_LANG = f'experiment_interface_{local_config.LANGUAGE.lower()}'
 
 with open(LANG_DIR / f'{GUI_LANG}.json', 'r', encoding='utf8') as translation_file:
     translations = json.load(translation_file)
@@ -63,12 +63,26 @@ def parse_args():
         description=translations['parser_description'],
     )
 
+    participants = parser.add_argument_group(translations['participants'])
+    participants.add_argument(
+        '--participant-id',
+        metavar=translations['participant_id'],
+        default=1,
+        help=translations['participant_id_help'],
+        required=True,
+        type=int,
+    )
+
+    participants.add_argument(
+        '--stimulus_order_version',
+        default=-1,
+        type=int,
+        gooey_options={'visible': False},
+    )
+
     lab_settings = parser.add_argument_group(
         translations['lab_settings'],
         description=translations['lab_settings_desc'],
-        gooey_options={
-            'show_underline': False,
-        },
     )
     lab_settings.add_argument(
         '--language',
@@ -102,8 +116,8 @@ def parse_args():
 
     lab_settings.add_argument(
         '--lab_number',
-        metavar='Lab number',
-        help='The lab number that you also specified in the pre-registration form.',
+        metavar=translations['lab_number'],
+        help=translations['lab_number_help'],
         widget='TextField',
         default=1,
         type=int,
@@ -115,27 +129,24 @@ def parse_args():
 
     lab_settings.add_argument(
         '--dummy_mode',
-        metavar='Dummy mode',
+        metavar=translations['dummy_mode'],
         action='store_true',
-        # default=local_config.DUMMY_MODE,
         widget='CheckBox',
-        help='Please (un)select this if you (do not) want to run the experiment in dummy mode. '
-             'This mode is used for testing the experiment without an eye tracker.',
+        help=translations['dummy_mode_help'],
     )
 
-    group = parser.add_argument_group('Session Mode')
+    group = parser.add_argument_group(translations['session_mode'])
     session_mode = group.add_mutually_exclusive_group(
-        gooey_options={'initial_selection': 1, 'show_label': False, 'show_help': False,
-                       'title': 'Please select a mode'},
+        gooey_options={'show_label': False, 'show_help': False,
+                       'title': translations['session_mode_title']},
         required=True
     )
 
     session_mode.add_argument(
         '--core',
-        metavar='Core dataset',
+        metavar=translations['core_session'],
         dest='session_mode',
-        help='Please ONLY select this if you want to collect data for the core experiment with a real participant '
-             'or for a pilot.',
+        help=translations['core_session_help'],
         action='store_const',
         const=SessionMode.CORE,
     )
@@ -144,54 +155,28 @@ def parse_args():
         '--test',
         metavar='Test session',
         dest='session_mode',
-        help='Please select this if you like to run a test session (uses the '
-             'real experiment but does not mark the participant ID as used).',
+        help=translations['test_session_help'],
         action='store_const',
         const=SessionMode.TEST,
     )
 
-    participants = parser.add_argument_group('Participant Information')
-    participants.add_argument(
-        '--participant-id',
-        metavar=translations['participant_id'],
-        default=1,
-        help=translations['participant_id_help'],
-        required=True,
-        type=int,
-    )
-
-    participants.add_argument(
-        '--stimulus_order_version',
-        default=-1,
-        type=int,
-        gooey_options={'visible': False},
-    )
-
     danger_zone = parser.add_argument_group(
-        '!!! Danger Zone !!!',
-        description='If you need to continue a core session please follow the following procedure:\n'
-                    '1. Save a copy the .edf file from the result folder to another location on your PC '
-                    'but do not delete the file in the result folder.\nFor participant ID 1 the result folder is '
-                    'located at\n"data > eye_tracking_data_[LANGUAGE_CODE]_[COUNTRY_CODE]_[LAB_NUMBER] >\n'
-                    'core_dataset > [PARTICIPANT_ID]..."'
+        translations['danger_zone'],
+        description=translations['danger_zone_desc'],
     )
     danger_zone.add_argument(
         '--continue-core-session',
-        metavar='Continue core session',
+        metavar=translations['continue_core_session'],
         action='store_true',
         default=False,
         widget='BlockCheckbox',
-        help='In case that a core session was interrupted unexpectedly after the experiment has already started.'
-             ' In that case,  '
-             'you can continue the session by selecting this option.',
+        help=translations['continue_core_session_help'],
     )
 
     danger_zone.add_argument(
         '--participant-id-continued',
-        metavar='Participant ID',
-        help='Please select the participant ID that you want to continue the session for. '
-             'If the one you are looking for does not appear,'
-             'you have to start a new session with a new participant ID.',
+        metavar=translations['participant_id'],
+        help=translations['continue_participant_id_help'],
         type=int,
         widget='Dropdown',
         choices=PARTICIPANT_IDS,
@@ -250,7 +235,13 @@ def start_experiment_session():
         from utils import experiment_utils
 
         if arguments['continue_core_session']:
-            arguments['participant_id'] = arguments['participant_id_continued']
+            if not arguments['participant_id_continued']:
+                raise ValueError(
+                    'You have to select the participant ID from the dropdown '
+                    'at the bottom to continue the core session.'
+                )
+            else:
+                arguments['participant_id'] = arguments['participant_id_continued']
             arguments['session_mode'] = SessionMode.CORE
             arguments['session_id'] = 1
             arguments['dataset_type'] = 'core_dataset'
