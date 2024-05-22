@@ -1,5 +1,4 @@
 # Randomization for the MultiplEYE experiment
-This directory contains the randomization files for the MultiplEYE experiment. 
 There are multiple parts of the experiment that are randomized:
 
 1. The order of the stimulus texts

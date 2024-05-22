@@ -16,17 +16,27 @@ import local_config
 PARENT_FOLDER = Path(__file__).parent
 LANG_DIR = PARENT_FOLDER / 'ui_data/interface_language/'
 IMAGE_DIR = PARENT_FOLDER / 'ui_data/interface_icons/'
-if os.path.exists(PARENT_FOLDER / 'data/randomization/stimulus_order_versions.tsv'):
-    df = pd.read_csv(PARENT_FOLDER / 'data/randomization/stimulus_order_versions.tsv', sep='\t', encoding='utf8')
 
-    PARTICIPANT_IDS = df.participant_id.dropna().astype(int).values.tolist()
+if os.path.exists(
+        PARENT_FOLDER / f'data/stimuli_{local_config.LANGUAGE}_{local_config.COUNTRY_CODE}_'
+                        f'{local_config.LAB_NUMBER}/config/stimulus_order_versions_{local_config.LANGUAGE}_'
+                        f'{local_config.COUNTRY_CODE}_'
+                        f'{local_config.LAB_NUMBER}.csv'
+        ):
+    df = pd.read_csv(
+        PARENT_FOLDER / f'data/stimuli_{local_config.LANGUAGE}_{local_config.COUNTRY_CODE}_'
+                        f'{local_config.LAB_NUMBER}/config/stimulus_order_versions_{local_config.LANGUAGE}_'
+                        f'{local_config.COUNTRY_CODE}_'
+                        f'{local_config.LAB_NUMBER}.csv', sep=',', encoding='utf8'
+        )
+    PARTICIPANT_IDS = sorted(df.participant_id.dropna().astype(int).values.tolist())
 else:
-    PARTICIPANT_IDS = sorted(list(range(1, 300)))
+    PARTICIPANT_IDS = []
 
-if not os.path.exists(LANG_DIR / f'{local_config.FULL_LANGUAGE.lower()}.json'):
-    GUI_LANG = 'English'
+if not os.path.exists(LANG_DIR / f'experiment_interface_{local_config.LANGUAGE.lower()}.json'):
+    GUI_LANG = 'experiment_interface_en'
 else:
-    GUI_LANG = local_config.FULL_LANGUAGE
+    GUI_LANG = f'experiment_interface_{local_config.LANGUAGE.lower()}'
 
 with open(LANG_DIR / f'{GUI_LANG}.json', 'r', encoding='utf8') as translation_file:
     translations = json.load(translation_file)
@@ -53,103 +63,12 @@ def parse_args():
         description=translations['parser_description'],
     )
 
-    lab_settings = parser.add_argument_group(
-        'Lab Settings',
-        description=f'At the moment you will run the experiment with the language settings below. '
-                    f'They should be the same as the values you have entered in the pre-registration form. '
-                    f'If that is not the case, please change them here. To run the minimal experiment, '
-                    f'please enter "toy" '
-                    f'as the language and "x" as the country code.',
-        gooey_options={
-            'show_underline': False,
-        },
-    )
-    lab_settings.add_argument(
-        '--language',
-        widget='TextField',
-        metavar='Language',
-        help='The 2 letter ISO-639-1 language code that you also specified in the pre-registration form.',
-        default=local_config.LANGUAGE,
-        required=True,
-        gooey_options={'visible': True},
-    )
-
-    lab_settings.add_argument(
-        '--full_language',
-        widget='TextField',
-        help='The full language name that you run the experiment in (e.g. English).',
-        metavar='Full language',
-        default=local_config.FULL_LANGUAGE,
-        required=True,
-        gooey_options={'visible': True},
-    )
-
-    lab_settings.add_argument(
-        '--country_code',
-        help='The 2 letter ISO-639-1 country code that you also specified in the pre-registration form.',
-        metavar='Country code',
-        widget='TextField',
-        default=local_config.COUNTRY_CODE,
-        required=True,
-        gooey_options={'visible': True},
-    )
-
-    lab_settings.add_argument(
-        '--lab_number',
-        metavar='Lab number',
-        help='The lab number that you also specified in the pre-registration form.',
-        widget='TextField',
-        default=1,
-        type=int,
-        required=True,
-        gooey_options={
-            'visible': True,
-        }
-    )
-
-    lab_settings.add_argument(
-        '--dummy_mode',
-        metavar='Dummy mode',
-        action='store_true',
-        #default=local_config.DUMMY_MODE,
-        widget='CheckBox',
-        help='Please (un)select this if you (do not) want to run the experiment in dummy mode. '
-             'This mode is used for testing the experiment without an eye tracker.',
-    )
-
-    group = parser.add_argument_group('Session Mode')
-    session_mode = group.add_mutually_exclusive_group(
-        gooey_options={'initial_selection': 1, 'show_label': False, 'show_help': False,
-                       'title': 'Please select a mode'},
-        required=True
-    )
-
-    session_mode.add_argument(
-        '--core',
-        metavar='Core dataset',
-        dest='session_mode',
-        help='Please ONLY select this if you want to collect data for the core experiment with a real participant '
-             'or for a pilot.',
-        action='store_const',
-        const=SessionMode.CORE,
-    )
-
-    session_mode.add_argument(
-        '--test',
-        metavar='Test session',
-        dest='session_mode',
-        help='Please select this if you like to run a test session (uses the '
-             'real experiment but does not mark the participant ID as used).',
-        action='store_const',
-        const=SessionMode.TEST,
-    )
-
-    participants = parser.add_argument_group('Participant Information')
+    participants = parser.add_argument_group(translations['participants'])
     participants.add_argument(
         '--participant-id',
-        metavar='Participant ID',
+        metavar=translations['participant_id'],
         default=1,
-        help='Enter the participant ID here. Note that is has to be a number and it cannot be longer than 3 digits',
+        help=translations['participant_id_help'],
         required=True,
         type=int,
     )
@@ -161,30 +80,103 @@ def parse_args():
         gooey_options={'visible': False},
     )
 
+    lab_settings = parser.add_argument_group(
+        translations['lab_settings'],
+        description=translations['lab_settings_desc'],
+    )
+    lab_settings.add_argument(
+        '--language',
+        widget='TextField',
+        metavar=translations['language'],
+        help=translations['language_help'],
+        default=local_config.LANGUAGE,
+        required=True,
+        gooey_options={'visible': True},
+    )
+
+    lab_settings.add_argument(
+        '--full_language',
+        widget='TextField',
+        help=translations['full_language_help'],
+        metavar=translations['full_language'],
+        default=local_config.FULL_LANGUAGE,
+        required=True,
+        gooey_options={'visible': True},
+    )
+
+    lab_settings.add_argument(
+        '--country_code',
+        help=translations['country_code_help'],
+        metavar=translations['country_code'],
+        widget='TextField',
+        default=local_config.COUNTRY_CODE,
+        required=True,
+        gooey_options={'visible': True},
+    )
+
+    lab_settings.add_argument(
+        '--lab_number',
+        metavar=translations['lab_number'],
+        help=translations['lab_number_help'],
+        widget='TextField',
+        default=1,
+        type=int,
+        required=True,
+        gooey_options={
+            'visible': True,
+        }
+    )
+
+    lab_settings.add_argument(
+        '--dummy_mode',
+        metavar=translations['dummy_mode'],
+        action='store_true',
+        widget='CheckBox',
+        help=translations['dummy_mode_help'],
+    )
+
+    group = parser.add_argument_group(translations['session_mode'])
+    session_mode = group.add_mutually_exclusive_group(
+        gooey_options={'show_label': False, 'show_help': False,
+                       'title': translations['session_mode_title']},
+        required=True
+    )
+
+    session_mode.add_argument(
+        '--core',
+        metavar=translations['core_session'],
+        dest='session_mode',
+        help=translations['core_session_help'],
+        action='store_const',
+        const=SessionMode.CORE,
+    )
+
+    session_mode.add_argument(
+        '--test',
+        metavar='Test session',
+        dest='session_mode',
+        help=translations['test_session_help'],
+        action='store_const',
+        const=SessionMode.TEST,
+    )
+
     danger_zone = parser.add_argument_group(
-        '!!! Danger Zone !!!',
-        description='If you need to continue a core session please follow the following procedure:\n'
-                    '1. Save a copy the .edf file from the result folder to another location on your PC '
-                    'but do not delete the file  in the result folder. For participant ID 1 the result folder is '
-                    'located at "data/eye_tracking_data_[LANGUAGE_CODE]_[COUNTRY_CODE]_[LAB_NUMBER]"'
+        translations['danger_zone'],
+        description=translations['danger_zone_desc'],
     )
     danger_zone.add_argument(
         '--continue-core-session',
-        metavar='Continue core session',
+        metavar=translations['continue_core_session'],
         action='store_true',
         default=False,
         widget='BlockCheckbox',
-        help='In case that a core session was interrupted unexpectedly after the experiment has already started.'
-             ' In that case,  '
-             'you can continue the session by selecting this option.',
+        help=translations['continue_core_session_help'],
     )
 
     danger_zone.add_argument(
         '--participant-id-continued',
-        metavar='Participant ID',
-        help='Please select the participant ID that you want to continue the session for. '
-             'If the one you are looking for does not appear,'
-             'you have to start a new session with a new participant ID.',
+        metavar=translations['participant_id'],
+        help=translations['continue_participant_id_help'],
         type=int,
         widget='Dropdown',
         choices=PARTICIPANT_IDS,
@@ -218,7 +210,7 @@ def start_experiment_session():
     if arguments['dummy_mode'] != local_config.DUMMY_MODE:
         settings_changed = True
 
-    if settings_changed:
+    if settings_changed and not arguments['continue_core_session']:
         with open(PARENT_FOLDER / 'local_config.py', 'w') as f:
             f.write(f'LANGUAGE = "{arguments["language"]}"\n')
             f.write(f'FULL_LANGUAGE = "{arguments["full_language"]}"\n')
@@ -243,7 +235,13 @@ def start_experiment_session():
         from utils import experiment_utils
 
         if arguments['continue_core_session']:
-            arguments['participant_id'] = arguments['participant_id_continued']
+            if not arguments['participant_id_continued']:
+                raise ValueError(
+                    'You have to select the participant ID from the dropdown '
+                    'at the bottom to continue the core session.'
+                )
+            else:
+                arguments['participant_id'] = arguments['participant_id_continued']
             arguments['session_mode'] = SessionMode.CORE
             arguments['session_id'] = 1
             arguments['dataset_type'] = 'core_dataset'
@@ -261,13 +259,13 @@ def start_experiment_session():
             # hardcoded args
             arguments['session_id'] = 1
             arguments['stimulus_order_version'] = constants.VERSION_START
-            arguments['dataset_type'] = 'test_dataset'
+            arguments['dataset_type'] = 'test_sessions'
 
         elif arguments['session_mode'].value == 'minimal':
 
             # hardcoded args
             arguments['session_id'] = 1
-            arguments['dataset_type'] = 'test_dataset'
+            arguments['dataset_type'] = 'test_sessions'
             arguments['stimulus_order_version'] = constants.VERSION_START
 
         elif arguments['session_mode'].value == 'additional':
@@ -279,6 +277,17 @@ def start_experiment_session():
 
             arguments['session_id'] = 1
             arguments['dataset_type'] = 'core_dataset'
+
+            # check if the participant ID is within the range of the number of versions for data collections that
+            # are using multiple devices
+            if constants.MULTIPLE_DEVICES:
+                if (not arguments['participant_id'] >= constants.VERSION_START
+                        and arguments['participant_id'] <= constants.NUM_VERSIONS):
+                    raise ValueError(
+                        f'The participant ID has to be between {constants.VERSION_START} and '
+                        f'{constants.NUM_VERSIONS}, as you are using multiple devices to'
+                        f' collect the data.'
+                        )
 
         # if the item version has not been manually set, we determine it
         stimulus_order_version = arguments['stimulus_order_version']

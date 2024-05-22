@@ -12,6 +12,7 @@ from pygaze.logfile import Logfile
 from experiment.experiment import Experiment
 from start_multipleye_session import SessionMode
 from utils import data_utils, experiment_utils
+from utils.experiment_utils import determine_last_stimulus
 
 
 def run_experiment(
@@ -27,23 +28,24 @@ def run_experiment(
         continue_core_session: bool = False,
 
 ) -> None:
-
-    experiment_utils.mark_stimulus_order_version_used(stimulus_order_version, participant_id, session_mode)
+    if not continue_core_session:
+        experiment_utils.mark_stimulus_order_version_used(stimulus_order_version, participant_id, session_mode)
 
     participant_id_str = str(participant_id)
 
+    # participant id should always be 3 digits long
     while len(participant_id_str) < 3:
         participant_id_str = "0" + participant_id_str
 
     participant_result_folder = (f'{participant_id_str}_{constants.LANGUAGE}_{constants.COUNTRY_CODE}_'
                                  f'{constants.LAB_NUMBER}_S1').upper()
 
-    not_completed_stimulus = None
+    last_completed_stimulus_id = None
 
     # if it is a testrun, we create a folder with the name of the participant ID and the suffix "_testrun"
     # if the folder already exists we just dump the test files to that same folder
     if session_mode.value == 'test' or session_mode.value == 'minimal':
-        relative_exp_result_path = (f'{constants.RESULT_FOLDER_PATH}/{dataset_type.lower()}/'
+        relative_exp_result_path = (f'{constants.DATA_FOLDER_PATH}/{dataset_type.lower()}/'
                                     f'{participant_result_folder}_testrun_{int(datetime.datetime.now().timestamp())}')
 
         absolute_exp_result_path = os.path.abspath(relative_exp_result_path)
@@ -55,22 +57,26 @@ def run_experiment(
         relative_exp_result_path = f'{constants.RESULT_FOLDER_PATH}/{dataset_type.lower()}/{participant_result_folder}'
 
         if continue_core_session:
-            completed_stimuli_df = pd.read_csv(f'{relative_exp_result_path}/logfiles/completed_stimuli.csv',
-                                               sep=',')
+            completed_stimuli_df, csv_path, last_completed_stimulus_id, last_trial_id = determine_last_stimulus(
+                relative_exp_result_path
+                )
 
-            not_completed_stimulus = completed_stimuli_df[completed_stimuli_df['completed'] == 0]['stimulus_id']
-            not_completed_stimulus = not_completed_stimulus.values.tolist()
-
-            if not not_completed_stimulus:
-                # if no entry is found, this means the participants has not yet started with an item
-                not_completed_stimulus = '-_(full_restart)'
-            else:
-                not_completed_stimulus = not_completed_stimulus[0]
+            if not last_trial_id:
+                last_trial_id = 'full_restart'
 
             relative_exp_result_path = (f'{constants.RESULT_FOLDER_PATH}/{dataset_type.lower()}/'
-                                        f'{participant_result_folder}_continued_with_id_{not_completed_stimulus}')
+                                        f'{participant_result_folder}_start_after_trial_{last_trial_id}')
 
             absolute_exp_result_path = os.path.abspath(relative_exp_result_path)
+
+            # add a note in the completed_stimuli.csv file that the session has been continued
+            new_row = {
+                'timestamp_started': pd.NA, 'timestamp_completed': pd.NA, 'trial_id': pd.NA, 'stimulus_id': pd.NA,
+                'stimulus_name': absolute_exp_result_path, 'completed': 'restart',
+            }
+
+            completed_stimuli_df = pd.concat([completed_stimuli_df, pd.DataFrame(new_row, index=[0])])
+            completed_stimuli_df.to_csv(csv_path, index=False)
 
         else:
             os.mkdir(relative_exp_result_path)
@@ -105,7 +111,8 @@ def run_experiment(
     general_log_file.write([get_time(), 'start preparing stimuli screens'])
     stimuli_screens, total_num_pages = data_utils.get_stimuli_screens(
         data_screens_path, question_screens_path, data_logfile, session_mode, stimulus_order_version,
-        absolute_exp_result_path, not_completed_stimulus)
+        absolute_exp_result_path, last_completed_stimulus_id
+    )
     general_log_file.write([get_time(), 'finished preparing stimuli screens'])
 
     general_log_file.write([get_time(), 'finished preparing practice screens'])
@@ -130,11 +137,12 @@ def run_experiment(
         num_pages=total_num_pages,
     )
 
-    general_log_file.write([get_time(), 'show welcome screen'])
-    experiment.welcome_screen()
+    if not continue_core_session:
+        general_log_file.write([get_time(), 'show welcome screen'])
+        experiment.welcome_screen()
 
-    general_log_file.write([get_time(), 'show informed consent screen'])
-    experiment.show_informed_consent()
+        general_log_file.write([get_time(), 'show informed consent screen'])
+        experiment.show_informed_consent()
 
     general_log_file.write([get_time(), 'start initial calibration'])
     experiment.calibrate()
