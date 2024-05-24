@@ -7,6 +7,8 @@ https://github.com/esdalmaijer/PyGaze/blob/master/pygaze/defaults.py
 from pathlib import Path
 from runpy import run_path
 
+import pandas as pd
+
 EXP_ROOT_PATH = Path(__file__).parent
 LOCAL_CONFIGS = run_path(str(EXP_ROOT_PATH / 'local_config.py'))
 
@@ -129,3 +131,13 @@ PQ_image_dir = EXP_ROOT_PATH / 'ui_data/interface_icons/running_icon_copy.png'
 
 PQ_FONT = ("Times New Roman", 14)
 PQ_FONT_ITALIC = ("Times New Roman", 12, "italic")
+
+# read the instructions to a dictionary
+PQ_INSTRUCTIONS_DICT = pd.read_csv(PQ_PARTICIPANT_INSTRUCTIONS_CSV, index_col='pq_instructions').to_dict(orient='dict')
+PQ_INSTRUCTIONS_DICT = PQ_INSTRUCTIONS_DICT['pq_text']
+
+PQ_QUESTIONS = pd.read_csv(PQ_QUESTIONS_CSV, index_col='pq_question_no').fillna('')
+PQ_QUESTIONS = PQ_QUESTIONS.to_dict(orient='index')
+
+from pprint import pprint
+pprint(PQ_QUESTIONS)
