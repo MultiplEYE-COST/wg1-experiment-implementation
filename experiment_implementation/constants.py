@@ -114,22 +114,18 @@ OPTION_5 = IMAGE_CONFIG['option_5']
 #########################################################
 
 # participant_questionnaire constants
+PQ_DATA_FOLDER_PATH = EXP_ROOT_PATH / 'data' / f'participant_questionnaire_{LANGUAGE}_{COUNTRY_CODE}_{LAB_NUMBER}'
 
-PQ_ROOT_PATH = Path(__file__).parent
-PQ_RESULT_FOLDER_PATH = PQ_ROOT_PATH / 'participant_questionnaire/pq_results'
-
-PQ_PARTICIPANT_INSTRUCTIONS_CSV = PQ_ROOT_PATH / f'participant_questionnaire/pq_data/questionnaire_{LANGUAGE}' \
-                                                 f'/multipleye_questionnaire_instructions_{LANGUAGE}.csv'
-PQ_QUESTIONS_CSV = PQ_ROOT_PATH / f'participant_questionnaire/pq_data/questionnaire_{LANGUAGE}' \
-                                  f'/multipleye_questionnaire_questions_{LANGUAGE}.csv'
-PQ_LANGUAGES_CSV = PQ_ROOT_PATH / f'participant_questionnaire/pq_data/questionnaire_{LANGUAGE}' \
-                                  f'/language_iso639_1_{LANGUAGE}.csv'
+PQ_PARTICIPANT_INSTRUCTIONS_CSV = PQ_DATA_FOLDER_PATH / f'multipleye_questionnaire_instructions_{LANGUAGE}.csv'
+PQ_QUESTIONS_CSV = PQ_DATA_FOLDER_PATH / f'multipleye_questionnaire_questions_{LANGUAGE}.csv'
+PQ_LANGUAGES_CSV = PQ_DATA_FOLDER_PATH / f'language_iso639_1_{LANGUAGE}.csv'
 
 # Opening the file where the data is saved
-PQ_FILE = PQ_ROOT_PATH / 'participant_questionnaire/participants_data.csv'
+PQ_FILE = PQ_DATA_FOLDER_PATH / f'participant_questionnaire_data_{LANGUAGE}_{COUNTRY_CODE}_{LAB_NUMBER}.csv'
 
 # fix program icon and image not showing
-PQ_program_icon = PQ_ROOT_PATH / 'data/icons/program_icon.png'
-PQ_image_dir = PQ_ROOT_PATH / 'data/icons/running_icon_copy.png'
+PQ_program_icon = EXP_ROOT_PATH / 'ui_data/interface_icons/program_icon.png'
+PQ_image_dir = EXP_ROOT_PATH / 'ui_data/interface_icons/running_icon_copy.png'
 
-PQ_Participant_ID = 0
+PQ_FONT = ("Times New Roman", 14)
+PQ_FONT_ITALIC = ("Times New Roman", 12, "italic")

@@ -5,7 +5,7 @@ We encourage you to report any bugs or contribute to new features, optimisations
 
 Here we give you an overview of the workflow and best practices for contributing.
 
-**Questions:** If you have any developer-related questions, please contact Deborah on slack.
+**Questions:** If you have any developer-related questions, please contact us via [multipleye@cl.uzh.ch](mailto:multipleye@cl.uzh.ch).
 
 ## Table of Contents
 - [Code of Conduct](#code-of-conduct)

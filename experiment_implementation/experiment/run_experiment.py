@@ -152,7 +152,7 @@ def run_experiment(
     experiment.run_experiment()
     general_log_file.write([get_time(), 'finished experiment'])
 
-    experiment.quit_experiment()
+    experiment.finish_experiment(participant_questionnaire=True)
 
     general_log_file.write([get_time(), 'END'])
 
