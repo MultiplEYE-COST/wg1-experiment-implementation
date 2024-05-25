@@ -25,7 +25,7 @@ def run_participant_questionnaire(participant_id: str) -> None:
     header = [gui.Column(header_text, background_color='#ffffff', expand_x=True, expand_y=True),
               gui.Column(
                   header_icon, background_color='#ffffff', expand_x=True, expand_y=True, element_justification='r'
-                  )]
+              )]
 
     layout_h = [[gui.Frame("", [header], size=(1000, 100), background_color='#ffffff', pad=0, expand_x=True)]]
 
@@ -35,20 +35,24 @@ def run_participant_questionnaire(participant_id: str) -> None:
         gui.Text('' + participant_id + '\n\n', font=("Times New Roman", 20, "bold", "italic"))]
 
     gender = [gui.Text('1. ' + pq_questions_dict['1']['pq_question_text'], size=(50, None)),
-           gui.Combo(
-               [pq_questions_dict['1']['pq_answer_option_1'], pq_questions_dict['1']['pq_answer_option_2'],
-                pq_questions_dict['1']['pq_answer_option_3'], pq_questions_dict['1']['pq_answer_option_4']], size=(25, 1),
-               pad=(50, 0),
-               key=pq_questions_dict['1']['pq_question_identifier']
-               )]
+              gui.Combo(
+                  [pq_questions_dict['1']['pq_answer_option_1'], pq_questions_dict['1']['pq_answer_option_2'],
+                   pq_questions_dict['1']['pq_answer_option_3'], pq_questions_dict['1']['pq_answer_option_4']],
+                  size=(25, 1),
+                  pad=(50, 0),
+                  key=pq_questions_dict['1']['pq_question_identifier']
+              )]
 
     years_education = [gui.Text('2. ' + pq_questions_dict['2']['pq_question_text'], size=(50, None)),
-           gui.Combo(list(range(1, 21)), size=(25, 1), pad=(50, 0), key=pq_questions_dict['2']['pq_question_identifier'])]
+                       gui.Combo(
+                           list(range(1, 21)), size=(25, 1), pad=(50, 0),
+                           key=pq_questions_dict['2']['pq_question_identifier']
+                           )]
 
     help_years_education = [gui.Text(
         ' ' + pq_questions_dict['2']['pq_question_help'], size=(70, None), pad=(25, 0),
         font=constants.PQ_FONT_ITALIC
-        )]
+    )]
 
     age = [gui.Text('3. ' + pq_questions_dict['3']['pq_question_text'], size=(50, None)),
            gui.In(pad=(50, 0), size=26, key=pq_questions_dict['3']['pq_question_identifier'])]
@@ -56,46 +60,47 @@ def run_participant_questionnaire(participant_id: str) -> None:
     help_age = [gui.Text(
         ' ' + pq_questions_dict['3']['pq_question_help'], size=(70, None), pad=(25, 0),
         font=constants.PQ_FONT_ITALIC
-        )]
+    )]
 
     socio_economic_status = [gui.Text('4. ' + pq_questions_dict['4']['pq_question_text'], size=(50, None)),
-           gui.Combo(
-               [pq_questions_dict['4'][f'pq_answer_option_{i}'] 
-                for i in range(1, 10) if pq_questions_dict['4'][f'pq_answer_option_{i}']],
-               size=(25, 1),
-               pad=(50, 0),
-               key=pq_questions_dict['4']['pq_question_identifier']
-           )]
+                             gui.Combo(
+                                 [pq_questions_dict['4'][f'pq_answer_option_{i}']
+                                  for i in range(1, 10) if pq_questions_dict['4'][f'pq_answer_option_{i}']],
+                                 size=(25, 1),
+                                 pad=(50, 0),
+                                 key=pq_questions_dict['4']['pq_question_identifier']
+                             )]
 
-    layout1 = [participant_id_element, gender, years_education, 
+    layout1 = [participant_id_element, gender, years_education,
                help_years_education, age, help_age, socio_economic_status]
 
     # Creating the layout for the second frame
     child_langs = [gui.Text('5. ' + pq_questions_dict['5']['pq_question_text'], size=(50, None)),
-           gui.Combo(
-               [pq_questions_dict['5'][f'pq_answer_option_{i}'] 
-                for i in range(1, 10) if pq_questions_dict['5'][f'pq_answer_option_{i}']], 
-               size=25, pad=(50, 0), 
-               key=pq_questions_dict['5']['pq_question_identifier'],
-               enable_events=True, 
-               readonly=False
-               )]
+                   gui.Combo(
+                       [pq_questions_dict['5'][f'pq_answer_option_{i}']
+                        for i in range(1, 10) if pq_questions_dict['5'][f'pq_answer_option_{i}']],
+                       size=25, pad=(50, 0),
+                       key=pq_questions_dict['5']['pq_question_identifier'],
+                       enable_events=True,
+                       readonly=False
+                   )]
 
     help_child_langs = [gui.Text(
         ' ' + pq_questions_dict['5']['pq_question_help'], size=(70, None), pad=(20, 0),
         font=constants.PQ_FONT_ITALIC
-        )]
+    )]
 
     native_lang = [gui.Text('6. ' + pq_questions_dict['6']['pq_question_text'], size=(50, None)),
-           gui.Combo(
-               read_questions.pq_language_list, size=25, pad=(50, 0), key=pq_questions_dict['6']['pq_question_identifier'],
-               enable_events=True
-               ),
-           ]
+                   gui.Combo(
+                       read_questions.pq_language_list, size=25, pad=(50, 0),
+                       key=pq_questions_dict['6']['pq_question_identifier'],
+                       enable_events=True
+                   ),
+                   ]
     col1 = [child_langs, help_child_langs, native_lang]
 
     # These elements are made visible depending on the answer to question 5
-    c24 = [[gui.Text('7. ' + read_questions.pq_questions[6][1], size=(50, None))]]
+    c24 = [[gui.Text('7. ' + pq_questions_dict['7']['pq_question_text'], size=(50, None))]]
     c25 = [
         [gui.Text('' + pq_ins_dict['pq_second_native_language'], size=(25, None)),
          gui.Combo(
@@ -103,7 +108,7 @@ def run_participant_questionnaire(participant_id: str) -> None:
              size=22,
              key='second_native_language',
              enable_events=True
-             )]]
+         )]]
     c26 = [
         [gui.Text('' + pq_ins_dict['pq_third_native_language'], size=(25, None)),
          gui.Combo(
@@ -111,7 +116,7 @@ def run_participant_questionnaire(participant_id: str) -> None:
              size=22,
              key='third_native_language',
              enable_events=True
-             )]]
+         )]]
 
     layout2 = [[gui.Column(col1, element_justification='l')],
                [gui.Column(c24, element_justification='l', key='question_7', visible=False)],
@@ -128,12 +133,12 @@ def run_participant_questionnaire(participant_id: str) -> None:
            gui.Combo(
                read_questions.pq_language_list, size=25, pad=(50, 0), key='dominant_language',
                enable_events=True
-               )]
+           )]
     c33 = [gui.Text('10. ' + read_questions.pq_questions[9][1], size=(50, 2)),
            gui.Combo(
                [read_questions.pq_questions[9][2], read_questions.pq_questions[9][3]], size=25, pad=(50, 0),
                key='dialect', enable_events=True, default_value=read_questions.pq_questions[9][3]
-               ),
+           ),
            ]
     col3 = [c31, c32, c33]
 
@@ -161,11 +166,11 @@ def run_participant_questionnaire(participant_id: str) -> None:
             gui.Combo(
                 [read_questions.pq_questions[19][2], read_questions.pq_questions[19][3]], size=(22, 1),
                 key='read_language', enable_events=True
-                )]]
+            )]]
     c52 = [[gui.Text(
         ' ' + read_questions.pq_questions[19][11], size=(50, None), pad=(20, 0),
         font=constants.PQ_FONT_ITALIC
-        )]]
+    )]]
     c53 = [[gui.Text('' + pq_ins_dict['pq_add_language']), gui.B('+', key='add_language', enable_events=True)]]
 
     c54 = [[gui.Frame('' + pq_ins_dict['pq_read_language'], [[gui.T('')]], key='frame_reading_language')]]
@@ -192,7 +197,7 @@ def run_participant_questionnaire(participant_id: str) -> None:
                 read_questions.pq_questions[21][7], read_questions.pq_questions[21][8],
                 read_questions.pq_questions[21][9], read_questions.pq_questions[21][10]], size=(47, 1),
                key='tiredness'
-               )]
+           )]
     c73 = [gui.Text('15. ' + read_questions.pq_questions[22][1], size=(45, None)),
            gui.Combo(
                [read_questions.pq_questions[22][2], read_questions.pq_questions[22][3],
@@ -202,7 +207,7 @@ def run_participant_questionnaire(participant_id: str) -> None:
     c74 = [gui.Text(
         ' ' + read_questions.pq_questions[22][11], size=(50, None), pad=(20, 0),
         font=constants.PQ_FONT_ITALIC
-        )]
+    )]
     c75 = [gui.Text('16. ' + read_questions.pq_questions[23][1], size=(45, None)),
            gui.Combo(
                [read_questions.pq_questions[23][2], read_questions.pq_questions[23][3],
@@ -212,14 +217,14 @@ def run_participant_questionnaire(participant_id: str) -> None:
     c76 = [gui.Text(
         ' ' + read_questions.pq_questions[23][11], size=(50, None), pad=(20, 0),
         font=constants.PQ_FONT_ITALIC
-        )]
+    )]
     layout10 = [c71, c72, c73, c74, c75, c76]
 
     # Creating the layout for the eighth frame
     layout11 = [[gui.Text(
         "" + pq_ins_dict['pq_final_message'], size=(75, None),
         justification='center'
-        )]]
+    )]]
 
     # Changing layout visibility to True/False depending on the selection of Prev/Next buttons
     q = [gui.VPush(),
@@ -240,29 +245,29 @@ def run_participant_questionnaire(participant_id: str) -> None:
         [gui.Frame(
             "", [q], size=(1000, 350), key='layout_questions', element_justification='c', pad=0, expand_x=True,
             expand_y=True
-            )]]
+        )]]
 
     # Create layout for the buttons (prev, next, submit)
     b = [gui.pin(
         gui.Button(
             '' + pq_ins_dict['pq_prev_button'], key='prev', size=(10, 1), mouseover_colors='grey',
             use_ttk_buttons=True, visible=False
+        )
+    ),
+        gui.Push(),
+        gui.pin(
+            gui.Button(
+                '' + pq_ins_dict['pq_next_button'], key='next', size=(10, 1), mouseover_colors='grey',
+                use_ttk_buttons=True
             )
         ),
-         gui.Push(),
-         gui.pin(
-             gui.Button(
-                 '' + pq_ins_dict['pq_next_button'], key='next', size=(10, 1), mouseover_colors='grey',
-                 use_ttk_buttons=True
-                 )
-             ),
-         gui.pin(
-             gui.Button(
-                 '' + pq_ins_dict['pq_submit_button'], key='submit', size=(10, 1), mouseover_colors='grey',
-                 use_ttk_buttons=True, visible=False
-                 )
-         )
-         ]
+        gui.pin(
+            gui.Button(
+                '' + pq_ins_dict['pq_submit_button'], key='submit', size=(10, 1), mouseover_colors='grey',
+                use_ttk_buttons=True, visible=False
+            )
+        )
+    ]
 
     layout_b = [[gui.Frame("", [b], size=(1000, 55), pad=0, expand_x=True)]]
 
@@ -275,7 +280,7 @@ def run_participant_questionnaire(participant_id: str) -> None:
         pq_ins_dict['pq_program_name'], layout, resizable=True,
         location=(0, 0), icon=constants.PQ_program_icon,
         margins=(0, 0), return_keyboard_events=True, element_justification='c'
-        ).Finalize()
+    ).Finalize()
 
     # Maximize window for full screen
     window.Maximize()
@@ -363,9 +368,9 @@ def run_participant_questionnaire(participant_id: str) -> None:
                       pq_ins_dict['pq_delete_button'], k=('delete_dialect', item_d),
                       enable_events=True,
                       tooltip='Delete this item'
-                      )]], k=('row_dialect', item_d)
-                )
-            )]
+                  )]], k=('row_dialect', item_d)
+            )
+        )]
         return row
 
     # Elements shown when inserting new reading languages
@@ -375,25 +380,27 @@ def run_participant_questionnaire(participant_id: str) -> None:
                 [[gui.Text(
                     '' + pq_ins_dict['pq_read_language'] + ' ' + f'{item_read}',
                     key=f'language_number_{item_read}'
+                ),
+                    gui.Combo(
+                        read_questions.pq_language_list, size=22,
+                        key=f'read_language_{item_read}'
                     ),
-                  gui.Combo(
-                      read_questions.pq_language_list, size=22,
-                      key=f'read_language_{item_read}'
-                      ),
-                  gui.B(
-                      pq_ins_dict['pq_remove_language'],
-                      k=('delete_read_language', item_read), enable_events=True,
-                      tooltip='Delete this item'
-                      )]],
+                    gui.B(
+                        pq_ins_dict['pq_remove_language'],
+                        k=('delete_read_language', item_read), enable_events=True,
+                        tooltip='Delete this item'
+                    )]],
                 k=('row_read_language', item_read), visible=True
-                )
-            )]
+            )
+        )]
         return row_language
 
     # Repeat layout for each language
     def repeating_layout(language_name):
-        c41 = [[gui.Text(' ' + pq_questions_dict['11']['pq_question_help'] + '\n', size=(None, None), pad=(20, 0),
-                         font=constants.PQ_FONT_ITALIC)]]
+        c41 = [[gui.Text(
+            ' ' + pq_questions_dict['11']['pq_question_help'] + '\n', size=(None, None), pad=(20, 0),
+            font=constants.PQ_FONT_ITALIC
+            )]]
 
         row4 = [gui.pin(
             gui.Col(
@@ -409,56 +416,56 @@ def run_participant_questionnaire(participant_id: str) -> None:
                          [read_questions.pq_questions[11][2], read_questions.pq_questions[11][3],
                           read_questions.pq_questions[11][4],
                           read_questions.pq_questions[11][5], read_questions.pq_questions[11][6]],
-                         key=f'academic_reading_time_{no_repeating_layout}'
+                         key=f'academic_reading_time_{num_repeating_layout}'
                      ),
                      gui.Text(read_questions.pq_questions[12][1], size=(18, 1), justification='right'),
                      gui.Combo(
                          [read_questions.pq_questions[12][2], read_questions.pq_questions[12][3],
                           read_questions.pq_questions[12][4],
                           read_questions.pq_questions[12][5], read_questions.pq_questions[12][6]],
-                         key=f'magazine_reading_time_{no_repeating_layout}'
+                         key=f'magazine_reading_time_{num_repeating_layout}'
                      )],
                     [gui.Text(read_questions.pq_questions[13][1], size=(18, 1), justification='right'),
                      gui.Combo(
                          [read_questions.pq_questions[13][2], read_questions.pq_questions[13][3],
                           read_questions.pq_questions[13][4],
                           read_questions.pq_questions[13][5], read_questions.pq_questions[13][6]],
-                         key=f'newspaper_reading_time_{no_repeating_layout}'
+                         key=f'newspaper_reading_time_{num_repeating_layout}'
                      ),
                      gui.Text(read_questions.pq_questions[14][1], size=(18, 1), justification='right'),
                      gui.Combo(
                          [read_questions.pq_questions[14][2], read_questions.pq_questions[14][3],
                           read_questions.pq_questions[14][4],
                           read_questions.pq_questions[14][5], read_questions.pq_questions[14][6]],
-                         key=f'email_reading_time_{no_repeating_layout}'
+                         key=f'email_reading_time_{num_repeating_layout}'
                      )],
                     [gui.Text(read_questions.pq_questions[15][1], size=(18, 1), justification='right'),
                      gui.Combo(
                          [read_questions.pq_questions[15][2], read_questions.pq_questions[15][3],
                           read_questions.pq_questions[15][4],
                           read_questions.pq_questions[15][5], read_questions.pq_questions[15][6]],
-                         key=f'fiction_reading_time_{no_repeating_layout}'
+                         key=f'fiction_reading_time_{num_repeating_layout}'
                      ),
                      gui.Text(read_questions.pq_questions[16][1], size=(18, 2), justification='right'),
                      gui.Combo(
                          [read_questions.pq_questions[16][2], read_questions.pq_questions[16][3],
                           read_questions.pq_questions[16][4],
                           read_questions.pq_questions[16][5], read_questions.pq_questions[16][6]],
-                         key=f'nonfiction_reading_time_{no_repeating_layout}'
+                         key=f'nonfiction_reading_time_{num_repeating_layout}'
                      )],
                     [gui.Text(read_questions.pq_questions[17][1], size=(18, None), justification='right'),
                      gui.Combo(
                          [read_questions.pq_questions[17][2], read_questions.pq_questions[17][3],
                           read_questions.pq_questions[17][4],
                           read_questions.pq_questions[17][5], read_questions.pq_questions[17][6]],
-                         key=f'internet_reading_time_{no_repeating_layout}'
+                         key=f'internet_reading_time_{num_repeating_layout}'
                      ),
                      gui.Text(read_questions.pq_questions[18][1], size=(18, 1), justification='right'),
                      gui.Combo(
                          [read_questions.pq_questions[18][2], read_questions.pq_questions[18][3],
                           read_questions.pq_questions[18][4],
                           read_questions.pq_questions[18][5], read_questions.pq_questions[18][6]],
-                         key=f'other_reading_time_{no_repeating_layout}'
+                         key=f'other_reading_time_{num_repeating_layout}'
                      )]
                 ], key=f'row_time_{language_name}'
             )
@@ -469,7 +476,7 @@ def run_participant_questionnaire(participant_id: str) -> None:
     pq_no_reading_languages = 0  # to change frames
     pq_languages = []  # the languages selected so far
     copy_pq_languages = pq_languages  # copy of languages selected so far (to be used when removing from combobox)
-    no_repeating_layout = 0  # to iterate between selected languages (to repeat layout)
+    num_repeating_layout = 0  # to iterate between selected languages (to repeat layout)
     no_dialects = 0  # to iterate between selected languages (to determine dialects)
     i = 0  # for autocomplete text
 
@@ -557,7 +564,7 @@ def run_participant_questionnaire(participant_id: str) -> None:
                 window.extend_layout(
                     window['frame_reading_language'],
                     [item_read_language(pq_no_reading_languages)]
-                    )
+                )
         if event[0] == 'delete_read_language':
             window[('row_read_language', event[1])].update(visible=False)
 
@@ -569,45 +576,45 @@ def run_participant_questionnaire(participant_id: str) -> None:
             window[f'-COL{layout}-'].update(visible=False)
             layout = layout + 1 if layout < 11 else 11
 
-            if layout == 4 and no_repeating_layout < len(pq_languages):
+            if layout == 4 and num_repeating_layout < len(pq_languages):
                 window[f'-COL{layout}-'].update(visible=True)
-                window.extend_layout(window['layout_4'], [repeating_layout(pq_languages[no_repeating_layout])])
-                no_repeating_layout += 1
-            elif layout == 4 and no_repeating_layout == 0:
+                window.extend_layout(window['layout_4'], [repeating_layout(pq_languages[num_repeating_layout])])
+                num_repeating_layout += 1
+            elif layout == 4 and num_repeating_layout == 0:
                 window[f'-COL{layout}-'].update(visible=False)
                 layout = layout + 1
 
-            if layout == 5 and no_repeating_layout < len(pq_languages):
+            if layout == 5 and num_repeating_layout < len(pq_languages):
                 window[f'-COL{layout}-'].update(visible=True)
-                window.extend_layout(window['layout_5'], [repeating_layout(pq_languages[no_repeating_layout])])
-                no_repeating_layout += 1
-            elif layout == 5 and (no_repeating_layout == 0 or no_repeating_layout == 1):
+                window.extend_layout(window['layout_5'], [repeating_layout(pq_languages[num_repeating_layout])])
+                num_repeating_layout += 1
+            elif layout == 5 and (num_repeating_layout == 0 or num_repeating_layout == 1):
                 window[f'-COL{layout}-'].update(visible=False)
                 layout = layout + 1
 
-            if layout == 6 and no_repeating_layout < len(pq_languages):
+            if layout == 6 and num_repeating_layout < len(pq_languages):
                 window[f'-COL{layout}-'].update(visible=True)
-                window.extend_layout(window['layout_6'], [repeating_layout(pq_languages[no_repeating_layout])])
-                no_repeating_layout += 1
-            elif layout == 6 and (no_repeating_layout == 0 or no_repeating_layout == 1 or no_repeating_layout == 2):
+                window.extend_layout(window['layout_6'], [repeating_layout(pq_languages[num_repeating_layout])])
+                num_repeating_layout += 1
+            elif layout == 6 and (num_repeating_layout == 0 or num_repeating_layout == 1 or num_repeating_layout == 2):
                 window[f'-COL{layout}-'].update(visible=False)
                 layout = layout + 1
 
-            if layout == 7 and no_repeating_layout < len(pq_languages):
+            if layout == 7 and num_repeating_layout < len(pq_languages):
                 window[f'-COL{layout}-'].update(visible=True)
-                window.extend_layout(window['layout_7'], [repeating_layout(pq_languages[no_repeating_layout])])
-                no_repeating_layout += 1
+                window.extend_layout(window['layout_7'], [repeating_layout(pq_languages[num_repeating_layout])])
+                num_repeating_layout += 1
             elif layout == 7 and (
-                    no_repeating_layout == 0 or no_repeating_layout == 1 or no_repeating_layout == 2 or no_repeating_layout == 3):
+                    num_repeating_layout == 0 or num_repeating_layout == 1 or num_repeating_layout == 2 or num_repeating_layout == 3):
                 window[f'-COL{layout}-'].update(visible=False)
                 layout = layout + 1
 
-            if layout == 8 and no_repeating_layout < len(pq_languages):
+            if layout == 8 and num_repeating_layout < len(pq_languages):
                 window[f'-COL{layout}-'].update(visible=True)
-                window.extend_layout(window['layout_8'], [repeating_layout(pq_languages[no_repeating_layout])])
-                no_repeating_layout += 1
+                window.extend_layout(window['layout_8'], [repeating_layout(pq_languages[num_repeating_layout])])
+                num_repeating_layout += 1
             elif layout == 8 and (
-                    no_repeating_layout == 0 or no_repeating_layout == 1 or no_repeating_layout == 2 or no_repeating_layout == 3 or no_repeating_layout == 4):
+                    num_repeating_layout == 0 or num_repeating_layout == 1 or num_repeating_layout == 2 or num_repeating_layout == 3 or num_repeating_layout == 4):
                 window[f'-COL{layout}-'].update(visible=False)
                 layout = layout + 1
 
@@ -617,6 +624,7 @@ def run_participant_questionnaire(participant_id: str) -> None:
                 window['prev'].update(visible=False)
             else:
                 window['prev'].update(visible=True)
+
             if layout == 11:
                 window['next'].update(visible=False)
                 window['submit'].update(visible=True)
@@ -628,34 +636,34 @@ def run_participant_questionnaire(participant_id: str) -> None:
             window[f'-COL{layout}-'].update(visible=False)
             layout = layout - 1 if layout > 1 else 1
 
-            if layout == 8 and no_repeating_layout == 5:
+            if layout == 8 and num_repeating_layout == 5:
                 window[f'-COL{layout}-'].update(visible=True)
-            elif layout == 8 and no_repeating_layout < 5:
+            elif layout == 8 and num_repeating_layout < 5:
                 window[f'-COL{layout}-'].update(visible=False)
                 layout -= 1
 
-            if layout == 7 and no_repeating_layout >= 4:
+            if layout == 7 and num_repeating_layout >= 4:
                 window[f'-COL{layout}-'].update(visible=True)
-            elif layout == 7 and no_repeating_layout < 4:
+            elif layout == 7 and num_repeating_layout < 4:
                 window[f'-COL{layout}-'].update(visible=False)
                 layout -= 1
 
-            if layout == 6 and no_repeating_layout >= 3:
+            if layout == 6 and num_repeating_layout >= 3:
                 window[f'-COL{layout}-'].update(visible=True)
                 layout -= 1
-            elif layout == 6 and no_repeating_layout < 3:
+            elif layout == 6 and num_repeating_layout < 3:
                 window[f'-COL{layout}-'].update(visible=False)
                 layout -= 1
 
-            if layout == 5 and no_repeating_layout >= 2:
+            if layout == 5 and num_repeating_layout >= 2:
                 window[f'-COL{layout}-'].update(visible=True)
-            elif layout == 5 and no_repeating_layout < 2:
+            elif layout == 5 and num_repeating_layout < 2:
                 window[f'-COL{layout}-'].update(visible=False)
                 layout -= 1
 
-            if layout == 4 and no_repeating_layout >= 1:
+            if layout == 4 and num_repeating_layout >= 1:
                 window[f'-COL{layout}-'].update(visible=True)
-            elif layout == 4 and no_repeating_layout < 1:
+            elif layout == 4 and num_repeating_layout < 1:
                 window[f'-COL{layout}-'].update(visible=False)
                 layout -= 1
 
@@ -682,7 +690,7 @@ def run_participant_questionnaire(participant_id: str) -> None:
                 df.to_csv(
                     constants.PQ_FILE,
                     index=False
-                    )  # This will create the file if it doesn't exist ->should be changed
+                )  # This will create the file if it doesn't exist ->should be changed
                 gui.popup(pq_ins_dict['pq_final_message'], title=pq_ins_dict['pq_success_title'])
                 window.close()
             else:
