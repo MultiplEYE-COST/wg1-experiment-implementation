@@ -18,14 +18,16 @@ LANG_DIR = PARENT_FOLDER / 'ui_data/interface_language/'
 IMAGE_DIR = PARENT_FOLDER / 'ui_data/interface_icons/'
 
 if os.path.exists(
-        PARENT_FOLDER / f'data/stimuli_{local_config.LANGUAGE}_{local_config.COUNTRY_CODE}_'
-                        f'{local_config.LAB_NUMBER}/config/stimulus_order_versions_{local_config.LANGUAGE}_'
+        PARENT_FOLDER / f'data/stimuli_MultiplEYE_{local_config.LANGUAGE}_{local_config.COUNTRY_CODE}_'
+                        f'{local_config.CITY}_{local_config.LAB_NUMBER}_{local_config.YEAR}/'
+                        f'config/stimulus_order_versions_{local_config.LANGUAGE}_'
                         f'{local_config.COUNTRY_CODE}_'
                         f'{local_config.LAB_NUMBER}.csv'
         ):
     df = pd.read_csv(
-        PARENT_FOLDER / f'data/stimuli_{local_config.LANGUAGE}_{local_config.COUNTRY_CODE}_'
-                        f'{local_config.LAB_NUMBER}/config/stimulus_order_versions_{local_config.LANGUAGE}_'
+        PARENT_FOLDER / f'data/stimuli_MultiplEYE_{local_config.LANGUAGE}_{local_config.COUNTRY_CODE}_'
+                        f'{local_config.CITY}_{local_config.LAB_NUMBER}_{local_config.YEAR}/'
+                        f'config/stimulus_order_versions_{local_config.LANGUAGE}_'
                         f'{local_config.COUNTRY_CODE}_'
                         f'{local_config.LAB_NUMBER}.csv', sep=',', encoding='utf8'
         )
@@ -74,6 +76,15 @@ def parse_args():
     )
 
     participants.add_argument(
+        '--session_id',
+        metavar=translations['session_id'],
+        default=1,
+        help=translations['session_id_help'],
+        required=True,
+        type=int,
+    )
+
+    participants.add_argument(
         '--stimulus_order_version',
         default=-1,
         type=int,
@@ -95,21 +106,32 @@ def parse_args():
     )
 
     lab_settings.add_argument(
-        '--full_language',
-        widget='TextField',
-        help=translations['full_language_help'],
-        metavar=translations['full_language'],
-        default=local_config.FULL_LANGUAGE,
-        required=True,
-        gooey_options={'visible': True},
-    )
-
-    lab_settings.add_argument(
         '--country_code',
         help=translations['country_code_help'],
         metavar=translations['country_code'],
         widget='TextField',
         default=local_config.COUNTRY_CODE,
+        required=True,
+        gooey_options={'visible': True},
+    )
+
+    lab_settings.add_argument(
+        '--city',
+        metavar=translations['city'],
+        help=translations['city_help'],
+        widget='TextField',
+        default=local_config.CITY,
+        required=True,
+        gooey_options={'visible': True},
+    )
+
+    lab_settings.add_argument(
+        '--year',
+        metavar=translations['year'],
+        help=translations['year_help'],
+        type=int,
+        widget='TextField',
+        default=local_config.YEAR,
         required=True,
         gooey_options={'visible': True},
     )
@@ -198,9 +220,6 @@ def start_experiment_session():
     if arguments['language'] != local_config.LANGUAGE:
         settings_changed = True
 
-    if arguments['full_language'] != local_config.FULL_LANGUAGE:
-        settings_changed = True
-
     if arguments['country_code'] != local_config.COUNTRY_CODE:
         settings_changed = True
 
@@ -215,6 +234,8 @@ def start_experiment_session():
             f.write(f'LANGUAGE = "{arguments["language"]}"\n')
             f.write(f'FULL_LANGUAGE = "{arguments["full_language"]}"\n')
             f.write(f'COUNTRY_CODE = "{arguments["country_code"]}"\n')
+            f.write(f'CITY = "{arguments["city"]}"\n')
+            f.write(f'YEAR = {arguments["year"]}\n')
             f.write(f'LAB_NUMBER = {arguments["lab_number"]}\n')
             f.write(f'DUMMY_MODE = {arguments["dummy_mode"]}\n')
 
@@ -225,6 +246,8 @@ def start_experiment_session():
             f'The language is {arguments["language"]}.\n'
             f'The country code is {arguments["country_code"]}.\n'
             f'The lab number is {arguments["lab_number"]}.\n'
+            f'The city is {arguments["city"]}.\n'
+            f'The estimated end year is {arguments["year"]}.\n'
             f'The dummy mode is {arguments["dummy_mode"]}.\n\n'
             'Please restart the program to apply the changes and run the experiment.\n'
             'Otherwise please click edit or close and restart the script.'
@@ -243,7 +266,6 @@ def start_experiment_session():
             else:
                 arguments['participant_id'] = arguments['participant_id_continued']
             arguments['session_mode'] = SessionMode.CORE
-            arguments['session_id'] = 1
             arguments['dataset_type'] = 'core_dataset'
             arguments['stimulus_order_version'] = experiment_utils.determine_stimulus_order_version(
                 participant_id=arguments['participant_id']
@@ -257,14 +279,12 @@ def start_experiment_session():
             experiment_utils.create_results_folder(dataset='test_dataset')
 
             # hardcoded args
-            arguments['session_id'] = 1
             arguments['stimulus_order_version'] = constants.VERSION_START
             arguments['dataset_type'] = 'test_sessions'
 
         elif arguments['session_mode'].value == 'minimal':
 
             # hardcoded args
-            arguments['session_id'] = 1
             arguments['dataset_type'] = 'test_sessions'
             arguments['stimulus_order_version'] = constants.VERSION_START
 
@@ -275,7 +295,6 @@ def start_experiment_session():
 
             experiment_utils.create_results_folder(dataset='core_dataset')
 
-            arguments['session_id'] = 1
             arguments['dataset_type'] = 'core_dataset'
 
             # check if the participant ID is within the range of the number of versions for data collections that
@@ -308,6 +327,8 @@ def start_experiment_session():
         arguments.pop('country_code', None)
         arguments.pop('lab_number', None)
         arguments.pop('dummy_mode', None)
+        arguments.pop('city', None)
+        arguments.pop('year', None)
 
         # !!! THIS IMPORT CANNOT BE MOVED SOMEWHERE ELSE; OTHERWISE THE PROGRAM GETS REALLY SLOW !!!
         from experiment.run_experiment import run_experiment

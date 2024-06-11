@@ -1,5 +1,5 @@
 ﻿pq_instructions,pq_text,comments
-pq_initial_message,Now we kindly ask you to provide some general information about yourself. Remember that all data will be anonymised and treated confidentially.,This will be shown when the questionnaire starts. 
+pq_initial_message,Now we kindly ask you to provide some general information about yourself.\nRemember that all data will be anonymised and treated confidentially.,This will be shown when the questionnaire starts.
 pq_program_name,MultiplEYE Participant Questionnaire,Shown in the header of the questionnaire.
 pq_program_description,Thank you for participating in the MultiplEYE experiment. Please fill out the form below and follow the instructions.,Shown in the header of the questionnaire.
 pq_participant_id,Participant ID:,

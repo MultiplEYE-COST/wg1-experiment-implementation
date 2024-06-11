@@ -14,7 +14,8 @@ LOCAL_CONFIGS = run_path(str(EXP_ROOT_PATH / 'local_config.py'))
 
 LANGUAGE = LOCAL_CONFIGS['LANGUAGE']
 COUNTRY_CODE = LOCAL_CONFIGS['COUNTRY_CODE']
-FULL_LANGUAGE = LOCAL_CONFIGS['FULL_LANGUAGE']
+CITY = LOCAL_CONFIGS['CITY']
+YEAR = LOCAL_CONFIGS['YEAR']
 LAB_NUMBER = LOCAL_CONFIGS['LAB_NUMBER']
 
 
@@ -42,8 +43,8 @@ HIGHLIGHT_COLOR = (185, 65, 40)
 DATA_FOLDER_PATH = f'data'
 RESULT_FOLDER_PATH = f'data/eye_tracking_data_{LANGUAGE}_{COUNTRY_CODE}_{LAB_NUMBER}'
 
-IMAGE_CONFIG_PATH = (f'data/stimuli_{LANGUAGE}_{COUNTRY_CODE}_{LAB_NUMBER}/config/'
-                     f'config_{LANGUAGE}_{COUNTRY_CODE}_{LAB_NUMBER}.py')
+IMAGE_CONFIG_PATH = (f'data/stimuli_MultiplEYE_{LANGUAGE}_{COUNTRY_CODE}_{CITY}_{LAB_NUMBER}_{YEAR}/config/'
+                     f'config_{LANGUAGE}_{COUNTRY_CODE}_{CITY}_{LAB_NUMBER}_{YEAR}.py')
 
 IMAGE_CONFIG = run_path(str(EXP_ROOT_PATH / IMAGE_CONFIG_PATH))
 ############################################################
@@ -131,13 +132,3 @@ PQ_image_dir = EXP_ROOT_PATH / 'ui_data/interface_icons/running_icon_copy.png'
 
 PQ_FONT = ("Times New Roman", 14)
 PQ_FONT_ITALIC = ("Times New Roman", 12, "italic")
-
-# read the instructions to a dictionary
-PQ_INSTRUCTIONS_DICT = pd.read_csv(PQ_PARTICIPANT_INSTRUCTIONS_CSV, index_col='pq_instructions').to_dict(orient='dict')
-PQ_INSTRUCTIONS_DICT = PQ_INSTRUCTIONS_DICT['pq_text']
-
-PQ_QUESTIONS = pd.read_csv(PQ_QUESTIONS_CSV, index_col='pq_question_no').fillna('')
-PQ_QUESTIONS = PQ_QUESTIONS.to_dict(orient='index')
-
-from pprint import pprint
-pprint(PQ_QUESTIONS)

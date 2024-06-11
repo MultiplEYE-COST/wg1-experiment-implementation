@@ -21,9 +21,10 @@ from pygaze.libtime import get_time
 from pygaze.plugins import aoi
 
 from devices.screen import MultiplEyeScreen
-from participant_questionnaire.pq_layout_file import run_participant_questionnaire
 
 from start_multipleye_session import SessionMode
+
+from experiment_implementation.experiment.participant_questionnaire import MultiplEYEParticipantQuestionnaire
 
 
 class Experiment:
@@ -505,6 +506,9 @@ class Experiment:
                         answer_correct=is_chosen_answer_correct,
                         message='preliminary answer'
                     )
+                    self._eye_tracker.log(
+                        f'{flag}trial_{trial_nr}_question_{question_number}_key_pressed_{key_pressed_question}',
+                    )
 
                 is_answer_correct = answer_chosen == correct_answer_key
 
@@ -520,7 +524,7 @@ class Experiment:
                 )
 
                 self._eye_tracker.log(
-                    f'{flag}trial_{trial_nr}_question_{question_number}_answer_given_is_{key_pressed_question}',
+                    f'{flag}trial_{trial_nr}_question_{question_number}_final_answer_given_is_{answer_chosen}',
                 )
                 self._eye_tracker.log(
                     f'{flag}trial_{trial_nr}_question_{question_number}_answer_given_is_correct:{is_answer_correct}',
@@ -819,7 +823,7 @@ class Experiment:
         self._display.close()
 
         if participant_questionnaire:
-            run_participant_questionnaire(self.participant_id)
+            MultiplEYEParticipantQuestionnaire(self.participant_id)
 
         libtime.expend()
 
