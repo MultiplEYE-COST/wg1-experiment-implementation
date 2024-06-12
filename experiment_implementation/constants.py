@@ -8,6 +8,7 @@ from pathlib import Path
 from runpy import run_path
 
 import pandas as pd
+from PyQt5 import QtGui
 
 EXP_ROOT_PATH = Path(__file__).parent
 LOCAL_CONFIGS = run_path(str(EXP_ROOT_PATH / 'local_config.py'))
@@ -130,5 +131,6 @@ PQ_FILE = PQ_DATA_FOLDER_PATH / f'participant_questionnaire_data_{LANGUAGE}_{COU
 PQ_program_icon = EXP_ROOT_PATH / 'ui_data/interface_icons/program_icon.png'
 PQ_image_dir = EXP_ROOT_PATH / 'ui_data/interface_icons/running_icon_copy.png'
 
-PQ_FONT = ("Times New Roman", 14)
-PQ_FONT_ITALIC = ("Times New Roman", 12, "italic")
+PQ_FONT = ("Helvetica", 15)
+PQ_FONT_ITALIC = ("Helvetica", 13)
+PQ_FONT_BOLD = ("Helvetica", 15, QtGui.QFont.Bold)

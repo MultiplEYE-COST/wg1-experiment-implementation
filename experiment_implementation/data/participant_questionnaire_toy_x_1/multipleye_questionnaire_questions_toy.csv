@@ -1,25 +1,26 @@
-﻿pq_question_no,pq_question_text,pq_answer_option_1,pq_answer_option_2,pq_answer_option_3,pq_answer_option_4,pq_answer_option_5,pq_answer_option_6,pq_answer_option_7,pq_answer_option_8,pq_answer_option_9,pq_question_help,pq_question_type,pq_question_identifier
-1,Gender,male ,female,other,prefer not to say,,,,,,,1,gender
-2,Years of education,1;20,,,,,,,,,"Please consider the years of education starting with primary school, including PhD studies.",1,years_education
-3,Age,18;120,,,,,,,,,Please provide you age (in number of years). The allowed values are from 18 to 120.,1,age
-4,"Compared to the other people in your geographical community, how do you rate your socio-economic status?",below-average,average,above-average,prefer not to say,,,,,,,1,socio_economic_status
-5,"As a child, did you grow up with one or multiple languages at the same time?",one language,two languages,three languages,,,,,,,Please answer this question by not taking into account languages learned in school or in language courses.,1,childhood_languages
-6,Native language: What is the first language you learned as a child?,language_iso639_1_en.csv,,,,,,,,,,1,native_language_1
-7,Which other language(s) did you grow up with?,language_iso639_1_en.csv,,,,,,,,,,1,native_language
-8,Language of use: Which language do you currently use the most?,language_iso639_1_en.csv,,,,,,,,,,1,use_language
-9,Dominant language: Which language are you currently the most at ease with?,language_iso639_1_en.csv,,,,,,,,,,1,dominant_language
-10,"For any of the languages mentioned before, do you speak a specific dialect or variation?",Yes,No,,,,,,,,,1,dialect
-11,"In a typical week, how much time do you spend reading in each type of material listed below in: ",,,,,,,,,,Please exclude audiobooks.,1,read_language_1
-11a,Academic materials,0 hours,less than 1 hour,1 to 3 hours,3 to 5 hours,More than 5 hours,,,,,,1,academic_reading_time
-11b,Magazines,0 hours,less than 1 hour,1 to 3 hours,3 to 5 hours,More than 5 hours,,,,,,1,magazine_reading_time
-11c,Newspapers,0 hours,less than 1 hour,1 to 3 hours,3 to 5 hours,More than 5 hours,,,,,,1,newspaper_reading_time
-11d,E-mails,0 hours,less than 1 hour,1 to 3 hours,3 to 5 hours,More than 5 hours,,,,,,1,email_reading_time
-11e,Fiction books,0 hours,less than 1 hour,1 to 3 hours,3 to 5 hours,More than 5 hours,,,,,,1,fiction_reading_time
-11f,Nonfiction/ special interest books,0 hours,less than 1 hour,1 to 3 hours,3 to 5 hours,More than 5 hours,,,,,,1,nonfiction_reading_time
-11g,"Internet media (including social media, forums, and blogs)",0 hours,less than 1 hour,1 to 3 hours,3 to 5 hours,More than 5 hours,,,,,,1,internet_reading_time
-11h,Other categories,0 hours,less than 1 hour,1 to 3 hours,3 to 5 hours,More than 5 hours,,,,,,1,other_reading_time
-20,Do you read in any other language(s)?,Yes,No,,,,,,,,You can insert 4 languages.,1,read_language
-21,Are you wearing glasses or contact lenses?,glasses,lenses,no,,,,,,,,1,eyewear
-22,How tired are you currently?,1 - extremely alert,2 - very alert,3 - alert,4 - fairly alert,5 - neither alert not sleepy,6 - some sign of sleepiness,"7 - sleepy, but no effort to keep alert","8 - sleepy, some effort to keep alert","9 - very sleepy, great effort to keep alert, fighting sleep",,1,tiredness
-23,Did you consume alcohol yesterday?,no,yes,prefer not to answer,,,,,,,Remember that all data will be anonymised and treated confidentially.,0,alcohol_yesterday
-24,Have you consumed alcohol today?,no ,yes,prefer not to answer,,,,,,,Remember that all data will be anonymised and treated confidentially.,0,alcohol_today
+﻿pq_question_no,pq_question_text,pq_answer_option_1,pq_answer_option_2,pq_answer_option_3,pq_answer_option_4,pq_answer_option_5,pq_answer_option_6,pq_answer_option_7,pq_answer_option_8,pq_answer_option_9,pq_question_help,pq_question_type,pq_question_identifier,pq_answer_type
+1,Gender,male ,female,other,prefer not to say,,,,,,,1,gender,dropdown
+2,Years of education,1;20,,,,,,,,,"Please consider the years of education starting with primary school, including PhD studies.",1,years_education,interval
+3,Age,18;120,,,,,,,,,Please provide you age (in number of years). The allowed values are from 18 to 120.,1,age,interval
+4,"Compared to the other people in your geographical community, how do you rate your socio-economic status?",below-average,average,above-average,prefer not to say,,,,,,,1,socio_economic_status,dropdown
+5,"As a child, did you grow up with one or multiple languages at the same time?",one language,two languages,three languages,,,,,,,Please answer this question by not taking into account languages learned in school or in language courses.,1,childhood_languages,dropdown
+6,Native language: What is the first language you learned as a child?,language_iso639_1_toy.csv,,,,,,,,,,1,native_language_1,dropdown_file
+7,Which other language(s) did you grow up with?,language_iso639_1_toy.csv,,,,,,,,,,1,native_language,dropdown_file
+8,Language of use: Which language do you currently use the most?,language_iso639_1_toy.csv,,,,,,,,,,1,use_language,dropdown_file
+9,Dominant language: Which language are you currently the most at ease with?,language_iso639_1_toy.csv,,,,,,,,,,1,dominant_language,dropdown_file
+10,"For any of the languages mentioned before, do you speak a specific dialect or variation?",,,,,,,,,,,1,dialect,dropdown
+11,"In a typical week, how much time do you spend reading in each type of material listed below in: ",,,,,,,,,,Please exclude audiobooks.,1,read_language,
+11a,Academic materials,0 hours,less than 1 hour,1 to 3 hours,3 to 5 hours,More than 5 hours,,,,,,1,academic_reading_time,dropdown
+11b,Magazines,0 hours,less than 1 hour,1 to 3 hours,3 to 5 hours,More than 5 hours,,,,,,1,magazine_reading_time,dropdown
+11c,Newspapers,0 hours,less than 1 hour,1 to 3 hours,3 to 5 hours,More than 5 hours,,,,,,1,newspaper_reading_time,dropdown
+11d,E-mails,0 hours,less than 1 hour,1 to 3 hours,3 to 5 hours,More than 5 hours,,,,,,1,email_reading_time,dropdown
+11e,Fiction books,0 hours,less than 1 hour,1 to 3 hours,3 to 5 hours,More than 5 hours,,,,,,1,fiction_reading_time,dropdown
+11f,Nonfiction/ special interest books,0 hours,less than 1 hour,1 to 3 hours,3 to 5 hours,More than 5 hours,,,,,,1,nonfiction_reading_time,dropdown
+11g,"Internet media (including social media, forums, and blogs)",0 hours,less than 1 hour,1 to 3 hours,3 to 5 hours,More than 5 hours,,,,,,1,internet_reading_time,dropdown
+11h,Other categories,0 hours,less than 1 hour,1 to 3 hours,3 to 5 hours,More than 5 hours,,,,,,1,other_reading_time,dropdown
+20,Do you read in any other language(s)?,,,,,,,,,,You can insert 4 languages.,1,additional_read_language,
+21,Are you wearing glasses or contact lenses?,glasses,lenses,no,,,,,,,,1,eyewear,dropdown
+22,How tired are you currently?,1 - extremely alert,2 - very alert,3 - alert,4 - fairly alert,5 - neither alert not sleepy,6 - some sign of sleepiness,"7 - sleepy, but no effort to keep alert","8 - sleepy, some effort to keep alert","9 - very sleepy, great effort to keep alert, fighting sleep",,1,tiredness,dropdown
+23,Did you consume alcohol yesterday?,no,yes,prefer not to answer,,,,,,,Remember that all data will be anonymised and treated confidentially.,0,alcohol_yesterday,dropdown
+24,Have you consumed alcohol today?,no ,yes,prefer not to answer,,,,,,,Remember that all data will be anonymised and treated confidentially.,0,alcohol_today,dropdown
+10a,Please specify the dialects:,,,,,,,,,,,1,dialect_name,
