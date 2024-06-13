@@ -1,3 +1,4 @@
+import json
 from pprint import pprint
 
 import pandas as pd
@@ -8,12 +9,16 @@ from experiment_implementation import constants
 
 class MultiplEYEParticipantQuestionnaire:
 
-    def __init__(self, participant_identifier: int):
+    def __init__(self, participant_identifier: int, results_folder: str):
         self.instructions, self.questions = self.load_data()
         self.participant_id = participant_identifier
         self.pq_data = {}
+        self.results_folder = results_folder
 
     def load_data(self):
+
+        # TODO: rewrite to directly load data from xlxs files instead of csv (just change function and path)
+
         # read the instructions to a dictionary
         pq_instructions_dict = pd.read_csv(constants.PQ_PARTICIPANT_INSTRUCTIONS_CSV,
                                            index_col='pq_instructions').to_dict(
@@ -147,6 +152,8 @@ class MultiplEYEParticipantQuestionnaire:
             optional=True
         )
 
+        # TODO: add the above questions again for all the additional reading languages
+
         self._show_questions(
             '',
             ['tiredness', 'eyewear', 'alcohol_yesterday', 'alcohol_today'],
@@ -163,6 +170,17 @@ class MultiplEYEParticipantQuestionnaire:
         #  et data is. We can just pass this folder to the PQ via the exp, it should be the "abs_results_path"
         #  or something like that. The name fo the file should
         #  {Participant ID}_{LANGUAGE}_{COUNTRY_CODE}_{LAB_NUMBER}_pq_data.json or sth like that...
+
+        self._save_data()
+
+    def _save_data(self):
+        result_file_name = (f'/{self.participant_id}_{constants.LANGUAGE}_'
+                            f'{constants.COUNTRY_CODE}_{constants.LAB_NUMBER}_pq_data.json')
+
+        result_file_path = self.results_folder + result_file_name
+
+        with open(result_file_path, 'w') as f:
+            json.dump(self.pq_data, f)
 
     def _show_questions(self, instructions: str, questions: list, button: str,
                         existing_data: dict = None,
@@ -275,6 +293,7 @@ class MultiplEYEParticipantQuestionnaire:
                     elif option_type == 'dropdown_file':
                         option_csv = pd.read_csv(constants.PQ_DATA_FOLDER_PATH / constants.PQ_LANGUAGES_CSV)
                         options = sorted(option_csv['language_name'].tolist())
+                        options.insert(0, '')
                         pq_gui.addField(option_label, choices=options, required=True)
                     else:
                         pq_gui.addField(option_label, required=True)

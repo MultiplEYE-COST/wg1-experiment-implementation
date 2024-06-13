@@ -50,6 +50,7 @@ class Experiment:
             num_pages: int,
     ):
 
+        self.obligatory_break_made = None
         self.stimuli_screens = [
             stimulus_dict for stimulus_dict in stimuli_screens if stimulus_dict['stimulus_type'] == 'experiment'
         ]
@@ -135,6 +136,8 @@ class Experiment:
             constants.FIXATION_TRIGGER_RADIUS * 2
             )
 
+        self.participant_questionnaire = MultiplEYEParticipantQuestionnaire(self.participant_id, self.abs_exp_path)
+
     def _set_initial_tracker_vars(self):
         # turn off automatic calibration, should be manual!
         self._eye_tracker.send_command("enable_automatic_calibration=NO")
@@ -169,32 +172,32 @@ class Experiment:
     def run_experiment(self) -> None:
         self._eye_tracker.log(f'start_experiment')
 
-        # self._show_instruction_screens()
-        #
-        # self._display.fill(self.instruction_screens['practice_screen']['screen'])
-        # self._eye_tracker.log('practice_text_starting_screen')
-        # self._eye_tracker.status_msg('Practice start screen')
-        # ts = self._display.show()
-        # key, key_ts = self._keyboard.get_key()
-        # self.write_to_logfile(get_time(), pd.NA, pd.NA, 'practice_start_screen', ts, key, key_ts, False, pd.NA,
-        #                       'stop showing: practice_start_screen')
-        #
-        # self._run_trials(practice=True)
-        #
-        # self._display.fill(self.instruction_screens['transition_screen']['screen'])
-        # self._eye_tracker.log('transition_screen')
-        # self._eye_tracker.status_msg('Transition screen')
-        # ts = self._display.show()
-        # key, key_ts = self._keyboard.get_key()
-        # self.write_to_logfile(get_time(), pd.NA, pd.NA, 'transition_screen', ts, key, key_ts, False, pd.NA,
-        #                       'stop showing: transition_screen')
-        #
-        # self._run_trials()
-        #
-        # # do another final validation at the end
-        # self._eye_tracker.status_msg('Perform a final VALIDATION')
-        # self._eye_tracker.log('final_validation')
-        # self.calibrate()
+        self._show_instruction_screens()
+
+        self._display.fill(self.instruction_screens['practice_screen']['screen'])
+        self._eye_tracker.log('practice_text_starting_screen')
+        self._eye_tracker.status_msg('Practice start screen')
+        ts = self._display.show()
+        key, key_ts = self._keyboard.get_key()
+        self.write_to_logfile(get_time(), pd.NA, pd.NA, 'practice_start_screen', ts, key, key_ts, False, pd.NA,
+                              'stop showing: practice_start_screen')
+
+        self._run_trials(practice=True)
+
+        self._display.fill(self.instruction_screens['transition_screen']['screen'])
+        self._eye_tracker.log('transition_screen')
+        self._eye_tracker.status_msg('Transition screen')
+        ts = self._display.show()
+        key, key_ts = self._keyboard.get_key()
+        self.write_to_logfile(get_time(), pd.NA, pd.NA, 'transition_screen', ts, key, key_ts, False, pd.NA,
+                              'stop showing: transition_screen')
+
+        self._run_trials()
+
+        # do another final validation at the end
+        self._eye_tracker.status_msg('Perform a final VALIDATION')
+        self._eye_tracker.log('final_validation')
+        self.calibrate()
 
         self._eye_tracker.status_msg(f'final screen')
         self._eye_tracker.log(f'show_final_screen')
@@ -347,7 +350,8 @@ class Experiment:
                 self._eye_tracker.log('!V CLEAR 116 116 116')
                 self._send_img_path_to_edf(relative_img_path)
                 # delete queued host pc key presses on page onset
-                self._eye_tracker.get_tracker().flushKeybuttons(0)
+                if not constants.DUMMY_MODE:
+                    self._eye_tracker.get_tracker().flushKeybuttons(0)
 
                 key_pressed_stimulus = ''
                 keypress_timestamp = -1
@@ -455,7 +459,8 @@ class Experiment:
                 self._send_img_path_to_edf(relative_question_page_path)
 
                 # delete queued host pc key presses on page onset
-                self._eye_tracker.get_tracker().flushKeybuttons(0)
+                if not constants.DUMMY_MODE:
+                    self._eye_tracker.get_tracker().flushKeybuttons(0)
 
                 key_pressed_question = ''
                 keypress_timestamp = -1
@@ -565,11 +570,11 @@ class Experiment:
                         trial_nr):
         if (((total_page_count >= self.num_pages // 2 and trial_nr >= half_num_stimuli - 2)
              or trial_nr == half_num_stimuli + 1)
-                and not obligatory_break_made and not practice):
+                and not self.obligatory_break_made and not practice):
 
             self._eye_tracker.log('obligatory_break')
             self._eye_tracker.status_msg('OBLIGATORY BREAK')
-            obligatory_break_made = True
+            self.obligatory_break_made = True
 
             self._display.fill(screen=self.instruction_screens['obligatory_break_screen']['screen'])
             onset_timestamp = self._display.show()
@@ -663,7 +668,8 @@ class Experiment:
         self._eye_tracker.log('!V CLEAR 116 116 116')
         self._send_img_path_to_edf(screens['relative_path'])
         # delete queued host pc key presses on page onset
-        self._eye_tracker.get_tracker().flushKeybuttons(0)
+        if not constants.DUMMY_MODE:
+            self._eye_tracker.get_tracker().flushKeybuttons(0)
 
         key_pressed = ''
         keypress_timestamp = -1
@@ -823,7 +829,7 @@ class Experiment:
         self._display.close()
 
         if participant_questionnaire:
-            MultiplEYEParticipantQuestionnaire(self.participant_id)
+            self.participant_questionnaire.run_questionnaire()
 
         libtime.expend()
 
