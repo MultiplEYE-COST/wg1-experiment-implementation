@@ -338,5 +338,5 @@ class MultiplEYEParticipantQuestionnaire:
 
 if __name__ == '__main__':
     participant_id = 1
-    pq = MultiplEYEParticipantQuestionnaire(participant_id)
+    pq = MultiplEYEParticipantQuestionnaire(participant_id, 'res')
     pq.run_questionnaire()
