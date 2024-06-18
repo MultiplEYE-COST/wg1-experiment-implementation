@@ -130,7 +130,7 @@ class MultiplEYEParticipantQuestionnaire:
             )
 
         for lang in unique_language_keys:
-            reading_questions = ['read_language', 'academic_reading_time', 'magazine_reading_time',
+            reading_questions = ['read_language','academic_reading_time', 'magazine_reading_time',
                                  'newspaper_reading_time',
                                  'email_reading_time', 'fiction_reading_time', 'nonfiction_reading_time',
                                  'internet_reading_time',
