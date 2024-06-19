@@ -19,12 +19,12 @@ class MultiplEYEParticipantQuestionnaire:
 
 
         # read the instructions to a dictionary
-        pq_instructions_dict = pd.read_excel(constants.PQ_PARTICIPANT_INSTRUCTIONS_EXCEL,
+        pq_instructions_dict = pd.read_excel(constants.PQ_PARTICIPANT_INSTRUCTIONS_XLSX,
                                              index_col='pq_instructions').to_dict(
             orient='dict')
         pq_instructions_dict = pq_instructions_dict['pq_text']
 
-        pq_questions = pd.read_excel(constants.PQ_QUESTIONS_EXCEL, index_col='pq_question_identifier').fillna('')
+        pq_questions = pd.read_excel(constants.PQ_QUESTIONS_XLSX, index_col='pq_question_identifier').fillna('')
         pq_questions = pq_questions.to_dict(orient='index')
 
         return pq_instructions_dict, pq_questions
@@ -113,6 +113,7 @@ class MultiplEYEParticipantQuestionnaire:
                 # if the language is already in the list
                 if language_name not in lang_with_dialects:
                     lang_with_dialects.append(self.pq_data[lang_key])
+
                     lang_keys_with_dialects.append(f'{lang_key}_dialect_name')
 
         # if there are any dialects
@@ -127,7 +128,7 @@ class MultiplEYEParticipantQuestionnaire:
             )
 
         for lang in unique_language_keys:
-            reading_questions = ['read_language', 'academic_reading_time', 'magazine_reading_time',
+            reading_questions = ['read_language','academic_reading_time', 'magazine_reading_time',
                                  'newspaper_reading_time',
                                  'email_reading_time', 'fiction_reading_time', 'nonfiction_reading_time',
                                  'internet_reading_time',
@@ -152,6 +153,35 @@ class MultiplEYEParticipantQuestionnaire:
         )
 
         # TODO: add the above questions again for all the additional reading languages
+        # Finished
+
+        reading_languages_mentioned = ['additional_read_language_1', 'additional_read_language_2',
+                                       'additional_read_language_3', 'additional_read_language_4']
+
+        # get those languages that have been mentioned in the previous questions and whose keys are in the pq_data
+        reading_languages_mentioned = [language for language in reading_languages_mentioned if
+                                       language in self.pq_data.keys() and self.pq_data[language] != '']
+
+        unique_reading_languages = []
+        unique_reading_language_keys = []
+        for lang_key in reading_languages_mentioned:
+            if self.pq_data[lang_key] not in unique_reading_languages:
+                unique_reading_language_keys.append(lang_key)
+                unique_reading_languages.append(self.pq_data[lang_key])
+
+        for lang in unique_reading_language_keys:
+            reading_questions = ['read_language', 'academic_reading_time', 'magazine_reading_time',
+                                 'newspaper_reading_time',
+                                 'email_reading_time', 'fiction_reading_time', 'nonfiction_reading_time',
+                                 'internet_reading_time',
+                                 'other_reading_time']
+
+            self._show_questions(
+                f'Please answer the following questions for the language {self.pq_data[lang]}',
+                reading_questions,
+                button=self.instructions['pq_next_button'],
+                keys=[f'{lang}_{question}' for question in reading_questions],
+            )
 
         self._show_questions(
             '',
@@ -159,11 +189,11 @@ class MultiplEYEParticipantQuestionnaire:
             button=self.instructions['pq_submit_button'],
         )
 
-        # TODO: add confirmation dialog, i.e. list all questions ans answers and they can tick a box if any of
+        # TODO: add confirmation dialog, i.e. list all questions and answers and they can tick a box if any of
         #  those is wrong, if yes, we show them again
 
         pprint(self.pq_data)
-        # TODO: save the data! it would be best to save the dictionarry, possibly just as a json file to the folder
+        # TODO: save the data! it would be best to save the dictionary, possibly just as a json file to the folder
         #  for the participant. I think it would make sense to write it to the same participant folder where the
         #  et data is. We can just pass this folder to the PQ via the exp, it should be the "abs_results_path"
         #  or something like that. The name fo the file should
@@ -212,6 +242,8 @@ class MultiplEYEParticipantQuestionnaire:
         # TODO: the size somehow does not work, but I think it could be a bug and that we cannot change it..
         pq_gui = gui.Dlg(
             title='Participant Questionnaire',
+            # Positioning the dialog boxes in the top left corner of the screen
+            pos=(0, 0),
             size=(800, 900),
         )
 
@@ -252,9 +284,9 @@ class MultiplEYEParticipantQuestionnaire:
                     options = list(range(int(interval[0]), int(interval[1]) + 1))
 
                 elif answer_type == 'dropdown_file':
-                    option_csv = pd.read_excel(constants.PQ_DATA_FOLDER_PATH /
-                                             self.questions[question_id]["pq_answer_option_1"])
-                    options = sorted(option_csv['language_name'].tolist())
+                    option_xlsx = pd.read_excel(constants.PQ_DATA_FOLDER_PATH /
+                                                self.questions[question_id]["pq_answer_option_1"])
+                    options = sorted(option_xlsx['language_name'].tolist())
 
                 else:
                     options = []
@@ -289,8 +321,8 @@ class MultiplEYEParticipantQuestionnaire:
                     if option_type == 'checkbox':
                         pq_gui.addField(option_label, initial=False)
                     elif option_type == 'dropdown_file':
-                        option_csv = pd.read_excel(constants.PQ_DATA_FOLDER_PATH / constants.PQ_LANGUAGES_EXCEL)
-                        options = sorted(option_csv['language_name'].tolist())
+                        option_xlsx = pd.read_excel(constants.PQ_DATA_FOLDER_PATH / constants.PQ_LANGUAGES_XLSX)
+                        options = sorted(option_xlsx['language_name'].tolist())
                         options.insert(0, '')
                         pq_gui.addField(option_label, choices=options, required=True)
                     else:
