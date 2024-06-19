@@ -339,7 +339,7 @@ class Experiment:
                     f'{flag}trial {trial_nr} {stimulus_name} page '
                     f'{page_number}/{total_reading_pages}'
                     )
-                self._eye_tracker.log(f'start_recording_{flag}trial_{trial_nr}_page_{page_number}')
+                self._eye_tracker.log(f'start_recording_{flag}trial_{trial_nr}_{stimulus_name}_{stimulus_id}_page_{page_number}')
                 self._eye_tracker.start_recording()
 
                 self._display.fill(screen=page_screen)
@@ -376,7 +376,7 @@ class Experiment:
                 # self._eye_tracker.log('!V CLEAR 128 128 128')
                 # stop eye tracking
                 self._eye_tracker.stop_recording()
-                self._eye_tracker.log(f'stop_recording_{flag}trial_{trial_nr}_page_{page_number}')
+                self._eye_tracker.log(f'stop_recording_{flag}trial_{trial_nr}_{stimulus_name}_{stimulus_id}_page_{page_number}')
 
             # self._eye_tracker.log(f'!V TRIAL_VAR RT {int(core.getTime() - stimulus_timestamp) * 1000}')
 
@@ -512,7 +512,7 @@ class Experiment:
                         message='preliminary answer'
                     )
                     self._eye_tracker.log(
-                        f'{flag}trial_{trial_nr}_question_{question_number}_key_pressed_{key_pressed_question}',
+                        f'{flag}trial_{trial_nr}_{stimulus_name}_{stimulus_id}_question_{question_number}_key_pressed_{key_pressed_question}',
                     )
 
                 is_answer_correct = answer_chosen == correct_answer_key
@@ -529,15 +529,15 @@ class Experiment:
                 )
 
                 self._eye_tracker.log(
-                    f'{flag}trial_{trial_nr}_question_{question_number}_final_answer_given_is_{answer_chosen}',
+                    f'{flag}trial_{trial_nr}_{stimulus_name}_{stimulus_id}_question_{question_number}_final_answer_given_is_{answer_chosen}',
                 )
                 self._eye_tracker.log(
-                    f'{flag}trial_{trial_nr}_question_{question_number}_answer_given_is_correct:{is_answer_correct}',
+                    f'{flag}trial_{trial_nr}_{stimulus_name}_{stimulus_id}_question_{question_number}_answer_given_is_correct:{is_answer_correct}',
                 )
 
                 # stop eye tracking
                 self._eye_tracker.stop_recording()
-                self._eye_tracker.log(f'stop_recording_{flag}trial_{trial_nr}_question_{question_number}')
+                self._eye_tracker.log(f'stop_recording_{flag}trial_{trial_nr}_{stimulus_name}_{stimulus_id}_question_{question_number}')
 
             self._eye_tracker.log(f'!V TRIAL_VAR trial_number {flag}{trial_nr}')
             self._eye_tracker.log(f'!V TRIAL_VAR stimulus_id {stimulus_id}')
