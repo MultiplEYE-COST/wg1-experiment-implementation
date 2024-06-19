@@ -18,9 +18,9 @@ contact [multipleye@cl.uzh.ch](mailto:multipleye@cl.uzh.ch).
 ## Installation
 
 In order to run the MultiplEYE experiment you will need to complete the following steps
-1. Please read the official MultiplEYE guidelines linked on this page: [MultiplEYE contribute](https://multipleye.eu/contribute/)
+1. Please read the official MultiplEYE Data Collection Guidelines linked on this page: [MultiplEYE contribute](https://multipleye.eu/contribute/)
 2. Download the experiment code from this repository. Either clone via git or download the zip file (see [download as zip](#download-the-experiment-code-as-zip-file)).
-3. Following the guidelines, prepare the stimulus files which includes the creation of the images
+3. Following the MultiplEYE Data Collection Guidelines, prepare the stimulus files which includes the creation of the images
 4. Copy the stimulus files to the correct location in the experiment data folder: `experiment_implementation/data/[your stimulus folder]`
 5. Prepare the environment for the experiment following the guidelines in [CONDA_ENVIRONMENT.md](guidelines/markdown/CONDA_ENVIRONMENT.md)
 6. Install the necessary packages for your eye-tracker. For EyeLink eye-trackers 
@@ -105,3 +105,11 @@ work with the tobii eye-trackers:
 ### Develop and run experiments for other eye-trackers
 Depending on what is needed we can add more eye-trackers. There is also a team that is trying to set up experiment 
 using a webcam. Please contact [multipleye@cl.uzh.ch](mailto:multipleye@cl.uzh.ch) for more information.
+
+## Upload the data
+After you have run a MultiplEYE session, no matter if pilot or real experiment, please make sure to:
+1. Always save the entire `data` folder in a safe location locally as you do for other data collections.
+2. Upload the `data` to the MultiplEYE server. When you preregistered, you should have 
+received a folder where to upload the data.
+3. Whenever you collect data from a new participant, please upload the entire `data` folder to the server, 
+replacing the old one.
