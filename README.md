@@ -84,6 +84,9 @@ section. The box `Dummy version` should be **un-ticked**.
 Depending on what eye-tracker you intend to use you need to install the software that comes with the eye-tracker. For 
 EyeLink and tobii you can download the software online for free.
 
+If you use a display PC and an external monitor, please start the experiment on the external monitor and 
+close the display PC. Otherwise the resolution can be weird for some monitors.
+
 ### Develop and run experiments for EyeLink
 The code has been tested with EyeLink eye-trackers and mostly on a Windows presentation PC. However, MacOS should work 
 as well, but it has not been tested as thoroughly.
