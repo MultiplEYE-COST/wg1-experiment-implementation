@@ -232,7 +232,6 @@ def start_experiment_session():
     if settings_changed and not arguments['continue_core_session']:
         with open(PARENT_FOLDER / 'local_config.py', 'w') as f:
             f.write(f'LANGUAGE = "{arguments["language"]}"\n')
-            f.write(f'FULL_LANGUAGE = "{arguments["full_language"]}"\n')
             f.write(f'COUNTRY_CODE = "{arguments["country_code"]}"\n')
             f.write(f'CITY = "{arguments["city"]}"\n')
             f.write(f'YEAR = {arguments["year"]}\n')

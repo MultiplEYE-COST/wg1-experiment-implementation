@@ -17,15 +17,14 @@ class MultiplEYEParticipantQuestionnaire:
 
     def load_data(self):
 
-        # TODO: rewrite to directly load data from xlxs files instead of csv (just change function and path)
 
         # read the instructions to a dictionary
-        pq_instructions_dict = pd.read_csv(constants.PQ_PARTICIPANT_INSTRUCTIONS_CSV,
-                                           index_col='pq_instructions').to_dict(
+        pq_instructions_dict = pd.read_excel(constants.PQ_PARTICIPANT_INSTRUCTIONS_EXCEL,
+                                             index_col='pq_instructions').to_dict(
             orient='dict')
         pq_instructions_dict = pq_instructions_dict['pq_text']
 
-        pq_questions = pd.read_csv(constants.PQ_QUESTIONS_CSV, index_col='pq_question_identifier').fillna('')
+        pq_questions = pd.read_excel(constants.PQ_QUESTIONS_EXCEL, index_col='pq_question_identifier').fillna('')
         pq_questions = pq_questions.to_dict(orient='index')
 
         return pq_instructions_dict, pq_questions
@@ -160,7 +159,6 @@ class MultiplEYEParticipantQuestionnaire:
             button=self.instructions['pq_submit_button'],
         )
 
-
         # TODO: add confirmation dialog, i.e. list all questions ans answers and they can tick a box if any of
         #  those is wrong, if yes, we show them again
 
@@ -254,7 +252,7 @@ class MultiplEYEParticipantQuestionnaire:
                     options = list(range(int(interval[0]), int(interval[1]) + 1))
 
                 elif answer_type == 'dropdown_file':
-                    option_csv = pd.read_csv(constants.PQ_DATA_FOLDER_PATH /
+                    option_csv = pd.read_excel(constants.PQ_DATA_FOLDER_PATH /
                                              self.questions[question_id]["pq_answer_option_1"])
                     options = sorted(option_csv['language_name'].tolist())
 
@@ -291,7 +289,7 @@ class MultiplEYEParticipantQuestionnaire:
                     if option_type == 'checkbox':
                         pq_gui.addField(option_label, initial=False)
                     elif option_type == 'dropdown_file':
-                        option_csv = pd.read_csv(constants.PQ_DATA_FOLDER_PATH / constants.PQ_LANGUAGES_CSV)
+                        option_csv = pd.read_excel(constants.PQ_DATA_FOLDER_PATH / constants.PQ_LANGUAGES_EXCEL)
                         options = sorted(option_csv['language_name'].tolist())
                         options.insert(0, '')
                         pq_gui.addField(option_label, choices=options, required=True)

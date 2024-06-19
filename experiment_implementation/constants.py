@@ -120,9 +120,9 @@ OPTION_5 = IMAGE_CONFIG['option_5']
 # participant_questionnaire constants
 PQ_DATA_FOLDER_PATH = EXP_ROOT_PATH / 'data' / f'participant_questionnaire_{LANGUAGE}_{COUNTRY_CODE}_{LAB_NUMBER}'
 
-PQ_PARTICIPANT_INSTRUCTIONS_CSV = PQ_DATA_FOLDER_PATH / f'multipleye_questionnaire_instructions_{LANGUAGE}.csv'
-PQ_QUESTIONS_CSV = PQ_DATA_FOLDER_PATH / f'multipleye_questionnaire_questions_{LANGUAGE}.csv'
-PQ_LANGUAGES_CSV = PQ_DATA_FOLDER_PATH / f'language_iso639_1_{LANGUAGE}.csv'
+PQ_PARTICIPANT_INSTRUCTIONS_EXCEL = PQ_DATA_FOLDER_PATH / f'multipleye_questionnaire_instructions_{LANGUAGE}.xlsx'
+PQ_QUESTIONS_EXCEL = PQ_DATA_FOLDER_PATH / f'multipleye_questionnaire_questions_{LANGUAGE}.xlsx'
+PQ_LANGUAGES_EXCEL = PQ_DATA_FOLDER_PATH / f'language_iso639_1_{LANGUAGE}.xlsx'
 
 # Opening the file where the data is saved
 PQ_FILE = PQ_DATA_FOLDER_PATH / f'participant_questionnaire_data_{LANGUAGE}_{COUNTRY_CODE}_{LAB_NUMBER}.csv'

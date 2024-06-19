@@ -34,7 +34,7 @@
   "year": "Year",
     "year_help": "The preliminary end year of the data collection. This is the same as you have entered in the pre-registration form.",
   "session_id": "Session ID",
-    "session_id_help": "The session ID of the eye-tracking session! Note that the psychometric tests use a separate session ID.",
+    "session_id_help": "Enter the session ID (1-9). Note that the eye-tracking sessions and psychometric tests sessions use a separate session ID.",
   "browse": "Browse",
   "cancel": "Cancel",
   "checkbox_label": "Enable",
@@ -82,5 +82,13 @@
   "validation_failed": "One or more fields failed validation.",
   "dialog_button_yes": "Yes",
   "dialog_button_no": "No",
-  "dialog_button_ok": "OK"
+  "dialog_button_ok": "OK",
+  "wmc": "Working Memory Capacity Battery (WMC)",
+    "wmc_help": "Working Memory Capacity Battery (WMC) task",
+  "ran": "RAN",
+    "ran_help": "Rapid Automatized Naming (RAN) test",
+  "stroop_flanker": "Stroop and Flanker",
+    "stroop_flanker_help": "Stroop and Flanker tasks",
+  "plab": "PLAB",
+    "plab_help": "Pimsleur Language Aptitude Battery test"
 }
