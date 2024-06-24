@@ -17,7 +17,6 @@ class MultiplEYEParticipantQuestionnaire:
 
     def load_data(self):
 
-
         # read the instructions to a dictionary
         pq_instructions_dict = pd.read_excel(constants.PQ_PARTICIPANT_INSTRUCTIONS_XLSX,
                                              index_col='pq_instructions').to_dict(
@@ -128,14 +127,14 @@ class MultiplEYEParticipantQuestionnaire:
             )
 
         for lang in unique_language_keys:
-            reading_questions = ['read_language','academic_reading_time', 'magazine_reading_time',
+            reading_questions = ['read_language', 'academic_reading_time', 'magazine_reading_time',
                                  'newspaper_reading_time',
                                  'email_reading_time', 'fiction_reading_time', 'nonfiction_reading_time',
                                  'internet_reading_time',
                                  'other_reading_time']
 
             self._show_questions(
-                f'Please answer the following questions for the language {self.pq_data[lang]}',
+                f'{self.instructions["pq_answer_for_lang"]} {self.pq_data[lang]}',
                 reading_questions,
                 button=self.instructions['pq_next_button'],
                 keys=[f'{lang}_{question}' for question in reading_questions],
@@ -177,7 +176,7 @@ class MultiplEYEParticipantQuestionnaire:
                                  'other_reading_time']
 
             self._show_questions(
-                f'Please answer the following questions for the language {self.pq_data[lang]}',
+                f'{self.instructions["pq_answer_for_lang"]} {self.pq_data[lang]}',
                 reading_questions,
                 button=self.instructions['pq_next_button'],
                 keys=[f'{lang}_{question}' for question in reading_questions],
@@ -358,8 +357,10 @@ class MultiplEYEParticipantQuestionnaire:
                 for key, value in pq_data.items():
                     pprint(pq_data)
                     if value == '':
-                        gui.infoDlg(prompt='Please fill in all questions.')
-                        self._show_questions('Please fill in all questions! ' + instructions, questions, button=button,
+                        gui.infoDlg(prompt=self.instructions['pq_answer_all'],
+                                    title=self.instructions['pq_error_title'])
+                        self._show_questions(self.instructions['pq_answer_all'] + ' ' + instructions, questions,
+                                             button=button,
                                              existing_data=pq_data, keys=keys, option_labels=option_labels,
                                              option_type=option_type)
 

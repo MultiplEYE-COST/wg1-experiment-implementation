@@ -6,3 +6,4 @@ git+https://github.com/theDebbister/PyGaze
 pandas==2.2.0
 gooey==1.0.8.1
 pyarrow==15.0.2
+PyQt5==5.15.10
