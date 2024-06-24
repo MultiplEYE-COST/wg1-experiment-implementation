@@ -13,6 +13,7 @@ class MultiplEYEParticipantQuestionnaire:
         self.instructions, self.questions = self.load_data()
         self.participant_id = participant_identifier
         self.pq_data = {}
+        self.confirmation_data = {}
         self.results_folder = results_folder
 
     def load_data(self):
@@ -126,6 +127,8 @@ class MultiplEYEParticipantQuestionnaire:
                 option_type='text'
             )
 
+        # TODO: Fix save other_reading_time
+
         for lang in unique_language_keys:
             reading_questions = ['read_language', 'academic_reading_time', 'magazine_reading_time',
                                  'newspaper_reading_time',
@@ -168,6 +171,8 @@ class MultiplEYEParticipantQuestionnaire:
                 unique_reading_language_keys.append(lang_key)
                 unique_reading_languages.append(self.pq_data[lang_key])
 
+        # TODO: Fix save other_reading_time
+
         for lang in unique_reading_language_keys:
             reading_questions = ['read_language', 'academic_reading_time', 'magazine_reading_time',
                                  'newspaper_reading_time',
@@ -190,6 +195,10 @@ class MultiplEYEParticipantQuestionnaire:
 
         # TODO: add confirmation dialog, i.e. list all questions and answers and they can tick a box if any of
         #  those is wrong, if yes, we show them again
+
+        for screen_number in range(1, 8):
+            self._make_changes(screen_number, unique_language_keys,
+                               lang_keys_with_dialects, unique_reading_language_keys, reading_languages_mentioned)
 
         pprint(self.pq_data)
         # TODO: save the data! it would be best to save the dictionary, possibly just as a json file to the folder
@@ -366,6 +375,478 @@ class MultiplEYEParticipantQuestionnaire:
 
             self.pq_data.update(pq_data)
 
+    def _show_confirmation(self, instructions: str, questions: list, button: str,
+                           existing_data: dict = None,
+                           keys: list = None,
+                           option_labels: list = None,
+                           option_type: str = None,
+                           optional: bool = False) -> None:
+
+        if (option_type is None and option_labels is not None) or (option_type is not None and option_labels is None):
+            raise ValueError('If option labels are passed, the option type must be specified.')
+
+        if existing_data is None:
+            existing_data = {}
+
+        # TODO: the size somehow does not work, but I think it could be a bug and that we cannot change it..
+        pq_gui = gui.Dlg(
+            title='Participant Questionnaire',
+            # Positioning the dialog boxes in the top left corner of the screen
+            pos=(0, 0),
+            size=(800, 900),
+        )
+
+        pq_gui.cancelBtn.setHidden(True)
+        pq_gui.okBtn.setText(button)
+
+        initial_text = pq_gui.addText(instructions)
+        initial_text.setFont(QtGui.QFont(*constants.PQ_FONT_BOLD))
+
+        # id_text = f'{self.instructions["pq_participant_id"]} {self.participant_id}'
+        # part_id = pq_gui.addText(id_text)
+
+        if keys is None:
+            # use the original question identifiers as keys
+            keys = questions
+        else:
+            # use the passed keys
+            keys = keys
+        if not existing_data:
+            pq_data = {}
+        else:
+            pq_data = existing_data
+
+        # first 4 questions on one page
+        for question_id in questions:
+
+            # answer_type = self.questions[question_id]["pq_answer_type"]
+
+            if (question_id in existing_data.keys() and
+                    existing_data[question_id] != ''):
+
+                initial_value = existing_data[question_id]
+                pq_gui.addFixedField(question_id, str(initial_value))
+
+                pq_gui.addText(self.questions[question_id]["pq_question_text"])
+
+                # add help text if there is one
+                if self.questions[question_id]["pq_question_help"]:
+                    help_text = pq_gui.addText(self.questions[question_id]["pq_question_help"])
+                    help_text.setFont(QtGui.QFont(*constants.PQ_FONT_ITALIC, italic=True))
+
+            # if there are additional options that are no in the question file but have been passed
+            if option_labels:
+                for option_label in option_labels:
+                    if option_type == 'checkbox':
+                        pq_gui.addField(option_label, initial=False)
+                    elif option_type == 'dropdown_file':
+                        option_xlsx = pd.read_excel(constants.PQ_DATA_FOLDER_PATH / constants.PQ_LANGUAGES_XLSX)
+                        options = sorted(option_xlsx['language_name'].tolist())
+                        options.insert(0, '')
+                        pq_gui.addField(option_label, choices=options, required=True)
+                    else:
+                        pq_gui.addField(option_label, required=True)
+
+        # the item in the top left position is some default text that I don't know how to remove otherwise
+        pq_gui.layout.itemAtPosition(0, 0).widget().hide()
+
+        # via psychopy it is not possible to access the label information, which is why we do it like below.
+        # This is simply to change the font size via the layout grid
+        num_rows = pq_gui.layout.rowCount()
+        num_cols = pq_gui.layout.columnCount()
+
+        # exclude the first two rows, these are the instructions and the ID
+        for row in range(2, num_rows):
+            for col in range(num_cols):
+                item = pq_gui.layout.itemAtPosition(row, col)
+                # if we have already changed the font to italic, we don't want to change it again
+                if not item.widget().font().family() == constants.PQ_FONT_ITALIC[0]:
+                    item.widget().setFont(QtGui.QFont(*constants.PQ_FONT))
+
+        ok_data = pq_gui.show()
+
+        answer_dict = {}
+        for key, value in zip(keys, ok_data):
+            answer_dict[key] = value
+
+        pq_data.update(answer_dict)
+
+        if pq_gui.OK:
+            # check whether one value is empty, if yes, prompt the user to fill in all questions
+            if not optional:
+                for key, value in pq_data.items():
+                    pprint(pq_data)
+                    if value == '':
+                        gui.infoDlg(prompt='Please fill in all questions.')
+                        self._show_questions('Please fill in all questions! ' + instructions, questions, button=button,
+                                             existing_data=pq_data, keys=keys, option_labels=option_labels,
+                                             option_type=option_type)
+
+            self.confirmation_data.update(pq_data)
+
+    def _make_changes(self, screen_number: int, unique_language_keys: list, lang_keys_with_dialects: list,
+                      unique_reading_language_keys: list, reading_languages_mentioned: list):
+
+        # The confirmation data dictionary contains all the previously filled data in the following format:
+        # key=gender value= key+value (gender:female)
+        confirmation_data = {}
+        for key, value in self.pq_data.items():
+            if value != '':
+                confirmation_data[key] = ''.join(': '.join((key, str(value))))
+
+        print(confirmation_data)
+
+        if screen_number == 1:
+            # appearance of confirmation screen. Clicking any checkboxes, would result in the appearance of the
+            # fields to be changed
+            first_confirmation_screen = [confirmation_data['gender'], confirmation_data['years_education'],
+                                         confirmation_data['age'],
+                                         confirmation_data['socio_economic_status']]
+            first_confirmation_screen_keys = []
+            for key, value in confirmation_data.items():
+                for v in first_confirmation_screen:
+                    if value == v:
+                        first_confirmation_screen_keys.append(key)
+
+            self._show_confirmation(
+                '1. Click on the answers you want to change.',
+                [''],
+                button=self.instructions['pq_next_button'],
+                keys=first_confirmation_screen_keys,
+                option_labels=first_confirmation_screen,
+                option_type='checkbox'
+            )
+
+            # showing the questions that have been checked in the first screen
+            first_questions_checked = []
+            first_questions_keys_checked = []
+
+            # get those questions which has been checked
+            for q in first_confirmation_screen_keys:
+                if self.confirmation_data[q]:
+                    first_questions_checked.append(q)
+                    first_questions_keys_checked.append(q)
+
+            if len(first_questions_checked) > 0:
+                self._show_questions(
+                    '',
+                    first_questions_checked,
+                    button=self.instructions['pq_next_button'],
+                )
+
+        elif screen_number == 2:
+            # appearance of second confirmation screen.
+            second_confirmation_screen = []
+            second_confirmation_screen_key = []
+
+            for key, value in confirmation_data.items():
+                if key in unique_language_keys:
+                    second_confirmation_screen.append(confirmation_data[key])
+                    second_confirmation_screen_key.append(key)
+
+            self._show_confirmation(
+                '2. Click on the answers you want to change.',
+                [''],
+                button=self.instructions['pq_next_button'],
+                keys=second_confirmation_screen_key,
+                option_labels=second_confirmation_screen,
+                option_type='checkbox'
+            )
+
+            # showing the questions that have been checked in the second screen
+            second_questions_checked = []
+            second_questions_keys_checked = []
+
+            # get those questions which has been checked
+            for q in second_confirmation_screen_key:
+                if self.confirmation_data[q] and (
+                        q == 'native_language_1' or q == 'dominant_language' or q == 'use_language'):
+                    second_questions_checked.append(q)
+                    second_questions_keys_checked.append(q)
+                elif self.confirmation_data[q] and (
+                        q != 'native_language_1' or q != 'dominant_language' or q != 'use_language'):
+                    second_questions_checked.append(q[0:15])
+                    second_questions_keys_checked.append(q)
+
+            if len(second_questions_checked) > 0:
+                self._show_questions(
+                    '',
+                    second_questions_checked,
+                    button=self.instructions['pq_next_button'],
+                    keys=second_questions_keys_checked,
+                )
+
+        elif screen_number == 3:
+            # appearance of third confirmation screen.
+
+            if lang_keys_with_dialects:
+                third_confirmation_screen = []
+                third_confirmation_screen_key = []
+                for key, value in confirmation_data.items():
+                    if key in lang_keys_with_dialects:
+                        third_confirmation_screen.append(confirmation_data[key])
+                        third_confirmation_screen_key.append(key)
+
+                self._show_confirmation(
+                    '3. Click on the answers you want to change.',
+                    [''],
+                    button=self.instructions['pq_next_button'],
+                    keys=third_confirmation_screen_key,
+                    option_labels=third_confirmation_screen,
+                    option_type='checkbox'
+                )
+
+                third_questions_checked = []
+                third_questions_keys_checked = []
+
+                # get those questions which has been checked
+                for q in third_confirmation_screen_key:
+                    if self.confirmation_data[q]:
+                        pprint(q[-12:])
+                        third_questions_checked.append(q[-12:])
+                        third_questions_keys_checked.append(q)
+
+                # TODO Find a way to remove the option_label so that the question is not duplicated
+
+                if len(third_questions_checked) > 0:
+                    self._show_questions(
+                        '',
+                        third_questions_checked,
+                        button=self.instructions['pq_next_button'],
+                        keys=third_questions_keys_checked,
+                        option_labels=third_questions_checked,
+                        option_type='text'
+                    )
+
+        elif screen_number == 4:
+            # appearance of fourth confirmation screen.
+
+            # TODO: Fix to show other_reading_time
+
+            for lang in unique_language_keys:
+                fourth_confirmation_screen = []
+                fourth_confirmation_screen_key = []
+                reading_questions = ['read_language', 'academic_reading_time', 'magazine_reading_time',
+                                     'newspaper_reading_time',
+                                     'email_reading_time', 'fiction_reading_time', 'nonfiction_reading_time',
+                                     'internet_reading_time',
+                                     'other_reading_time']
+
+                for key, value in confirmation_data.items():
+                    if key in [f'{lang}_{question}' for question in reading_questions]:
+                        fourth_confirmation_screen.append(confirmation_data[key])
+                        fourth_confirmation_screen_key.append(key)
+
+                self._show_confirmation(
+                    f'4. Click on the answers you want to change for the language {self.pq_data[lang]}.',
+                    [''],
+                    button=self.instructions['pq_next_button'],
+                    keys=fourth_confirmation_screen_key,
+                    option_labels=fourth_confirmation_screen,
+                    option_type='checkbox',
+                )
+
+                fourth_questions_checked = []
+                fourth_questions_keys_checked = []
+
+                # get those questions which has been checked
+                for q in fourth_confirmation_screen_key:
+                    if self.confirmation_data[q]:
+                        # email_reading_time
+                        if q[-18:] == 'email_reading_time':
+                            fourth_questions_checked.append(q[-18:])
+                            fourth_questions_keys_checked.append(q)
+                        # academic_reading_time
+                        elif q[-21:] == 'academic_reading_time':
+                            fourth_questions_checked.append(q[-21:])
+                            fourth_questions_keys_checked.append(q)
+                        # nonfiction_reading_time
+                        elif q[-23:] == 'nonfiction_reading_time':
+                            fourth_questions_checked.append(q[-23:])
+                            fourth_questions_keys_checked.append(q)
+                        # fiction_reading_time
+                        elif q[-20:] == 'fiction_reading_time':
+                            fourth_questions_checked.append(q[-20:])
+                            fourth_questions_keys_checked.append(q)
+                        # internet_reading_time
+                        elif q[-21:] == 'internet_reading_time':
+                            fourth_questions_checked.append(q[-21:])
+                            fourth_questions_keys_checked.append(q)
+                        # magazine_reading_time
+                        elif q[-21:] == 'magazine_reading_time':
+                            fourth_questions_checked.append(q[-21:])
+                            fourth_questions_keys_checked.append(q)
+                        # newspaper_reading_time
+                        elif q[-22:] == 'newspaper_reading_time':
+                            fourth_questions_checked.append(q[-22:])
+                            fourth_questions_keys_checked.append(q)
+
+                        # TODO: Fix for other_reading_time
+                        # elif q[-18:] == 'other_reading_time':
+                        #    fourth_questions_checked.append(q[-18:])
+                        #    fourth_questions_keys_checked.append(q)
+
+                if len(fourth_questions_checked) > 0:
+                    self._show_questions(
+                        '',
+                        fourth_questions_checked,
+                        button=self.instructions['pq_next_button'],
+                        keys=fourth_questions_keys_checked,
+                    )
+
+        elif screen_number == 5:
+
+            if reading_languages_mentioned:
+                fifth_confirmation_screen = []
+                fifth_confirmation_screen_key = []
+                for key, value in confirmation_data.items():
+                    if key in reading_languages_mentioned:
+                        fifth_confirmation_screen.append(confirmation_data[key])
+                        fifth_confirmation_screen_key.append(key)
+
+                self._show_confirmation(
+                    '5. Click on the answers you want to change.',
+                    [''],
+                    button=self.instructions['pq_next_button'],
+                    keys=fifth_confirmation_screen_key,
+                    option_labels=fifth_confirmation_screen,
+                    option_type='checkbox'
+                )
+
+                fifth_questions_checked = []
+                fifth_questions_keys_checked = []
+
+                # get those questions which has been checked
+                for q in fifth_confirmation_screen_key:
+                    if self.confirmation_data[q]:
+                        fifth_questions_checked.append(q[0:24])
+                        fifth_questions_keys_checked.append(q)
+
+                # TODO Find a way to remove the option_label so that the question is not duplicated
+
+                if len(fifth_questions_checked) > 0:
+                    self._show_questions(
+                        '',
+                        fifth_questions_checked,
+                        button=self.instructions['pq_next_button'],
+                        keys=fifth_questions_keys_checked,
+                        option_labels=fifth_questions_checked,
+                        option_type='dropdown_file'
+                    )
+
+        elif screen_number == 6:
+            # TODO: Fix to show other_reading_time
+
+            for lang in unique_reading_language_keys:
+                sixth_confirmation_screen = []
+                sixth_confirmation_screen_key = []
+                reading_questions = ['read_language', 'academic_reading_time', 'magazine_reading_time',
+                                     'newspaper_reading_time',
+                                     'email_reading_time', 'fiction_reading_time', 'nonfiction_reading_time',
+                                     'internet_reading_time',
+                                     'other_reading_time']
+
+                for key, value in confirmation_data.items():
+                    if key in [f'{lang}_{question}' for question in reading_questions]:
+                        sixth_confirmation_screen.append(confirmation_data[key])
+                        sixth_confirmation_screen_key.append(key)
+
+                self._show_confirmation(
+                    f'6. Click on the answers you want to change for the language {self.pq_data[lang]}.',
+                    [''],
+                    button=self.instructions['pq_next_button'],
+                    keys=sixth_confirmation_screen_key,
+                    option_labels=sixth_confirmation_screen,
+                    option_type='checkbox',
+                )
+                sixth_questions_checked = []
+                sixth_questions_keys_checked = []
+
+                # get those questions which has been checked
+                for q in sixth_confirmation_screen_key:
+                    if self.confirmation_data[q]:
+                        # email_reading_time
+                        if q[-18:] == 'email_reading_time':
+                            sixth_questions_checked.append(q[-18:])
+                            sixth_questions_keys_checked.append(q)
+                        # academic_reading_time
+                        elif q[-21:] == 'academic_reading_time':
+                            sixth_questions_checked.append(q[-21:])
+                            sixth_questions_keys_checked.append(q)
+                        # nonfiction_reading_time
+                        elif q[-23:] == 'nonfiction_reading_time':
+                            sixth_questions_checked.append(q[-23:])
+                            sixth_questions_keys_checked.append(q)
+                        # fiction_reading_time
+                        elif q[-20:] == 'fiction_reading_time':
+                            sixth_questions_checked.append(q[-20:])
+                            sixth_questions_keys_checked.append(q)
+                        # internet_reading_time
+                        elif q[-21:] == 'internet_reading_time':
+                            sixth_questions_checked.append(q[-21:])
+                            sixth_questions_keys_checked.append(q)
+                        # magazine_reading_time
+                        elif q[-21:] == 'magazine_reading_time':
+                            sixth_questions_checked.append(q[-21:])
+                            sixth_questions_keys_checked.append(q)
+                        # newspaper_reading_time
+                        elif q[-22:] == 'newspaper_reading_time':
+                            sixth_questions_checked.append(q[-22:])
+                            sixth_questions_keys_checked.append(q)
+
+                        # TODO: Fix for other_reading_time
+                        # elif q[-18:] == 'other_reading_time':
+                        #    fourth_questions_checked.append(q[-18:])
+                        #    fourth_questions_keys_checked.append(q)
+
+                # if there are any dialects
+                if len(sixth_questions_checked) > 0:
+                    self._show_questions(
+                        '',
+                        sixth_questions_checked,
+                        button=self.instructions['pq_next_button'],
+                        keys=sixth_questions_keys_checked,
+                    )
+
+        elif screen_number == 7:
+            seventh_confirmation_screen_key = []
+
+            seventh_confirmation_screen = [confirmation_data['tiredness'],
+                                           confirmation_data['eyewear'],
+                                           confirmation_data['alcohol_yesterday'],
+                                           confirmation_data['alcohol_today']]
+
+            for key, value in confirmation_data.items():
+                for v in seventh_confirmation_screen:
+                    if value == v:
+                        seventh_confirmation_screen_key.append(key)
+
+            self._show_confirmation(
+                '7. Click on the answers you want to change.',
+                [''],
+                button=self.instructions['pq_next_button'],
+                keys=seventh_confirmation_screen_key,
+                option_labels=seventh_confirmation_screen,
+                option_type='checkbox'
+            )
+
+            seventh_questions_checked = []
+            seventh_questions_keys_checked = []
+
+            # get those questions which has been checked
+            for q in seventh_confirmation_screen_key:
+                if self.confirmation_data[q]:
+                    seventh_questions_checked.append(q)
+                    seventh_questions_keys_checked.append(q)
+
+            # if there are any dialects
+            if len(seventh_questions_checked) > 0:
+                self._show_questions(
+                    '',
+                    seventh_questions_checked,
+                    button=self.instructions['pq_next_button'],
+                    keys=seventh_questions_keys_checked
+                )
 
 if __name__ == '__main__':
     participant_id = 1
