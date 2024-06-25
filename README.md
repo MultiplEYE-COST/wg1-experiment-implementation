@@ -68,8 +68,8 @@ In the GUI that will pop up you can tick the box `Dummy version` to run the expe
 ## The result files
 The experiment will write log and data files to a newly created results folder for your language and country
 in the data folder (``data/eye_tracking_data...``). 
-In there it will create a folder depending on the experiment type. For example, if you run the test session, 
-it will create a folder called ``test_dataset``. Within those
+In there it will create a folder depending on the experiment type. For example, if you run the core session, 
+it will create a folder called ``core_dataset``. Within those
 folders it will simply create a new folder for each participant. The folder name is the participant ID 
 (three-digit number) and information on the language etc. If you run the
 script for the core dataset, it will prevent you from running the experiment twice for the same participant. 
@@ -81,6 +81,7 @@ The naming scheme of the log files in the `log_files` folder is a follows:
 
 All logfiles are csv files. Note that the timestamps are relative to the start of the experiment. The experiment starts
 at timestamp 0. Those log files are mainly used for debugging purposes.
+
 
 ## Run the experiment with an eye-tracker
 In order to run the experiment with an actual eye-tracker you can tick the respective box in the GUI in the lab settings 

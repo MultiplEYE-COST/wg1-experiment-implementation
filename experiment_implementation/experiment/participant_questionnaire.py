@@ -1,4 +1,5 @@
 import json
+import os.path
 from pprint import pprint
 
 import pandas as pd
@@ -42,6 +43,7 @@ class MultiplEYEParticipantQuestionnaire:
             button=self.instructions['pq_next_button'],
         )
 
+        # check whether there are multiple languages that the person grew up with
         if self.pq_data['childhood_languages'] == 'one language':
             self._show_questions(
                 '',
@@ -70,6 +72,7 @@ class MultiplEYEParticipantQuestionnaire:
             ['use_language', 'dominant_language'],
             button=self.instructions['pq_next_button'],
         )
+
 
         languages_mentioned = ['native_language_1', 'native_language_2',
                                'native_language_3', 'use_language', 'dominant_language'
@@ -127,8 +130,6 @@ class MultiplEYEParticipantQuestionnaire:
                 option_type='text'
             )
 
-        # TODO: Fix save other_reading_time
-
         for lang in unique_language_keys:
             reading_questions = ['read_language', 'academic_reading_time', 'magazine_reading_time',
                                  'newspaper_reading_time',
@@ -140,7 +141,7 @@ class MultiplEYEParticipantQuestionnaire:
                 f'{self.instructions["pq_answer_for_lang"]} {self.pq_data[lang]}',
                 reading_questions,
                 button=self.instructions['pq_next_button'],
-                keys=[f'{lang}_{question}' for question in reading_questions],
+                keys=[f'{lang}_{question}' for question in reading_questions[1:]],
             )
 
         # we allow for 4 additional languages to be mentioned
@@ -153,9 +154,6 @@ class MultiplEYEParticipantQuestionnaire:
             option_type='dropdown_file',
             optional=True
         )
-
-        # TODO: add the above questions again for all the additional reading languages
-        # Finished
 
         reading_languages_mentioned = ['additional_read_language_1', 'additional_read_language_2',
                                        'additional_read_language_3', 'additional_read_language_4']
@@ -171,8 +169,6 @@ class MultiplEYEParticipantQuestionnaire:
                 unique_reading_language_keys.append(lang_key)
                 unique_reading_languages.append(self.pq_data[lang_key])
 
-        # TODO: Fix save other_reading_time
-
         for lang in unique_reading_language_keys:
             reading_questions = ['read_language', 'academic_reading_time', 'magazine_reading_time',
                                  'newspaper_reading_time',
@@ -184,7 +180,7 @@ class MultiplEYEParticipantQuestionnaire:
                 f'{self.instructions["pq_answer_for_lang"]} {self.pq_data[lang]}',
                 reading_questions,
                 button=self.instructions['pq_next_button'],
-                keys=[f'{lang}_{question}' for question in reading_questions],
+                keys=[f'{lang}_{question}' for question in reading_questions[1:]],
             )
 
         self._show_questions(
@@ -193,21 +189,16 @@ class MultiplEYEParticipantQuestionnaire:
             button=self.instructions['pq_submit_button'],
         )
 
-        # TODO: add confirmation dialog, i.e. list all questions and answers and they can tick a box if any of
-        #  those is wrong, if yes, we show them again
-
         for screen_number in range(1, 8):
             self._make_changes(screen_number, unique_language_keys,
                                lang_keys_with_dialects, unique_reading_language_keys, reading_languages_mentioned)
 
         pprint(self.pq_data)
-        # TODO: save the data! it would be best to save the dictionary, possibly just as a json file to the folder
-        #  for the participant. I think it would make sense to write it to the same participant folder where the
-        #  et data is. We can just pass this folder to the PQ via the exp, it should be the "abs_results_path"
-        #  or something like that. The name fo the file should
-        #  {Participant ID}_{LANGUAGE}_{COUNTRY_CODE}_{LAB_NUMBER}_pq_data.json or sth like that...
-
         self._save_data()
+
+        # show goodbye message
+        gui.infoDlg(prompt=self.instructions['pq_final_message'])
+
 
     def _save_data(self):
         result_file_name = (f'/{self.participant_id}_{constants.LANGUAGE}_'
@@ -216,7 +207,7 @@ class MultiplEYEParticipantQuestionnaire:
         result_file_path = self.results_folder + result_file_name
 
         with open(result_file_path, 'w') as f:
-            json.dump(self.pq_data, f)
+            json.dump(self.pq_data, f, indent=4)
 
     def _show_questions(self, instructions: str, questions: list, button: str,
                         existing_data: dict = None,
@@ -247,7 +238,6 @@ class MultiplEYEParticipantQuestionnaire:
         if existing_data is None:
             existing_data = {}
 
-        # TODO: the size somehow does not work, but I think it could be a bug and that we cannot change it..
         pq_gui = gui.Dlg(
             title='Participant Questionnaire',
             # Positioning the dialog boxes in the top left corner of the screen
@@ -305,8 +295,9 @@ class MultiplEYEParticipantQuestionnaire:
 
                 # if it is a dropdown (i.e. multiple options), the initial value is an empty string
                 # which is prepended to the options
-                if len(options) > 1:
-                    options.insert(0, '')
+                # TODO uncomment this!!!
+                # if len(options) > 1:
+                 #   options.insert(0, '')
 
                 if len(options) > 0:
 
@@ -364,7 +355,6 @@ class MultiplEYEParticipantQuestionnaire:
             # check whether one value is empty, if yes, prompt the user to fill in all questions
             if not optional:
                 for key, value in pq_data.items():
-                    pprint(pq_data)
                     if value == '':
                         gui.infoDlg(prompt=self.instructions['pq_answer_all'],
                                     title=self.instructions['pq_error_title'])
@@ -373,7 +363,9 @@ class MultiplEYEParticipantQuestionnaire:
                                              existing_data=pq_data, keys=keys, option_labels=option_labels,
                                              option_type=option_type)
 
+            # update the dictionary with the new data and save it to file
             self.pq_data.update(pq_data)
+            self._save_data()
 
     def _show_confirmation(self, instructions: str, questions: list, button: str,
                            existing_data: dict = None,
@@ -388,7 +380,6 @@ class MultiplEYEParticipantQuestionnaire:
         if existing_data is None:
             existing_data = {}
 
-        # TODO: the size somehow does not work, but I think it could be a bug and that we cannot change it..
         pq_gui = gui.Dlg(
             title='Participant Questionnaire',
             # Positioning the dialog boxes in the top left corner of the screen
@@ -401,9 +392,6 @@ class MultiplEYEParticipantQuestionnaire:
 
         initial_text = pq_gui.addText(instructions)
         initial_text.setFont(QtGui.QFont(*constants.PQ_FONT_BOLD))
-
-        # id_text = f'{self.instructions["pq_participant_id"]} {self.participant_id}'
-        # part_id = pq_gui.addText(id_text)
 
         if keys is None:
             # use the original question identifiers as keys
@@ -434,7 +422,7 @@ class MultiplEYEParticipantQuestionnaire:
                     help_text = pq_gui.addText(self.questions[question_id]["pq_question_help"])
                     help_text.setFont(QtGui.QFont(*constants.PQ_FONT_ITALIC, italic=True))
 
-            # if there are additional options that are no in the question file but have been passed
+            # if there are additional options that are not in the question file but have been passed
             if option_labels:
                 for option_label in option_labels:
                     if option_type == 'checkbox':
@@ -475,10 +463,9 @@ class MultiplEYEParticipantQuestionnaire:
             # check whether one value is empty, if yes, prompt the user to fill in all questions
             if not optional:
                 for key, value in pq_data.items():
-                    pprint(pq_data)
                     if value == '':
-                        gui.infoDlg(prompt='Please fill in all questions.')
-                        self._show_questions('Please fill in all questions! ' + instructions, questions, button=button,
+                        gui.infoDlg(prompt=self.instructions['pq_answer_all'])
+                        self._show_questions(self.instructions['pq_answer_all'] + ' ' + instructions, questions, button=button,
                                              existing_data=pq_data, keys=keys, option_labels=option_labels,
                                              option_type=option_type)
 
@@ -494,8 +481,6 @@ class MultiplEYEParticipantQuestionnaire:
             if value != '':
                 confirmation_data[key] = ''.join(': '.join((key, str(value))))
 
-        print(confirmation_data)
-
         if screen_number == 1:
             # appearance of confirmation screen. Clicking any checkboxes, would result in the appearance of the
             # fields to be changed
@@ -509,7 +494,7 @@ class MultiplEYEParticipantQuestionnaire:
                         first_confirmation_screen_keys.append(key)
 
             self._show_confirmation(
-                '1. Click on the answers you want to change.',
+                f'{screen_number}. {self.instructions["pq_check_and_change_answers"]}',
                 [''],
                 button=self.instructions['pq_next_button'],
                 keys=first_confirmation_screen_keys,
@@ -537,18 +522,18 @@ class MultiplEYEParticipantQuestionnaire:
         elif screen_number == 2:
             # appearance of second confirmation screen.
             second_confirmation_screen = []
-            second_confirmation_screen_key = []
+            second_confirmation_screen_keys = []
 
             for key, value in confirmation_data.items():
                 if key in unique_language_keys:
                     second_confirmation_screen.append(confirmation_data[key])
-                    second_confirmation_screen_key.append(key)
+                    second_confirmation_screen_keys.append(key)
 
             self._show_confirmation(
-                '2. Click on the answers you want to change.',
+                f'{screen_number}. {self.instructions["pq_check_and_change_answers"]}',
                 [''],
                 button=self.instructions['pq_next_button'],
-                keys=second_confirmation_screen_key,
+                keys=second_confirmation_screen_keys,
                 option_labels=second_confirmation_screen,
                 option_type='checkbox'
             )
@@ -558,7 +543,7 @@ class MultiplEYEParticipantQuestionnaire:
             second_questions_keys_checked = []
 
             # get those questions which has been checked
-            for q in second_confirmation_screen_key:
+            for q in second_confirmation_screen_keys:
                 if self.confirmation_data[q] and (
                         q == 'native_language_1' or q == 'dominant_language' or q == 'use_language'):
                     second_questions_checked.append(q)
@@ -588,7 +573,7 @@ class MultiplEYEParticipantQuestionnaire:
                         third_confirmation_screen_key.append(key)
 
                 self._show_confirmation(
-                    '3. Click on the answers you want to change.',
+                    f'{screen_number}. {self.instructions["pq_check_and_change_answers"]}',
                     [''],
                     button=self.instructions['pq_next_button'],
                     keys=third_confirmation_screen_key,
@@ -602,11 +587,12 @@ class MultiplEYEParticipantQuestionnaire:
                 # get those questions which has been checked
                 for q in third_confirmation_screen_key:
                     if self.confirmation_data[q]:
-                        pprint(q[-12:])
                         third_questions_checked.append(q[-12:])
                         third_questions_keys_checked.append(q)
 
                 # TODO Find a way to remove the option_label so that the question is not duplicated
+                print(third_questions_checked)
+                print(third_questions_keys_checked)
 
                 if len(third_questions_checked) > 0:
                     self._show_questions(
@@ -625,7 +611,7 @@ class MultiplEYEParticipantQuestionnaire:
 
             for lang in unique_language_keys:
                 fourth_confirmation_screen = []
-                fourth_confirmation_screen_key = []
+                fourth_confirmation_screen_keys = []
                 reading_questions = ['read_language', 'academic_reading_time', 'magazine_reading_time',
                                      'newspaper_reading_time',
                                      'email_reading_time', 'fiction_reading_time', 'nonfiction_reading_time',
@@ -635,13 +621,13 @@ class MultiplEYEParticipantQuestionnaire:
                 for key, value in confirmation_data.items():
                     if key in [f'{lang}_{question}' for question in reading_questions]:
                         fourth_confirmation_screen.append(confirmation_data[key])
-                        fourth_confirmation_screen_key.append(key)
+                        fourth_confirmation_screen_keys.append(key)
 
                 self._show_confirmation(
-                    f'4. Click on the answers you want to change for the language {self.pq_data[lang]}.',
+                    f'{screen_number}. {self.instructions["pq_check_and_change_answers"]}\nLanguage: {self.pq_data[lang]}',
                     [''],
                     button=self.instructions['pq_next_button'],
-                    keys=fourth_confirmation_screen_key,
+                    keys=fourth_confirmation_screen_keys,
                     option_labels=fourth_confirmation_screen,
                     option_type='checkbox',
                 )
@@ -650,41 +636,39 @@ class MultiplEYEParticipantQuestionnaire:
                 fourth_questions_keys_checked = []
 
                 # get those questions which has been checked
-                for q in fourth_confirmation_screen_key:
+                for q in fourth_confirmation_screen_keys:
                     if self.confirmation_data[q]:
                         # email_reading_time
-                        if q[-18:] == 'email_reading_time':
-                            fourth_questions_checked.append(q[-18:])
+                        if 'email_reading_time' in q:
+                            fourth_questions_checked.append('email_reading_time')
                             fourth_questions_keys_checked.append(q)
                         # academic_reading_time
-                        elif q[-21:] == 'academic_reading_time':
-                            fourth_questions_checked.append(q[-21:])
+                        elif 'academic_reading_time' in q:
+                            fourth_questions_checked.append('academic_reading_time')
                             fourth_questions_keys_checked.append(q)
                         # nonfiction_reading_time
-                        elif q[-23:] == 'nonfiction_reading_time':
-                            fourth_questions_checked.append(q[-23:])
+                        elif 'nonfiction_reading_time' in q:
+                            fourth_questions_checked.append('nonfiction_reading_time')
                             fourth_questions_keys_checked.append(q)
                         # fiction_reading_time
-                        elif q[-20:] == 'fiction_reading_time':
-                            fourth_questions_checked.append(q[-20:])
+                        elif 'fiction_reading_time' in q:
+                            fourth_questions_checked.append('fiction_reading_time')
                             fourth_questions_keys_checked.append(q)
                         # internet_reading_time
-                        elif q[-21:] == 'internet_reading_time':
-                            fourth_questions_checked.append(q[-21:])
+                        elif 'internet_reading_time' in q:
+                            fourth_questions_checked.append('internet_reading_time')
                             fourth_questions_keys_checked.append(q)
                         # magazine_reading_time
-                        elif q[-21:] == 'magazine_reading_time':
-                            fourth_questions_checked.append(q[-21:])
+                        elif 'magazine_reading_time' in q:
+                            fourth_questions_checked.append('magazine_reading_time')
                             fourth_questions_keys_checked.append(q)
                         # newspaper_reading_time
-                        elif q[-22:] == 'newspaper_reading_time':
-                            fourth_questions_checked.append(q[-22:])
+                        elif 'newspaper_reading_time' in q:
+                            fourth_questions_checked.append('newspaper_reading_time')
                             fourth_questions_keys_checked.append(q)
-
-                        # TODO: Fix for other_reading_time
-                        # elif q[-18:] == 'other_reading_time':
-                        #    fourth_questions_checked.append(q[-18:])
-                        #    fourth_questions_keys_checked.append(q)
+                        elif 'other_reading_time' in q:
+                            fourth_questions_checked.append('other_reading_time')
+                            fourth_questions_keys_checked.append(q)
 
                 if len(fourth_questions_checked) > 0:
                     self._show_questions(
@@ -705,7 +689,7 @@ class MultiplEYEParticipantQuestionnaire:
                         fifth_confirmation_screen_key.append(key)
 
                 self._show_confirmation(
-                    '5. Click on the answers you want to change.',
+                    f'{screen_number}. {self.instructions["pq_check_and_change_answers"]}',
                     [''],
                     button=self.instructions['pq_next_button'],
                     keys=fifth_confirmation_screen_key,
@@ -752,7 +736,7 @@ class MultiplEYEParticipantQuestionnaire:
                         sixth_confirmation_screen_key.append(key)
 
                 self._show_confirmation(
-                    f'6. Click on the answers you want to change for the language {self.pq_data[lang]}.',
+                    f'{screen_number}. {self.instructions["pq_check_and_change_answers"]}\nLanguage: {self.pq_data[lang]}',
                     [''],
                     button=self.instructions['pq_next_button'],
                     keys=sixth_confirmation_screen_key,
@@ -794,10 +778,9 @@ class MultiplEYEParticipantQuestionnaire:
                             sixth_questions_checked.append(q[-22:])
                             sixth_questions_keys_checked.append(q)
 
-                        # TODO: Fix for other_reading_time
-                        # elif q[-18:] == 'other_reading_time':
-                        #    fourth_questions_checked.append(q[-18:])
-                        #    fourth_questions_keys_checked.append(q)
+                        elif q[-18:] == 'other_reading_time':
+                            sixth_questions_checked.append(q[-18:])
+                            sixth_questions_keys_checked.append(q)
 
                 # if there are any dialects
                 if len(sixth_questions_checked) > 0:
@@ -822,7 +805,7 @@ class MultiplEYEParticipantQuestionnaire:
                         seventh_confirmation_screen_key.append(key)
 
             self._show_confirmation(
-                '7. Click on the answers you want to change.',
+                f'{screen_number}. {self.instructions["pq_check_and_change_answers"]}',
                 [''],
                 button=self.instructions['pq_next_button'],
                 keys=seventh_confirmation_screen_key,
@@ -848,7 +831,12 @@ class MultiplEYEParticipantQuestionnaire:
                     keys=seventh_questions_keys_checked
                 )
 
+
 if __name__ == '__main__':
     participant_id = 1
+
+    # create res folder
+    os.makedirs('res', exist_ok=True)
+
     pq = MultiplEYEParticipantQuestionnaire(participant_id, 'res')
     pq.run_questionnaire()
