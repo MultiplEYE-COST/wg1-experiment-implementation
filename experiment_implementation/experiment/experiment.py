@@ -253,6 +253,7 @@ class Experiment:
         # if a core session has been restarted we need to update the trial numbering
         start_trial = 0
         if self.session_mode.value == 'core':
+            # note that this is specific for the mutipleye experiment, 2 practice and 10 normal trials
             if practice:
                 start_trial = 2 - len(stimuli_dicts)
             else:
@@ -336,7 +337,7 @@ class Experiment:
 
                 # start eye-tracking
                 self._eye_tracker.status_msg(
-                    f'{flag}trial {trial_nr} {stimulus_name} page '
+                    f'{flag}trial {trial_nr}/{len(stimuli_dicts)} {stimulus_name} page '
                     f'{page_number}/{total_reading_pages}'
                     )
                 self._eye_tracker.log(f'start_recording_{flag}trial_{trial_nr}_{stimulus_name}_{stimulus_id}_page_{page_number}')
@@ -782,7 +783,7 @@ class Experiment:
                 self._eye_tracker.stop_recording()
                 self.write_to_logfile(
                     get_time(), trial_id, pd.NA, 'fixation_trigger', screen_onset, timestamp,
-                    'esc or ctrl c', False, pd.NA, 'ctrl-c_pressed_by_user'
+                    'ctrl c', False, pd.NA, 'ctrl-c_pressed_by_user'
                 )
                 self.finish_experiment()
 
@@ -803,7 +804,7 @@ class Experiment:
                 self._eye_tracker.log('fixation_trigger:experimenter_calibration_triggered')
                 self.write_to_logfile(
                     get_time(), trial_id, pd.NA, 'fixation_trigger', screen_onset, timestamp,
-                    'c', False, pd.NA, 'calibration_triggered'
+                    'esc', False, pd.NA, 'calibration_triggered'
                 )
                 self._eye_tracker.calibrate()
                 return True
