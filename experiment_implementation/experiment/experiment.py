@@ -645,6 +645,8 @@ class Experiment:
     def show_rating_screen(self, name: str, trial_number: int, screens: dict,
                            num_options: int, flag: str) -> None:
 
+        self._fixation_trigger(trial_number)
+
         page_path = screens['path']
 
         if constants.DUMMY_MODE:
