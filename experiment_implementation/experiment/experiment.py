@@ -24,7 +24,7 @@ from devices.screen import MultiplEyeScreen
 
 from start_multipleye_session import SessionMode
 
-from experiment_implementation.experiment.participant_questionnaire import MultiplEYEParticipantQuestionnaire
+from experiment.participant_questionnaire import MultiplEYEParticipantQuestionnaire
 
 
 class Experiment:

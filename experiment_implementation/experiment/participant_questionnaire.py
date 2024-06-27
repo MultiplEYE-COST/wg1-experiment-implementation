@@ -5,7 +5,7 @@ from pprint import pprint
 import pandas as pd
 from PyQt5 import QtGui, QtWidgets
 from psychopy import gui
-from experiment_implementation import constants
+import constants
 
 
 class MultiplEYEParticipantQuestionnaire:
