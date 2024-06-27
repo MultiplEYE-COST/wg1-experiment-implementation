@@ -1,0 +1,60 @@
+instruction_screen_id,instruction_screen_name,instruction_screen_text,comment,instruction_screen_img_name,instruction_screen_img_path
+1,welcome_screen,"Welcome to the MultiplEYE study
+
+
+
+
+When you are ready, please press the space bar to proceed to the instructions.",this is the screen that participants will see upon entering the lab,welcome_screen_toy.png,data/stimuli_MultiplEYE_toy_x_x_1_1/participant_instructions_images_toy_x_1/welcome_screen_toy.png
+2,empty_screen,,I just leave this in here for the sake of transparency.,empty_screen_toy.png,data/stimuli_MultiplEYE_toy_x_x_1_1/participant_instructions_images_toy_x_1/empty_screen_toy.png
+3,fixation_screen,,"fixation dot in top left corner, no text",fixation_screen_toy.png,data/stimuli_MultiplEYE_toy_x_x_1_1/participant_instructions_images_toy_x_1/fixation_screen_toy.png
+4,obligatory_break_screen,"You should now take a 5 minute break. Feel free to get up, move your head, relax your eyes and get some water.",shown before the obligatory break,obligatory_break_screen_toy.png,data/stimuli_MultiplEYE_toy_x_x_1_1/participant_instructions_images_toy_x_1/obligatory_break_screen_toy.png
+5,optional_break_screen,"If you wish, you may now take a break to rest or get some water. Or you may continue reading by pressing the space bar.",This screen can be shown when there is an option for a break,optional_break_screen_toy.png,data/stimuli_MultiplEYE_toy_x_x_1_1/participant_instructions_images_toy_x_1/optional_break_screen_toy.png
+6,final_screen,"Thank you very much for your participation.
+Goodbye",,final_screen_toy.png,data/stimuli_MultiplEYE_toy_x_x_1_1/participant_instructions_images_toy_x_1/final_screen_toy.png
+7,practice_screen,"Now, we will begin with two practice texts so you can get an idea of the procedure of the experiment. If something is unclear or you have any questions, please speak to the experimenter.
+
+Please look at the black dot in the bottom right corner of the screen and press the space bar to start with the practice texts.",Right before practice stimuli,practice_screen_toy.png,data/stimuli_MultiplEYE_toy_x_x_1_1/participant_instructions_images_toy_x_1/practice_screen_toy.png
+8,transition_screen,"You have completed the practice texts. If you are ready, we will begin. Please try to move as little as possible while reading the texts. We may need to recalibrate the eye-tracker if you move too much. If you need a break during the experiment, please inform the experimenter.
+
+Please look at the dot in the bottom right corner of the screen and then press the space bar to begin.","After practice stimuli, before first stimulus",transition_screen_toy.png,data/stimuli_MultiplEYE_toy_x_x_1_1/participant_instructions_images_toy_x_1/transition_screen_toy.png
+9,informed_consent_screen,"Before starting the experiment, we require you to complete a written consent form. In this, we will explain the experimental procedure and usage and protection of your data.
+
+The experimenter will provide this form now.
+
+Once you have signed the form, please look at the black dot in the bottom right corner of the screen and press the space bar to continue.",Shown directly after the welcome screen. Participants need to sign the informed consent.,informed_consent_screen_toy.png,data/stimuli_MultiplEYE_toy_x_x_1_1/participant_instructions_images_toy_x_1/informed_consent_screen_toy.png
+10,instruction_screen_2,"
+
+
+Each text will be divided into multiple screens. Before each new text screen, you will see a black dot with a white centre shown at the top left corner of the screen. You must focus your eyes on the white centre of the dot to procede to the next screen. We will use this to check the accuracy of the eye-tracking, if the accuracy is low, we may need to recalibrate the eye-tracker. The experimenter will advise you if this is necessary, if not, you will automatically procede to the next text.
+
+When you are finished reading each screen, please follow the same procedure to move on. Look at the **black dot** shown in the bottom right corner of the screen. While looking at the dot, press the **space bar** to continue to the next screen. **Please note, you won't be able to go back to a screen you have already read.**
+
+Please follow the above procedure to continue to the next screen.",,instruction_screen_2_toy.png,data/stimuli_MultiplEYE_toy_x_x_1_1/participant_instructions_images_toy_x_1/instruction_screen_2_toy.png
+11,instruction_screen_3,"After each text, you will be presented with several comprehension questions about the text. Each question will be presented on a separate screen together with four answer options. **There is only one correct answer.** Please select the correct answer option by using the arrow keys on the keyboard. The selected answer will be highlighted. Once you are happy with your answer, press the space bar to confirm your selection.",,instruction_screen_3_toy.png,data/stimuli_MultiplEYE_toy_x_x_1_1/participant_instructions_images_toy_x_1/instruction_screen_3_toy.png
+12,instruction_screen_1,"You will read several different types of texts and answer comprehension questions related to them. The texts are diverse in terms of contents and layout. Some are longer and some are shorter. Please expect some uncommon words and different text styles and complexities. You may struggle to interpret some aspects of the texts, this is natural. The questions are also diverse. Some are more complex and some are easier. 
+
+Read each text naturally, as you would commonly read. Please read silently.
+
+To continue, please look at the black dot in the bottom right corner of the screen and press the space bar.
+
+",,instruction_screen_1_toy.png,data/stimuli_MultiplEYE_toy_x_x_1_1/participant_instructions_images_toy_x_1/instruction_screen_1_toy.png
+15,subject_difficulty_screen,"Please rate the difficulty of the text you just read. How difficult was the text for you to read and understand?
+
+1 ‚Äì very easy
+2 ‚Äì easy
+3 - neither easy nor difficult
+4 ‚Äì difficult
+5 ‚Äì very difficult",presented after reading the text,subject_difficulty_screen_toy.png,data/stimuli_MultiplEYE_toy_x_x_1_1/participant_instructions_images_toy_x_1/subject_difficulty_screen_toy.png
+16,familiarity_rating_screen_1,"Have you read or listened to this text before? 
+
+
+- Yes
+- No
+- Don't remember",presented after reading the text,familiarity_rating_screen_1_toy.png,data/stimuli_MultiplEYE_toy_x_x_1_1/participant_instructions_images_toy_x_1/familiarity_rating_screen_1_toy.png
+17,familiarity_rating_screen_2,"Please rate your familarity with the content of the text. How much of it were you familiar with?
+
+1 ‚Äì 0%
+2 ‚Äì 25%
+3 ‚Äì 50%
+4 ‚Äì 75%
+5 ‚Äì 100% ",presented after reading the text,familiarity_rating_screen_2_toy.png,data/stimuli_MultiplEYE_toy_x_x_1_1/participant_instructions_images_toy_x_1/familiarity_rating_screen_2_toy.png

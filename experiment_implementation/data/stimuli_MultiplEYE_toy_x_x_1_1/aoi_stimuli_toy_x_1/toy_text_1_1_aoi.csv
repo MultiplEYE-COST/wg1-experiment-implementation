@@ -1,0 +1,1447 @@
+char_idx,char,top_left_x,top_left_y,width,height,char_idx_in_line,line_idx,page,word_idx,word_idx_in_line,word,question_image_version
+0,W,49.0,64.0,10,24,0,0,question_1111,0,0,What,question_images_version_1
+1,h,59.0,64.0,10,24,1,0,question_1111,0,0,What,question_images_version_1
+2,a,69.0,64.0,10,24,2,0,question_1111,0,0,What,question_images_version_1
+3,t,79.0,64.0,10,24,3,0,question_1111,0,0,What,question_images_version_1
+4, ,89.0,64.0,10,24,4,0,question_1111,0,0,,question_images_version_1
+5,i,99.0,64.0,10,24,5,0,question_1111,1,1,is,question_images_version_1
+6,s,109.0,64.0,10,24,6,0,question_1111,1,1,is,question_images_version_1
+7, ,119.0,64.0,10,24,7,0,question_1111,1,1,,question_images_version_1
+8,p,129.0,64.0,10,24,8,0,question_1111,2,2,pymovements?,question_images_version_1
+9,y,139.0,64.0,10,24,9,0,question_1111,2,2,pymovements?,question_images_version_1
+10,m,149.0,64.0,10,24,10,0,question_1111,2,2,pymovements?,question_images_version_1
+11,o,159.0,64.0,10,24,11,0,question_1111,2,2,pymovements?,question_images_version_1
+12,v,169.0,64.0,10,24,12,0,question_1111,2,2,pymovements?,question_images_version_1
+13,e,179.0,64.0,10,24,13,0,question_1111,2,2,pymovements?,question_images_version_1
+14,m,189.0,64.0,10,24,14,0,question_1111,2,2,pymovements?,question_images_version_1
+15,e,199.0,64.0,10,24,15,0,question_1111,2,2,pymovements?,question_images_version_1
+16,n,209.0,64.0,10,24,16,0,question_1111,2,2,pymovements?,question_images_version_1
+17,t,219.0,64.0,10,24,17,0,question_1111,2,2,pymovements?,question_images_version_1
+18,s,229.0,64.0,10,24,18,0,question_1111,2,2,pymovements?,question_images_version_1
+19,?,239.0,64.0,10,24,19,0,question_1111,2,2,pymovements?,question_images_version_1
+0,A,49.0,318.56,10,24,0,0,toy_text_1_1_question_1111_target,0,0,A,question_images_version_1
+1, ,59.0,318.56,10,24,1,0,toy_text_1_1_question_1111_target,0,0,,question_images_version_1
+2,P,69.0,318.56,10,24,2,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_1
+3,y,79.0,318.56,10,24,3,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_1
+4,t,89.0,318.56,10,24,4,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_1
+5,h,99.0,318.56,10,24,5,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_1
+6,o,109.0,318.56,10,24,6,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_1
+7,n,119.0,318.56,10,24,7,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_1
+8, ,129.0,318.56,10,24,8,0,toy_text_1_1_question_1111_target,1,1,,question_images_version_1
+9,p,139.0,318.56,10,24,9,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_1
+10,a,149.0,318.56,10,24,10,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_1
+11,c,159.0,318.56,10,24,11,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_1
+12,k,169.0,318.56,10,24,12,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_1
+13,a,179.0,318.56,10,24,13,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_1
+14,g,189.0,318.56,10,24,14,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_1
+15,e,199.0,318.56,10,24,15,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_1
+0,A,416.58000000000004,318.56,10,24,0,0,toy_text_1_1_question_1111_distractor_a,0,0,A,question_images_version_1
+1, ,426.58000000000004,318.56,10,24,1,0,toy_text_1_1_question_1111_distractor_a,0,0,,question_images_version_1
+2,p,436.58000000000004,318.56,10,24,2,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_1
+3,l,446.58000000000004,318.56,10,24,3,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_1
+4,o,456.58000000000004,318.56,10,24,4,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_1
+5,t,466.58000000000004,318.56,10,24,5,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_1
+6,t,476.58000000000004,318.56,10,24,6,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_1
+7,i,486.58000000000004,318.56,10,24,7,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_1
+8,n,496.58000000000004,318.56,10,24,8,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_1
+9,g,506.58000000000004,318.56,10,24,9,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_1
+10, ,516.58,318.56,10,24,10,0,toy_text_1_1_question_1111_distractor_a,1,1,,question_images_version_1
+11,m,526.58,318.56,10,24,11,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_1
+12,e,536.58,318.56,10,24,12,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_1
+13,t,546.58,318.56,10,24,13,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_1
+14,h,556.58,318.56,10,24,14,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_1
+15,o,566.58,318.56,10,24,15,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_1
+16,d,576.58,318.56,10,24,16,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_1
+0,A,117.89999999999999,181.0,10,24,0,0,toy_text_1_1_question_1111_distractor_b,0,0,A,question_images_version_1
+1, ,127.89999999999999,181.0,10,24,1,0,toy_text_1_1_question_1111_distractor_b,0,0,,question_images_version_1
+2,J,137.89999999999998,181.0,10,24,2,0,toy_text_1_1_question_1111_distractor_b,1,1,Java,question_images_version_1
+3,a,147.89999999999998,181.0,10,24,3,0,toy_text_1_1_question_1111_distractor_b,1,1,Java,question_images_version_1
+4,v,157.89999999999998,181.0,10,24,4,0,toy_text_1_1_question_1111_distractor_b,1,1,Java,question_images_version_1
+5,a,167.89999999999998,181.0,10,24,5,0,toy_text_1_1_question_1111_distractor_b,1,1,Java,question_images_version_1
+6, ,177.89999999999998,181.0,10,24,6,0,toy_text_1_1_question_1111_distractor_b,1,1,,question_images_version_1
+7,s,187.89999999999998,181.0,10,24,7,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_1
+8,c,197.89999999999998,181.0,10,24,8,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_1
+9,r,207.89999999999998,181.0,10,24,9,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_1
+10,i,217.89999999999998,181.0,10,24,10,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_1
+11,p,227.89999999999998,181.0,10,24,11,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_1
+12,t,237.89999999999998,181.0,10,24,12,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_1
+0,A,117.89999999999999,543.0,10,24,0,0,toy_text_1_1_question_1111_distractor_c,0,0,A,question_images_version_1
+1, ,127.89999999999999,543.0,10,24,1,0,toy_text_1_1_question_1111_distractor_c,0,0,,question_images_version_1
+2,t,137.89999999999998,543.0,10,24,2,0,toy_text_1_1_question_1111_distractor_c,1,1,test,question_images_version_1
+3,e,147.89999999999998,543.0,10,24,3,0,toy_text_1_1_question_1111_distractor_c,1,1,test,question_images_version_1
+4,s,157.89999999999998,543.0,10,24,4,0,toy_text_1_1_question_1111_distractor_c,1,1,test,question_images_version_1
+5,t,167.89999999999998,543.0,10,24,5,0,toy_text_1_1_question_1111_distractor_c,1,1,test,question_images_version_1
+6, ,177.89999999999998,543.0,10,24,6,0,toy_text_1_1_question_1111_distractor_c,1,1,,question_images_version_1
+7,s,187.89999999999998,543.0,10,24,7,0,toy_text_1_1_question_1111_distractor_c,2,2,suite,question_images_version_1
+8,u,197.89999999999998,543.0,10,24,8,0,toy_text_1_1_question_1111_distractor_c,2,2,suite,question_images_version_1
+9,i,207.89999999999998,543.0,10,24,9,0,toy_text_1_1_question_1111_distractor_c,2,2,suite,question_images_version_1
+10,t,217.89999999999998,543.0,10,24,10,0,toy_text_1_1_question_1111_distractor_c,2,2,suite,question_images_version_1
+11,e,227.89999999999998,543.0,10,24,11,0,toy_text_1_1_question_1111_distractor_c,2,2,suite,question_images_version_1
+0,W,49.0,64.0,10,24,0,0,question_1111,0,0,What,question_images_version_2
+1,h,59.0,64.0,10,24,1,0,question_1111,0,0,What,question_images_version_2
+2,a,69.0,64.0,10,24,2,0,question_1111,0,0,What,question_images_version_2
+3,t,79.0,64.0,10,24,3,0,question_1111,0,0,What,question_images_version_2
+4, ,89.0,64.0,10,24,4,0,question_1111,0,0,,question_images_version_2
+5,i,99.0,64.0,10,24,5,0,question_1111,1,1,is,question_images_version_2
+6,s,109.0,64.0,10,24,6,0,question_1111,1,1,is,question_images_version_2
+7, ,119.0,64.0,10,24,7,0,question_1111,1,1,,question_images_version_2
+8,p,129.0,64.0,10,24,8,0,question_1111,2,2,pymovements?,question_images_version_2
+9,y,139.0,64.0,10,24,9,0,question_1111,2,2,pymovements?,question_images_version_2
+10,m,149.0,64.0,10,24,10,0,question_1111,2,2,pymovements?,question_images_version_2
+11,o,159.0,64.0,10,24,11,0,question_1111,2,2,pymovements?,question_images_version_2
+12,v,169.0,64.0,10,24,12,0,question_1111,2,2,pymovements?,question_images_version_2
+13,e,179.0,64.0,10,24,13,0,question_1111,2,2,pymovements?,question_images_version_2
+14,m,189.0,64.0,10,24,14,0,question_1111,2,2,pymovements?,question_images_version_2
+15,e,199.0,64.0,10,24,15,0,question_1111,2,2,pymovements?,question_images_version_2
+16,n,209.0,64.0,10,24,16,0,question_1111,2,2,pymovements?,question_images_version_2
+17,t,219.0,64.0,10,24,17,0,question_1111,2,2,pymovements?,question_images_version_2
+18,s,229.0,64.0,10,24,18,0,question_1111,2,2,pymovements?,question_images_version_2
+19,?,239.0,64.0,10,24,19,0,question_1111,2,2,pymovements?,question_images_version_2
+0,A,117.89999999999999,181.0,10,24,0,0,toy_text_1_1_question_1111_target,0,0,A,question_images_version_2
+1, ,127.89999999999999,181.0,10,24,1,0,toy_text_1_1_question_1111_target,0,0,,question_images_version_2
+2,P,137.89999999999998,181.0,10,24,2,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_2
+3,y,147.89999999999998,181.0,10,24,3,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_2
+4,t,157.89999999999998,181.0,10,24,4,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_2
+5,h,167.89999999999998,181.0,10,24,5,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_2
+6,o,177.89999999999998,181.0,10,24,6,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_2
+7,n,187.89999999999998,181.0,10,24,7,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_2
+8, ,197.89999999999998,181.0,10,24,8,0,toy_text_1_1_question_1111_target,1,1,,question_images_version_2
+9,p,207.89999999999998,181.0,10,24,9,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_2
+10,a,217.89999999999998,181.0,10,24,10,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_2
+11,c,227.89999999999998,181.0,10,24,11,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_2
+12,k,237.89999999999998,181.0,10,24,12,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_2
+13,a,247.89999999999998,181.0,10,24,13,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_2
+14,g,257.9,181.0,10,24,14,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_2
+15,e,267.9,181.0,10,24,15,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_2
+0,A,49.0,318.56,10,24,0,0,toy_text_1_1_question_1111_distractor_a,0,0,A,question_images_version_2
+1, ,59.0,318.56,10,24,1,0,toy_text_1_1_question_1111_distractor_a,0,0,,question_images_version_2
+2,p,69.0,318.56,10,24,2,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_2
+3,l,79.0,318.56,10,24,3,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_2
+4,o,89.0,318.56,10,24,4,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_2
+5,t,99.0,318.56,10,24,5,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_2
+6,t,109.0,318.56,10,24,6,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_2
+7,i,119.0,318.56,10,24,7,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_2
+8,n,129.0,318.56,10,24,8,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_2
+9,g,139.0,318.56,10,24,9,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_2
+10, ,149.0,318.56,10,24,10,0,toy_text_1_1_question_1111_distractor_a,1,1,,question_images_version_2
+11,m,159.0,318.56,10,24,11,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_2
+12,e,169.0,318.56,10,24,12,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_2
+13,t,179.0,318.56,10,24,13,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_2
+14,h,189.0,318.56,10,24,14,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_2
+15,o,199.0,318.56,10,24,15,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_2
+16,d,209.0,318.56,10,24,16,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_2
+0,A,416.58000000000004,318.56,10,24,0,0,toy_text_1_1_question_1111_distractor_b,0,0,A,question_images_version_2
+1, ,426.58000000000004,318.56,10,24,1,0,toy_text_1_1_question_1111_distractor_b,0,0,,question_images_version_2
+2,J,436.58000000000004,318.56,10,24,2,0,toy_text_1_1_question_1111_distractor_b,1,1,Java,question_images_version_2
+3,a,446.58000000000004,318.56,10,24,3,0,toy_text_1_1_question_1111_distractor_b,1,1,Java,question_images_version_2
+4,v,456.58000000000004,318.56,10,24,4,0,toy_text_1_1_question_1111_distractor_b,1,1,Java,question_images_version_2
+5,a,466.58000000000004,318.56,10,24,5,0,toy_text_1_1_question_1111_distractor_b,1,1,Java,question_images_version_2
+6, ,476.58000000000004,318.56,10,24,6,0,toy_text_1_1_question_1111_distractor_b,1,1,,question_images_version_2
+7,s,486.58000000000004,318.56,10,24,7,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_2
+8,c,496.58000000000004,318.56,10,24,8,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_2
+9,r,506.58000000000004,318.56,10,24,9,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_2
+10,i,516.58,318.56,10,24,10,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_2
+11,p,526.58,318.56,10,24,11,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_2
+12,t,536.58,318.56,10,24,12,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_2
+0,A,117.89999999999999,543.0,10,24,0,0,toy_text_1_1_question_1111_distractor_c,0,0,A,question_images_version_2
+1, ,127.89999999999999,543.0,10,24,1,0,toy_text_1_1_question_1111_distractor_c,0,0,,question_images_version_2
+2,t,137.89999999999998,543.0,10,24,2,0,toy_text_1_1_question_1111_distractor_c,1,1,test,question_images_version_2
+3,e,147.89999999999998,543.0,10,24,3,0,toy_text_1_1_question_1111_distractor_c,1,1,test,question_images_version_2
+4,s,157.89999999999998,543.0,10,24,4,0,toy_text_1_1_question_1111_distractor_c,1,1,test,question_images_version_2
+5,t,167.89999999999998,543.0,10,24,5,0,toy_text_1_1_question_1111_distractor_c,1,1,test,question_images_version_2
+6, ,177.89999999999998,543.0,10,24,6,0,toy_text_1_1_question_1111_distractor_c,1,1,,question_images_version_2
+7,s,187.89999999999998,543.0,10,24,7,0,toy_text_1_1_question_1111_distractor_c,2,2,suite,question_images_version_2
+8,u,197.89999999999998,543.0,10,24,8,0,toy_text_1_1_question_1111_distractor_c,2,2,suite,question_images_version_2
+9,i,207.89999999999998,543.0,10,24,9,0,toy_text_1_1_question_1111_distractor_c,2,2,suite,question_images_version_2
+10,t,217.89999999999998,543.0,10,24,10,0,toy_text_1_1_question_1111_distractor_c,2,2,suite,question_images_version_2
+11,e,227.89999999999998,543.0,10,24,11,0,toy_text_1_1_question_1111_distractor_c,2,2,suite,question_images_version_2
+0,W,49.0,64.0,10,24,0,0,question_1111,0,0,What,question_images_version_3
+1,h,59.0,64.0,10,24,1,0,question_1111,0,0,What,question_images_version_3
+2,a,69.0,64.0,10,24,2,0,question_1111,0,0,What,question_images_version_3
+3,t,79.0,64.0,10,24,3,0,question_1111,0,0,What,question_images_version_3
+4, ,89.0,64.0,10,24,4,0,question_1111,0,0,,question_images_version_3
+5,i,99.0,64.0,10,24,5,0,question_1111,1,1,is,question_images_version_3
+6,s,109.0,64.0,10,24,6,0,question_1111,1,1,is,question_images_version_3
+7, ,119.0,64.0,10,24,7,0,question_1111,1,1,,question_images_version_3
+8,p,129.0,64.0,10,24,8,0,question_1111,2,2,pymovements?,question_images_version_3
+9,y,139.0,64.0,10,24,9,0,question_1111,2,2,pymovements?,question_images_version_3
+10,m,149.0,64.0,10,24,10,0,question_1111,2,2,pymovements?,question_images_version_3
+11,o,159.0,64.0,10,24,11,0,question_1111,2,2,pymovements?,question_images_version_3
+12,v,169.0,64.0,10,24,12,0,question_1111,2,2,pymovements?,question_images_version_3
+13,e,179.0,64.0,10,24,13,0,question_1111,2,2,pymovements?,question_images_version_3
+14,m,189.0,64.0,10,24,14,0,question_1111,2,2,pymovements?,question_images_version_3
+15,e,199.0,64.0,10,24,15,0,question_1111,2,2,pymovements?,question_images_version_3
+16,n,209.0,64.0,10,24,16,0,question_1111,2,2,pymovements?,question_images_version_3
+17,t,219.0,64.0,10,24,17,0,question_1111,2,2,pymovements?,question_images_version_3
+18,s,229.0,64.0,10,24,18,0,question_1111,2,2,pymovements?,question_images_version_3
+19,?,239.0,64.0,10,24,19,0,question_1111,2,2,pymovements?,question_images_version_3
+0,A,49.0,318.56,10,24,0,0,toy_text_1_1_question_1111_target,0,0,A,question_images_version_3
+1, ,59.0,318.56,10,24,1,0,toy_text_1_1_question_1111_target,0,0,,question_images_version_3
+2,P,69.0,318.56,10,24,2,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_3
+3,y,79.0,318.56,10,24,3,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_3
+4,t,89.0,318.56,10,24,4,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_3
+5,h,99.0,318.56,10,24,5,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_3
+6,o,109.0,318.56,10,24,6,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_3
+7,n,119.0,318.56,10,24,7,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_3
+8, ,129.0,318.56,10,24,8,0,toy_text_1_1_question_1111_target,1,1,,question_images_version_3
+9,p,139.0,318.56,10,24,9,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_3
+10,a,149.0,318.56,10,24,10,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_3
+11,c,159.0,318.56,10,24,11,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_3
+12,k,169.0,318.56,10,24,12,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_3
+13,a,179.0,318.56,10,24,13,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_3
+14,g,189.0,318.56,10,24,14,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_3
+15,e,199.0,318.56,10,24,15,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_3
+0,A,117.89999999999999,543.0,10,24,0,0,toy_text_1_1_question_1111_distractor_a,0,0,A,question_images_version_3
+1, ,127.89999999999999,543.0,10,24,1,0,toy_text_1_1_question_1111_distractor_a,0,0,,question_images_version_3
+2,p,137.89999999999998,543.0,10,24,2,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_3
+3,l,147.89999999999998,543.0,10,24,3,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_3
+4,o,157.89999999999998,543.0,10,24,4,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_3
+5,t,167.89999999999998,543.0,10,24,5,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_3
+6,t,177.89999999999998,543.0,10,24,6,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_3
+7,i,187.89999999999998,543.0,10,24,7,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_3
+8,n,197.89999999999998,543.0,10,24,8,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_3
+9,g,207.89999999999998,543.0,10,24,9,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_3
+10, ,217.89999999999998,543.0,10,24,10,0,toy_text_1_1_question_1111_distractor_a,1,1,,question_images_version_3
+11,m,227.89999999999998,543.0,10,24,11,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_3
+12,e,237.89999999999998,543.0,10,24,12,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_3
+13,t,247.89999999999998,543.0,10,24,13,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_3
+14,h,257.9,543.0,10,24,14,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_3
+15,o,267.9,543.0,10,24,15,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_3
+16,d,277.9,543.0,10,24,16,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_3
+0,A,117.89999999999999,181.0,10,24,0,0,toy_text_1_1_question_1111_distractor_b,0,0,A,question_images_version_3
+1, ,127.89999999999999,181.0,10,24,1,0,toy_text_1_1_question_1111_distractor_b,0,0,,question_images_version_3
+2,J,137.89999999999998,181.0,10,24,2,0,toy_text_1_1_question_1111_distractor_b,1,1,Java,question_images_version_3
+3,a,147.89999999999998,181.0,10,24,3,0,toy_text_1_1_question_1111_distractor_b,1,1,Java,question_images_version_3
+4,v,157.89999999999998,181.0,10,24,4,0,toy_text_1_1_question_1111_distractor_b,1,1,Java,question_images_version_3
+5,a,167.89999999999998,181.0,10,24,5,0,toy_text_1_1_question_1111_distractor_b,1,1,Java,question_images_version_3
+6, ,177.89999999999998,181.0,10,24,6,0,toy_text_1_1_question_1111_distractor_b,1,1,,question_images_version_3
+7,s,187.89999999999998,181.0,10,24,7,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_3
+8,c,197.89999999999998,181.0,10,24,8,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_3
+9,r,207.89999999999998,181.0,10,24,9,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_3
+10,i,217.89999999999998,181.0,10,24,10,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_3
+11,p,227.89999999999998,181.0,10,24,11,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_3
+12,t,237.89999999999998,181.0,10,24,12,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_3
+0,A,416.58000000000004,318.56,10,24,0,0,toy_text_1_1_question_1111_distractor_c,0,0,A,question_images_version_3
+1, ,426.58000000000004,318.56,10,24,1,0,toy_text_1_1_question_1111_distractor_c,0,0,,question_images_version_3
+2,t,436.58000000000004,318.56,10,24,2,0,toy_text_1_1_question_1111_distractor_c,1,1,test,question_images_version_3
+3,e,446.58000000000004,318.56,10,24,3,0,toy_text_1_1_question_1111_distractor_c,1,1,test,question_images_version_3
+4,s,456.58000000000004,318.56,10,24,4,0,toy_text_1_1_question_1111_distractor_c,1,1,test,question_images_version_3
+5,t,466.58000000000004,318.56,10,24,5,0,toy_text_1_1_question_1111_distractor_c,1,1,test,question_images_version_3
+6, ,476.58000000000004,318.56,10,24,6,0,toy_text_1_1_question_1111_distractor_c,1,1,,question_images_version_3
+7,s,486.58000000000004,318.56,10,24,7,0,toy_text_1_1_question_1111_distractor_c,2,2,suite,question_images_version_3
+8,u,496.58000000000004,318.56,10,24,8,0,toy_text_1_1_question_1111_distractor_c,2,2,suite,question_images_version_3
+9,i,506.58000000000004,318.56,10,24,9,0,toy_text_1_1_question_1111_distractor_c,2,2,suite,question_images_version_3
+10,t,516.58,318.56,10,24,10,0,toy_text_1_1_question_1111_distractor_c,2,2,suite,question_images_version_3
+11,e,526.58,318.56,10,24,11,0,toy_text_1_1_question_1111_distractor_c,2,2,suite,question_images_version_3
+0,W,49.0,64.0,10,24,0,0,question_1111,0,0,What,question_images_version_4
+1,h,59.0,64.0,10,24,1,0,question_1111,0,0,What,question_images_version_4
+2,a,69.0,64.0,10,24,2,0,question_1111,0,0,What,question_images_version_4
+3,t,79.0,64.0,10,24,3,0,question_1111,0,0,What,question_images_version_4
+4, ,89.0,64.0,10,24,4,0,question_1111,0,0,,question_images_version_4
+5,i,99.0,64.0,10,24,5,0,question_1111,1,1,is,question_images_version_4
+6,s,109.0,64.0,10,24,6,0,question_1111,1,1,is,question_images_version_4
+7, ,119.0,64.0,10,24,7,0,question_1111,1,1,,question_images_version_4
+8,p,129.0,64.0,10,24,8,0,question_1111,2,2,pymovements?,question_images_version_4
+9,y,139.0,64.0,10,24,9,0,question_1111,2,2,pymovements?,question_images_version_4
+10,m,149.0,64.0,10,24,10,0,question_1111,2,2,pymovements?,question_images_version_4
+11,o,159.0,64.0,10,24,11,0,question_1111,2,2,pymovements?,question_images_version_4
+12,v,169.0,64.0,10,24,12,0,question_1111,2,2,pymovements?,question_images_version_4
+13,e,179.0,64.0,10,24,13,0,question_1111,2,2,pymovements?,question_images_version_4
+14,m,189.0,64.0,10,24,14,0,question_1111,2,2,pymovements?,question_images_version_4
+15,e,199.0,64.0,10,24,15,0,question_1111,2,2,pymovements?,question_images_version_4
+16,n,209.0,64.0,10,24,16,0,question_1111,2,2,pymovements?,question_images_version_4
+17,t,219.0,64.0,10,24,17,0,question_1111,2,2,pymovements?,question_images_version_4
+18,s,229.0,64.0,10,24,18,0,question_1111,2,2,pymovements?,question_images_version_4
+19,?,239.0,64.0,10,24,19,0,question_1111,2,2,pymovements?,question_images_version_4
+0,A,117.89999999999999,181.0,10,24,0,0,toy_text_1_1_question_1111_target,0,0,A,question_images_version_4
+1, ,127.89999999999999,181.0,10,24,1,0,toy_text_1_1_question_1111_target,0,0,,question_images_version_4
+2,P,137.89999999999998,181.0,10,24,2,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_4
+3,y,147.89999999999998,181.0,10,24,3,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_4
+4,t,157.89999999999998,181.0,10,24,4,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_4
+5,h,167.89999999999998,181.0,10,24,5,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_4
+6,o,177.89999999999998,181.0,10,24,6,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_4
+7,n,187.89999999999998,181.0,10,24,7,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_4
+8, ,197.89999999999998,181.0,10,24,8,0,toy_text_1_1_question_1111_target,1,1,,question_images_version_4
+9,p,207.89999999999998,181.0,10,24,9,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_4
+10,a,217.89999999999998,181.0,10,24,10,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_4
+11,c,227.89999999999998,181.0,10,24,11,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_4
+12,k,237.89999999999998,181.0,10,24,12,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_4
+13,a,247.89999999999998,181.0,10,24,13,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_4
+14,g,257.9,181.0,10,24,14,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_4
+15,e,267.9,181.0,10,24,15,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_4
+0,A,49.0,318.56,10,24,0,0,toy_text_1_1_question_1111_distractor_a,0,0,A,question_images_version_4
+1, ,59.0,318.56,10,24,1,0,toy_text_1_1_question_1111_distractor_a,0,0,,question_images_version_4
+2,p,69.0,318.56,10,24,2,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_4
+3,l,79.0,318.56,10,24,3,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_4
+4,o,89.0,318.56,10,24,4,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_4
+5,t,99.0,318.56,10,24,5,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_4
+6,t,109.0,318.56,10,24,6,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_4
+7,i,119.0,318.56,10,24,7,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_4
+8,n,129.0,318.56,10,24,8,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_4
+9,g,139.0,318.56,10,24,9,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_4
+10, ,149.0,318.56,10,24,10,0,toy_text_1_1_question_1111_distractor_a,1,1,,question_images_version_4
+11,m,159.0,318.56,10,24,11,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_4
+12,e,169.0,318.56,10,24,12,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_4
+13,t,179.0,318.56,10,24,13,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_4
+14,h,189.0,318.56,10,24,14,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_4
+15,o,199.0,318.56,10,24,15,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_4
+16,d,209.0,318.56,10,24,16,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_4
+0,A,416.58000000000004,318.56,10,24,0,0,toy_text_1_1_question_1111_distractor_b,0,0,A,question_images_version_4
+1, ,426.58000000000004,318.56,10,24,1,0,toy_text_1_1_question_1111_distractor_b,0,0,,question_images_version_4
+2,J,436.58000000000004,318.56,10,24,2,0,toy_text_1_1_question_1111_distractor_b,1,1,Java,question_images_version_4
+3,a,446.58000000000004,318.56,10,24,3,0,toy_text_1_1_question_1111_distractor_b,1,1,Java,question_images_version_4
+4,v,456.58000000000004,318.56,10,24,4,0,toy_text_1_1_question_1111_distractor_b,1,1,Java,question_images_version_4
+5,a,466.58000000000004,318.56,10,24,5,0,toy_text_1_1_question_1111_distractor_b,1,1,Java,question_images_version_4
+6, ,476.58000000000004,318.56,10,24,6,0,toy_text_1_1_question_1111_distractor_b,1,1,,question_images_version_4
+7,s,486.58000000000004,318.56,10,24,7,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_4
+8,c,496.58000000000004,318.56,10,24,8,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_4
+9,r,506.58000000000004,318.56,10,24,9,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_4
+10,i,516.58,318.56,10,24,10,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_4
+11,p,526.58,318.56,10,24,11,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_4
+12,t,536.58,318.56,10,24,12,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_4
+0,A,117.89999999999999,543.0,10,24,0,0,toy_text_1_1_question_1111_distractor_c,0,0,A,question_images_version_4
+1, ,127.89999999999999,543.0,10,24,1,0,toy_text_1_1_question_1111_distractor_c,0,0,,question_images_version_4
+2,t,137.89999999999998,543.0,10,24,2,0,toy_text_1_1_question_1111_distractor_c,1,1,test,question_images_version_4
+3,e,147.89999999999998,543.0,10,24,3,0,toy_text_1_1_question_1111_distractor_c,1,1,test,question_images_version_4
+4,s,157.89999999999998,543.0,10,24,4,0,toy_text_1_1_question_1111_distractor_c,1,1,test,question_images_version_4
+5,t,167.89999999999998,543.0,10,24,5,0,toy_text_1_1_question_1111_distractor_c,1,1,test,question_images_version_4
+6, ,177.89999999999998,543.0,10,24,6,0,toy_text_1_1_question_1111_distractor_c,1,1,,question_images_version_4
+7,s,187.89999999999998,543.0,10,24,7,0,toy_text_1_1_question_1111_distractor_c,2,2,suite,question_images_version_4
+8,u,197.89999999999998,543.0,10,24,8,0,toy_text_1_1_question_1111_distractor_c,2,2,suite,question_images_version_4
+9,i,207.89999999999998,543.0,10,24,9,0,toy_text_1_1_question_1111_distractor_c,2,2,suite,question_images_version_4
+10,t,217.89999999999998,543.0,10,24,10,0,toy_text_1_1_question_1111_distractor_c,2,2,suite,question_images_version_4
+11,e,227.89999999999998,543.0,10,24,11,0,toy_text_1_1_question_1111_distractor_c,2,2,suite,question_images_version_4
+0,W,49.0,64.0,10,24,0,0,question_1111,0,0,What,question_images_version_5
+1,h,59.0,64.0,10,24,1,0,question_1111,0,0,What,question_images_version_5
+2,a,69.0,64.0,10,24,2,0,question_1111,0,0,What,question_images_version_5
+3,t,79.0,64.0,10,24,3,0,question_1111,0,0,What,question_images_version_5
+4, ,89.0,64.0,10,24,4,0,question_1111,0,0,,question_images_version_5
+5,i,99.0,64.0,10,24,5,0,question_1111,1,1,is,question_images_version_5
+6,s,109.0,64.0,10,24,6,0,question_1111,1,1,is,question_images_version_5
+7, ,119.0,64.0,10,24,7,0,question_1111,1,1,,question_images_version_5
+8,p,129.0,64.0,10,24,8,0,question_1111,2,2,pymovements?,question_images_version_5
+9,y,139.0,64.0,10,24,9,0,question_1111,2,2,pymovements?,question_images_version_5
+10,m,149.0,64.0,10,24,10,0,question_1111,2,2,pymovements?,question_images_version_5
+11,o,159.0,64.0,10,24,11,0,question_1111,2,2,pymovements?,question_images_version_5
+12,v,169.0,64.0,10,24,12,0,question_1111,2,2,pymovements?,question_images_version_5
+13,e,179.0,64.0,10,24,13,0,question_1111,2,2,pymovements?,question_images_version_5
+14,m,189.0,64.0,10,24,14,0,question_1111,2,2,pymovements?,question_images_version_5
+15,e,199.0,64.0,10,24,15,0,question_1111,2,2,pymovements?,question_images_version_5
+16,n,209.0,64.0,10,24,16,0,question_1111,2,2,pymovements?,question_images_version_5
+17,t,219.0,64.0,10,24,17,0,question_1111,2,2,pymovements?,question_images_version_5
+18,s,229.0,64.0,10,24,18,0,question_1111,2,2,pymovements?,question_images_version_5
+19,?,239.0,64.0,10,24,19,0,question_1111,2,2,pymovements?,question_images_version_5
+0,A,117.89999999999999,543.0,10,24,0,0,toy_text_1_1_question_1111_target,0,0,A,question_images_version_5
+1, ,127.89999999999999,543.0,10,24,1,0,toy_text_1_1_question_1111_target,0,0,,question_images_version_5
+2,P,137.89999999999998,543.0,10,24,2,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_5
+3,y,147.89999999999998,543.0,10,24,3,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_5
+4,t,157.89999999999998,543.0,10,24,4,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_5
+5,h,167.89999999999998,543.0,10,24,5,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_5
+6,o,177.89999999999998,543.0,10,24,6,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_5
+7,n,187.89999999999998,543.0,10,24,7,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_5
+8, ,197.89999999999998,543.0,10,24,8,0,toy_text_1_1_question_1111_target,1,1,,question_images_version_5
+9,p,207.89999999999998,543.0,10,24,9,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_5
+10,a,217.89999999999998,543.0,10,24,10,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_5
+11,c,227.89999999999998,543.0,10,24,11,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_5
+12,k,237.89999999999998,543.0,10,24,12,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_5
+13,a,247.89999999999998,543.0,10,24,13,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_5
+14,g,257.9,543.0,10,24,14,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_5
+15,e,267.9,543.0,10,24,15,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_5
+0,A,416.58000000000004,318.56,10,24,0,0,toy_text_1_1_question_1111_distractor_a,0,0,A,question_images_version_5
+1, ,426.58000000000004,318.56,10,24,1,0,toy_text_1_1_question_1111_distractor_a,0,0,,question_images_version_5
+2,p,436.58000000000004,318.56,10,24,2,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_5
+3,l,446.58000000000004,318.56,10,24,3,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_5
+4,o,456.58000000000004,318.56,10,24,4,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_5
+5,t,466.58000000000004,318.56,10,24,5,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_5
+6,t,476.58000000000004,318.56,10,24,6,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_5
+7,i,486.58000000000004,318.56,10,24,7,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_5
+8,n,496.58000000000004,318.56,10,24,8,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_5
+9,g,506.58000000000004,318.56,10,24,9,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_5
+10, ,516.58,318.56,10,24,10,0,toy_text_1_1_question_1111_distractor_a,1,1,,question_images_version_5
+11,m,526.58,318.56,10,24,11,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_5
+12,e,536.58,318.56,10,24,12,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_5
+13,t,546.58,318.56,10,24,13,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_5
+14,h,556.58,318.56,10,24,14,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_5
+15,o,566.58,318.56,10,24,15,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_5
+16,d,576.58,318.56,10,24,16,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_5
+0,A,117.89999999999999,181.0,10,24,0,0,toy_text_1_1_question_1111_distractor_b,0,0,A,question_images_version_5
+1, ,127.89999999999999,181.0,10,24,1,0,toy_text_1_1_question_1111_distractor_b,0,0,,question_images_version_5
+2,J,137.89999999999998,181.0,10,24,2,0,toy_text_1_1_question_1111_distractor_b,1,1,Java,question_images_version_5
+3,a,147.89999999999998,181.0,10,24,3,0,toy_text_1_1_question_1111_distractor_b,1,1,Java,question_images_version_5
+4,v,157.89999999999998,181.0,10,24,4,0,toy_text_1_1_question_1111_distractor_b,1,1,Java,question_images_version_5
+5,a,167.89999999999998,181.0,10,24,5,0,toy_text_1_1_question_1111_distractor_b,1,1,Java,question_images_version_5
+6, ,177.89999999999998,181.0,10,24,6,0,toy_text_1_1_question_1111_distractor_b,1,1,,question_images_version_5
+7,s,187.89999999999998,181.0,10,24,7,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_5
+8,c,197.89999999999998,181.0,10,24,8,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_5
+9,r,207.89999999999998,181.0,10,24,9,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_5
+10,i,217.89999999999998,181.0,10,24,10,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_5
+11,p,227.89999999999998,181.0,10,24,11,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_5
+12,t,237.89999999999998,181.0,10,24,12,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_5
+0,A,49.0,318.56,10,24,0,0,toy_text_1_1_question_1111_distractor_c,0,0,A,question_images_version_5
+1, ,59.0,318.56,10,24,1,0,toy_text_1_1_question_1111_distractor_c,0,0,,question_images_version_5
+2,t,69.0,318.56,10,24,2,0,toy_text_1_1_question_1111_distractor_c,1,1,test,question_images_version_5
+3,e,79.0,318.56,10,24,3,0,toy_text_1_1_question_1111_distractor_c,1,1,test,question_images_version_5
+4,s,89.0,318.56,10,24,4,0,toy_text_1_1_question_1111_distractor_c,1,1,test,question_images_version_5
+5,t,99.0,318.56,10,24,5,0,toy_text_1_1_question_1111_distractor_c,1,1,test,question_images_version_5
+6, ,109.0,318.56,10,24,6,0,toy_text_1_1_question_1111_distractor_c,1,1,,question_images_version_5
+7,s,119.0,318.56,10,24,7,0,toy_text_1_1_question_1111_distractor_c,2,2,suite,question_images_version_5
+8,u,129.0,318.56,10,24,8,0,toy_text_1_1_question_1111_distractor_c,2,2,suite,question_images_version_5
+9,i,139.0,318.56,10,24,9,0,toy_text_1_1_question_1111_distractor_c,2,2,suite,question_images_version_5
+10,t,149.0,318.56,10,24,10,0,toy_text_1_1_question_1111_distractor_c,2,2,suite,question_images_version_5
+11,e,159.0,318.56,10,24,11,0,toy_text_1_1_question_1111_distractor_c,2,2,suite,question_images_version_5
+0,W,49.0,64.0,10,24,0,0,question_1111,0,0,What,question_images_version_6
+1,h,59.0,64.0,10,24,1,0,question_1111,0,0,What,question_images_version_6
+2,a,69.0,64.0,10,24,2,0,question_1111,0,0,What,question_images_version_6
+3,t,79.0,64.0,10,24,3,0,question_1111,0,0,What,question_images_version_6
+4, ,89.0,64.0,10,24,4,0,question_1111,0,0,,question_images_version_6
+5,i,99.0,64.0,10,24,5,0,question_1111,1,1,is,question_images_version_6
+6,s,109.0,64.0,10,24,6,0,question_1111,1,1,is,question_images_version_6
+7, ,119.0,64.0,10,24,7,0,question_1111,1,1,,question_images_version_6
+8,p,129.0,64.0,10,24,8,0,question_1111,2,2,pymovements?,question_images_version_6
+9,y,139.0,64.0,10,24,9,0,question_1111,2,2,pymovements?,question_images_version_6
+10,m,149.0,64.0,10,24,10,0,question_1111,2,2,pymovements?,question_images_version_6
+11,o,159.0,64.0,10,24,11,0,question_1111,2,2,pymovements?,question_images_version_6
+12,v,169.0,64.0,10,24,12,0,question_1111,2,2,pymovements?,question_images_version_6
+13,e,179.0,64.0,10,24,13,0,question_1111,2,2,pymovements?,question_images_version_6
+14,m,189.0,64.0,10,24,14,0,question_1111,2,2,pymovements?,question_images_version_6
+15,e,199.0,64.0,10,24,15,0,question_1111,2,2,pymovements?,question_images_version_6
+16,n,209.0,64.0,10,24,16,0,question_1111,2,2,pymovements?,question_images_version_6
+17,t,219.0,64.0,10,24,17,0,question_1111,2,2,pymovements?,question_images_version_6
+18,s,229.0,64.0,10,24,18,0,question_1111,2,2,pymovements?,question_images_version_6
+19,?,239.0,64.0,10,24,19,0,question_1111,2,2,pymovements?,question_images_version_6
+0,A,416.58000000000004,318.56,10,24,0,0,toy_text_1_1_question_1111_target,0,0,A,question_images_version_6
+1, ,426.58000000000004,318.56,10,24,1,0,toy_text_1_1_question_1111_target,0,0,,question_images_version_6
+2,P,436.58000000000004,318.56,10,24,2,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_6
+3,y,446.58000000000004,318.56,10,24,3,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_6
+4,t,456.58000000000004,318.56,10,24,4,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_6
+5,h,466.58000000000004,318.56,10,24,5,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_6
+6,o,476.58000000000004,318.56,10,24,6,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_6
+7,n,486.58000000000004,318.56,10,24,7,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_6
+8, ,496.58000000000004,318.56,10,24,8,0,toy_text_1_1_question_1111_target,1,1,,question_images_version_6
+9,p,506.58000000000004,318.56,10,24,9,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_6
+10,a,516.58,318.56,10,24,10,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_6
+11,c,526.58,318.56,10,24,11,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_6
+12,k,536.58,318.56,10,24,12,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_6
+13,a,546.58,318.56,10,24,13,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_6
+14,g,556.58,318.56,10,24,14,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_6
+15,e,566.58,318.56,10,24,15,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_6
+0,A,117.89999999999999,181.0,10,24,0,0,toy_text_1_1_question_1111_distractor_a,0,0,A,question_images_version_6
+1, ,127.89999999999999,181.0,10,24,1,0,toy_text_1_1_question_1111_distractor_a,0,0,,question_images_version_6
+2,p,137.89999999999998,181.0,10,24,2,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_6
+3,l,147.89999999999998,181.0,10,24,3,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_6
+4,o,157.89999999999998,181.0,10,24,4,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_6
+5,t,167.89999999999998,181.0,10,24,5,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_6
+6,t,177.89999999999998,181.0,10,24,6,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_6
+7,i,187.89999999999998,181.0,10,24,7,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_6
+8,n,197.89999999999998,181.0,10,24,8,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_6
+9,g,207.89999999999998,181.0,10,24,9,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_6
+10, ,217.89999999999998,181.0,10,24,10,0,toy_text_1_1_question_1111_distractor_a,1,1,,question_images_version_6
+11,m,227.89999999999998,181.0,10,24,11,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_6
+12,e,237.89999999999998,181.0,10,24,12,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_6
+13,t,247.89999999999998,181.0,10,24,13,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_6
+14,h,257.9,181.0,10,24,14,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_6
+15,o,267.9,181.0,10,24,15,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_6
+16,d,277.9,181.0,10,24,16,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_6
+0,A,49.0,318.56,10,24,0,0,toy_text_1_1_question_1111_distractor_b,0,0,A,question_images_version_6
+1, ,59.0,318.56,10,24,1,0,toy_text_1_1_question_1111_distractor_b,0,0,,question_images_version_6
+2,J,69.0,318.56,10,24,2,0,toy_text_1_1_question_1111_distractor_b,1,1,Java,question_images_version_6
+3,a,79.0,318.56,10,24,3,0,toy_text_1_1_question_1111_distractor_b,1,1,Java,question_images_version_6
+4,v,89.0,318.56,10,24,4,0,toy_text_1_1_question_1111_distractor_b,1,1,Java,question_images_version_6
+5,a,99.0,318.56,10,24,5,0,toy_text_1_1_question_1111_distractor_b,1,1,Java,question_images_version_6
+6, ,109.0,318.56,10,24,6,0,toy_text_1_1_question_1111_distractor_b,1,1,,question_images_version_6
+7,s,119.0,318.56,10,24,7,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_6
+8,c,129.0,318.56,10,24,8,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_6
+9,r,139.0,318.56,10,24,9,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_6
+10,i,149.0,318.56,10,24,10,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_6
+11,p,159.0,318.56,10,24,11,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_6
+12,t,169.0,318.56,10,24,12,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_6
+0,A,117.89999999999999,543.0,10,24,0,0,toy_text_1_1_question_1111_distractor_c,0,0,A,question_images_version_6
+1, ,127.89999999999999,543.0,10,24,1,0,toy_text_1_1_question_1111_distractor_c,0,0,,question_images_version_6
+2,t,137.89999999999998,543.0,10,24,2,0,toy_text_1_1_question_1111_distractor_c,1,1,test,question_images_version_6
+3,e,147.89999999999998,543.0,10,24,3,0,toy_text_1_1_question_1111_distractor_c,1,1,test,question_images_version_6
+4,s,157.89999999999998,543.0,10,24,4,0,toy_text_1_1_question_1111_distractor_c,1,1,test,question_images_version_6
+5,t,167.89999999999998,543.0,10,24,5,0,toy_text_1_1_question_1111_distractor_c,1,1,test,question_images_version_6
+6, ,177.89999999999998,543.0,10,24,6,0,toy_text_1_1_question_1111_distractor_c,1,1,,question_images_version_6
+7,s,187.89999999999998,543.0,10,24,7,0,toy_text_1_1_question_1111_distractor_c,2,2,suite,question_images_version_6
+8,u,197.89999999999998,543.0,10,24,8,0,toy_text_1_1_question_1111_distractor_c,2,2,suite,question_images_version_6
+9,i,207.89999999999998,543.0,10,24,9,0,toy_text_1_1_question_1111_distractor_c,2,2,suite,question_images_version_6
+10,t,217.89999999999998,543.0,10,24,10,0,toy_text_1_1_question_1111_distractor_c,2,2,suite,question_images_version_6
+11,e,227.89999999999998,543.0,10,24,11,0,toy_text_1_1_question_1111_distractor_c,2,2,suite,question_images_version_6
+0,W,49.0,64.0,10,24,0,0,question_1111,0,0,What,question_images_version_7
+1,h,59.0,64.0,10,24,1,0,question_1111,0,0,What,question_images_version_7
+2,a,69.0,64.0,10,24,2,0,question_1111,0,0,What,question_images_version_7
+3,t,79.0,64.0,10,24,3,0,question_1111,0,0,What,question_images_version_7
+4, ,89.0,64.0,10,24,4,0,question_1111,0,0,,question_images_version_7
+5,i,99.0,64.0,10,24,5,0,question_1111,1,1,is,question_images_version_7
+6,s,109.0,64.0,10,24,6,0,question_1111,1,1,is,question_images_version_7
+7, ,119.0,64.0,10,24,7,0,question_1111,1,1,,question_images_version_7
+8,p,129.0,64.0,10,24,8,0,question_1111,2,2,pymovements?,question_images_version_7
+9,y,139.0,64.0,10,24,9,0,question_1111,2,2,pymovements?,question_images_version_7
+10,m,149.0,64.0,10,24,10,0,question_1111,2,2,pymovements?,question_images_version_7
+11,o,159.0,64.0,10,24,11,0,question_1111,2,2,pymovements?,question_images_version_7
+12,v,169.0,64.0,10,24,12,0,question_1111,2,2,pymovements?,question_images_version_7
+13,e,179.0,64.0,10,24,13,0,question_1111,2,2,pymovements?,question_images_version_7
+14,m,189.0,64.0,10,24,14,0,question_1111,2,2,pymovements?,question_images_version_7
+15,e,199.0,64.0,10,24,15,0,question_1111,2,2,pymovements?,question_images_version_7
+16,n,209.0,64.0,10,24,16,0,question_1111,2,2,pymovements?,question_images_version_7
+17,t,219.0,64.0,10,24,17,0,question_1111,2,2,pymovements?,question_images_version_7
+18,s,229.0,64.0,10,24,18,0,question_1111,2,2,pymovements?,question_images_version_7
+19,?,239.0,64.0,10,24,19,0,question_1111,2,2,pymovements?,question_images_version_7
+0,A,117.89999999999999,543.0,10,24,0,0,toy_text_1_1_question_1111_target,0,0,A,question_images_version_7
+1, ,127.89999999999999,543.0,10,24,1,0,toy_text_1_1_question_1111_target,0,0,,question_images_version_7
+2,P,137.89999999999998,543.0,10,24,2,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_7
+3,y,147.89999999999998,543.0,10,24,3,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_7
+4,t,157.89999999999998,543.0,10,24,4,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_7
+5,h,167.89999999999998,543.0,10,24,5,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_7
+6,o,177.89999999999998,543.0,10,24,6,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_7
+7,n,187.89999999999998,543.0,10,24,7,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_7
+8, ,197.89999999999998,543.0,10,24,8,0,toy_text_1_1_question_1111_target,1,1,,question_images_version_7
+9,p,207.89999999999998,543.0,10,24,9,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_7
+10,a,217.89999999999998,543.0,10,24,10,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_7
+11,c,227.89999999999998,543.0,10,24,11,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_7
+12,k,237.89999999999998,543.0,10,24,12,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_7
+13,a,247.89999999999998,543.0,10,24,13,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_7
+14,g,257.9,543.0,10,24,14,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_7
+15,e,267.9,543.0,10,24,15,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_7
+0,A,117.89999999999999,181.0,10,24,0,0,toy_text_1_1_question_1111_distractor_a,0,0,A,question_images_version_7
+1, ,127.89999999999999,181.0,10,24,1,0,toy_text_1_1_question_1111_distractor_a,0,0,,question_images_version_7
+2,p,137.89999999999998,181.0,10,24,2,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_7
+3,l,147.89999999999998,181.0,10,24,3,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_7
+4,o,157.89999999999998,181.0,10,24,4,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_7
+5,t,167.89999999999998,181.0,10,24,5,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_7
+6,t,177.89999999999998,181.0,10,24,6,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_7
+7,i,187.89999999999998,181.0,10,24,7,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_7
+8,n,197.89999999999998,181.0,10,24,8,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_7
+9,g,207.89999999999998,181.0,10,24,9,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_7
+10, ,217.89999999999998,181.0,10,24,10,0,toy_text_1_1_question_1111_distractor_a,1,1,,question_images_version_7
+11,m,227.89999999999998,181.0,10,24,11,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_7
+12,e,237.89999999999998,181.0,10,24,12,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_7
+13,t,247.89999999999998,181.0,10,24,13,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_7
+14,h,257.9,181.0,10,24,14,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_7
+15,o,267.9,181.0,10,24,15,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_7
+16,d,277.9,181.0,10,24,16,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_7
+0,A,49.0,318.56,10,24,0,0,toy_text_1_1_question_1111_distractor_b,0,0,A,question_images_version_7
+1, ,59.0,318.56,10,24,1,0,toy_text_1_1_question_1111_distractor_b,0,0,,question_images_version_7
+2,J,69.0,318.56,10,24,2,0,toy_text_1_1_question_1111_distractor_b,1,1,Java,question_images_version_7
+3,a,79.0,318.56,10,24,3,0,toy_text_1_1_question_1111_distractor_b,1,1,Java,question_images_version_7
+4,v,89.0,318.56,10,24,4,0,toy_text_1_1_question_1111_distractor_b,1,1,Java,question_images_version_7
+5,a,99.0,318.56,10,24,5,0,toy_text_1_1_question_1111_distractor_b,1,1,Java,question_images_version_7
+6, ,109.0,318.56,10,24,6,0,toy_text_1_1_question_1111_distractor_b,1,1,,question_images_version_7
+7,s,119.0,318.56,10,24,7,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_7
+8,c,129.0,318.56,10,24,8,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_7
+9,r,139.0,318.56,10,24,9,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_7
+10,i,149.0,318.56,10,24,10,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_7
+11,p,159.0,318.56,10,24,11,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_7
+12,t,169.0,318.56,10,24,12,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_7
+0,A,416.58000000000004,318.56,10,24,0,0,toy_text_1_1_question_1111_distractor_c,0,0,A,question_images_version_7
+1, ,426.58000000000004,318.56,10,24,1,0,toy_text_1_1_question_1111_distractor_c,0,0,,question_images_version_7
+2,t,436.58000000000004,318.56,10,24,2,0,toy_text_1_1_question_1111_distractor_c,1,1,test,question_images_version_7
+3,e,446.58000000000004,318.56,10,24,3,0,toy_text_1_1_question_1111_distractor_c,1,1,test,question_images_version_7
+4,s,456.58000000000004,318.56,10,24,4,0,toy_text_1_1_question_1111_distractor_c,1,1,test,question_images_version_7
+5,t,466.58000000000004,318.56,10,24,5,0,toy_text_1_1_question_1111_distractor_c,1,1,test,question_images_version_7
+6, ,476.58000000000004,318.56,10,24,6,0,toy_text_1_1_question_1111_distractor_c,1,1,,question_images_version_7
+7,s,486.58000000000004,318.56,10,24,7,0,toy_text_1_1_question_1111_distractor_c,2,2,suite,question_images_version_7
+8,u,496.58000000000004,318.56,10,24,8,0,toy_text_1_1_question_1111_distractor_c,2,2,suite,question_images_version_7
+9,i,506.58000000000004,318.56,10,24,9,0,toy_text_1_1_question_1111_distractor_c,2,2,suite,question_images_version_7
+10,t,516.58,318.56,10,24,10,0,toy_text_1_1_question_1111_distractor_c,2,2,suite,question_images_version_7
+11,e,526.58,318.56,10,24,11,0,toy_text_1_1_question_1111_distractor_c,2,2,suite,question_images_version_7
+0,W,49.0,64.0,10,24,0,0,question_1111,0,0,What,question_images_version_8
+1,h,59.0,64.0,10,24,1,0,question_1111,0,0,What,question_images_version_8
+2,a,69.0,64.0,10,24,2,0,question_1111,0,0,What,question_images_version_8
+3,t,79.0,64.0,10,24,3,0,question_1111,0,0,What,question_images_version_8
+4, ,89.0,64.0,10,24,4,0,question_1111,0,0,,question_images_version_8
+5,i,99.0,64.0,10,24,5,0,question_1111,1,1,is,question_images_version_8
+6,s,109.0,64.0,10,24,6,0,question_1111,1,1,is,question_images_version_8
+7, ,119.0,64.0,10,24,7,0,question_1111,1,1,,question_images_version_8
+8,p,129.0,64.0,10,24,8,0,question_1111,2,2,pymovements?,question_images_version_8
+9,y,139.0,64.0,10,24,9,0,question_1111,2,2,pymovements?,question_images_version_8
+10,m,149.0,64.0,10,24,10,0,question_1111,2,2,pymovements?,question_images_version_8
+11,o,159.0,64.0,10,24,11,0,question_1111,2,2,pymovements?,question_images_version_8
+12,v,169.0,64.0,10,24,12,0,question_1111,2,2,pymovements?,question_images_version_8
+13,e,179.0,64.0,10,24,13,0,question_1111,2,2,pymovements?,question_images_version_8
+14,m,189.0,64.0,10,24,14,0,question_1111,2,2,pymovements?,question_images_version_8
+15,e,199.0,64.0,10,24,15,0,question_1111,2,2,pymovements?,question_images_version_8
+16,n,209.0,64.0,10,24,16,0,question_1111,2,2,pymovements?,question_images_version_8
+17,t,219.0,64.0,10,24,17,0,question_1111,2,2,pymovements?,question_images_version_8
+18,s,229.0,64.0,10,24,18,0,question_1111,2,2,pymovements?,question_images_version_8
+19,?,239.0,64.0,10,24,19,0,question_1111,2,2,pymovements?,question_images_version_8
+0,A,416.58000000000004,318.56,10,24,0,0,toy_text_1_1_question_1111_target,0,0,A,question_images_version_8
+1, ,426.58000000000004,318.56,10,24,1,0,toy_text_1_1_question_1111_target,0,0,,question_images_version_8
+2,P,436.58000000000004,318.56,10,24,2,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_8
+3,y,446.58000000000004,318.56,10,24,3,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_8
+4,t,456.58000000000004,318.56,10,24,4,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_8
+5,h,466.58000000000004,318.56,10,24,5,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_8
+6,o,476.58000000000004,318.56,10,24,6,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_8
+7,n,486.58000000000004,318.56,10,24,7,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_8
+8, ,496.58000000000004,318.56,10,24,8,0,toy_text_1_1_question_1111_target,1,1,,question_images_version_8
+9,p,506.58000000000004,318.56,10,24,9,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_8
+10,a,516.58,318.56,10,24,10,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_8
+11,c,526.58,318.56,10,24,11,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_8
+12,k,536.58,318.56,10,24,12,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_8
+13,a,546.58,318.56,10,24,13,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_8
+14,g,556.58,318.56,10,24,14,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_8
+15,e,566.58,318.56,10,24,15,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_8
+0,A,117.89999999999999,543.0,10,24,0,0,toy_text_1_1_question_1111_distractor_a,0,0,A,question_images_version_8
+1, ,127.89999999999999,543.0,10,24,1,0,toy_text_1_1_question_1111_distractor_a,0,0,,question_images_version_8
+2,p,137.89999999999998,543.0,10,24,2,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_8
+3,l,147.89999999999998,543.0,10,24,3,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_8
+4,o,157.89999999999998,543.0,10,24,4,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_8
+5,t,167.89999999999998,543.0,10,24,5,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_8
+6,t,177.89999999999998,543.0,10,24,6,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_8
+7,i,187.89999999999998,543.0,10,24,7,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_8
+8,n,197.89999999999998,543.0,10,24,8,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_8
+9,g,207.89999999999998,543.0,10,24,9,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_8
+10, ,217.89999999999998,543.0,10,24,10,0,toy_text_1_1_question_1111_distractor_a,1,1,,question_images_version_8
+11,m,227.89999999999998,543.0,10,24,11,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_8
+12,e,237.89999999999998,543.0,10,24,12,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_8
+13,t,247.89999999999998,543.0,10,24,13,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_8
+14,h,257.9,543.0,10,24,14,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_8
+15,o,267.9,543.0,10,24,15,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_8
+16,d,277.9,543.0,10,24,16,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_8
+0,A,117.89999999999999,181.0,10,24,0,0,toy_text_1_1_question_1111_distractor_b,0,0,A,question_images_version_8
+1, ,127.89999999999999,181.0,10,24,1,0,toy_text_1_1_question_1111_distractor_b,0,0,,question_images_version_8
+2,J,137.89999999999998,181.0,10,24,2,0,toy_text_1_1_question_1111_distractor_b,1,1,Java,question_images_version_8
+3,a,147.89999999999998,181.0,10,24,3,0,toy_text_1_1_question_1111_distractor_b,1,1,Java,question_images_version_8
+4,v,157.89999999999998,181.0,10,24,4,0,toy_text_1_1_question_1111_distractor_b,1,1,Java,question_images_version_8
+5,a,167.89999999999998,181.0,10,24,5,0,toy_text_1_1_question_1111_distractor_b,1,1,Java,question_images_version_8
+6, ,177.89999999999998,181.0,10,24,6,0,toy_text_1_1_question_1111_distractor_b,1,1,,question_images_version_8
+7,s,187.89999999999998,181.0,10,24,7,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_8
+8,c,197.89999999999998,181.0,10,24,8,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_8
+9,r,207.89999999999998,181.0,10,24,9,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_8
+10,i,217.89999999999998,181.0,10,24,10,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_8
+11,p,227.89999999999998,181.0,10,24,11,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_8
+12,t,237.89999999999998,181.0,10,24,12,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_8
+0,A,49.0,318.56,10,24,0,0,toy_text_1_1_question_1111_distractor_c,0,0,A,question_images_version_8
+1, ,59.0,318.56,10,24,1,0,toy_text_1_1_question_1111_distractor_c,0,0,,question_images_version_8
+2,t,69.0,318.56,10,24,2,0,toy_text_1_1_question_1111_distractor_c,1,1,test,question_images_version_8
+3,e,79.0,318.56,10,24,3,0,toy_text_1_1_question_1111_distractor_c,1,1,test,question_images_version_8
+4,s,89.0,318.56,10,24,4,0,toy_text_1_1_question_1111_distractor_c,1,1,test,question_images_version_8
+5,t,99.0,318.56,10,24,5,0,toy_text_1_1_question_1111_distractor_c,1,1,test,question_images_version_8
+6, ,109.0,318.56,10,24,6,0,toy_text_1_1_question_1111_distractor_c,1,1,,question_images_version_8
+7,s,119.0,318.56,10,24,7,0,toy_text_1_1_question_1111_distractor_c,2,2,suite,question_images_version_8
+8,u,129.0,318.56,10,24,8,0,toy_text_1_1_question_1111_distractor_c,2,2,suite,question_images_version_8
+9,i,139.0,318.56,10,24,9,0,toy_text_1_1_question_1111_distractor_c,2,2,suite,question_images_version_8
+10,t,149.0,318.56,10,24,10,0,toy_text_1_1_question_1111_distractor_c,2,2,suite,question_images_version_8
+11,e,159.0,318.56,10,24,11,0,toy_text_1_1_question_1111_distractor_c,2,2,suite,question_images_version_8
+0,W,49.0,64.0,10,24,0,0,question_1111,0,0,What,question_images_version_9
+1,h,59.0,64.0,10,24,1,0,question_1111,0,0,What,question_images_version_9
+2,a,69.0,64.0,10,24,2,0,question_1111,0,0,What,question_images_version_9
+3,t,79.0,64.0,10,24,3,0,question_1111,0,0,What,question_images_version_9
+4, ,89.0,64.0,10,24,4,0,question_1111,0,0,,question_images_version_9
+5,i,99.0,64.0,10,24,5,0,question_1111,1,1,is,question_images_version_9
+6,s,109.0,64.0,10,24,6,0,question_1111,1,1,is,question_images_version_9
+7, ,119.0,64.0,10,24,7,0,question_1111,1,1,,question_images_version_9
+8,p,129.0,64.0,10,24,8,0,question_1111,2,2,pymovements?,question_images_version_9
+9,y,139.0,64.0,10,24,9,0,question_1111,2,2,pymovements?,question_images_version_9
+10,m,149.0,64.0,10,24,10,0,question_1111,2,2,pymovements?,question_images_version_9
+11,o,159.0,64.0,10,24,11,0,question_1111,2,2,pymovements?,question_images_version_9
+12,v,169.0,64.0,10,24,12,0,question_1111,2,2,pymovements?,question_images_version_9
+13,e,179.0,64.0,10,24,13,0,question_1111,2,2,pymovements?,question_images_version_9
+14,m,189.0,64.0,10,24,14,0,question_1111,2,2,pymovements?,question_images_version_9
+15,e,199.0,64.0,10,24,15,0,question_1111,2,2,pymovements?,question_images_version_9
+16,n,209.0,64.0,10,24,16,0,question_1111,2,2,pymovements?,question_images_version_9
+17,t,219.0,64.0,10,24,17,0,question_1111,2,2,pymovements?,question_images_version_9
+18,s,229.0,64.0,10,24,18,0,question_1111,2,2,pymovements?,question_images_version_9
+19,?,239.0,64.0,10,24,19,0,question_1111,2,2,pymovements?,question_images_version_9
+0,A,117.89999999999999,181.0,10,24,0,0,toy_text_1_1_question_1111_target,0,0,A,question_images_version_9
+1, ,127.89999999999999,181.0,10,24,1,0,toy_text_1_1_question_1111_target,0,0,,question_images_version_9
+2,P,137.89999999999998,181.0,10,24,2,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_9
+3,y,147.89999999999998,181.0,10,24,3,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_9
+4,t,157.89999999999998,181.0,10,24,4,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_9
+5,h,167.89999999999998,181.0,10,24,5,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_9
+6,o,177.89999999999998,181.0,10,24,6,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_9
+7,n,187.89999999999998,181.0,10,24,7,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_9
+8, ,197.89999999999998,181.0,10,24,8,0,toy_text_1_1_question_1111_target,1,1,,question_images_version_9
+9,p,207.89999999999998,181.0,10,24,9,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_9
+10,a,217.89999999999998,181.0,10,24,10,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_9
+11,c,227.89999999999998,181.0,10,24,11,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_9
+12,k,237.89999999999998,181.0,10,24,12,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_9
+13,a,247.89999999999998,181.0,10,24,13,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_9
+14,g,257.9,181.0,10,24,14,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_9
+15,e,267.9,181.0,10,24,15,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_9
+0,A,117.89999999999999,543.0,10,24,0,0,toy_text_1_1_question_1111_distractor_a,0,0,A,question_images_version_9
+1, ,127.89999999999999,543.0,10,24,1,0,toy_text_1_1_question_1111_distractor_a,0,0,,question_images_version_9
+2,p,137.89999999999998,543.0,10,24,2,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_9
+3,l,147.89999999999998,543.0,10,24,3,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_9
+4,o,157.89999999999998,543.0,10,24,4,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_9
+5,t,167.89999999999998,543.0,10,24,5,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_9
+6,t,177.89999999999998,543.0,10,24,6,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_9
+7,i,187.89999999999998,543.0,10,24,7,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_9
+8,n,197.89999999999998,543.0,10,24,8,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_9
+9,g,207.89999999999998,543.0,10,24,9,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_9
+10, ,217.89999999999998,543.0,10,24,10,0,toy_text_1_1_question_1111_distractor_a,1,1,,question_images_version_9
+11,m,227.89999999999998,543.0,10,24,11,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_9
+12,e,237.89999999999998,543.0,10,24,12,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_9
+13,t,247.89999999999998,543.0,10,24,13,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_9
+14,h,257.9,543.0,10,24,14,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_9
+15,o,267.9,543.0,10,24,15,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_9
+16,d,277.9,543.0,10,24,16,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_9
+0,A,49.0,318.56,10,24,0,0,toy_text_1_1_question_1111_distractor_b,0,0,A,question_images_version_9
+1, ,59.0,318.56,10,24,1,0,toy_text_1_1_question_1111_distractor_b,0,0,,question_images_version_9
+2,J,69.0,318.56,10,24,2,0,toy_text_1_1_question_1111_distractor_b,1,1,Java,question_images_version_9
+3,a,79.0,318.56,10,24,3,0,toy_text_1_1_question_1111_distractor_b,1,1,Java,question_images_version_9
+4,v,89.0,318.56,10,24,4,0,toy_text_1_1_question_1111_distractor_b,1,1,Java,question_images_version_9
+5,a,99.0,318.56,10,24,5,0,toy_text_1_1_question_1111_distractor_b,1,1,Java,question_images_version_9
+6, ,109.0,318.56,10,24,6,0,toy_text_1_1_question_1111_distractor_b,1,1,,question_images_version_9
+7,s,119.0,318.56,10,24,7,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_9
+8,c,129.0,318.56,10,24,8,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_9
+9,r,139.0,318.56,10,24,9,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_9
+10,i,149.0,318.56,10,24,10,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_9
+11,p,159.0,318.56,10,24,11,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_9
+12,t,169.0,318.56,10,24,12,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_9
+0,A,416.58000000000004,318.56,10,24,0,0,toy_text_1_1_question_1111_distractor_c,0,0,A,question_images_version_9
+1, ,426.58000000000004,318.56,10,24,1,0,toy_text_1_1_question_1111_distractor_c,0,0,,question_images_version_9
+2,t,436.58000000000004,318.56,10,24,2,0,toy_text_1_1_question_1111_distractor_c,1,1,test,question_images_version_9
+3,e,446.58000000000004,318.56,10,24,3,0,toy_text_1_1_question_1111_distractor_c,1,1,test,question_images_version_9
+4,s,456.58000000000004,318.56,10,24,4,0,toy_text_1_1_question_1111_distractor_c,1,1,test,question_images_version_9
+5,t,466.58000000000004,318.56,10,24,5,0,toy_text_1_1_question_1111_distractor_c,1,1,test,question_images_version_9
+6, ,476.58000000000004,318.56,10,24,6,0,toy_text_1_1_question_1111_distractor_c,1,1,,question_images_version_9
+7,s,486.58000000000004,318.56,10,24,7,0,toy_text_1_1_question_1111_distractor_c,2,2,suite,question_images_version_9
+8,u,496.58000000000004,318.56,10,24,8,0,toy_text_1_1_question_1111_distractor_c,2,2,suite,question_images_version_9
+9,i,506.58000000000004,318.56,10,24,9,0,toy_text_1_1_question_1111_distractor_c,2,2,suite,question_images_version_9
+10,t,516.58,318.56,10,24,10,0,toy_text_1_1_question_1111_distractor_c,2,2,suite,question_images_version_9
+11,e,526.58,318.56,10,24,11,0,toy_text_1_1_question_1111_distractor_c,2,2,suite,question_images_version_9
+0,W,49.0,64.0,10,24,0,0,question_1111,0,0,What,question_images_version_10
+1,h,59.0,64.0,10,24,1,0,question_1111,0,0,What,question_images_version_10
+2,a,69.0,64.0,10,24,2,0,question_1111,0,0,What,question_images_version_10
+3,t,79.0,64.0,10,24,3,0,question_1111,0,0,What,question_images_version_10
+4, ,89.0,64.0,10,24,4,0,question_1111,0,0,,question_images_version_10
+5,i,99.0,64.0,10,24,5,0,question_1111,1,1,is,question_images_version_10
+6,s,109.0,64.0,10,24,6,0,question_1111,1,1,is,question_images_version_10
+7, ,119.0,64.0,10,24,7,0,question_1111,1,1,,question_images_version_10
+8,p,129.0,64.0,10,24,8,0,question_1111,2,2,pymovements?,question_images_version_10
+9,y,139.0,64.0,10,24,9,0,question_1111,2,2,pymovements?,question_images_version_10
+10,m,149.0,64.0,10,24,10,0,question_1111,2,2,pymovements?,question_images_version_10
+11,o,159.0,64.0,10,24,11,0,question_1111,2,2,pymovements?,question_images_version_10
+12,v,169.0,64.0,10,24,12,0,question_1111,2,2,pymovements?,question_images_version_10
+13,e,179.0,64.0,10,24,13,0,question_1111,2,2,pymovements?,question_images_version_10
+14,m,189.0,64.0,10,24,14,0,question_1111,2,2,pymovements?,question_images_version_10
+15,e,199.0,64.0,10,24,15,0,question_1111,2,2,pymovements?,question_images_version_10
+16,n,209.0,64.0,10,24,16,0,question_1111,2,2,pymovements?,question_images_version_10
+17,t,219.0,64.0,10,24,17,0,question_1111,2,2,pymovements?,question_images_version_10
+18,s,229.0,64.0,10,24,18,0,question_1111,2,2,pymovements?,question_images_version_10
+19,?,239.0,64.0,10,24,19,0,question_1111,2,2,pymovements?,question_images_version_10
+0,A,117.89999999999999,543.0,10,24,0,0,toy_text_1_1_question_1111_target,0,0,A,question_images_version_10
+1, ,127.89999999999999,543.0,10,24,1,0,toy_text_1_1_question_1111_target,0,0,,question_images_version_10
+2,P,137.89999999999998,543.0,10,24,2,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_10
+3,y,147.89999999999998,543.0,10,24,3,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_10
+4,t,157.89999999999998,543.0,10,24,4,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_10
+5,h,167.89999999999998,543.0,10,24,5,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_10
+6,o,177.89999999999998,543.0,10,24,6,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_10
+7,n,187.89999999999998,543.0,10,24,7,0,toy_text_1_1_question_1111_target,1,1,Python,question_images_version_10
+8, ,197.89999999999998,543.0,10,24,8,0,toy_text_1_1_question_1111_target,1,1,,question_images_version_10
+9,p,207.89999999999998,543.0,10,24,9,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_10
+10,a,217.89999999999998,543.0,10,24,10,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_10
+11,c,227.89999999999998,543.0,10,24,11,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_10
+12,k,237.89999999999998,543.0,10,24,12,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_10
+13,a,247.89999999999998,543.0,10,24,13,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_10
+14,g,257.9,543.0,10,24,14,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_10
+15,e,267.9,543.0,10,24,15,0,toy_text_1_1_question_1111_target,2,2,package,question_images_version_10
+0,A,49.0,318.56,10,24,0,0,toy_text_1_1_question_1111_distractor_a,0,0,A,question_images_version_10
+1, ,59.0,318.56,10,24,1,0,toy_text_1_1_question_1111_distractor_a,0,0,,question_images_version_10
+2,p,69.0,318.56,10,24,2,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_10
+3,l,79.0,318.56,10,24,3,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_10
+4,o,89.0,318.56,10,24,4,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_10
+5,t,99.0,318.56,10,24,5,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_10
+6,t,109.0,318.56,10,24,6,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_10
+7,i,119.0,318.56,10,24,7,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_10
+8,n,129.0,318.56,10,24,8,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_10
+9,g,139.0,318.56,10,24,9,0,toy_text_1_1_question_1111_distractor_a,1,1,plotting,question_images_version_10
+10, ,149.0,318.56,10,24,10,0,toy_text_1_1_question_1111_distractor_a,1,1,,question_images_version_10
+11,m,159.0,318.56,10,24,11,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_10
+12,e,169.0,318.56,10,24,12,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_10
+13,t,179.0,318.56,10,24,13,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_10
+14,h,189.0,318.56,10,24,14,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_10
+15,o,199.0,318.56,10,24,15,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_10
+16,d,209.0,318.56,10,24,16,0,toy_text_1_1_question_1111_distractor_a,2,2,method,question_images_version_10
+0,A,117.89999999999999,181.0,10,24,0,0,toy_text_1_1_question_1111_distractor_b,0,0,A,question_images_version_10
+1, ,127.89999999999999,181.0,10,24,1,0,toy_text_1_1_question_1111_distractor_b,0,0,,question_images_version_10
+2,J,137.89999999999998,181.0,10,24,2,0,toy_text_1_1_question_1111_distractor_b,1,1,Java,question_images_version_10
+3,a,147.89999999999998,181.0,10,24,3,0,toy_text_1_1_question_1111_distractor_b,1,1,Java,question_images_version_10
+4,v,157.89999999999998,181.0,10,24,4,0,toy_text_1_1_question_1111_distractor_b,1,1,Java,question_images_version_10
+5,a,167.89999999999998,181.0,10,24,5,0,toy_text_1_1_question_1111_distractor_b,1,1,Java,question_images_version_10
+6, ,177.89999999999998,181.0,10,24,6,0,toy_text_1_1_question_1111_distractor_b,1,1,,question_images_version_10
+7,s,187.89999999999998,181.0,10,24,7,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_10
+8,c,197.89999999999998,181.0,10,24,8,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_10
+9,r,207.89999999999998,181.0,10,24,9,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_10
+10,i,217.89999999999998,181.0,10,24,10,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_10
+11,p,227.89999999999998,181.0,10,24,11,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_10
+12,t,237.89999999999998,181.0,10,24,12,0,toy_text_1_1_question_1111_distractor_b,2,2,script,question_images_version_10
+0,A,416.58000000000004,318.56,10,24,0,0,toy_text_1_1_question_1111_distractor_c,0,0,A,question_images_version_10
+1, ,426.58000000000004,318.56,10,24,1,0,toy_text_1_1_question_1111_distractor_c,0,0,,question_images_version_10
+2,t,436.58000000000004,318.56,10,24,2,0,toy_text_1_1_question_1111_distractor_c,1,1,test,question_images_version_10
+3,e,446.58000000000004,318.56,10,24,3,0,toy_text_1_1_question_1111_distractor_c,1,1,test,question_images_version_10
+4,s,456.58000000000004,318.56,10,24,4,0,toy_text_1_1_question_1111_distractor_c,1,1,test,question_images_version_10
+5,t,466.58000000000004,318.56,10,24,5,0,toy_text_1_1_question_1111_distractor_c,1,1,test,question_images_version_10
+6, ,476.58000000000004,318.56,10,24,6,0,toy_text_1_1_question_1111_distractor_c,1,1,,question_images_version_10
+7,s,486.58000000000004,318.56,10,24,7,0,toy_text_1_1_question_1111_distractor_c,2,2,suite,question_images_version_10
+8,u,496.58000000000004,318.56,10,24,8,0,toy_text_1_1_question_1111_distractor_c,2,2,suite,question_images_version_10
+9,i,506.58000000000004,318.56,10,24,9,0,toy_text_1_1_question_1111_distractor_c,2,2,suite,question_images_version_10
+10,t,516.58,318.56,10,24,10,0,toy_text_1_1_question_1111_distractor_c,2,2,suite,question_images_version_10
+11,e,526.58,318.56,10,24,11,0,toy_text_1_1_question_1111_distractor_c,2,2,suite,question_images_version_10
+0,p,49.0,64.0,10,24,0,0,page_1,0,0,pymovements,
+1,y,59.0,64.0,10,24,1,0,page_1,0,0,pymovements,
+2,m,69.0,64.0,10,24,2,0,page_1,0,0,pymovements,
+3,o,79.0,64.0,10,24,3,0,page_1,0,0,pymovements,
+4,v,89.0,64.0,10,24,4,0,page_1,0,0,pymovements,
+5,e,99.0,64.0,10,24,5,0,page_1,0,0,pymovements,
+6,m,109.0,64.0,10,24,6,0,page_1,0,0,pymovements,
+7,e,119.0,64.0,10,24,7,0,page_1,0,0,pymovements,
+8,n,129.0,64.0,10,24,8,0,page_1,0,0,pymovements,
+9,t,139.0,64.0,10,24,9,0,page_1,0,0,pymovements,
+10,s,149.0,64.0,10,24,10,0,page_1,0,0,pymovements,
+0,A,49.0,64.0,10,24,0,0,page_2,0,0,ABSTRACT,
+1,B,59.0,64.0,10,24,1,0,page_2,0,0,ABSTRACT,
+2,S,69.0,64.0,10,24,2,0,page_2,0,0,ABSTRACT,
+3,T,79.0,64.0,10,24,3,0,page_2,0,0,ABSTRACT,
+4,R,89.0,64.0,10,24,4,0,page_2,0,0,ABSTRACT,
+5,A,99.0,64.0,10,24,5,0,page_2,0,0,ABSTRACT,
+6,C,109.0,64.0,10,24,6,0,page_2,0,0,ABSTRACT,
+7,T,119.0,64.0,10,24,7,0,page_2,0,0,ABSTRACT,
+8,p,49.0,133.6,10,24,0,1,page_2,1,0,pymovements:,
+9,y,59.0,133.6,10,24,1,1,page_2,1,0,pymovements:,
+10,m,69.0,133.6,10,24,2,1,page_2,1,0,pymovements:,
+11,o,79.0,133.6,10,24,3,1,page_2,1,0,pymovements:,
+12,v,89.0,133.6,10,24,4,1,page_2,1,0,pymovements:,
+13,e,99.0,133.6,10,24,5,1,page_2,1,0,pymovements:,
+14,m,109.0,133.6,10,24,6,1,page_2,1,0,pymovements:,
+15,e,119.0,133.6,10,24,7,1,page_2,1,0,pymovements:,
+16,n,129.0,133.6,10,24,8,1,page_2,1,0,pymovements:,
+17,t,139.0,133.6,10,24,9,1,page_2,1,0,pymovements:,
+18,s,149.0,133.6,10,24,10,1,page_2,1,0,pymovements:,
+19,:,159.0,133.6,10,24,11,1,page_2,1,0,pymovements:,
+20, ,169.0,133.6,10,24,12,1,page_2,1,0,,
+21,A,179.0,133.6,10,24,13,1,page_2,2,1,A,
+22, ,189.0,133.6,10,24,14,1,page_2,2,1,,
+23,P,199.0,133.6,10,24,15,1,page_2,3,2,Python,
+24,y,209.0,133.6,10,24,16,1,page_2,3,2,Python,
+25,t,219.0,133.6,10,24,17,1,page_2,3,2,Python,
+26,h,229.0,133.6,10,24,18,1,page_2,3,2,Python,
+27,o,239.0,133.6,10,24,19,1,page_2,3,2,Python,
+28,n,249.0,133.6,10,24,20,1,page_2,3,2,Python,
+29, ,259.0,133.6,10,24,21,1,page_2,3,2,,
+30,p,269.0,133.6,10,24,22,1,page_2,4,3,package,
+31,a,279.0,133.6,10,24,23,1,page_2,4,3,package,
+32,c,289.0,133.6,10,24,24,1,page_2,4,3,package,
+33,k,299.0,133.6,10,24,25,1,page_2,4,3,package,
+34,a,309.0,133.6,10,24,26,1,page_2,4,3,package,
+35,g,319.0,133.6,10,24,27,1,page_2,4,3,package,
+36,e,329.0,133.6,10,24,28,1,page_2,4,3,package,
+37, ,339.0,133.6,10,24,29,1,page_2,4,3,,
+38,f,349.0,133.6,10,24,30,1,page_2,5,4,for,
+39,o,359.0,133.6,10,24,31,1,page_2,5,4,for,
+40,r,369.0,133.6,10,24,32,1,page_2,5,4,for,
+41, ,379.0,133.6,10,24,33,1,page_2,5,4,,
+42,e,389.0,133.6,10,24,34,1,page_2,6,5,eye,
+43,y,399.0,133.6,10,24,35,1,page_2,6,5,eye,
+44,e,409.0,133.6,10,24,36,1,page_2,6,5,eye,
+45, ,419.0,133.6,10,24,37,1,page_2,6,5,,
+46,m,429.0,133.6,10,24,38,1,page_2,7,6,movement,
+47,o,439.0,133.6,10,24,39,1,page_2,7,6,movement,
+48,v,449.0,133.6,10,24,40,1,page_2,7,6,movement,
+49,e,459.0,133.6,10,24,41,1,page_2,7,6,movement,
+50,m,469.0,133.6,10,24,42,1,page_2,7,6,movement,
+51,e,479.0,133.6,10,24,43,1,page_2,7,6,movement,
+52,n,489.0,133.6,10,24,44,1,page_2,7,6,movement,
+53,t,499.0,133.6,10,24,45,1,page_2,7,6,movement,
+54, ,509.0,133.6,10,24,46,1,page_2,7,6,,
+55,d,519.0,133.6,10,24,47,1,page_2,8,7,data,
+56,a,529.0,133.6,10,24,48,1,page_2,8,7,data,
+57,t,539.0,133.6,10,24,49,1,page_2,8,7,data,
+58,a,549.0,133.6,10,24,50,1,page_2,8,7,data,
+59, ,559.0,133.6,10,24,51,1,page_2,8,7,,
+60,p,569.0,133.6,10,24,52,1,page_2,9,8,"processing,",
+61,r,579.0,133.6,10,24,53,1,page_2,9,8,"processing,",
+62,o,589.0,133.6,10,24,54,1,page_2,9,8,"processing,",
+63,c,599.0,133.6,10,24,55,1,page_2,9,8,"processing,",
+64,e,609.0,133.6,10,24,56,1,page_2,9,8,"processing,",
+65,s,619.0,133.6,10,24,57,1,page_2,9,8,"processing,",
+66,s,629.0,133.6,10,24,58,1,page_2,9,8,"processing,",
+67,i,639.0,133.6,10,24,59,1,page_2,9,8,"processing,",
+68,n,649.0,133.6,10,24,60,1,page_2,9,8,"processing,",
+69,g,659.0,133.6,10,24,61,1,page_2,9,8,"processing,",
+70,",",669.0,133.6,10,24,62,1,page_2,9,8,"processing,",
+71, ,679.0,133.6,10,24,63,1,page_2,9,8,,
+72,E,689.0,133.6,10,24,64,1,page_2,10,9,ETRA,
+73,T,699.0,133.6,10,24,65,1,page_2,10,9,ETRA,
+74,R,709.0,133.6,10,24,66,1,page_2,10,9,ETRA,
+75,A,719.0,133.6,10,24,67,1,page_2,10,9,ETRA,
+76, ,729.0,133.6,10,24,68,1,page_2,10,9,,
+77,2,739.0,133.6,10,24,69,1,page_2,11,10,2023,
+78,0,749.0,133.6,10,24,70,1,page_2,11,10,2023,
+79,2,759.0,133.6,10,24,71,1,page_2,11,10,2023,
+80,3,769.0,133.6,10,24,72,1,page_2,11,10,2023,
+0,W,49.0,64.0,10,24,0,0,page_3,0,0,We,
+1,e,59.0,64.0,10,24,1,0,page_3,0,0,We,
+2, ,69.0,64.0,10,24,2,0,page_3,0,0,,
+3,i,79.0,64.0,10,24,3,0,page_3,1,1,introduce,
+4,n,89.0,64.0,10,24,4,0,page_3,1,1,introduce,
+5,t,99.0,64.0,10,24,5,0,page_3,1,1,introduce,
+6,r,109.0,64.0,10,24,6,0,page_3,1,1,introduce,
+7,o,119.0,64.0,10,24,7,0,page_3,1,1,introduce,
+8,d,129.0,64.0,10,24,8,0,page_3,1,1,introduce,
+9,u,139.0,64.0,10,24,9,0,page_3,1,1,introduce,
+10,c,149.0,64.0,10,24,10,0,page_3,1,1,introduce,
+11,e,159.0,64.0,10,24,11,0,page_3,1,1,introduce,
+12, ,169.0,64.0,10,24,12,0,page_3,1,1,,
+13,p,179.0,64.0,10,24,13,0,page_3,2,2,pymovements:,
+14,y,189.0,64.0,10,24,14,0,page_3,2,2,pymovements:,
+15,m,199.0,64.0,10,24,15,0,page_3,2,2,pymovements:,
+16,o,209.0,64.0,10,24,16,0,page_3,2,2,pymovements:,
+17,v,219.0,64.0,10,24,17,0,page_3,2,2,pymovements:,
+18,e,229.0,64.0,10,24,18,0,page_3,2,2,pymovements:,
+19,m,239.0,64.0,10,24,19,0,page_3,2,2,pymovements:,
+20,e,249.0,64.0,10,24,20,0,page_3,2,2,pymovements:,
+21,n,259.0,64.0,10,24,21,0,page_3,2,2,pymovements:,
+22,t,269.0,64.0,10,24,22,0,page_3,2,2,pymovements:,
+23,s,279.0,64.0,10,24,23,0,page_3,2,2,pymovements:,
+24,:,289.0,64.0,10,24,24,0,page_3,2,2,pymovements:,
+25, ,299.0,64.0,10,24,25,0,page_3,2,2,,
+26,a,309.0,64.0,10,24,26,0,page_3,3,3,a,
+27, ,319.0,64.0,10,24,27,0,page_3,3,3,,
+28,P,329.0,64.0,10,24,28,0,page_3,4,4,Python,
+29,y,339.0,64.0,10,24,29,0,page_3,4,4,Python,
+30,t,349.0,64.0,10,24,30,0,page_3,4,4,Python,
+31,h,359.0,64.0,10,24,31,0,page_3,4,4,Python,
+32,o,369.0,64.0,10,24,32,0,page_3,4,4,Python,
+33,n,379.0,64.0,10,24,33,0,page_3,4,4,Python,
+34, ,389.0,64.0,10,24,34,0,page_3,4,4,,
+35,p,399.0,64.0,10,24,35,0,page_3,5,5,package,
+36,a,409.0,64.0,10,24,36,0,page_3,5,5,package,
+37,c,419.0,64.0,10,24,37,0,page_3,5,5,package,
+38,k,429.0,64.0,10,24,38,0,page_3,5,5,package,
+39,a,439.0,64.0,10,24,39,0,page_3,5,5,package,
+40,g,449.0,64.0,10,24,40,0,page_3,5,5,package,
+41,e,459.0,64.0,10,24,41,0,page_3,5,5,package,
+42, ,469.0,64.0,10,24,42,0,page_3,5,5,,
+43,f,479.0,64.0,10,24,43,0,page_3,6,6,for,
+44,o,489.0,64.0,10,24,44,0,page_3,6,6,for,
+45,r,499.0,64.0,10,24,45,0,page_3,6,6,for,
+46, ,509.0,64.0,10,24,46,0,page_3,6,6,,
+47,a,519.0,64.0,10,24,47,0,page_3,7,7,analyzing,
+48,n,529.0,64.0,10,24,48,0,page_3,7,7,analyzing,
+49,a,539.0,64.0,10,24,49,0,page_3,7,7,analyzing,
+50,l,549.0,64.0,10,24,50,0,page_3,7,7,analyzing,
+51,y,559.0,64.0,10,24,51,0,page_3,7,7,analyzing,
+52,z,569.0,64.0,10,24,52,0,page_3,7,7,analyzing,
+53,i,579.0,64.0,10,24,53,0,page_3,7,7,analyzing,
+54,n,589.0,64.0,10,24,54,0,page_3,7,7,analyzing,
+55,g,599.0,64.0,10,24,55,0,page_3,7,7,analyzing,
+56, ,609.0,64.0,10,24,56,0,page_3,7,7,,
+57,e,619.0,64.0,10,24,57,0,page_3,8,8,eye-tracking,
+58,y,629.0,64.0,10,24,58,0,page_3,8,8,eye-tracking,
+59,e,639.0,64.0,10,24,59,0,page_3,8,8,eye-tracking,
+60,-,649.0,64.0,10,24,60,0,page_3,8,8,eye-tracking,
+61,t,659.0,64.0,10,24,61,0,page_3,8,8,eye-tracking,
+62,r,669.0,64.0,10,24,62,0,page_3,8,8,eye-tracking,
+63,a,679.0,64.0,10,24,63,0,page_3,8,8,eye-tracking,
+64,c,689.0,64.0,10,24,64,0,page_3,8,8,eye-tracking,
+65,k,699.0,64.0,10,24,65,0,page_3,8,8,eye-tracking,
+66,i,709.0,64.0,10,24,66,0,page_3,8,8,eye-tracking,
+67,n,719.0,64.0,10,24,67,0,page_3,8,8,eye-tracking,
+68,g,729.0,64.0,10,24,68,0,page_3,8,8,eye-tracking,
+69, ,739.0,64.0,10,24,69,0,page_3,8,8,,
+70,d,749.0,64.0,10,24,70,0,page_3,9,9,data,
+71,a,759.0,64.0,10,24,71,0,page_3,9,9,data,
+72,t,769.0,64.0,10,24,72,0,page_3,9,9,data,
+73,a,779.0,64.0,10,24,73,0,page_3,9,9,data,
+74, ,789.0,64.0,10,24,74,0,page_3,9,9,,
+75,t,799.0,64.0,10,24,75,0,page_3,10,10,that,
+76,h,809.0,64.0,10,24,76,0,page_3,10,10,that,
+77,a,819.0,64.0,10,24,77,0,page_3,10,10,that,
+78,t,829.0,64.0,10,24,78,0,page_3,10,10,that,
+79,f,49.0,133.6,10,24,0,1,page_3,11,0,follows,
+80,o,59.0,133.6,10,24,1,1,page_3,11,0,follows,
+81,l,69.0,133.6,10,24,2,1,page_3,11,0,follows,
+82,l,79.0,133.6,10,24,3,1,page_3,11,0,follows,
+83,o,89.0,133.6,10,24,4,1,page_3,11,0,follows,
+84,w,99.0,133.6,10,24,5,1,page_3,11,0,follows,
+85,s,109.0,133.6,10,24,6,1,page_3,11,0,follows,
+86, ,119.0,133.6,10,24,7,1,page_3,11,0,,
+87,b,129.0,133.6,10,24,8,1,page_3,12,1,best,
+88,e,139.0,133.6,10,24,9,1,page_3,12,1,best,
+89,s,149.0,133.6,10,24,10,1,page_3,12,1,best,
+90,t,159.0,133.6,10,24,11,1,page_3,12,1,best,
+91, ,169.0,133.6,10,24,12,1,page_3,12,1,,
+92,p,179.0,133.6,10,24,13,1,page_3,13,2,practices,
+93,r,189.0,133.6,10,24,14,1,page_3,13,2,practices,
+94,a,199.0,133.6,10,24,15,1,page_3,13,2,practices,
+95,c,209.0,133.6,10,24,16,1,page_3,13,2,practices,
+96,t,219.0,133.6,10,24,17,1,page_3,13,2,practices,
+97,i,229.0,133.6,10,24,18,1,page_3,13,2,practices,
+98,c,239.0,133.6,10,24,19,1,page_3,13,2,practices,
+99,e,249.0,133.6,10,24,20,1,page_3,13,2,practices,
+100,s,259.0,133.6,10,24,21,1,page_3,13,2,practices,
+101, ,269.0,133.6,10,24,22,1,page_3,13,2,,
+102,i,279.0,133.6,10,24,23,1,page_3,14,3,in,
+103,n,289.0,133.6,10,24,24,1,page_3,14,3,in,
+104, ,299.0,133.6,10,24,25,1,page_3,14,3,,
+105,s,309.0,133.6,10,24,26,1,page_3,15,4,software,
+106,o,319.0,133.6,10,24,27,1,page_3,15,4,software,
+107,f,329.0,133.6,10,24,28,1,page_3,15,4,software,
+108,t,339.0,133.6,10,24,29,1,page_3,15,4,software,
+109,w,349.0,133.6,10,24,30,1,page_3,15,4,software,
+110,a,359.0,133.6,10,24,31,1,page_3,15,4,software,
+111,r,369.0,133.6,10,24,32,1,page_3,15,4,software,
+112,e,379.0,133.6,10,24,33,1,page_3,15,4,software,
+113, ,389.0,133.6,10,24,34,1,page_3,15,4,,
+114,d,399.0,133.6,10,24,35,1,page_3,16,5,"development,",
+115,e,409.0,133.6,10,24,36,1,page_3,16,5,"development,",
+116,v,419.0,133.6,10,24,37,1,page_3,16,5,"development,",
+117,e,429.0,133.6,10,24,38,1,page_3,16,5,"development,",
+118,l,439.0,133.6,10,24,39,1,page_3,16,5,"development,",
+119,o,449.0,133.6,10,24,40,1,page_3,16,5,"development,",
+120,p,459.0,133.6,10,24,41,1,page_3,16,5,"development,",
+121,m,469.0,133.6,10,24,42,1,page_3,16,5,"development,",
+122,e,479.0,133.6,10,24,43,1,page_3,16,5,"development,",
+123,n,489.0,133.6,10,24,44,1,page_3,16,5,"development,",
+124,t,499.0,133.6,10,24,45,1,page_3,16,5,"development,",
+125,",",509.0,133.6,10,24,46,1,page_3,16,5,"development,",
+126, ,519.0,133.6,10,24,47,1,page_3,16,5,,
+127,i,529.0,133.6,10,24,48,1,page_3,17,6,including,
+128,n,539.0,133.6,10,24,49,1,page_3,17,6,including,
+129,c,549.0,133.6,10,24,50,1,page_3,17,6,including,
+130,l,559.0,133.6,10,24,51,1,page_3,17,6,including,
+131,u,569.0,133.6,10,24,52,1,page_3,17,6,including,
+132,d,579.0,133.6,10,24,53,1,page_3,17,6,including,
+133,i,589.0,133.6,10,24,54,1,page_3,17,6,including,
+134,n,599.0,133.6,10,24,55,1,page_3,17,6,including,
+135,g,609.0,133.6,10,24,56,1,page_3,17,6,including,
+136, ,619.0,133.6,10,24,57,1,page_3,17,6,,
+137,r,629.0,133.6,10,24,58,1,page_3,18,7,rigorous,
+138,i,639.0,133.6,10,24,59,1,page_3,18,7,rigorous,
+139,g,649.0,133.6,10,24,60,1,page_3,18,7,rigorous,
+140,o,659.0,133.6,10,24,61,1,page_3,18,7,rigorous,
+141,r,669.0,133.6,10,24,62,1,page_3,18,7,rigorous,
+142,o,679.0,133.6,10,24,63,1,page_3,18,7,rigorous,
+143,u,689.0,133.6,10,24,64,1,page_3,18,7,rigorous,
+144,s,699.0,133.6,10,24,65,1,page_3,18,7,rigorous,
+145, ,709.0,133.6,10,24,66,1,page_3,18,7,,
+146,t,719.0,133.6,10,24,67,1,page_3,19,8,testing,
+147,e,729.0,133.6,10,24,68,1,page_3,19,8,testing,
+148,s,739.0,133.6,10,24,69,1,page_3,19,8,testing,
+149,t,749.0,133.6,10,24,70,1,page_3,19,8,testing,
+150,i,759.0,133.6,10,24,71,1,page_3,19,8,testing,
+151,n,769.0,133.6,10,24,72,1,page_3,19,8,testing,
+152,g,779.0,133.6,10,24,73,1,page_3,19,8,testing,
+153, ,789.0,133.6,10,24,74,1,page_3,19,8,,
+154,a,799.0,133.6,10,24,75,1,page_3,20,9,and,
+155,n,809.0,133.6,10,24,76,1,page_3,20,9,and,
+156,d,819.0,133.6,10,24,77,1,page_3,20,9,and,
+157,a,49.0,203.2,10,24,0,2,page_3,21,0,adherence,
+158,d,59.0,203.2,10,24,1,2,page_3,21,0,adherence,
+159,h,69.0,203.2,10,24,2,2,page_3,21,0,adherence,
+160,e,79.0,203.2,10,24,3,2,page_3,21,0,adherence,
+161,r,89.0,203.2,10,24,4,2,page_3,21,0,adherence,
+162,e,99.0,203.2,10,24,5,2,page_3,21,0,adherence,
+163,n,109.0,203.2,10,24,6,2,page_3,21,0,adherence,
+164,c,119.0,203.2,10,24,7,2,page_3,21,0,adherence,
+165,e,129.0,203.2,10,24,8,2,page_3,21,0,adherence,
+166, ,139.0,203.2,10,24,9,2,page_3,21,0,,
+167,t,149.0,203.2,10,24,10,2,page_3,22,1,to,
+168,o,159.0,203.2,10,24,11,2,page_3,22,1,to,
+169, ,169.0,203.2,10,24,12,2,page_3,22,1,,
+170,c,179.0,203.2,10,24,13,2,page_3,23,2,coding,
+171,o,189.0,203.2,10,24,14,2,page_3,23,2,coding,
+172,d,199.0,203.2,10,24,15,2,page_3,23,2,coding,
+173,i,209.0,203.2,10,24,16,2,page_3,23,2,coding,
+174,n,219.0,203.2,10,24,17,2,page_3,23,2,coding,
+175,g,229.0,203.2,10,24,18,2,page_3,23,2,coding,
+176, ,239.0,203.2,10,24,19,2,page_3,23,2,,
+177,s,249.0,203.2,10,24,20,2,page_3,24,3,standards.,
+178,t,259.0,203.2,10,24,21,2,page_3,24,3,standards.,
+179,a,269.0,203.2,10,24,22,2,page_3,24,3,standards.,
+180,n,279.0,203.2,10,24,23,2,page_3,24,3,standards.,
+181,d,289.0,203.2,10,24,24,2,page_3,24,3,standards.,
+182,a,299.0,203.2,10,24,25,2,page_3,24,3,standards.,
+183,r,309.0,203.2,10,24,26,2,page_3,24,3,standards.,
+184,d,319.0,203.2,10,24,27,2,page_3,24,3,standards.,
+185,s,329.0,203.2,10,24,28,2,page_3,24,3,standards.,
+186,.,339.0,203.2,10,24,29,2,page_3,24,3,standards.,
+187, ,349.0,203.2,10,24,30,2,page_3,24,3,,
+188,T,359.0,203.2,10,24,31,2,page_3,25,4,The,
+189,h,369.0,203.2,10,24,32,2,page_3,25,4,The,
+190,e,379.0,203.2,10,24,33,2,page_3,25,4,The,
+191, ,389.0,203.2,10,24,34,2,page_3,25,4,,
+192,p,399.0,203.2,10,24,35,2,page_3,26,5,package,
+193,a,409.0,203.2,10,24,36,2,page_3,26,5,package,
+194,c,419.0,203.2,10,24,37,2,page_3,26,5,package,
+195,k,429.0,203.2,10,24,38,2,page_3,26,5,package,
+196,a,439.0,203.2,10,24,39,2,page_3,26,5,package,
+197,g,449.0,203.2,10,24,40,2,page_3,26,5,package,
+198,e,459.0,203.2,10,24,41,2,page_3,26,5,package,
+199, ,469.0,203.2,10,24,42,2,page_3,26,5,,
+200,p,479.0,203.2,10,24,43,2,page_3,27,6,provides,
+201,r,489.0,203.2,10,24,44,2,page_3,27,6,provides,
+202,o,499.0,203.2,10,24,45,2,page_3,27,6,provides,
+203,v,509.0,203.2,10,24,46,2,page_3,27,6,provides,
+204,i,519.0,203.2,10,24,47,2,page_3,27,6,provides,
+205,d,529.0,203.2,10,24,48,2,page_3,27,6,provides,
+206,e,539.0,203.2,10,24,49,2,page_3,27,6,provides,
+207,s,549.0,203.2,10,24,50,2,page_3,27,6,provides,
+208, ,559.0,203.2,10,24,51,2,page_3,27,6,,
+209,f,569.0,203.2,10,24,52,2,page_3,28,7,functionality,
+210,u,579.0,203.2,10,24,53,2,page_3,28,7,functionality,
+211,n,589.0,203.2,10,24,54,2,page_3,28,7,functionality,
+212,c,599.0,203.2,10,24,55,2,page_3,28,7,functionality,
+213,t,609.0,203.2,10,24,56,2,page_3,28,7,functionality,
+214,i,619.0,203.2,10,24,57,2,page_3,28,7,functionality,
+215,o,629.0,203.2,10,24,58,2,page_3,28,7,functionality,
+216,n,639.0,203.2,10,24,59,2,page_3,28,7,functionality,
+217,a,649.0,203.2,10,24,60,2,page_3,28,7,functionality,
+218,l,659.0,203.2,10,24,61,2,page_3,28,7,functionality,
+219,i,669.0,203.2,10,24,62,2,page_3,28,7,functionality,
+220,t,679.0,203.2,10,24,63,2,page_3,28,7,functionality,
+221,y,689.0,203.2,10,24,64,2,page_3,28,7,functionality,
+222, ,699.0,203.2,10,24,65,2,page_3,28,7,,
+223,f,709.0,203.2,10,24,66,2,page_3,29,8,for,
+224,o,719.0,203.2,10,24,67,2,page_3,29,8,for,
+225,r,729.0,203.2,10,24,68,2,page_3,29,8,for,
+226, ,739.0,203.2,10,24,69,2,page_3,29,8,,
+227,k,749.0,203.2,10,24,70,2,page_3,30,9,key,
+228,e,759.0,203.2,10,24,71,2,page_3,30,9,key,
+229,y,769.0,203.2,10,24,72,2,page_3,30,9,key,
+230,p,49.0,272.79999999999995,10,24,0,3,page_3,31,0,processes,
+231,r,59.0,272.79999999999995,10,24,1,3,page_3,31,0,processes,
+232,o,69.0,272.79999999999995,10,24,2,3,page_3,31,0,processes,
+233,c,79.0,272.79999999999995,10,24,3,3,page_3,31,0,processes,
+234,e,89.0,272.79999999999995,10,24,4,3,page_3,31,0,processes,
+235,s,99.0,272.79999999999995,10,24,5,3,page_3,31,0,processes,
+236,s,109.0,272.79999999999995,10,24,6,3,page_3,31,0,processes,
+237,e,119.0,272.79999999999995,10,24,7,3,page_3,31,0,processes,
+238,s,129.0,272.79999999999995,10,24,8,3,page_3,31,0,processes,
+239, ,139.0,272.79999999999995,10,24,9,3,page_3,31,0,,
+240,a,149.0,272.79999999999995,10,24,10,3,page_3,32,1,along,
+241,l,159.0,272.79999999999995,10,24,11,3,page_3,32,1,along,
+242,o,169.0,272.79999999999995,10,24,12,3,page_3,32,1,along,
+243,n,179.0,272.79999999999995,10,24,13,3,page_3,32,1,along,
+244,g,189.0,272.79999999999995,10,24,14,3,page_3,32,1,along,
+245, ,199.0,272.79999999999995,10,24,15,3,page_3,32,1,,
+246,t,209.0,272.79999999999995,10,24,16,3,page_3,33,2,the,
+247,h,219.0,272.79999999999995,10,24,17,3,page_3,33,2,the,
+248,e,229.0,272.79999999999995,10,24,18,3,page_3,33,2,the,
+249, ,239.0,272.79999999999995,10,24,19,3,page_3,33,2,,
+250,e,249.0,272.79999999999995,10,24,20,3,page_3,34,3,entire,
+251,n,259.0,272.79999999999995,10,24,21,3,page_3,34,3,entire,
+252,t,269.0,272.79999999999995,10,24,22,3,page_3,34,3,entire,
+253,i,279.0,272.79999999999995,10,24,23,3,page_3,34,3,entire,
+254,r,289.0,272.79999999999995,10,24,24,3,page_3,34,3,entire,
+255,e,299.0,272.79999999999995,10,24,25,3,page_3,34,3,entire,
+256, ,309.0,272.79999999999995,10,24,26,3,page_3,34,3,,
+257,p,319.0,272.79999999999995,10,24,27,3,page_3,35,4,preprocessing,
+258,r,329.0,272.79999999999995,10,24,28,3,page_3,35,4,preprocessing,
+259,e,339.0,272.79999999999995,10,24,29,3,page_3,35,4,preprocessing,
+260,p,349.0,272.79999999999995,10,24,30,3,page_3,35,4,preprocessing,
+261,r,359.0,272.79999999999995,10,24,31,3,page_3,35,4,preprocessing,
+262,o,369.0,272.79999999999995,10,24,32,3,page_3,35,4,preprocessing,
+263,c,379.0,272.79999999999995,10,24,33,3,page_3,35,4,preprocessing,
+264,e,389.0,272.79999999999995,10,24,34,3,page_3,35,4,preprocessing,
+265,s,399.0,272.79999999999995,10,24,35,3,page_3,35,4,preprocessing,
+266,s,409.0,272.79999999999995,10,24,36,3,page_3,35,4,preprocessing,
+267,i,419.0,272.79999999999995,10,24,37,3,page_3,35,4,preprocessing,
+268,n,429.0,272.79999999999995,10,24,38,3,page_3,35,4,preprocessing,
+269,g,439.0,272.79999999999995,10,24,39,3,page_3,35,4,preprocessing,
+270, ,449.0,272.79999999999995,10,24,40,3,page_3,35,4,,
+271,p,459.0,272.79999999999995,10,24,41,3,page_3,36,5,pipeline.,
+272,i,469.0,272.79999999999995,10,24,42,3,page_3,36,5,pipeline.,
+273,p,479.0,272.79999999999995,10,24,43,3,page_3,36,5,pipeline.,
+274,e,489.0,272.79999999999995,10,24,44,3,page_3,36,5,pipeline.,
+275,l,499.0,272.79999999999995,10,24,45,3,page_3,36,5,pipeline.,
+276,i,509.0,272.79999999999995,10,24,46,3,page_3,36,5,pipeline.,
+277,n,519.0,272.79999999999995,10,24,47,3,page_3,36,5,pipeline.,
+278,e,529.0,272.79999999999995,10,24,48,3,page_3,36,5,pipeline.,
+279,.,539.0,272.79999999999995,10,24,49,3,page_3,36,5,pipeline.,
+280, ,549.0,272.79999999999995,10,24,50,3,page_3,36,5,,
+281,T,559.0,272.79999999999995,10,24,51,3,page_3,37,6,This,
+282,h,569.0,272.79999999999995,10,24,52,3,page_3,37,6,This,
+283,i,579.0,272.79999999999995,10,24,53,3,page_3,37,6,This,
+284,s,589.0,272.79999999999995,10,24,54,3,page_3,37,6,This,
+285, ,599.0,272.79999999999995,10,24,55,3,page_3,37,6,,
+286,i,609.0,272.79999999999995,10,24,56,3,page_3,38,7,includes,
+287,n,619.0,272.79999999999995,10,24,57,3,page_3,38,7,includes,
+288,c,629.0,272.79999999999995,10,24,58,3,page_3,38,7,includes,
+289,l,639.0,272.79999999999995,10,24,59,3,page_3,38,7,includes,
+290,u,649.0,272.79999999999995,10,24,60,3,page_3,38,7,includes,
+291,d,659.0,272.79999999999995,10,24,61,3,page_3,38,7,includes,
+292,e,669.0,272.79999999999995,10,24,62,3,page_3,38,7,includes,
+293,s,679.0,272.79999999999995,10,24,63,3,page_3,38,7,includes,
+294, ,689.0,272.79999999999995,10,24,64,3,page_3,38,7,,
+295,p,699.0,272.79999999999995,10,24,65,3,page_3,39,8,parsing,
+296,a,709.0,272.79999999999995,10,24,66,3,page_3,39,8,parsing,
+297,r,719.0,272.79999999999995,10,24,67,3,page_3,39,8,parsing,
+298,s,729.0,272.79999999999995,10,24,68,3,page_3,39,8,parsing,
+299,i,739.0,272.79999999999995,10,24,69,3,page_3,39,8,parsing,
+300,n,749.0,272.79999999999995,10,24,70,3,page_3,39,8,parsing,
+301,g,759.0,272.79999999999995,10,24,71,3,page_3,39,8,parsing,
+302, ,769.0,272.79999999999995,10,24,72,3,page_3,39,8,,
+303,o,779.0,272.79999999999995,10,24,73,3,page_3,40,9,of,
+304,f,789.0,272.79999999999995,10,24,74,3,page_3,40,9,of,
+305, ,799.0,272.79999999999995,10,24,75,3,page_3,40,9,,
+306,e,809.0,272.79999999999995,10,24,76,3,page_3,41,10,eye,
+307,y,819.0,272.79999999999995,10,24,77,3,page_3,41,10,eye,
+308,e,829.0,272.79999999999995,10,24,78,3,page_3,41,10,eye,
+309,t,49.0,342.4,10,24,0,4,page_3,42,0,tracker,
+310,r,59.0,342.4,10,24,1,4,page_3,42,0,tracker,
+311,a,69.0,342.4,10,24,2,4,page_3,42,0,tracker,
+312,c,79.0,342.4,10,24,3,4,page_3,42,0,tracker,
+313,k,89.0,342.4,10,24,4,4,page_3,42,0,tracker,
+314,e,99.0,342.4,10,24,5,4,page_3,42,0,tracker,
+315,r,109.0,342.4,10,24,6,4,page_3,42,0,tracker,
+316, ,119.0,342.4,10,24,7,4,page_3,42,0,,
+317,d,129.0,342.4,10,24,8,4,page_3,43,1,data,
+318,a,139.0,342.4,10,24,9,4,page_3,43,1,data,
+319,t,149.0,342.4,10,24,10,4,page_3,43,1,data,
+320,a,159.0,342.4,10,24,11,4,page_3,43,1,data,
+321, ,169.0,342.4,10,24,12,4,page_3,43,1,,
+322,f,179.0,342.4,10,24,13,4,page_3,44,2,"files,",
+323,i,189.0,342.4,10,24,14,4,page_3,44,2,"files,",
+324,l,199.0,342.4,10,24,15,4,page_3,44,2,"files,",
+325,e,209.0,342.4,10,24,16,4,page_3,44,2,"files,",
+326,s,219.0,342.4,10,24,17,4,page_3,44,2,"files,",
+327,",",229.0,342.4,10,24,18,4,page_3,44,2,"files,",
+328, ,239.0,342.4,10,24,19,4,page_3,44,2,,
+329,t,249.0,342.4,10,24,20,4,page_3,45,3,transforming,
+330,r,259.0,342.4,10,24,21,4,page_3,45,3,transforming,
+331,a,269.0,342.4,10,24,22,4,page_3,45,3,transforming,
+332,n,279.0,342.4,10,24,23,4,page_3,45,3,transforming,
+333,s,289.0,342.4,10,24,24,4,page_3,45,3,transforming,
+334,f,299.0,342.4,10,24,25,4,page_3,45,3,transforming,
+335,o,309.0,342.4,10,24,26,4,page_3,45,3,transforming,
+336,r,319.0,342.4,10,24,27,4,page_3,45,3,transforming,
+337,m,329.0,342.4,10,24,28,4,page_3,45,3,transforming,
+338,i,339.0,342.4,10,24,29,4,page_3,45,3,transforming,
+339,n,349.0,342.4,10,24,30,4,page_3,45,3,transforming,
+340,g,359.0,342.4,10,24,31,4,page_3,45,3,transforming,
+341, ,369.0,342.4,10,24,32,4,page_3,45,3,,
+342,p,379.0,342.4,10,24,33,4,page_3,46,4,positional,
+343,o,389.0,342.4,10,24,34,4,page_3,46,4,positional,
+344,s,399.0,342.4,10,24,35,4,page_3,46,4,positional,
+345,i,409.0,342.4,10,24,36,4,page_3,46,4,positional,
+346,t,419.0,342.4,10,24,37,4,page_3,46,4,positional,
+347,i,429.0,342.4,10,24,38,4,page_3,46,4,positional,
+348,o,439.0,342.4,10,24,39,4,page_3,46,4,positional,
+349,n,449.0,342.4,10,24,40,4,page_3,46,4,positional,
+350,a,459.0,342.4,10,24,41,4,page_3,46,4,positional,
+351,l,469.0,342.4,10,24,42,4,page_3,46,4,positional,
+352, ,479.0,342.4,10,24,43,4,page_3,46,4,,
+353,d,489.0,342.4,10,24,44,4,page_3,47,5,data,
+354,a,499.0,342.4,10,24,45,4,page_3,47,5,data,
+355,t,509.0,342.4,10,24,46,4,page_3,47,5,data,
+356,a,519.0,342.4,10,24,47,4,page_3,47,5,data,
+357, ,529.0,342.4,10,24,48,4,page_3,47,5,,
+358,i,539.0,342.4,10,24,49,4,page_3,48,6,into,
+359,n,549.0,342.4,10,24,50,4,page_3,48,6,into,
+360,t,559.0,342.4,10,24,51,4,page_3,48,6,into,
+361,o,569.0,342.4,10,24,52,4,page_3,48,6,into,
+362, ,579.0,342.4,10,24,53,4,page_3,48,6,,
+363,v,589.0,342.4,10,24,54,4,page_3,49,7,velocity,
+364,e,599.0,342.4,10,24,55,4,page_3,49,7,velocity,
+365,l,609.0,342.4,10,24,56,4,page_3,49,7,velocity,
+366,o,619.0,342.4,10,24,57,4,page_3,49,7,velocity,
+367,c,629.0,342.4,10,24,58,4,page_3,49,7,velocity,
+368,i,639.0,342.4,10,24,59,4,page_3,49,7,velocity,
+369,t,649.0,342.4,10,24,60,4,page_3,49,7,velocity,
+370,y,659.0,342.4,10,24,61,4,page_3,49,7,velocity,
+371, ,669.0,342.4,10,24,62,4,page_3,49,7,,
+372,d,679.0,342.4,10,24,63,4,page_3,50,8,"data,",
+373,a,689.0,342.4,10,24,64,4,page_3,50,8,"data,",
+374,t,699.0,342.4,10,24,65,4,page_3,50,8,"data,",
+375,a,709.0,342.4,10,24,66,4,page_3,50,8,"data,",
+376,",",719.0,342.4,10,24,67,4,page_3,50,8,"data,",
+377, ,729.0,342.4,10,24,68,4,page_3,50,8,,
+378,d,739.0,342.4,10,24,69,4,page_3,51,9,detecting,
+379,e,749.0,342.4,10,24,70,4,page_3,51,9,detecting,
+380,t,759.0,342.4,10,24,71,4,page_3,51,9,detecting,
+381,e,769.0,342.4,10,24,72,4,page_3,51,9,detecting,
+382,c,779.0,342.4,10,24,73,4,page_3,51,9,detecting,
+383,t,789.0,342.4,10,24,74,4,page_3,51,9,detecting,
+384,i,799.0,342.4,10,24,75,4,page_3,51,9,detecting,
+385,n,809.0,342.4,10,24,76,4,page_3,51,9,detecting,
+386,g,819.0,342.4,10,24,77,4,page_3,51,9,detecting,
+387,g,49.0,412.0,10,24,0,5,page_3,52,0,gaze,
+388,a,59.0,412.0,10,24,1,5,page_3,52,0,gaze,
+389,z,69.0,412.0,10,24,2,5,page_3,52,0,gaze,
+390,e,79.0,412.0,10,24,3,5,page_3,52,0,gaze,
+391, ,89.0,412.0,10,24,4,5,page_3,52,0,,
+392,e,99.0,412.0,10,24,5,5,page_3,53,1,events,
+393,v,109.0,412.0,10,24,6,5,page_3,53,1,events,
+394,e,119.0,412.0,10,24,7,5,page_3,53,1,events,
+395,n,129.0,412.0,10,24,8,5,page_3,53,1,events,
+396,t,139.0,412.0,10,24,9,5,page_3,53,1,events,
+397,s,149.0,412.0,10,24,10,5,page_3,53,1,events,
+398, ,159.0,412.0,10,24,11,5,page_3,53,1,,
+399,l,169.0,412.0,10,24,12,5,page_3,54,2,like,
+400,i,179.0,412.0,10,24,13,5,page_3,54,2,like,
+401,k,189.0,412.0,10,24,14,5,page_3,54,2,like,
+402,e,199.0,412.0,10,24,15,5,page_3,54,2,like,
+403, ,209.0,412.0,10,24,16,5,page_3,54,2,,
+404,s,219.0,412.0,10,24,17,5,page_3,55,3,saccades,
+405,a,229.0,412.0,10,24,18,5,page_3,55,3,saccades,
+406,c,239.0,412.0,10,24,19,5,page_3,55,3,saccades,
+407,c,249.0,412.0,10,24,20,5,page_3,55,3,saccades,
+408,a,259.0,412.0,10,24,21,5,page_3,55,3,saccades,
+409,d,269.0,412.0,10,24,22,5,page_3,55,3,saccades,
+410,e,279.0,412.0,10,24,23,5,page_3,55,3,saccades,
+411,s,289.0,412.0,10,24,24,5,page_3,55,3,saccades,
+412, ,299.0,412.0,10,24,25,5,page_3,55,3,,
+413,a,309.0,412.0,10,24,26,5,page_3,56,4,and,
+414,n,319.0,412.0,10,24,27,5,page_3,56,4,and,
+415,d,329.0,412.0,10,24,28,5,page_3,56,4,and,
+416, ,339.0,412.0,10,24,29,5,page_3,56,4,,
+417,f,349.0,412.0,10,24,30,5,page_3,57,5,"fixations,",
+418,i,359.0,412.0,10,24,31,5,page_3,57,5,"fixations,",
+419,x,369.0,412.0,10,24,32,5,page_3,57,5,"fixations,",
+420,a,379.0,412.0,10,24,33,5,page_3,57,5,"fixations,",
+421,t,389.0,412.0,10,24,34,5,page_3,57,5,"fixations,",
+422,i,399.0,412.0,10,24,35,5,page_3,57,5,"fixations,",
+423,o,409.0,412.0,10,24,36,5,page_3,57,5,"fixations,",
+424,n,419.0,412.0,10,24,37,5,page_3,57,5,"fixations,",
+425,s,429.0,412.0,10,24,38,5,page_3,57,5,"fixations,",
+426,",",439.0,412.0,10,24,39,5,page_3,57,5,"fixations,",
+427, ,449.0,412.0,10,24,40,5,page_3,57,5,,
+428,c,459.0,412.0,10,24,41,5,page_3,58,6,computing,
+429,o,469.0,412.0,10,24,42,5,page_3,58,6,computing,
+430,m,479.0,412.0,10,24,43,5,page_3,58,6,computing,
+431,p,489.0,412.0,10,24,44,5,page_3,58,6,computing,
+432,u,499.0,412.0,10,24,45,5,page_3,58,6,computing,
+433,t,509.0,412.0,10,24,46,5,page_3,58,6,computing,
+434,i,519.0,412.0,10,24,47,5,page_3,58,6,computing,
+435,n,529.0,412.0,10,24,48,5,page_3,58,6,computing,
+436,g,539.0,412.0,10,24,49,5,page_3,58,6,computing,
+437, ,549.0,412.0,10,24,50,5,page_3,58,6,,
+438,e,559.0,412.0,10,24,51,5,page_3,59,7,event,
+439,v,569.0,412.0,10,24,52,5,page_3,59,7,event,
+440,e,579.0,412.0,10,24,53,5,page_3,59,7,event,
+441,n,589.0,412.0,10,24,54,5,page_3,59,7,event,
+442,t,599.0,412.0,10,24,55,5,page_3,59,7,event,
+443, ,609.0,412.0,10,24,56,5,page_3,59,7,,
+444,p,619.0,412.0,10,24,57,5,page_3,60,8,properties,
+445,r,629.0,412.0,10,24,58,5,page_3,60,8,properties,
+446,o,639.0,412.0,10,24,59,5,page_3,60,8,properties,
+447,p,649.0,412.0,10,24,60,5,page_3,60,8,properties,
+448,e,659.0,412.0,10,24,61,5,page_3,60,8,properties,
+449,r,669.0,412.0,10,24,62,5,page_3,60,8,properties,
+450,t,679.0,412.0,10,24,63,5,page_3,60,8,properties,
+451,i,689.0,412.0,10,24,64,5,page_3,60,8,properties,
+452,e,699.0,412.0,10,24,65,5,page_3,60,8,properties,
+453,s,709.0,412.0,10,24,66,5,page_3,60,8,properties,
+454, ,719.0,412.0,10,24,67,5,page_3,60,8,,
+455,l,729.0,412.0,10,24,68,5,page_3,61,9,like,
+456,i,739.0,412.0,10,24,69,5,page_3,61,9,like,
+457,k,749.0,412.0,10,24,70,5,page_3,61,9,like,
+458,e,759.0,412.0,10,24,71,5,page_3,61,9,like,
+459, ,769.0,412.0,10,24,72,5,page_3,61,9,,
+460,s,779.0,412.0,10,24,73,5,page_3,62,10,saccade,
+461,a,789.0,412.0,10,24,74,5,page_3,62,10,saccade,
+462,c,799.0,412.0,10,24,75,5,page_3,62,10,saccade,
+463,c,809.0,412.0,10,24,76,5,page_3,62,10,saccade,
+464,a,819.0,412.0,10,24,77,5,page_3,62,10,saccade,
+465,d,829.0,412.0,10,24,78,5,page_3,62,10,saccade,
+466,e,839.0,412.0,10,24,79,5,page_3,62,10,saccade,
+467,a,49.0,481.6,10,24,0,6,page_3,63,0,amplitude,
+468,m,59.0,481.6,10,24,1,6,page_3,63,0,amplitude,
+469,p,69.0,481.6,10,24,2,6,page_3,63,0,amplitude,
+470,l,79.0,481.6,10,24,3,6,page_3,63,0,amplitude,
+471,i,89.0,481.6,10,24,4,6,page_3,63,0,amplitude,
+472,t,99.0,481.6,10,24,5,6,page_3,63,0,amplitude,
+473,u,109.0,481.6,10,24,6,6,page_3,63,0,amplitude,
+474,d,119.0,481.6,10,24,7,6,page_3,63,0,amplitude,
+475,e,129.0,481.6,10,24,8,6,page_3,63,0,amplitude,
+476, ,139.0,481.6,10,24,9,6,page_3,63,0,,
+477,a,149.0,481.6,10,24,10,6,page_3,64,1,and,
+478,n,159.0,481.6,10,24,11,6,page_3,64,1,and,
+479,d,169.0,481.6,10,24,12,6,page_3,64,1,and,
+480, ,179.0,481.6,10,24,13,6,page_3,64,1,,
+481,f,189.0,481.6,10,24,14,6,page_3,65,2,fixational,
+482,i,199.0,481.6,10,24,15,6,page_3,65,2,fixational,
+483,x,209.0,481.6,10,24,16,6,page_3,65,2,fixational,
+484,a,219.0,481.6,10,24,17,6,page_3,65,2,fixational,
+485,t,229.0,481.6,10,24,18,6,page_3,65,2,fixational,
+486,i,239.0,481.6,10,24,19,6,page_3,65,2,fixational,
+487,o,249.0,481.6,10,24,20,6,page_3,65,2,fixational,
+488,n,259.0,481.6,10,24,21,6,page_3,65,2,fixational,
+489,a,269.0,481.6,10,24,22,6,page_3,65,2,fixational,
+490,l,279.0,481.6,10,24,23,6,page_3,65,2,fixational,
+491, ,289.0,481.6,10,24,24,6,page_3,65,2,,
+492,d,299.0,481.6,10,24,25,6,page_3,66,3,dispersion,
+493,i,309.0,481.6,10,24,26,6,page_3,66,3,dispersion,
+494,s,319.0,481.6,10,24,27,6,page_3,66,3,dispersion,
+495,p,329.0,481.6,10,24,28,6,page_3,66,3,dispersion,
+496,e,339.0,481.6,10,24,29,6,page_3,66,3,dispersion,
+497,r,349.0,481.6,10,24,30,6,page_3,66,3,dispersion,
+498,s,359.0,481.6,10,24,31,6,page_3,66,3,dispersion,
+499,i,369.0,481.6,10,24,32,6,page_3,66,3,dispersion,
+500,o,379.0,481.6,10,24,33,6,page_3,66,3,dispersion,
+501,n,389.0,481.6,10,24,34,6,page_3,66,3,dispersion,
+502, ,399.0,481.6,10,24,35,6,page_3,66,3,,
+503,a,409.0,481.6,10,24,36,6,page_3,67,4,and,
+504,n,419.0,481.6,10,24,37,6,page_3,67,4,and,
+505,d,429.0,481.6,10,24,38,6,page_3,67,4,and,
+506, ,439.0,481.6,10,24,39,6,page_3,67,4,,
+507,v,449.0,481.6,10,24,40,6,page_3,68,5,visualizing,
+508,i,459.0,481.6,10,24,41,6,page_3,68,5,visualizing,
+509,s,469.0,481.6,10,24,42,6,page_3,68,5,visualizing,
+510,u,479.0,481.6,10,24,43,6,page_3,68,5,visualizing,
+511,a,489.0,481.6,10,24,44,6,page_3,68,5,visualizing,
+512,l,499.0,481.6,10,24,45,6,page_3,68,5,visualizing,
+513,i,509.0,481.6,10,24,46,6,page_3,68,5,visualizing,
+514,z,519.0,481.6,10,24,47,6,page_3,68,5,visualizing,
+515,i,529.0,481.6,10,24,48,6,page_3,68,5,visualizing,
+516,n,539.0,481.6,10,24,49,6,page_3,68,5,visualizing,
+517,g,549.0,481.6,10,24,50,6,page_3,68,5,visualizing,
+518, ,559.0,481.6,10,24,51,6,page_3,68,5,,
+519,d,569.0,481.6,10,24,52,6,page_3,69,6,data,
+520,a,579.0,481.6,10,24,53,6,page_3,69,6,data,
+521,t,589.0,481.6,10,24,54,6,page_3,69,6,data,
+522,a,599.0,481.6,10,24,55,6,page_3,69,6,data,
+523, ,609.0,481.6,10,24,56,6,page_3,69,6,,
+524,a,619.0,481.6,10,24,57,6,page_3,70,7,and,
+525,n,629.0,481.6,10,24,58,6,page_3,70,7,and,
+526,d,639.0,481.6,10,24,59,6,page_3,70,7,and,
+527, ,649.0,481.6,10,24,60,6,page_3,70,7,,
+528,r,659.0,481.6,10,24,61,6,page_3,71,8,results,
+529,e,669.0,481.6,10,24,62,6,page_3,71,8,results,
+530,s,679.0,481.6,10,24,63,6,page_3,71,8,results,
+531,u,689.0,481.6,10,24,64,6,page_3,71,8,results,
+532,l,699.0,481.6,10,24,65,6,page_3,71,8,results,
+533,t,709.0,481.6,10,24,66,6,page_3,71,8,results,
+534,s,719.0,481.6,10,24,67,6,page_3,71,8,results,
+535, ,729.0,481.6,10,24,68,6,page_3,71,8,,
+536,w,739.0,481.6,10,24,69,6,page_3,72,9,with,
+537,i,749.0,481.6,10,24,70,6,page_3,72,9,with,
+538,t,759.0,481.6,10,24,71,6,page_3,72,9,with,
+539,h,769.0,481.6,10,24,72,6,page_3,72,9,with,
+540, ,779.0,481.6,10,24,73,6,page_3,72,9,,
+541,s,789.0,481.6,10,24,74,6,page_3,73,10,several,
+542,e,799.0,481.6,10,24,75,6,page_3,73,10,several,
+543,v,809.0,481.6,10,24,76,6,page_3,73,10,several,
+544,e,819.0,481.6,10,24,77,6,page_3,73,10,several,
+545,r,829.0,481.6,10,24,78,6,page_3,73,10,several,
+546,a,839.0,481.6,10,24,79,6,page_3,73,10,several,
+547,l,849.0,481.6,10,24,80,6,page_3,73,10,several,
+548,t,49.0,551.2,10,24,0,7,page_3,74,0,types,
+549,y,59.0,551.2,10,24,1,7,page_3,74,0,types,
+550,p,69.0,551.2,10,24,2,7,page_3,74,0,types,
+551,e,79.0,551.2,10,24,3,7,page_3,74,0,types,
+552,s,89.0,551.2,10,24,4,7,page_3,74,0,types,
+553, ,99.0,551.2,10,24,5,7,page_3,74,0,,
+554,o,109.0,551.2,10,24,6,7,page_3,75,1,of,
+555,f,119.0,551.2,10,24,7,7,page_3,75,1,of,
+556, ,129.0,551.2,10,24,8,7,page_3,75,1,,
+557,p,139.0,551.2,10,24,9,7,page_3,76,2,plotting,
+558,l,149.0,551.2,10,24,10,7,page_3,76,2,plotting,
+559,o,159.0,551.2,10,24,11,7,page_3,76,2,plotting,
+560,t,169.0,551.2,10,24,12,7,page_3,76,2,plotting,
+561,t,179.0,551.2,10,24,13,7,page_3,76,2,plotting,
+562,i,189.0,551.2,10,24,14,7,page_3,76,2,plotting,
+563,n,199.0,551.2,10,24,15,7,page_3,76,2,plotting,
+564,g,209.0,551.2,10,24,16,7,page_3,76,2,plotting,
+565, ,219.0,551.2,10,24,17,7,page_3,76,2,,
+566,m,229.0,551.2,10,24,18,7,page_3,77,3,methods.,
+567,e,239.0,551.2,10,24,19,7,page_3,77,3,methods.,
+568,t,249.0,551.2,10,24,20,7,page_3,77,3,methods.,
+569,h,259.0,551.2,10,24,21,7,page_3,77,3,methods.,
+570,o,269.0,551.2,10,24,22,7,page_3,77,3,methods.,
+571,d,279.0,551.2,10,24,23,7,page_3,77,3,methods.,
+572,s,289.0,551.2,10,24,24,7,page_3,77,3,methods.,
+573,.,299.0,551.2,10,24,25,7,page_3,77,3,methods.,
