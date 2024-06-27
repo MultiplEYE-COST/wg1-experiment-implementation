@@ -1,5 +1,6 @@
-LANGUAGE = "en"
-FULL_LANGUAGE = "English"
-COUNTRY_CODE = "gb"
+LANGUAGE = "toy"
+COUNTRY_CODE = "x"
+CITY = "x"
+YEAR = 1
 LAB_NUMBER = 1
-DUMMY_MODE = False
+DUMMY_MODE = True

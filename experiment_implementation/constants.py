@@ -7,12 +7,16 @@ https://github.com/esdalmaijer/PyGaze/blob/master/pygaze/defaults.py
 from pathlib import Path
 from runpy import run_path
 
+import pandas as pd
+from PyQt5 import QtGui
+
 EXP_ROOT_PATH = Path(__file__).parent
 LOCAL_CONFIGS = run_path(str(EXP_ROOT_PATH / 'local_config.py'))
 
 LANGUAGE = LOCAL_CONFIGS['LANGUAGE']
 COUNTRY_CODE = LOCAL_CONFIGS['COUNTRY_CODE']
-FULL_LANGUAGE = LOCAL_CONFIGS['FULL_LANGUAGE']
+CITY = LOCAL_CONFIGS['CITY']
+YEAR = LOCAL_CONFIGS['YEAR']
 LAB_NUMBER = LOCAL_CONFIGS['LAB_NUMBER']
 
 
@@ -40,8 +44,8 @@ HIGHLIGHT_COLOR = (185, 65, 40)
 DATA_FOLDER_PATH = f'data'
 RESULT_FOLDER_PATH = f'data/eye_tracking_data_{LANGUAGE}_{COUNTRY_CODE}_{LAB_NUMBER}'
 
-IMAGE_CONFIG_PATH = (f'data/stimuli_{LANGUAGE}_{COUNTRY_CODE}_{LAB_NUMBER}/config/'
-                     f'config_{LANGUAGE}_{COUNTRY_CODE}_{LAB_NUMBER}.py')
+IMAGE_CONFIG_PATH = (f'data/stimuli_MultiplEYE_{LANGUAGE}_{COUNTRY_CODE}_{CITY}_{LAB_NUMBER}_{YEAR}/config/'
+                     f'config_{LANGUAGE}_{COUNTRY_CODE}_{CITY}_{LAB_NUMBER}_{YEAR}.py')
 
 IMAGE_CONFIG = run_path(str(EXP_ROOT_PATH / IMAGE_CONFIG_PATH))
 ############################################################
@@ -113,4 +117,25 @@ OPTION_5 = IMAGE_CONFIG['option_5']
 
 #########################################################
 
+# participant_questionnaire constants
+PQ_DATA_FOLDER_PATH = EXP_ROOT_PATH / 'data' / f'participant_questionnaire_{LANGUAGE}_{COUNTRY_CODE}_{LAB_NUMBER}'
 
+PQ_PARTICIPANT_INSTRUCTIONS_EXCEL = PQ_DATA_FOLDER_PATH / f'multipleye_questionnaire_instructions_{LANGUAGE}.xlsx'
+PQ_QUESTIONS_EXCEL = PQ_DATA_FOLDER_PATH / f'multipleye_questionnaire_questions_{LANGUAGE}.xlsx'
+PQ_LANGUAGES_EXCEL = PQ_DATA_FOLDER_PATH / f'language_iso639_1_{LANGUAGE}.xlsx'
+
+# excel file version
+PQ_PARTICIPANT_INSTRUCTIONS_XLSX = PQ_DATA_FOLDER_PATH / f'multipleye_questionnaire_instructions_{LANGUAGE}.xlsx'
+PQ_QUESTIONS_XLSX = PQ_DATA_FOLDER_PATH / f'multipleye_questionnaire_questions_{LANGUAGE}.xlsx'
+PQ_LANGUAGES_XLSX = PQ_DATA_FOLDER_PATH / f'language_iso639_1_{LANGUAGE}.xlsx'
+
+# Opening the file where the data is saved
+PQ_FILE = PQ_DATA_FOLDER_PATH / f'participant_questionnaire_data_{LANGUAGE}_{COUNTRY_CODE}_{LAB_NUMBER}.xlsx'
+
+# fix program icon and image not showing
+PQ_program_icon = EXP_ROOT_PATH / 'ui_data/interface_icons/program_icon.png'
+PQ_image_dir = EXP_ROOT_PATH / 'ui_data/interface_icons/running_icon_copy.png'
+
+PQ_FONT = ("Helvetica", 15)
+PQ_FONT_ITALIC = ("Helvetica", 13)
+PQ_FONT_BOLD = ("Helvetica", 15, QtGui.QFont.Bold)
