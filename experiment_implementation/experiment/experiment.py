@@ -24,6 +24,8 @@ from devices.screen import MultiplEyeScreen
 
 from start_multipleye_session import SessionMode
 
+from experiment.participant_questionnaire import MultiplEYEParticipantQuestionnaire
+
 
 class Experiment:
     _display: Display = Display(
@@ -48,6 +50,7 @@ class Experiment:
             num_pages: int,
     ):
 
+        self.obligatory_break_made = None
         self.stimuli_screens = [
             stimulus_dict for stimulus_dict in stimuli_screens if stimulus_dict['stimulus_type'] == 'experiment'
         ]
@@ -86,7 +89,7 @@ class Experiment:
         self.log_completed_stimuli = pd.DataFrame(
             columns=['timestamp_started', 'timestamp_completed',
                      'stimulus_id', 'stimulus_name', 'completed']
-            )
+        )
 
         self._eye_tracker = EyeTracker(
             self._display,
@@ -125,10 +128,15 @@ class Experiment:
         self.num_pages = num_pages
         self.abs_exp_path = abs_exp_path
         self.session_mode = session_mode
+        self.participant_id = participant_id
 
         # define the fixation trigger that will be shown between two pages
-        self.fixation_trigger_region = aoi.AOI('circle', (constants.FIX_DOT_X, constants.FIX_DOT_Y),
-                                               constants.FIXATION_TRIGGER_RADIUS * 2)
+        self.fixation_trigger_region = aoi.AOI(
+            'circle', (constants.FIX_DOT_X, constants.FIX_DOT_Y),
+            constants.FIXATION_TRIGGER_RADIUS * 2
+            )
+
+        self.participant_questionnaire = MultiplEYEParticipantQuestionnaire(self.participant_id, self.abs_exp_path)
 
     def _set_initial_tracker_vars(self):
         # turn off automatic calibration, should be manual!
@@ -196,8 +204,10 @@ class Experiment:
         self._display.fill(self.instruction_screens['final_screen']['screen'])
         ts = self._display.show()
         key, key_ts = self._keyboard.get_key()
-        self.write_to_logfile(get_time(), pd.NA, pd.NA, 'final_screen', ts, key, key_ts, False, pd.NA,
-                              'stop showing: final_screen')
+        self.write_to_logfile(
+            get_time(), pd.NA, pd.NA, 'final_screen', ts, key, key_ts, False, pd.NA,
+            'stop showing: final_screen'
+            )
 
     def _show_instruction_screens(self):
 
@@ -243,6 +253,7 @@ class Experiment:
         # if a core session has been restarted we need to update the trial numbering
         start_trial = 0
         if self.session_mode.value == 'core':
+            # note that this is specific for the mutipleye experiment, 2 practice and 10 normal trials
             if practice:
                 start_trial = 2 - len(stimuli_dicts)
             else:
@@ -260,8 +271,10 @@ class Experiment:
 
             # the obligatory break is made after half of the stimuli (+-1),
             # as close to the middle of the pages as possible
-            self.determine_break(half_num_stimuli, obligatory_break_made, practice, stimulus_id, total_page_count,
-                                 trial_nr)
+            self.determine_break(
+                half_num_stimuli, obligatory_break_made, practice, stimulus_id, total_page_count,
+                trial_nr
+                )
 
             self.skipped_fixation_triggers[str(trial_nr)] = 0
 
@@ -323,9 +336,11 @@ class Experiment:
                     self._eye_tracker.send_backdrop_image(page_path)
 
                 # start eye-tracking
-                self._eye_tracker.status_msg(f'{flag}trial {trial_nr} {stimulus_name} page '
-                                             f'{page_number}/{total_reading_pages}')
-                self._eye_tracker.log(f'start_recording_{flag}trial_{trial_nr}_page_{page_number}')
+                self._eye_tracker.status_msg(
+                    f'{flag}trial {trial_nr}/{len(stimuli_dicts)} {stimulus_name} page '
+                    f'{page_number}/{total_reading_pages}'
+                    )
+                self._eye_tracker.log(f'start_recording_{flag}trial_{trial_nr}_{stimulus_name}_{stimulus_id}_page_{page_number}')
                 self._eye_tracker.start_recording()
 
                 self._display.fill(screen=page_screen)
@@ -335,6 +350,9 @@ class Experiment:
                 self._eye_tracker.log('page_screen_image_onset')
                 self._eye_tracker.log('!V CLEAR 116 116 116')
                 self._send_img_path_to_edf(relative_img_path)
+                # delete queued host pc key presses on page onset
+                if not constants.DUMMY_MODE:
+                    self._eye_tracker.get_tracker().flushKeybuttons(0)
 
                 key_pressed_stimulus = ''
                 keypress_timestamp = -1
@@ -359,7 +377,7 @@ class Experiment:
                 # self._eye_tracker.log('!V CLEAR 128 128 128')
                 # stop eye tracking
                 self._eye_tracker.stop_recording()
-                self._eye_tracker.log(f'stop_recording_{flag}trial_{trial_nr}_page_{page_number}')
+                self._eye_tracker.log(f'stop_recording_{flag}trial_{trial_nr}_{stimulus_name}_{stimulus_id}_page_{page_number}')
 
             # self._eye_tracker.log(f'!V TRIAL_VAR RT {int(core.getTime() - stimulus_timestamp) * 1000}')
 
@@ -399,8 +417,10 @@ class Experiment:
                     self._eye_tracker.send_backdrop_image(question_dict['path'])
 
                 # start eye-tracking
-                self._eye_tracker.status_msg(f'{flag}trial {trial_nr} {stimulus_name} '
-                                             f'Q{question_number}/{total_questions}')
+                self._eye_tracker.status_msg(
+                    f'{flag}trial {trial_nr} {stimulus_name} '
+                    f'Q{question_number}/{total_questions}'
+                    )
                 self._eye_tracker.log(
                     f'start_recording_{flag}trial_{trial_nr}_question_{question_number}',
                 )
@@ -438,6 +458,10 @@ class Experiment:
                 self._eye_tracker.log('question_screen_image_onset')
                 self._eye_tracker.log('!V CLEAR 116 116 116')
                 self._send_img_path_to_edf(relative_question_page_path)
+
+                # delete queued host pc key presses on page onset
+                if not constants.DUMMY_MODE:
+                    self._eye_tracker.get_tracker().flushKeybuttons(0)
 
                 key_pressed_question = ''
                 keypress_timestamp = -1
@@ -488,6 +512,9 @@ class Experiment:
                         answer_correct=is_chosen_answer_correct,
                         message='preliminary answer'
                     )
+                    self._eye_tracker.log(
+                        f'{flag}trial_{trial_nr}_{stimulus_name}_{stimulus_id}_question_{question_number}_key_pressed_{key_pressed_question}',
+                    )
 
                 is_answer_correct = answer_chosen == correct_answer_key
 
@@ -503,15 +530,15 @@ class Experiment:
                 )
 
                 self._eye_tracker.log(
-                    f'{flag}trial_{trial_nr}_question_{question_number}_answer_given_is_{key_pressed_question}',
+                    f'{flag}trial_{trial_nr}_{stimulus_name}_{stimulus_id}_question_{question_number}_final_answer_given_is_{answer_chosen}',
                 )
                 self._eye_tracker.log(
-                    f'{flag}trial_{trial_nr}_question_{question_number}_answer_given_is_correct:{is_answer_correct}',
+                    f'{flag}trial_{trial_nr}_{stimulus_name}_{stimulus_id}_question_{question_number}_answer_given_is_correct:{is_answer_correct}',
                 )
 
                 # stop eye tracking
                 self._eye_tracker.stop_recording()
-                self._eye_tracker.log(f'stop_recording_{flag}trial_{trial_nr}_question_{question_number}')
+                self._eye_tracker.log(f'stop_recording_{flag}trial_{trial_nr}_{stimulus_name}_{stimulus_id}_question_{question_number}')
 
             self._eye_tracker.log(f'!V TRIAL_VAR trial_number {flag}{trial_nr}')
             self._eye_tracker.log(f'!V TRIAL_VAR stimulus_id {stimulus_id}')
@@ -544,11 +571,11 @@ class Experiment:
                         trial_nr):
         if (((total_page_count >= self.num_pages // 2 and trial_nr >= half_num_stimuli - 2)
              or trial_nr == half_num_stimuli + 1)
-                and not obligatory_break_made and not practice):
+                and not self.obligatory_break_made and not practice):
 
             self._eye_tracker.log('obligatory_break')
             self._eye_tracker.status_msg('OBLIGATORY BREAK')
-            obligatory_break_made = True
+            self.obligatory_break_made = True
 
             self._display.fill(screen=self.instruction_screens['obligatory_break_screen']['screen'])
             onset_timestamp = self._display.show()
@@ -641,7 +668,11 @@ class Experiment:
         self._display.fill(screen=screens['initial'])
         initial_onset_timestamp = self._display.show()
         self._eye_tracker.log('rating_screen_image_onset')
+        self._eye_tracker.log('!V CLEAR 116 116 116')
         self._send_img_path_to_edf(screens['relative_path'])
+        # delete queued host pc key presses on page onset
+        if not constants.DUMMY_MODE:
+            self._eye_tracker.get_tracker().flushKeybuttons(0)
 
         key_pressed = ''
         keypress_timestamp = -1
@@ -754,9 +785,9 @@ class Experiment:
                 self._eye_tracker.stop_recording()
                 self.write_to_logfile(
                     get_time(), trial_id, pd.NA, 'fixation_trigger', screen_onset, timestamp,
-                    'esc or ctrl c', False, pd.NA, 'ctrl-c_pressed_by_user'
+                    'ctrl c', False, pd.NA, 'ctrl-c_pressed_by_user'
                 )
-                self.quit_experiment()
+                self.finish_experiment()
 
             # key q: skip drift trigger and continue with experiment
             elif key == 113 and not modifier:
@@ -775,7 +806,7 @@ class Experiment:
                 self._eye_tracker.log('fixation_trigger:experimenter_calibration_triggered')
                 self.write_to_logfile(
                     get_time(), trial_id, pd.NA, 'fixation_trigger', screen_onset, timestamp,
-                    'c', False, pd.NA, 'calibration_triggered'
+                    'esc', False, pd.NA, 'calibration_triggered'
                 )
                 self._eye_tracker.calibrate()
                 return True
@@ -790,30 +821,20 @@ class Experiment:
         self._eye_tracker.stop_recording()
         return True
 
-    def quit_experiment(self) -> None:
-        # end the experiment and close all the files + connection to eye-tracker
+    def finish_experiment(self, participant_questionnaire: bool = True) -> None:
+        """
+        Finishes the experiment and performs all necessary actions to close the data files.
+        :param participant_questionnaire: At the end of the exp, a participant questionnaire can be shown.
+        :return: None
+        """
         self.log_file.close()
         self._eye_tracker.close()
         self._display.close()
+
+        if participant_questionnaire:
+            self.participant_questionnaire.run_questionnaire()
+
         libtime.expend()
-
-    def _drift_correction(self, trial_id: int, overwrite: bool = False) -> bool:
-
-        checked = False
-        while not checked:
-            checked = self._eye_tracker.drift_correction(
-                pos=constants.TOP_LEFT_CORNER,
-                fix_triggered=False,
-                overwrite=overwrite,
-            )
-            if checked == "skipped":
-                self._eye_tracker.log('drift_correction_skipped')
-                checked = True
-                self.write_to_logfile(
-                    timestamp=get_time(), trial_number=trial_id, stimulus_identifier=pd.NA, page_number=pd.NA,
-                    screen_onset_timestamp=pd.NA, keypress_timestamp=pd.NA, key_pressed=pd.NA, question=False,
-                    answer_correct=pd.NA, message='drift_correction_skipped',
-                )
 
     def write_to_logfile(self, timestamp, trial_number, stimulus_identifier, page_number, screen_onset_timestamp,
                          keypress_timestamp, key_pressed, question, answer_correct, message):

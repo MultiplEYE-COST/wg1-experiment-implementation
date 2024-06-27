@@ -144,5 +144,12 @@ tmp.txt
 eye_tracking_data*/
 experiment_implementation/utils/reading_times
 experiment_implementation/multipleye_pilot_*
+experiment_implementation/data/test_sessions
+
+/experiment_implementation/data/participant_questionnaire*/
+!experiment_implementation/data/stimuli_MultiplEYE_toy_x_x_1_1/
+
+/experiment_implementation/experiment/res/
+
 experiment_implementation/data/stimuli*/*.xslx
 experiment_implementation/data/test_sessions

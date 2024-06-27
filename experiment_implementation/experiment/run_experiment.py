@@ -38,7 +38,7 @@ def run_experiment(
         participant_id_str = "0" + participant_id_str
 
     participant_result_folder = (f'{participant_id_str}_{constants.LANGUAGE}_{constants.COUNTRY_CODE}_'
-                                 f'{constants.LAB_NUMBER}_S1').upper()
+                                 f'{constants.LAB_NUMBER}_ET{session_id}').upper()
 
     last_completed_stimulus_id = None
 
@@ -152,7 +152,7 @@ def run_experiment(
     experiment.run_experiment()
     general_log_file.write([get_time(), 'finished experiment'])
 
-    experiment.quit_experiment()
+    experiment.finish_experiment(participant_questionnaire=True)
 
     general_log_file.write([get_time(), 'END'])
 
