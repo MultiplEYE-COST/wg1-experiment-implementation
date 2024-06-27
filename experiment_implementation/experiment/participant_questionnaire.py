@@ -149,7 +149,7 @@ class MultiplEYEParticipantQuestionnaire:
             ['additional_read_language'],
             button=self.instructions['pq_next_button'],
             keys=[f'additional_read_language_{i}' for i in range(1, 5)],
-            option_labels=[f'Additional language {i}' for i in range(1, 5)],
+            option_labels=[f'{self.instructions["pq_additional_language"]} {i}' for i in range(1, 5)],
             option_type='dropdown_file',
             optional=True
         )
@@ -200,7 +200,7 @@ class MultiplEYEParticipantQuestionnaire:
 
         result_file_path = self.results_folder + result_file_name
 
-        with open(result_file_path, 'w') as f:
+        with open(result_file_path, 'w', encoding='utf8') as f:
             json.dump(self.pq_data, f, indent=4)
 
     def _show_questions(self, instructions: str, questions: list, button: str,
@@ -240,7 +240,7 @@ class MultiplEYEParticipantQuestionnaire:
             existing_data = {}
 
         pq_gui = gui.Dlg(
-            title='Participant Questionnaire',
+            title=self.instructions['pq_title'],
             # Positioning the dialog boxes in the top left corner of the screen
             pos=(constants.IMAGE_WIDTH_PX // 2, constants.IMAGE_HEIGHT_PX // 2),
             size=(800, 900),
@@ -304,7 +304,6 @@ class MultiplEYEParticipantQuestionnaire:
 
                     pq_gui.addField(self.questions[question_id]["pq_question_text"],
                                     choices=options,
-                                    required=True,
                                     tip=self.questions[question_id]["pq_question_help"],
                                     initial=existing_data.get(question_id, ''),
                                     )
@@ -326,13 +325,13 @@ class MultiplEYEParticipantQuestionnaire:
                         option_xlsx = pd.read_excel(constants.PQ_DATA_FOLDER_PATH / constants.PQ_LANGUAGES_XLSX)
                         options = sorted(option_xlsx['language_name'].tolist())
                         options.insert(0, '')
-                        pq_gui.addField(option_label, choices=options, required=True)
+                        pq_gui.addField(option_label, choices=options)
                     else:
-                        pq_gui.addField(option_label, required=True)
+                        pq_gui.addField(option_label)
 
         pq_gui.addText('')
         pq_gui.addText('')
-        pq_gui.addField(self.instructions['pq_confirm_answers'], initial=False, required=True)
+        pq_gui.addField(self.instructions['pq_confirm_answers'], initial=False)
 
         # the item in the top left position is some default text that I don't know how to remove otherwise
         pq_gui.layout.itemAtPosition(0, 0).widget().hide()
