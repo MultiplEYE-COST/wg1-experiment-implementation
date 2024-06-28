@@ -645,8 +645,6 @@ class Experiment:
     def show_rating_screen(self, name: str, trial_number: int, screens: dict,
                            num_options: int, flag: str) -> None:
 
-        self._fixation_trigger(trial_number)
-
         page_path = screens['path']
 
         if constants.DUMMY_MODE:
@@ -776,41 +774,40 @@ class Experiment:
                     return False
 
             # check whether host keyboard was pressed by experimenter
-            if not constants.DUMMY_MODE:
-                key, modifier, _, _, timestamp = self._eye_tracker.get_tracker().readKeyButton()
+            key, modifier, _, _, timestamp = self._eye_tracker.get_tracker().readKeyButton()
 
-                # keys are returned as ascii codes
-                # ctrl + c: quit the experiment
-                if key == 99 and modifier == 4:
-                    self._eye_tracker.log(f'fixation_trigger:ctrl-c_pressed_by_user_at_{timestamp}')
-                    self._eye_tracker.stop_recording()
-                    self.write_to_logfile(
-                        get_time(), trial_id, pd.NA, 'fixation_trigger', screen_onset, timestamp,
-                        'ctrl c', False, pd.NA, 'ctrl-c_pressed_by_user'
-                    )
-                    self.finish_experiment()
+            # keys are returned as ascii codes
+            # ctrl + c: quit the experiment
+            if key == 99 and modifier == 4:
+                self._eye_tracker.log(f'fixation_trigger:ctrl-c_pressed_by_user_at_{timestamp}')
+                self._eye_tracker.stop_recording()
+                self.write_to_logfile(
+                    get_time(), trial_id, pd.NA, 'fixation_trigger', screen_onset, timestamp,
+                    'ctrl c', False, pd.NA, 'ctrl-c_pressed_by_user'
+                )
+                self.finish_experiment()
 
-                # key q: skip drift trigger and continue with experiment
-                elif key == 113 and not modifier:
-                    self._eye_tracker.stop_recording()
-                    self._eye_tracker.log('fixation_trigger:skipped_by_experimenter')
-                    self.write_to_logfile(
-                        get_time(), trial_id, pd.NA, 'fixation_trigger', screen_onset, timestamp,
-                        'q', False, pd.NA, 'skipped_by_experimenter'
-                    )
-                    self.skipped_fixation_triggers[str(trial_id)] += 1
-                    return False
+            # key q: skip drift trigger and continue with experiment
+            elif key == 113 and not modifier:
+                self._eye_tracker.stop_recording()
+                self._eye_tracker.log('fixation_trigger:skipped_by_experimenter')
+                self.write_to_logfile(
+                    get_time(), trial_id, pd.NA, 'fixation_trigger', screen_onset, timestamp,
+                    'q', False, pd.NA, 'skipped_by_experimenter'
+                )
+                self.skipped_fixation_triggers[str(trial_id)] += 1
+                return False
 
-                # if esc was pressed we can go to the calibration screen
-                elif key == 27:
-                    self._eye_tracker.stop_recording()
-                    self._eye_tracker.log('fixation_trigger:experimenter_calibration_triggered')
-                    self.write_to_logfile(
-                        get_time(), trial_id, pd.NA, 'fixation_trigger', screen_onset, timestamp,
-                        'esc', False, pd.NA, 'calibration_triggered'
-                    )
-                    self._eye_tracker.calibrate()
-                    return True
+            # if esc was pressed we can go to the calibration screen
+            elif key == 27:
+                self._eye_tracker.stop_recording()
+                self._eye_tracker.log('fixation_trigger:experimenter_calibration_triggered')
+                self.write_to_logfile(
+                    get_time(), trial_id, pd.NA, 'fixation_trigger', screen_onset, timestamp,
+                    'esc', False, pd.NA, 'calibration_triggered'
+                )
+                self._eye_tracker.calibrate()
+                return True
 
             ts_fixation_end, data = self._eye_tracker.wait_for_fixation_end(timeout=500)
 

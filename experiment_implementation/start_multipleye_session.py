@@ -49,6 +49,7 @@ class SessionMode(Enum):
     MINIMAL = 'minimal'
     ADDITIONAL = 'additional'
     CORE = 'core'
+    PILOT = 'pilot'
 
 
 @Gooey(
@@ -174,6 +175,15 @@ def parse_args():
     )
 
     session_mode.add_argument(
+        '--pilot',
+        metavar=translations['pilot_session'],
+        dest='session_mode',
+        help=translations['pilot_session_help'],
+        action='store_const',
+        const=SessionMode.PILOT,
+    )
+
+    session_mode.add_argument(
         '--test',
         metavar='Test session',
         dest='session_mode',
@@ -287,8 +297,10 @@ def start_experiment_session():
             arguments['dataset_type'] = 'test_sessions'
             arguments['stimulus_order_version'] = constants.VERSION_START
 
-        elif arguments['session_mode'].value == 'additional':
-            pass
+        elif arguments['session_mode'].value == 'pilot':
+
+            experiment_utils.create_results_folder(dataset='pilot_sessions')
+            arguments['dataset_type'] = 'pilot_sessions'
 
         elif arguments['session_mode'].value == 'core' and not arguments['continue_core_session']:
 
