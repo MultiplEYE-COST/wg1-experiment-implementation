@@ -48,6 +48,7 @@ class Experiment:
             rel_exp_path: str,
             session_mode: SessionMode,
             num_pages: int,
+            stimuli_order_version: int,
     ):
 
         self.obligatory_break_made = None
@@ -80,8 +81,8 @@ class Experiment:
             ),
         )
 
-        edf_file_path = (f'{self.country_code.lower()}'
-                         f'{constants.LAB_NUMBER}{self.language.lower()}{participant_id}.edf')
+        edf_file_path = (f'{participant_id}{self.language.lower()}'
+                         f'{self.country_code.lower()}{constants.LAB_NUMBER}.edf')
 
         absolute_edf_file_path = f'{abs_exp_path}/{edf_file_path}'
         self.relative_edf_file_path = f'{rel_exp_path}/{edf_file_path}'
@@ -129,6 +130,7 @@ class Experiment:
         self.abs_exp_path = abs_exp_path
         self.session_mode = session_mode
         self.participant_id = participant_id
+        self.stimulus_order_version = stimuli_order_version
 
         # define the fixation trigger that will be shown between two pages
         self.fixation_trigger_region = aoi.AOI(
@@ -171,6 +173,9 @@ class Experiment:
 
     def run_experiment(self) -> None:
         self._eye_tracker.log(f'start_experiment')
+
+        # log some metadata
+        self._eye_tracker.log(f'stimulus_order_version: {self.stimulus_order_version}')
 
         self._show_instruction_screens()
 
@@ -340,7 +345,7 @@ class Experiment:
                     f'{flag}trial {trial_nr}/{len(stimuli_dicts)} {stimulus_name} page '
                     f'{page_number}/{total_reading_pages}'
                     )
-                self._eye_tracker.log(f'start_recording_{flag}trial_{trial_nr}_{stimulus_name}_{stimulus_id}_page_{page_number}')
+                self._eye_tracker.log(f'start_recording_{flag}trial_{trial_nr}_stimulus_{stimulus_name}_{stimulus_id}_page_{page_number}')
                 self._eye_tracker.start_recording()
 
                 self._display.fill(screen=page_screen)
@@ -422,7 +427,7 @@ class Experiment:
                     f'Q{question_number}/{total_questions}'
                     )
                 self._eye_tracker.log(
-                    f'start_recording_{flag}trial_{trial_nr}_question_{question_number}',
+                    f'start_recording_{flag}trial_{trial_nr}_stimulus_{stimulus_name}_{stimulus_id}_question_{question_number}',
                 )
                 self._eye_tracker.start_recording()
 

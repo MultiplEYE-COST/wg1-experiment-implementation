@@ -83,6 +83,7 @@ def parse_args():
         help=translations['session_id_help'],
         required=True,
         type=int,
+        visible=False,
     )
 
     participants.add_argument(
@@ -281,31 +282,23 @@ def start_experiment_session():
             )
 
         arguments.pop('participant_id_continued', None)
-
         arguments['date'] = str(date.today())
 
         if arguments['session_mode'].value == 'test':
             experiment_utils.create_results_folder(dataset='test_dataset')
-
             # hardcoded args
-            arguments['stimulus_order_version'] = constants.VERSION_START
             arguments['dataset_type'] = 'test_sessions'
 
         elif arguments['session_mode'].value == 'minimal':
-
             # hardcoded args
             arguments['dataset_type'] = 'test_sessions'
-            arguments['stimulus_order_version'] = constants.VERSION_START
 
         elif arguments['session_mode'].value == 'pilot':
-
             experiment_utils.create_results_folder(dataset='pilot_sessions')
             arguments['dataset_type'] = 'pilot_sessions'
 
         elif arguments['session_mode'].value == 'core' and not arguments['continue_core_session']:
-
             experiment_utils.create_results_folder(dataset='core_dataset')
-
             arguments['dataset_type'] = 'core_dataset'
 
             # check if the participant ID is within the range of the number of versions for data collections that
@@ -321,7 +314,6 @@ def start_experiment_session():
 
         # if the item version has not been manually set, we determine it
         stimulus_order_version = arguments['stimulus_order_version']
-
         if stimulus_order_version == -1:
             stimulus_order_version = experiment_utils.determine_stimulus_order_version()
             arguments['stimulus_order_version'] = stimulus_order_version

@@ -136,6 +136,7 @@ def run_experiment(
         rel_exp_path=relative_exp_result_path,
         session_mode=session_mode,
         num_pages=total_num_pages,
+        stimulus_order_version=stimulus_order_version,
     )
 
     if not continue_core_session:
