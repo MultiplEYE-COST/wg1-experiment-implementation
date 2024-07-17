@@ -217,6 +217,10 @@ def get_stimuli_screens(
             question_img_path = row['question_img_path']
             target = row['target']
             target_answer_key = row['target_key']
+            distractor_a_answer_key = row['distractor_a_key']
+            distractor_b_answer_key = row['distractor_b_key']
+            distractor_c_answer_key = row['distractor_c_key']
+
 
             logfile.write(
                 [
@@ -287,9 +291,13 @@ def get_stimuli_screens(
                         'question_screen_select_right': question_screen_select_right,
                         'question_screen_select_left': question_screen_select_left,
                         'correct_answer': target,
-                        'correct_answer_key': target_answer_key,
+                        'target_key': target_answer_key,
+                        'distractor_a_key': distractor_a_answer_key,
+                        'distractor_b_key': distractor_b_answer_key,
+                        'distractor_c_key': distractor_c_answer_key,
                         'path': norm_img_path,
                         'relative_path': question_img_path,
+                        'question_identifier': question_id,
                     }
                 )
 

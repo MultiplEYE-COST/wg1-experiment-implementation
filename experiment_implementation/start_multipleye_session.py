@@ -83,7 +83,7 @@ def parse_args():
         help=translations['session_id_help'],
         required=True,
         type=int,
-        visible=False,
+        gooey_options={'visible': False},
     )
 
     participants.add_argument(

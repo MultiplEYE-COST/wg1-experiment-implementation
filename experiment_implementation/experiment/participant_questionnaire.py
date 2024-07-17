@@ -176,7 +176,7 @@ class MultiplEYEParticipantQuestionnaire:
                                  'other_reading_time']
 
             self._show_questions(
-                f'{self.instructions["pq_answer_for_lang"]} {self.pq_data[lang]}',
+                f'{self.instructions["pq_answer_for_lang"]}: {self.pq_data[lang]}',
                 reading_questions,
                 button=self.instructions['pq_next_button'],
                 keys=[f'{lang}_{question}' for question in reading_questions[1:]],
@@ -296,7 +296,6 @@ class MultiplEYEParticipantQuestionnaire:
 
                 # if it is a dropdown (i.e. multiple options), the initial value is an empty string
                 # which is prepended to the options
-                # TODO uncomment this!!!
                 if len(options) > 1:
                     options.insert(0, '')
 

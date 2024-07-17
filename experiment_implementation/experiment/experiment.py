@@ -48,7 +48,7 @@ class Experiment:
             rel_exp_path: str,
             session_mode: SessionMode,
             num_pages: int,
-            stimuli_order_version: int,
+            stimulus_order_version: int,
     ):
 
         self.obligatory_break_made = None
@@ -130,7 +130,7 @@ class Experiment:
         self.abs_exp_path = abs_exp_path
         self.session_mode = session_mode
         self.participant_id = participant_id
-        self.stimulus_order_version = stimuli_order_version
+        self.stimulus_order_version = stimulus_order_version
 
         # define the fixation trigger that will be shown between two pages
         self.fixation_trigger_region = aoi.AOI(
@@ -382,7 +382,8 @@ class Experiment:
                 # self._eye_tracker.log('!V CLEAR 128 128 128')
                 # stop eye tracking
                 self._eye_tracker.stop_recording()
-                self._eye_tracker.log(f'stop_recording_{flag}trial_{trial_nr}_{stimulus_name}_{stimulus_id}_page_{page_number}')
+                self._eye_tracker.log(f'stop_recording_{flag}trial_{trial_nr}_stimulus_'
+                                      f'{stimulus_name}_{stimulus_id}_page_{page_number}')
 
             # self._eye_tracker.log(f'!V TRIAL_VAR RT {int(core.getTime() - stimulus_timestamp) * 1000}')
 
@@ -410,6 +411,15 @@ class Experiment:
                 # question numbering should start at 1 but starts at 0 per default
                 question_number += 1
 
+                # 5 digit number that denots the type of question
+                question_identifier = question_dict['question_identifier']
+
+                # which key belongs to which answer
+                key_to_answer_temp = {k: question_dict[k] for k in
+                                      ['target_key', 'distractor_a_key', 'distractor_b_key', 'distractor_c_key']}
+                key_to_answer = {answer: key for key, answer in key_to_answer_temp.items()}
+                key_to_answer['space'] = 'final_confirmation'
+
                 # fixation trigger
                 if constants.DUMMY_MODE:
                     self._display.fill(screen=self.instruction_screens['fixation_screen']['screen'])
@@ -427,7 +437,8 @@ class Experiment:
                     f'Q{question_number}/{total_questions}'
                     )
                 self._eye_tracker.log(
-                    f'start_recording_{flag}trial_{trial_nr}_stimulus_{stimulus_name}_{stimulus_id}_question_{question_number}',
+                    f'start_recording_{flag}trial_{trial_nr}_stimulus_{stimulus_name}_{stimulus_id}_question_'
+                    f'{question_identifier}',
                 )
                 self._eye_tracker.start_recording()
 
@@ -472,7 +483,7 @@ class Experiment:
                 keypress_timestamp = -1
                 valid_answer = False
                 answer_chosen = ''
-                correct_answer_key = question_dict['correct_answer_key']
+                correct_answer_key = question_dict['target_key']
 
                 while not valid_answer:
 
@@ -506,19 +517,20 @@ class Experiment:
                     elif key_pressed_question == 'space' and answer_chosen:
                         valid_answer = True
 
-                    is_chosen_answer_correct = answer_chosen == question_dict['correct_answer_key']
+                    is_chosen_answer_correct = answer_chosen == correct_answer_key
 
                     # log on and off set of each question screen
                     self.write_to_logfile(
                         timestamp=get_time(), trial_number=trial_nr, stimulus_identifier=stimulus_id,
-                        page_number=question_number, screen_onset_timestamp=question_timestamp,
+                        page_number=question_identifier, screen_onset_timestamp=question_timestamp,
                         keypress_timestamp=keypress_timestamp,
                         key_pressed=key_pressed_question, question=True,
                         answer_correct=is_chosen_answer_correct,
-                        message='preliminary answer'
+                        message=f'preliminary answer: {key_to_answer[key_pressed_question]}'
                     )
                     self._eye_tracker.log(
-                        f'{flag}trial_{trial_nr}_{stimulus_name}_{stimulus_id}_question_{question_number}_key_pressed_{key_pressed_question}',
+                        f'{flag}trial_{trial_nr}_stimulus_{stimulus_name}_{stimulus_id}_question_{question_identifier}_'
+                        f'preliminary_answer_{key_to_answer[key_pressed_question]}',
                     )
 
                 is_answer_correct = answer_chosen == correct_answer_key
@@ -526,7 +538,7 @@ class Experiment:
                 # overall question screen duration including answer
                 self.write_to_logfile(
                     timestamp=get_time(), trial_number=trial_nr, stimulus_identifier=stimulus_id,
-                    page_number=question_number, screen_onset_timestamp=initial_question_timestamp,
+                    page_number=question_identifier, screen_onset_timestamp=initial_question_timestamp,
                     keypress_timestamp=keypress_timestamp, key_pressed=answer_chosen,
                     question=True, answer_correct=is_answer_correct,
                     message=f"FINAL ANSWER: correct answer is '{correct_answer_key}' "
@@ -535,15 +547,15 @@ class Experiment:
                 )
 
                 self._eye_tracker.log(
-                    f'{flag}trial_{trial_nr}_{stimulus_name}_{stimulus_id}_question_{question_number}_final_answer_given_is_{answer_chosen}',
+                    f'{flag}trial_{trial_nr}_stimulus_{stimulus_name}_{stimulus_id}_question_{question_identifier}_final_answer_given_is_{key_to_answer[answer_chosen]}',
                 )
                 self._eye_tracker.log(
-                    f'{flag}trial_{trial_nr}_{stimulus_name}_{stimulus_id}_question_{question_number}_answer_given_is_correct:{is_answer_correct}',
+                    f'{flag}trial_{trial_nr}_stimulus_{stimulus_name}_{stimulus_id}_question_{question_identifier}_answer_given_is_correct:{is_answer_correct}',
                 )
 
                 # stop eye tracking
                 self._eye_tracker.stop_recording()
-                self._eye_tracker.log(f'stop_recording_{flag}trial_{trial_nr}_{stimulus_name}_{stimulus_id}_question_{question_number}')
+                self._eye_tracker.log(f'stop_recording_{flag}trial_{trial_nr}_stimulus_{stimulus_name}_{stimulus_id}_question_{question_identifier}')
 
             self._eye_tracker.log(f'!V TRIAL_VAR trial_number {flag}{trial_nr}')
             self._eye_tracker.log(f'!V TRIAL_VAR stimulus_id {stimulus_id}')
