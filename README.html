@@ -15,10 +15,15 @@ contact <a href="mailto:multipleye@cl.uzh.ch">multipleye@cl.uzh.ch</a>.</p>
 <h2>Installation</h2>
 <p>In order to run the MultiplEYE experiment you will need to complete the following steps</p>
 <ol>
-<li>Please read the official MultiplEYE guidelines linked on this page: <a href="https://multipleye.eu/contribute/">MultiplEYE contribute</a></li>
+<li>Please read the official MultiplEYE Data Collection Guidelines linked on this page: <a href="https://multipleye.eu/contribute/">MultiplEYE contribute</a></li>
 <li>Download the experiment code from this repository. Either clone via git or download the zip file (see <a href="#download-the-experiment-code-as-zip-file">download as zip</a>).</li>
-<li>Following the guidelines, prepare the stimulus files which includes the creation of the images</li>
+<li>Following the MultiplEYE Data Collection Guidelines, prepare the stimulus files which includes the creation of the images</li>
 <li>Copy the stimulus files to the correct location in the experiment data folder: <code>experiment_implementation/data/[your stimulus folder]</code></li>
+<li>Copy the files (3 Excel files) for the participant questionnaire the to the correct location in the experiment
+data folder. You will have to create a folder for your language and country. The folder should be named as follows:
+<code>experiment_implementation/data/participant_questionnaire_[LANGUAGE_CODE]_[COUNTRY_CODE]_[LAB_NUMBER]/</code></li>
+<li>Optional: if you have created a translation of the interface, you can copy it to this location:
+<code>experiment_implementation/ui_data/interface_language/[your language]</code>. The name of the file should be <code>experiment_interface_[your language].json</code>.</li>
 <li>Prepare the environment for the experiment following the guidelines in <a href="guidelines/html/CONDA_ENVIRONMENT.html">CONDA_ENVIRONMENT.html</a></li>
 <li>Install the necessary packages for your eye-tracker. For EyeLink eye-trackers
 <a href="guidelines/html/INSTALL_PYLINK.html">INSTALL_PYLINK.html</a>. For Tobii eye-trackers, please see <a href="#develop-and-run-experiments-for-tobii">develop for Tobii</a> further below.</li>
@@ -39,7 +44,7 @@ copy them to the correct location.</p>
 <h2>Run the dummy experiment</h2>
 <p>The experiment can be run in dummy mode which means that can be run without an actual eye-tracker.
 If you'd like to run it, make sure you have completed the above steps, and you have your conda environment activated.</p>
-<p>To be sure that you are running the dummy version, activate the environment:</p>
+<p>Activate the environment:</p>
 <pre><code class="language-bash">conda activate multipleye3.9
 </code></pre>
 <p>Then you can navigate to the root folder of your local clone of the repository (your path should now end with
@@ -51,30 +56,32 @@ If you'd like to run it, make sure you have completed the above steps, and you h
 <h2>The result files</h2>
 <p>The experiment will write log and data files to a newly created results folder for your language and country
 in the data folder (<code>data/eye_tracking_data...</code>).
-In there it will create a folder depending on the experiment type. For example, if you run the test session,
-it will create a folder called <code>test_dataset</code>. Within those
+In there it will create a folder depending on the experiment type. For example, if you run the core session,
+it will create a folder called <code>core_dataset</code>. Within those
 folders it will simply create a new folder for each participant. The folder name is the participant ID
-(three-digit number). If you run the
+(three-digit number) and information on the language etc. If you run the
 script for the core dataset, it will prevent you from running the experiment twice for the same participant.
 Note that if you run a test session, it will not warn you if you enter the same participant ID more than once. It will
 just write the files to the same folder.</p>
-<p>The naming scheme of the log files is a follows:
+<p>The naming scheme of the log files in the <code>log_files</code> folder is a follows:
 <code>[log_file_type]_[session_id]_[participant_id]_[date]_[timestamp].txt</code>.</p>
 <p>All logfiles are csv files. Note that the timestamps are relative to the start of the experiment. The experiment starts
-at timestamp 0.</p>
+at timestamp 0. Those log files are mainly used for debugging purposes.</p>
 <h2>Run the experiment with an eye-tracker</h2>
 <p>In order to run the experiment with an actual eye-tracker you can tick the respective box in the GUI in the lab settings
 section. The box <code>Dummy version</code> should be <strong>un-ticked</strong>.</p>
 <p>Depending on what eye-tracker you intend to use you need to install the software that comes with the eye-tracker. For
 EyeLink and tobii you can download the software online for free.</p>
-<h3>Develop and run experiments for EyeLink</h3>
+<p>If you use a display PC and an external monitor, please start the experiment on the external monitor and
+close the display PC. Otherwise the resolution can be weird for some monitors.</p>
+<h3>Run and develop experiments for EyeLink</h3>
 <p>The code has been tested with EyeLink eye-trackers and mostly on a Windows presentation PC. However, MacOS should work
 as well, but it has not been tested as thoroughly.
 You will need to install <code>pylink</code> a package provided by SR Research if you use EyeLink eye-trackers.
 Note that using pip to install pylink installs a different package although the names are the same! You have to follow
 these step-by-step instructions
 of how to install <code>pylink</code> can be found here: <a href="guidelines/html/INSTALL_PYLINK.html">INSTALL_PYLINK.html</a></p>
-<h3>Develop and run experiments for Tobii</h3>
+<h3>Run and develop experiments for Tobii</h3>
 <p>An early version of the experiment has been tested with tobii eye-trackers. However, the code is not yet fully developed
 and tested as the experiment as been developed further since then. If you want to use a tobii eye-tracker, you definitively
 need to follow the following steps. Once those are completed, it will still be necessary to adjust the code in order to
@@ -88,3 +95,12 @@ work with the tobii eye-trackers:</p>
 <h3>Develop and run experiments for other eye-trackers</h3>
 <p>Depending on what is needed we can add more eye-trackers. There is also a team that is trying to set up experiment
 using a webcam. Please contact <a href="mailto:multipleye@cl.uzh.ch">multipleye@cl.uzh.ch</a> for more information.</p>
+<h2>Upload the data</h2>
+<p>After you have run a MultiplEYE session, no matter if pilot or real experiment, please make sure to:</p>
+<ol>
+<li>Always save the entire <code>data</code> folder in a safe location locally as you do for other data collections.</li>
+<li>Upload the <code>data</code> to the MultiplEYE server. When you preregistered, you should have
+received a folder where to upload the data.</li>
+<li>Whenever you collect data from a new participant, please upload the entire <code>data</code> folder to the server,
+replacing the old one.</li>
+</ol>
