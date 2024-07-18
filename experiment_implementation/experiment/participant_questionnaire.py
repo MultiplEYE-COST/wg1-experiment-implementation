@@ -5,8 +5,7 @@ from pprint import pprint
 import pandas as pd
 from PyQt6 import QtGui, QtWidgets
 from psychopy import gui
-# import constants
-from experiment_implementation import constants
+import constants
 
 
 class MultiplEYEParticipantQuestionnaire:
@@ -278,8 +277,13 @@ class MultiplEYEParticipantQuestionnaire:
         else:
             pq_data = existing_data
 
-        # first 4 questions on one page
+
+         # first 4 questions on one page
         for question_id, question_key in questions:
+            # Adding the current language in the additional_read_language question
+            if question_id == "additional_read_language":
+                self.questions["additional_read_language"][
+                    "pq_question_text"] = f'{self.questions["additional_read_language"]["pq_question_text"]}{constants.LANGUAGE}?'
 
             answer_type = self.questions[question_id]["pq_answer_type"]
 
@@ -296,6 +300,8 @@ class MultiplEYEParticipantQuestionnaire:
                 if answer_type == 'interval':
                     interval = self.questions[question_id]["pq_answer_option_1"].split(';')
                     options = list(range(int(interval[0]), int(interval[1]) + 1))
+                    if question_id == "years_education":
+                        options.append(self.questions[question_id]["pq_answer_option_2"])
 
                 elif answer_type == 'dropdown_file':
                     option_xlsx = pd.read_excel(constants.PQ_DATA_FOLDER_PATH /
