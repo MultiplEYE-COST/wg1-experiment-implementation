@@ -3,9 +3,10 @@ import os.path
 from pprint import pprint
 
 import pandas as pd
-from PyQt5 import QtGui, QtWidgets
+from PyQt6 import QtGui, QtWidgets
 from psychopy import gui
-import constants
+# import constants
+from experiment_implementation import constants
 
 
 class MultiplEYEParticipantQuestionnaire:
@@ -99,8 +100,7 @@ class MultiplEYEParticipantQuestionnaire:
             '',
             ['dialect'],
             button=self.instructions['pq_next_button'],
-            option_labels=dialect_languages,
-            keys=dialect_keys,
+            option_labels=[(k, v) for (k, v) in zip(dialect_languages, dialect_keys)],
             option_type='checkbox',
         )
 
@@ -124,8 +124,7 @@ class MultiplEYEParticipantQuestionnaire:
                 '',
                 ['dialect_name'],
                 button=self.instructions['pq_next_button'],
-                keys=lang_keys_with_dialects,
-                option_labels=lang_with_dialects,
+                option_labels=[(k, v) for (k, v) in zip(lang_with_dialects, lang_keys_with_dialects)],
                 option_type='text'
             )
 
@@ -144,12 +143,14 @@ class MultiplEYEParticipantQuestionnaire:
             )
 
         # we allow for 4 additional languages to be mentioned
+        options = zip([f'{self.instructions["pq_additional_language"]} {i}' for i in range(1, 5)],
+                      [f'additional_read_language_{i}' for i in range(1, 5)])
+
         self._show_questions(
             '',
             ['additional_read_language'],
             button=self.instructions['pq_next_button'],
-            keys=[f'additional_read_language_{i}' for i in range(1, 5)],
-            option_labels=[f'{self.instructions["pq_additional_language"]} {i}' for i in range(1, 5)],
+            option_labels=[(k, v) for (k, v) in options],
             option_type='dropdown_file',
             optional=True
         )
@@ -206,10 +207,11 @@ class MultiplEYEParticipantQuestionnaire:
     def _show_questions(self, instructions: str, questions: list, button: str,
                         existing_data: dict = None,
                         keys: list = None,
-                        option_labels: list = None,
+                        option_labels: list[tuple[str, str]] = None,
                         option_type: str = None,
                         optional: bool = False,
-                        confirmed: bool = False) -> None:
+                        confirmed: bool = False,
+                        recalled: bool = False) -> None:
         """
         Show the questions in a dialog box and save the answers to the pq_data dictionary.
 
@@ -222,14 +224,16 @@ class MultiplEYEParticipantQuestionnaire:
         keys: list
             in case that the keys that should be used for the final data are not the same as the question identifiers,
             they can be passed as a list
-        option_labels: list
-            labels for additional free text options
+        option_labels: list[tuple(str, str)]
+            labels for additional free text options together with their identifiers (label, identifier)
         option_type: str
             the type of the additional options, either 'text' or 'checkbox'
         optional: bool
             whether the questions are optional or not
         confirmed: bool
             whether the answers have been confirmed or not
+        recalled: bool
+            whether the questions are being recalled or not, e.g. if something was wrong with the answers
 
         """
 
@@ -246,18 +250,28 @@ class MultiplEYEParticipantQuestionnaire:
             size=(800, 900),
         )
 
-        pq_gui.cancelBtn.setHidden(True)
-        pq_gui.okBtn.setText(button)
+        try:
+            pq_gui.cancelBtn.setHidden(True)
+            pq_gui.okBtn.setText(button)
+        except AttributeError:
+            pass
 
+        font = QtGui.QFont(*constants.PQ_FONT_BOLD)
+        font.setBold(True)
         initial_text = pq_gui.addText(instructions)
-        initial_text.setFont(QtGui.QFont(*constants.PQ_FONT_BOLD))
+        initial_text.setFont(font)
 
-        if keys is None:
-            # use the original question identifiers as keys
-            keys = questions
-        else:
-            # use the passed keys
-            keys = keys
+        if not recalled:
+            # we only need to do this if it is the first time that the questions are presented on the screen
+            if keys is None:
+                # use the original question identifiers as keys
+                keys = questions
+            else:
+                # use the passed keys
+                keys = keys
+
+            # update questions to be a list of tuples containing the question id and the key
+            questions = list(zip(questions, keys))
 
         if not existing_data:
             pq_data = {}
@@ -265,19 +279,20 @@ class MultiplEYEParticipantQuestionnaire:
             pq_data = existing_data
 
         # first 4 questions on one page
-        for question_id in questions:
+        for question_id, question_key in questions:
 
             answer_type = self.questions[question_id]["pq_answer_type"]
 
             # if we have an answer to that question, we add it as a fixed field,
             # unless the answers have not been confirmed yet
             if (question_id in existing_data.keys() and
-                    existing_data[question_id] != '') and confirmed:
+                existing_data[question_id] != '') and confirmed:
 
                 initial_value = existing_data[question_id]
-                pq_gui.addFixedField(question_id, str(initial_value))
+                pq_gui.addFixedField(question_key, str(initial_value))
 
             else:
+                # collect all the options for the questions if there are any
                 if answer_type == 'interval':
                     interval = self.questions[question_id]["pq_answer_option_1"].split(';')
                     options = list(range(int(interval[0]), int(interval[1]) + 1))
@@ -301,14 +316,18 @@ class MultiplEYEParticipantQuestionnaire:
 
                 if len(options) > 0:
 
-                    pq_gui.addField(self.questions[question_id]["pq_question_text"],
-                                    choices=options,
-                                    tip=self.questions[question_id]["pq_question_help"],
-                                    initial=existing_data.get(question_id, ''),
-                                    )
+                    question_text = pq_gui.addField(question_key,
+                                                    label=self.questions[question_id]["pq_question_text"],
+                                                    choices=options,
+                                                    initial=existing_data.get(question_id, ''),
+                                                    tip=self.questions[question_id]["pq_question_help"]
+                                                    )
+
+                    question_text.setFont(QtGui.QFont(*constants.PQ_FONT_BOLD))
 
                 else:
-                    pq_gui.addText(self.questions[question_id]["pq_question_text"])
+                    question_text = pq_gui.addText(self.questions[question_id]["pq_question_text"])
+                    question_text.setFont(QtGui.QFont(*constants.PQ_FONT_BOLD))
 
                 # add help text if there is one
                 if self.questions[question_id]["pq_question_help"]:
@@ -317,20 +336,20 @@ class MultiplEYEParticipantQuestionnaire:
 
             # if there are additional options that are no in the question file but have been passed
             if option_labels:
-                for option_label in option_labels:
+                for option_label, option_key in option_labels:
                     if option_type == 'checkbox':
-                        pq_gui.addField(option_label, initial=False)
+                        pq_gui.addField(option_key, label=option_label, initial=False)
                     elif option_type == 'dropdown_file':
                         option_xlsx = pd.read_excel(constants.PQ_DATA_FOLDER_PATH / constants.PQ_LANGUAGES_XLSX)
                         options = sorted(option_xlsx['language_name'].tolist())
                         options.insert(0, '')
-                        pq_gui.addField(option_label, choices=options)
+                        pq_gui.addField(option_key, label=option_label, choices=options)
                     else:
-                        pq_gui.addField(option_label)
+                        pq_gui.addField(option_key, label=option_label)
 
         pq_gui.addText('')
         pq_gui.addText('')
-        pq_gui.addField(self.instructions['pq_confirm_answers'], initial=False)
+        pq_gui.addField('confirm_answer', self.instructions['pq_confirm_answers'], initial=False)
 
         # the item in the top left position is some default text that I don't know how to remove otherwise
         pq_gui.layout.itemAtPosition(0, 0).widget().hide()
@@ -350,13 +369,9 @@ class MultiplEYEParticipantQuestionnaire:
 
         ok_data = pq_gui.show()
         # the last entry is always the confirmation checkbox
-        answers_confirmed = pq_gui.data[-1]
+        answers_confirmed = pq_gui.data['confirm_answer']
 
-        answer_dict = {}
-        for key, value in zip(keys, ok_data):
-            answer_dict[key] = value
-
-        pq_data.update(answer_dict)
+        pq_data.update(ok_data)
 
         if pq_gui.OK:
             # check whether one value is empty, if yes, prompt the user to fill in all questions
@@ -368,14 +383,16 @@ class MultiplEYEParticipantQuestionnaire:
                         self._show_questions(self.instructions['pq_answer_all'] + ' ' + instructions, questions,
                                              button=button,
                                              existing_data=pq_data, keys=keys, option_labels=option_labels,
-                                             option_type=option_type, confirmed=answers_confirmed)
+                                             option_type=option_type, confirmed=answers_confirmed,
+                                             recalled=True, optional=optional)
             if not answers_confirmed:
                 gui.warnDlg(prompt=self.instructions['pq_confirmation'],
                             title=self.instructions['pq_error_title'])
                 self._show_questions(self.instructions['pq_answer_all'] + ' ' + instructions, questions,
                                      button=button,
                                      existing_data=pq_data, keys=keys, option_labels=option_labels,
-                                     option_type=option_type, confirmed=answers_confirmed)
+                                     option_type=option_type, confirmed=answers_confirmed,
+                                     recalled=True, optional=optional)
 
             # update the dictionary with the new data and save it to file
             self.pq_data.update(pq_data)

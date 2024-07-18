@@ -7,9 +7,6 @@ https://github.com/esdalmaijer/PyGaze/blob/master/pygaze/defaults.py
 from pathlib import Path
 from runpy import run_path
 
-import pandas as pd
-from PyQt5 import QtGui
-
 EXP_ROOT_PATH = Path(__file__).parent
 LOCAL_CONFIGS = run_path(str(EXP_ROOT_PATH / 'local_config.py'))
 
@@ -34,7 +31,7 @@ EVENTDETECTION = "native"
 EYE_USED = "RIGHT"
 DISPTYPE = 'psychopy'
 FULLSCREEN = True
-MOUSEVISIBLE = False
+MOUSEVISIBLE = 0
 # background color (black bars around the image)
 BGC = (15, 15, 15)
 
@@ -138,4 +135,4 @@ PQ_image_dir = EXP_ROOT_PATH / 'ui_data/interface_icons/running_icon_copy.png'
 
 PQ_FONT = ("Helvetica", 15)
 PQ_FONT_ITALIC = ("Helvetica", 13)
-PQ_FONT_BOLD = ("Helvetica", 15, QtGui.QFont.Bold)
+PQ_FONT_BOLD = ("Helvetica", 15)

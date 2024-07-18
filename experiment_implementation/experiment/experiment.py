@@ -11,14 +11,17 @@ from PIL import Image
 from pygaze.eyetracker import EyeTracker
 
 import constants
+import psychopy
 from psychopy import core
 from psychopy.monitors import Monitor
+import pygaze
 from pygaze import libtime
 from pygaze.keyboard import Keyboard
 from pygaze.logfile import Logfile
 from pygaze.display import Display
 from pygaze.libtime import get_time
 from pygaze.plugins import aoi
+from pygaze.mouse import Mouse
 
 from devices.screen import MultiplEyeScreen
 
@@ -131,6 +134,10 @@ class Experiment:
         self.session_mode = session_mode
         self.participant_id = participant_id
         self.stimulus_order_version = stimulus_order_version
+
+        self.mouse = psychopy.event.Mouse()
+        self.mouse.setVisible(False)
+        self.mouse.setVisible(0)
 
         # define the fixation trigger that will be shown between two pages
         self.fixation_trigger_region = aoi.AOI(
@@ -348,6 +355,8 @@ class Experiment:
                 self._eye_tracker.log(f'start_recording_{flag}trial_{trial_nr}_stimulus_{stimulus_name}_{stimulus_id}_page_{page_number}')
                 self._eye_tracker.start_recording()
 
+                self.mouse.setVisible(False)
+                self.mouse.setVisible(0)
                 self._display.fill(screen=page_screen)
                 stimulus_timestamp = self._display.show()
 
@@ -431,17 +440,6 @@ class Experiment:
                     self._fixation_trigger(trial_id=trial_nr)
                     self._eye_tracker.send_backdrop_image(question_dict['path'])
 
-                # start eye-tracking
-                self._eye_tracker.status_msg(
-                    f'{flag}trial {trial_nr} {stimulus_name} '
-                    f'Q{question_number}/{total_questions}'
-                    )
-                self._eye_tracker.log(
-                    f'start_recording_{flag}trial_{trial_nr}_stimulus_{stimulus_name}_{stimulus_id}_question_'
-                    f'{question_identifier}',
-                )
-                self._eye_tracker.start_recording()
-
                 question_screen = question_dict['question_screen_initial']
 
                 # for the first question for the first practice trial, we show the arrow image in
@@ -466,6 +464,18 @@ class Experiment:
 
                 relative_question_page_path = question_dict['relative_path']
 
+                # start eye-tracking
+                self._eye_tracker.status_msg(
+                    f'{flag}trial {trial_nr} {stimulus_name} '
+                    f'Q{question_number}/{total_questions}'
+                    )
+                self._eye_tracker.log(
+                    f'start_recording_{flag}trial_{trial_nr}_stimulus_{stimulus_name}_{stimulus_id}_question_'
+                    f'{question_identifier}',
+                )
+                self._eye_tracker.start_recording()
+
+                self.mouse.setVisible(0)
                 self._display.fill(screen=question_screen)
                 initial_question_timestamp = self._display.show()
 
@@ -680,6 +690,7 @@ class Experiment:
 
         self._eye_tracker.start_recording()
 
+        self.mouse.setVisible(0)
         self._display.fill(screen=screens['initial'])
         initial_onset_timestamp = self._display.show()
         self._eye_tracker.log('rating_screen_image_onset')
