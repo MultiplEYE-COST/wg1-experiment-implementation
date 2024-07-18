@@ -65,7 +65,7 @@ def determine_stimulus_order_version(participant_id: int = None) -> int:
     """
     Determine the stimulus order version for the participant.
     It is chosen randomly from all versions that have not been used previously.
-    if an ID is given, the function will return the stimulus order version for that ID
+    If an ID is given, the function will return the stimulus order version for that ID
     """
     randomization_df = pd.read_csv(
         constants.STIMULUS_RANDOMIZATION_CSV,

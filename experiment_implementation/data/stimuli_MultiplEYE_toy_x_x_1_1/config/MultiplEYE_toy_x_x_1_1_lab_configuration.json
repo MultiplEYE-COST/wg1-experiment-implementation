@@ -1,8 +1,8 @@
 {
-  "use of multiple devices": "",
+  "Use_of_multiple_devices": "",
   "title": "MultiplEYE_toy_x_x_1_1",
-  "resolution in px": "(1024, 768)",
-  "screen size in cm": "(47.5, 29.7)",
-  "distance in cm": "60",
-  "script direction": "ltr"
+  "Monitor_resolution_in_px": "(1920, 1080)",
+  "Screen_size_in_cm": "(54.4, 30.3)",
+  "Distance_in_cm": "60",
+  "Script_direction": "ltr"
 }
