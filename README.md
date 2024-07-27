@@ -12,7 +12,6 @@ contact [multipleye@cl.uzh.ch](mailto:multipleye@cl.uzh.ch).
 > **Important**: Please make sure to have the most recent version of the enviornment and the dependencies installed.
 > If you have created the env before July 27, 2024, please make sure to update the environment. It is best to just 
 > create a new clean env and install all the dependencies again. You do not have to reinstall anaconda or so.
-> :bangbang::bangbang::bangbang::bangbang:
 
 ## Contents
 - [Installation](#installation)
