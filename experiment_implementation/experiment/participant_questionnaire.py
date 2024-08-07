@@ -44,22 +44,20 @@ class MultiplEYEParticipantQuestionnaire:
         )
 
         # check whether there are multiple languages that the person grew up with
-        if self.pq_data['childhood_languages'] == 'one language':
+        if self.pq_data['childhood_languages'] == self.questions['childhood_languages']['pq_answer_option_1']:
             self._show_questions(
                 '',
                 ['native_language_1'],
                 button=self.instructions['pq_next_button'],
             )
-
-        elif self.pq_data['childhood_languages'] == 'two languages':
+        elif self.pq_data['childhood_languages'] == self.questions['childhood_languages']['pq_answer_option_2']:
             self._show_questions(
                 '',
                 ['native_language_1', 'native_language'],
                 button=self.instructions['pq_next_button'],
                 keys=['native_language_1', 'native_language_2']
             )
-
-        elif self.pq_data['childhood_languages'] == 'three languages':
+        elif self.pq_data['childhood_languages'] == self.questions['childhood_languages']['pq_answer_option_3']:
             self._show_questions(
                 '',
                 ['native_language_1', 'native_language', 'native_language'],
@@ -283,62 +281,53 @@ class MultiplEYEParticipantQuestionnaire:
             # Adding the current language in the additional_read_language question
             if question_id == "additional_read_language":
                 self.questions["additional_read_language"][
-                    "pq_question_text"] = f'{self.questions["additional_read_language"]["pq_question_text"]} {pq_data["native_language_1"]}'
+                    "pq_question_text"] = f'{self.questions["additional_read_language"]["pq_question_text"]} {pq_data["native_language_1"]}?'
 
             answer_type = self.questions[question_id]["pq_answer_type"]
 
-            # if we have an answer to that question, we add it as a fixed field,
-            # unless the answers have not been confirmed yet
-            if (question_id in existing_data.keys() and
-                existing_data[question_id] != '') and confirmed:
+            # collect all the options for the questions if there are any
+            if answer_type == 'interval':
+                interval = self.questions[question_id]["pq_answer_option_1"].split(';')
+                options = list(range(int(interval[0]), int(interval[1]) + 1))
+                if question_id == "years_education":
+                    options.append(self.questions[question_id]["pq_answer_option_2"])
 
-                initial_value = existing_data[question_id]
-                pq_gui.addFixedField(question_key, str(initial_value))
+            elif answer_type == 'dropdown_file':
+                option_xlsx = pd.read_excel(constants.PQ_DATA_FOLDER_PATH /
+                                            self.questions[question_id]["pq_answer_option_1"])
+                options = sorted(option_xlsx['language_name'].tolist())
 
             else:
-                # collect all the options for the questions if there are any
-                if answer_type == 'interval':
-                    interval = self.questions[question_id]["pq_answer_option_1"].split(';')
-                    options = list(range(int(interval[0]), int(interval[1]) + 1))
-                    if question_id == "years_education":
-                        options.append(self.questions[question_id]["pq_answer_option_2"])
+                options = []
+                for i in range(1, 10):
+                    option = self.questions[question_id][f'pq_answer_option_{i}'].strip()
+                    if option:
+                        options.append(option)
 
-                elif answer_type == 'dropdown_file':
-                    option_xlsx = pd.read_excel(constants.PQ_DATA_FOLDER_PATH /
-                                                self.questions[question_id]["pq_answer_option_1"])
-                    options = sorted(option_xlsx['language_name'].tolist())
+            # if it is a dropdown (i.e. multiple options), the initial value is an empty string
+            # which is prepended to the options
+            if len(options) > 1:
+                options.insert(0, '')
 
-                else:
-                    options = []
-                    for i in range(1, 10):
-                        option = self.questions[question_id][f'pq_answer_option_{i}'].strip()
-                        if option:
-                            options.append(option)
+            if len(options) > 0:
 
-                # if it is a dropdown (i.e. multiple options), the initial value is an empty string
-                # which is prepended to the options
-                if len(options) > 1:
-                    options.insert(0, '')
+                question_text = pq_gui.addField(question_key,
+                                                label=self.questions[question_id]["pq_question_text"],
+                                                choices=options,
+                                                initial=existing_data.get(question_id, ''),
+                                                tip=self.questions[question_id]["pq_question_help"]
+                                                )
 
-                if len(options) > 0:
+                question_text.setFont(QtGui.QFont(*constants.PQ_FONT_BOLD))
 
-                    question_text = pq_gui.addField(question_key,
-                                                    label=self.questions[question_id]["pq_question_text"],
-                                                    choices=options,
-                                                    initial=existing_data.get(question_id, ''),
-                                                    tip=self.questions[question_id]["pq_question_help"]
-                                                    )
+            else:
+                question_text = pq_gui.addText(self.questions[question_id]["pq_question_text"])
+                question_text.setFont(QtGui.QFont(*constants.PQ_FONT_BOLD))
 
-                    question_text.setFont(QtGui.QFont(*constants.PQ_FONT_BOLD))
-
-                else:
-                    question_text = pq_gui.addText(self.questions[question_id]["pq_question_text"])
-                    question_text.setFont(QtGui.QFont(*constants.PQ_FONT_BOLD))
-
-                # add help text if there is one
-                if self.questions[question_id]["pq_question_help"]:
-                    help_text = pq_gui.addText(self.questions[question_id]["pq_question_help"])
-                    help_text.setFont(QtGui.QFont(*constants.PQ_FONT_ITALIC, italic=True))
+            # add help text if there is one
+            if self.questions[question_id]["pq_question_help"]:
+                help_text = pq_gui.addText(self.questions[question_id]["pq_question_help"])
+                help_text.setFont(QtGui.QFont(*constants.PQ_FONT_ITALIC, italic=True))
 
             # if there are additional options that are no in the question file but have been passed
             if option_labels:
