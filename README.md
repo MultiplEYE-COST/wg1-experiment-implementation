@@ -106,6 +106,8 @@ Note that using pip to install pylink installs a different package although the 
 these step-by-step instructions
 of how to install `pylink` can be found here: [INSTALL_PYLINK.md](guidelines/markdown/INSTALL_PYLINK.md)
 
+> Note on pylink experiments: The pixel coordinates written to the edf and consequently asc file will be -1 on both axes due to the EyeLink setting described here: [SR Research Forum Thread](https://www.sr-research.com/support/thread-9129-post-35624.html#pid35624) and is implemented here: [PyGaze](https://github.com/theDebbister/PyGaze/blob/b5771a98d910ce5b29151fc9303c4852d6a62034/pygaze/_eyetracker/libeyelink.py#L217-L219). pymovements will take care of this during preprocessing. 
+
 ### Run and develop experiments for Tobii
 An early version of the experiment has been tested with tobii eye-trackers. However, the code is not yet fully developed
 and tested as the experiment as been developed further since then. If you want to use a tobii eye-tracker, you definitively
