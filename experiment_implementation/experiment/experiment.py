@@ -163,14 +163,18 @@ class Experiment:
         self._display.show()
         self._eye_tracker.log('welcome_screen')
         self._eye_tracker.status_msg('Welcome screen')
-        self._keyboard.get_key(flush=True)
+        key_pressed = ''
+        while key_pressed not in ['space']:
+            key_pressed, keypress_timestamp = self._keyboard.get_key(flush=True)
 
     def show_informed_consent(self):
         self._display.fill(self.instruction_screens['informed_consent_screen']['screen'])
         self._display.show()
         self._eye_tracker.log('informed_consent_screen')
         self._eye_tracker.status_msg('Informed consent screen')
-        self._keyboard.get_key(flush=True)
+        key = ''
+        while key not in ['space']:
+            key, key_ts = self._keyboard.get_key()
         self._display.fill()
         self._display.show()
 
@@ -190,7 +194,10 @@ class Experiment:
         self._eye_tracker.log('practice_text_starting_screen')
         self._eye_tracker.status_msg('Practice start screen')
         ts = self._display.show()
-        key, key_ts = self._keyboard.get_key()
+
+        key = ''
+        while key not in ['space']:
+            key, key_ts = self._keyboard.get_key()
         self.write_to_logfile(get_time(), pd.NA, pd.NA, 'practice_start_screen', ts, key, key_ts, False, pd.NA,
                               'stop showing: practice_start_screen')
 
@@ -200,7 +207,9 @@ class Experiment:
         self._eye_tracker.log('transition_screen')
         self._eye_tracker.status_msg('Transition screen')
         ts = self._display.show()
-        key, key_ts = self._keyboard.get_key()
+        key = ''
+        while key not in ['space']:
+            key, key_ts = self._keyboard.get_key()
         self.write_to_logfile(get_time(), pd.NA, pd.NA, 'transition_screen', ts, key, key_ts, False, pd.NA,
                               'stop showing: transition_screen')
 
@@ -215,7 +224,9 @@ class Experiment:
         self._eye_tracker.log(f'show_final_screen')
         self._display.fill(self.instruction_screens['final_screen']['screen'])
         ts = self._display.show()
-        key, key_ts = self._keyboard.get_key()
+        key = ''
+        while key not in ['space']:
+            key, key_ts = self._keyboard.get_key()
         self.write_to_logfile(
             get_time(), pd.NA, pd.NA, 'final_screen', ts, key, key_ts, False, pd.NA,
             'stop showing: final_screen'
