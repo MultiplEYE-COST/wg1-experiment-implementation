@@ -40,11 +40,11 @@ To continue, please look at the black dot in the bottom right corner of the scre
 ",,instruction_screen_1_toy.png,data/stimuli_MultiplEYE_TOY_X_x_1_1/participant_instructions_images_toy_x_1/instruction_screen_1_toy.png
 15,subject_difficulty_screen,"Please rate the difficulty of the text you just read. How difficult was the text for you to read and understand?
 
-1 - very easy
-2 - easy
+1 – very easy
+2 – easy
 3 - neither easy nor difficult
-4 - difficult
-5 - very difficult",presented after reading the text,subject_difficulty_screen_toy.png,data/stimuli_MultiplEYE_TOY_X_x_1_1/participant_instructions_images_toy_x_1/subject_difficulty_screen_toy.png
+4 – difficult
+5 – very difficult",presented after reading the text,subject_difficulty_screen_toy.png,data/stimuli_MultiplEYE_TOY_X_x_1_1/participant_instructions_images_toy_x_1/subject_difficulty_screen_toy.png
 16,familiarity_rating_screen_1,"Have you read or listened to this text before? 
 
 
@@ -53,8 +53,12 @@ To continue, please look at the black dot in the bottom right corner of the scre
 - Don't remember",presented after reading the text,familiarity_rating_screen_1_toy.png,data/stimuli_MultiplEYE_TOY_X_x_1_1/participant_instructions_images_toy_x_1/familiarity_rating_screen_1_toy.png
 17,familiarity_rating_screen_2,"Please rate your familarity with the content of the text. How much of it were you familiar with?
 
-1  -0%
-2  -25%
-3 - 50%
-4 - 75%
-5 - 100% ",presented after reading the text,familiarity_rating_screen_2_toy.png,data/stimuli_MultiplEYE_TOY_X_x_1_1/participant_instructions_images_toy_x_1/familiarity_rating_screen_2_toy.png
+1 – 0%
+2 – 25%
+3 – 50%
+4 – 75%
+5 – 100% ",presented after reading the text,familiarity_rating_screen_2_toy.png,data/stimuli_MultiplEYE_TOY_X_x_1_1/participant_instructions_images_toy_x_1/familiarity_rating_screen_2_toy.png
+18,camera_setup_instruction_screen_1,Now we will adjust the focus of the camera and perform a calibration. Please follow the experimenter’s instructions.,"presented before the camera set-up, after the instructions",camera_setup_instruction_screen_1_toy.png,data/stimuli_MultiplEYE_TOY_X_x_1_1/participant_instructions_images_toy_x_1/camera_setup_instruction_screen_1_toy.png
+19,camera_setup_instruction_screen_2,Please move your finger close to your dominant eye. The experimenter will check if the correct eye is being tracked. ,Presented after the camera set-up,camera_setup_instruction_screen_2_toy.png,data/stimuli_MultiplEYE_TOY_X_x_1_1/participant_instructions_images_toy_x_1/camera_setup_instruction_screen_2_toy.png
+20,camera_setup_screen,To the experimenter: Please adjust the camera's focus and the CR and pupil thresholds. ,,camera_setup_screen_toy.png,data/stimuli_MultiplEYE_TOY_X_x_1_1/participant_instructions_images_toy_x_1/camera_setup_screen_toy.png
+21,validation_screen,"Now, we will validate the calibration of the camera and, if necessary, re-calibrate.",Before each of the validations performed between trials.,validation_screen_toy.png,data/stimuli_MultiplEYE_TOY_X_x_1_1/participant_instructions_images_toy_x_1/validation_screen_toy.png

@@ -147,7 +147,7 @@ def run_experiment(
         experiment.show_informed_consent()
 
     general_log_file.write([get_time(), 'start initial calibration'])
-    experiment.calibrate()
+    # experiment.calibrate()
     general_log_file.write([get_time(), 'finished initial calibration'])
 
     general_log_file.write([get_time(), 'start experiment'])
