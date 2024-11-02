@@ -1,9 +1,9 @@
 
 # QUESTION_OPTION_BOXES: TOP_X, TOP_Y, BOTTOM_X, BOTTOM_Y ##########
-right = (674.54, 487.52, 1210.7199999999998, 797.76)
+left = (72.9, 487.52, 609.0799999999999, 797.76)
 up = (185.1, 277.0, 1094.8, 465.36)
 down = (185.1, 831.0, 1094.8, 1019.36)
-left = (72.9, 487.52, 609.0799999999999, 797.76)
+right = (674.54, 487.52, 1210.7199999999998, 797.76)
 
 # QUESTION_CSV_PATHS ##########
 question_images_question_images_version_1_csv = "data/stimuli_MultiplEYE_TOY_X_x_1_1/question_images_toy_x_1/question_images_version_1/multipleye_comprehension_questions_toy_question_images_version_1_with_img_paths.csv"
