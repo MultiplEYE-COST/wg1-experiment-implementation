@@ -9,8 +9,7 @@ contact <a href="mailto:multipleye@cl.uzh.ch">multipleye@cl.uzh.ch</a>.</p>
 <p>:bangbang::bangbang::bangbang::bangbang:
 <strong>Important</strong>: Please make sure to have the most recent version of the enviornment and the dependencies installed.
 If you have created the env before July 27, 2024, please make sure to update the environment. It is best to just
-create a new clean env and install all the dependencies again. You do not have to reinstall anaconda or so.
-:bangbang::bangbang::bangbang::bangbang:</p>
+create a new clean env and install all the dependencies again. You do not have to reinstall anaconda or so.</p>
 </blockquote>
 <h2>Contents</h2>
 <ul>
@@ -18,6 +17,7 @@ create a new clean env and install all the dependencies again. You do not have t
 <li><a href="#run-the-dummy-experiment">Run the experiment without an eye-tracker</a></li>
 <li><a href="#the-result-files">The result files</a></li>
 <li><a href="#run-the-experiment-with-an-eye-tracker">Run the experiment with an eye-tracker</a></li>
+<li><a href="#upload-the-data">Upload the data</a></li>
 </ul>
 <h2>Installation</h2>
 <p>In order to run the MultiplEYE experiment you will need to complete the following steps</p>
@@ -88,6 +88,9 @@ You will need to install <code>pylink</code> a package provided by SR Research i
 Note that using pip to install pylink installs a different package although the names are the same! You have to follow
 these step-by-step instructions
 of how to install <code>pylink</code> can be found here: <a href="guidelines/html/INSTALL_PYLINK.html">INSTALL_PYLINK.html</a></p>
+<blockquote>
+<p>Note on pylink experiments: The pixel coordinates written to the edf and consequently asc file will be -1 on both axes due to the EyeLink setting described here: <a href="https://www.sr-research.com/support/thread-9129-post-35624.html#pid35624">SR Research Forum Thread</a> and is implemented here: <a href="https://github.com/theDebbister/PyGaze/blob/b5771a98d910ce5b29151fc9303c4852d6a62034/pygaze/_eyetracker/libeyelink.py#L217-L219">PyGaze</a>. pymovements will take care of this during preprocessing.</p>
+</blockquote>
 <h3>Run and develop experiments for Tobii</h3>
 <p>An early version of the experiment has been tested with tobii eye-trackers. However, the code is not yet fully developed
 and tested as the experiment as been developed further since then. If you want to use a tobii eye-tracker, you definitively

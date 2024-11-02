@@ -6,7 +6,7 @@ from markdown_it import MarkdownIt
 REPO_ROO = Path(__file__).parent.parent.parent
 
 
-def markdown_to_pdf(md_file_path: str):
+def markdown_to_html(md_file_path: str):
     """
     Convert a markdown file to a PDF file.
     """
@@ -47,4 +47,4 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    markdown_to_pdf(args.md_file_path)
+    markdown_to_html(args.md_file_path)
