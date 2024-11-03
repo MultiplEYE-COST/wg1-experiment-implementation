@@ -358,6 +358,7 @@ class Experiment:
                 if recalibrate:
                     # add a screen to remind the experimenter to recalibrate.
                     self._show_recalibration_screens()
+                    recalibrate = False
                 else:
                     # add a screen to remind the experimenter to validate or recalibrate, if necessary
                     self._show_validation_screens()
