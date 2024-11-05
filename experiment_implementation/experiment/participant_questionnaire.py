@@ -281,7 +281,7 @@ class MultiplEYEParticipantQuestionnaire:
             # Adding the current language in the additional_read_language question
             if question_id == "additional_read_language":
                 self.questions["additional_read_language"][
-                    "pq_question_text"] = f'{self.questions["additional_read_language"]["pq_question_text"]}?'
+                    "pq_question_text"] = f'{self.questions["additional_read_language"]["pq_question_text"]}'
 
             answer_type = self.questions[question_id]["pq_answer_type"]
 
