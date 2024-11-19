@@ -244,7 +244,7 @@ class MultiplEYEParticipantQuestionnaire:
         pq_gui = gui.Dlg(
             title=self.instructions['pq_title'],
             # Positioning the dialog boxes in the top left corner of the screen
-            pos=(constants.IMAGE_WIDTH_PX // 2, constants.IMAGE_HEIGHT_PX // 2),
+            pos=(constants.IMAGE_WIDTH_PX // 12, constants.IMAGE_HEIGHT_PX // 10),
             size=(800, 900),
         )
 

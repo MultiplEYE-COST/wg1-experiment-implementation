@@ -444,6 +444,7 @@ class Experiment:
                     key_pressed_stimulus, keypress_timestamp = self._keyboard.get_key(
                         flush=True,
                     )
+                self._eye_tracker.log('page_screen_image_offset')
 
                 self.write_to_logfile(
                     timestamp=get_time(), trial_number=trial_nr, stimulus_identifier=stimulus_id,
@@ -607,7 +608,7 @@ class Experiment:
                         f'{flag}trial_{trial_nr}_stimulus_{stimulus_name}_{stimulus_id}_question_{question_identifier}_'
                         f'preliminary_answer_{key_to_answer[key_pressed_question]}',
                     )
-
+                self._eye_tracker.log('question_screen_image_offset')
                 is_answer_correct = answer_chosen == correct_answer_key
 
                 # overall question screen duration including answer
@@ -816,7 +817,7 @@ class Experiment:
                 valid_answer = True
 
             key_pressed = ''
-
+        self._eye_tracker.log('rating_screen_image_offset')
         self.write_to_logfile(
             timestamp=get_time(), trial_number=trial_number, stimulus_identifier=pd.NA,
             page_number=name, screen_onset_timestamp=initial_onset_timestamp, keypress_timestamp=keypress_timestamp,
