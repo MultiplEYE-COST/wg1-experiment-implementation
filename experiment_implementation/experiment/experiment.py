@@ -141,7 +141,7 @@ class Experiment:
         # define the fixation trigger that will be shown between two pages
         self.fixation_trigger_region = aoi.AOI(
             'circle', (constants.FIX_DOT_X, constants.FIX_DOT_Y),
-            constants.FIXATION_TRIGGER_RADIUS * 2.5
+            constants.FIXATION_TRIGGER_RADIUS * 2
             )
 
         self.participant_questionnaire = MultiplEYEParticipantQuestionnaire(self.participant_id, self.abs_exp_path)
