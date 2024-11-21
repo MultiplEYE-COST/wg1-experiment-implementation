@@ -502,9 +502,9 @@ class Experiment:
                     self._eye_tracker.log("dummy_fixation_trigger")
                     milliseconds = 300
                     libtime.pause(milliseconds)
-                else:
+                    #else:
                     #self._fixation_trigger(trial_id=trial_nr)
-                    self._eye_tracker.send_backdrop_image(question_dict['path'])
+                    #self._eye_tracker.send_backdrop_image(question_dict['path'])
 
                 question_screen = question_dict['question_screen_initial']
 
@@ -748,9 +748,9 @@ class Experiment:
             self._eye_tracker.log("dummy_fixation_trigger")
             milliseconds = 300
             libtime.pause(milliseconds)
-        else:
+            #else:
             #self._fixation_trigger(trial_id=trial_number)
-            self._eye_tracker.send_backdrop_image(page_path)
+            #self._eye_tracker.send_backdrop_image(page_path)
 
         self._eye_tracker.log(f'start_recording_{flag}trial_{trial_number}_{name}')
         self._eye_tracker.status_msg(f'showing {name}')
