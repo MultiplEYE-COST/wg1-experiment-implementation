@@ -326,7 +326,7 @@ class Experiment:
         # if a core session has been restarted we need to update the trial numbering
         start_trial = 0
         if self.session_mode.value == 'core':
-            # note that this is specific for the mutipleye experiment, 2 practice and 10 normal trials
+            # note that this is specific for the multipleye experiment, 2 practice and 10 normal trials
             if practice:
                 start_trial = 2 - len(stimuli_dicts)
             else:
@@ -354,7 +354,7 @@ class Experiment:
             # self._show_validation_screens()
             # self.calibrate()
 
-            if trial_nr != 1 or flag != 'PRACTICE_' or recalibrate:
+            if flag != 'PRACTICE_' or recalibrate:
                 if recalibrate:
                     # add a screen to remind the experimenter to recalibrate.
                     self._show_recalibration_screens()
@@ -632,7 +632,9 @@ class Experiment:
                 # stop eye tracking
                 #self._eye_tracker.stop_recording()
                 self._eye_tracker.log(f'stop_recording_{flag}trial_{trial_nr}_stimulus_{stimulus_name}_{stimulus_id}_question_{question_identifier}')
+
             self._eye_tracker.stop_recording()
+
             self._eye_tracker.log(f'!V TRIAL_VAR trial_number {flag}{trial_nr}')
             self._eye_tracker.log(f'!V TRIAL_VAR stimulus_id {stimulus_id}')
             self._eye_tracker.log(f'!V TRIAL_VAR stimulus_name {stimulus_name}')
