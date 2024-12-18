@@ -105,7 +105,7 @@ In order to run the experiment including the GUI on Mac you need to do the follo
 
 1. You need to allow PsychoPy to access your input. In order to do that go to `System Preferences` 
 -> `Security & Privacy` -> `Privacy` -> `Input Monitoring`. Then you click on the '+' and add PsychoPy. 
-Pick the PsychoPy version that is in your env. For me the path for a anaconda env called 'test' looks like this:
+Pick the PsychoPy version that is in your env. For me the path for a anaconda env called 'multipleye3.9' looks like this:
 ```bash
 /Users/[USERNAME]/opt/anaconda3/envs/multipleye3.9/bin/psychopy
 ```
