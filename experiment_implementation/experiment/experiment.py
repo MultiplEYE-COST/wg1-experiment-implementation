@@ -90,7 +90,7 @@ class Experiment:
         self.relative_edf_file_path = f'{rel_exp_path}/{edf_file_path}'
 
         self.log_completed_stimuli = pd.DataFrame(
-            columns=['timestamp_started', 'timestamp_completed',
+            columns=['timestamp_started', 'timestamp_completed', 'trial_id',
                      'stimulus_id', 'stimulus_name', 'completed']
         )
 
@@ -874,33 +874,33 @@ class Experiment:
 
             # keys are returned as ascii codes
             # ctrl + c: quit the experiment
-            if key == 99 and modifier == 4:
+            if key in [99, 36] and modifier == 4:
                 self._eye_tracker.log(f'fixation_trigger:ctrl-c_pressed_by_user_at_{timestamp}')
                 self._eye_tracker.stop_recording()
                 self.write_to_logfile(
                     get_time(), trial_id, pd.NA, 'fixation_trigger', screen_onset, timestamp,
-                    'ctrl c', False, pd.NA, 'ctrl-c_pressed_by_user'
+                    'ctrl c', False, pd.NA, f'ctrl-c_pressed_by_user_with_key_{key}_modifier_{modifier}'
                 )
                 self.finish_experiment()
 
             # key q: skip fixation trigger and continue with experiment
-            elif key == 113 and not modifier:
+            elif key in [113, 81] or (key in [113, 81] and modifier == 8):
                 self._eye_tracker.stop_recording()
                 self._eye_tracker.log('fixation_trigger:skipped_by_experimenter')
                 self.write_to_logfile(
                     get_time(), trial_id, pd.NA, 'fixation_trigger', screen_onset, timestamp,
-                    'q', False, pd.NA, 'skipped_by_experimenter'
+                    'q', False, pd.NA, f'skipped_by_experimenter_with_key_{key}_modifier_{modifier}'
                 )
                 self.skipped_fixation_triggers[str(trial_id)] += 1
                 return False
 
             # if esc was pressed we can go to the calibration screen
-            elif key == 27:
+            elif key == 27 or (key == 27 and modifier == 8):
                 self._eye_tracker.stop_recording()
                 self._eye_tracker.log('fixation_trigger:experimenter_calibration_triggered')
                 self.write_to_logfile(
                     get_time(), trial_id, pd.NA, 'fixation_trigger', screen_onset, timestamp,
-                    'esc', False, pd.NA, 'calibration_triggered'
+                    'esc', False, pd.NA, f'calibration_triggered_with_key_{key}_modifier_{modifier}'
                 )
                 self._eye_tracker.calibrate()
                 return True
@@ -909,6 +909,7 @@ class Experiment:
 
             if data is not None:
                 average_position = data.getAverageGaze()
+                # print(average_position)
                 x_pos, y_pos = average_position
 
         self._eye_tracker.stop_recording()

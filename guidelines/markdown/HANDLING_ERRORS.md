@@ -61,6 +61,11 @@ If you copied it manually and confirm that the folder is in the right location, 
 of anaconda installed on your computer. Please check whether this is the case and if so, delete both of them and 
 restart the process in the `CONDA_ENVIRONMENT.md`.
 
+### Error: Microsoft Visual C++ 14.0 or greater is required. Get it with "Microsoft C++ Build Tools": https://visualstudio.microsoft.com/visual-cpp-build-tools/
+![images](../images/visual_c++_error.png)
+If you see this error message, it means that you do not have the necessary build tools installed on your computer. 
+As instructed in the error message, you can download the necessary build tools from the link provided, and then restart the process in the `CONDA_ENVIRONMENT.md`.
+
 ### Other Errors (will be updated soon)
 - reaction latency: the experiment is designed such that participants cannot just press space right when the screen appears.
 If you test the experiment and it does not immediately react to your keypress, this must not be an error. If the new screen appears, wait a short moment

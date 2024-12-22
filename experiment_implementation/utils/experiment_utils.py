@@ -92,7 +92,8 @@ def determine_stimulus_order_version(participant_id: int = None) -> int:
     return order_version
 
 
-def mark_stimulus_order_version_used(order_version: int, participant_id: int, session_mode: SessionMode) -> None:
+def mark_stimulus_order_version_used(order_version: int, participant_id: int, session_mode: SessionMode,
+                                     dataset_type: str, participant_result_folder: str) -> None:
     """
     Mark the stimulus order version as used by the participant.
     """
@@ -104,9 +105,10 @@ def mark_stimulus_order_version_used(order_version: int, participant_id: int, se
 
     # we only mark the participant ID as used if it was NOT a test run or the minimal exp
     if not session_mode.value == 'test' and not session_mode.value == 'minimal':
-
+        relative_exp_result_path = f'{constants.RESULT_FOLDER_PATH}/{dataset_type.lower()}/{participant_result_folder}'
+        result = determine_last_stimulus(relative_exp_result_path)
         participant_ids = randomization_df.participant_id.dropna().astype(int).values.tolist()
-        if participant_id in participant_ids:
+        if participant_id in participant_ids and result:
             raise ValueError(
                 f'You did already run an experiment with participant id {participant_id}. '
                 f'Please check the participant id or choose another one.',
@@ -122,7 +124,14 @@ def mark_stimulus_order_version_used(order_version: int, participant_id: int, se
 
 def determine_last_stimulus(relative_exp_result_path: str) -> tuple[pd.DataFrame, str, int | None, str | None]:
     csv_path = f'{relative_exp_result_path}/logfiles/completed_stimuli.csv'
-    completed_stimuli_df = pd.read_csv(csv_path, sep=',', encoding='utf8')
+    if os.path.isfile(csv_path):
+        completed_stimuli_df = pd.read_csv(csv_path, sep=',', encoding='utf8')
+    else:
+        # if the file does not exist, we return None as the experiment was interrupted before anything could happen
+        return None
+
+    if completed_stimuli_df.empty:
+        return None
 
     if not len(list(Path(relative_exp_result_path).glob('*.edf'))) == 1:
         raise FileNotFoundError(f'Continue session: No EDF file found in the {relative_exp_result_path}. Please check the path. '

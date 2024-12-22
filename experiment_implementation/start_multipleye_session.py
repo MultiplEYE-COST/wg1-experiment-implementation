@@ -315,7 +315,14 @@ def start_experiment_session():
         # if the item version has not been manually set, we determine it
         stimulus_order_version = arguments['stimulus_order_version']
         if stimulus_order_version == -1:
-            stimulus_order_version = experiment_utils.determine_stimulus_order_version()
+
+            if ((arguments['session_mode'].value in ['core', 'pilot'])
+                    and (arguments['participant_id'] in PARTICIPANT_IDS)):
+                stimulus_order_version = experiment_utils.determine_stimulus_order_version(
+                    participant_id=arguments['participant_id']
+                )
+            else:
+                stimulus_order_version = experiment_utils.determine_stimulus_order_version()
             arguments['stimulus_order_version'] = stimulus_order_version
 
         arguments['data_screens_path'] = constants.EXP_ROOT_PATH / constants.STIMULI_IMAGES_CSV

@@ -44,7 +44,14 @@ Note: to install ana/miniconda it might ask you to register, but you should be a
    ```
    If you get an error message, it means your git is not installed, and you need to install it. You can download it [here](https://git-scm.com/downloads), and follow the instructions to install it.
 
-**3. Clone this repository**
+**3. Install Microsoft C++ Build Tools for Windows: Microsoft Visual C++ 14.0 or greater**
+
+   If you are using Windows, you need to have Microsoft Visual C++ 14.0 or greater installed on your computer to install the required packages. <br>
+   If you are not sure whether you have it installed, you can check it by going to the following path on your computer: `C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\MSBuild\Microsoft\VC`. If you see a folder with this name, it means you have it installed. <br>
+   You can also go to `Control Panel` -> `Programs` -> `Programs and Features` and look for entries related to Microsoft Visual C++ Redistributable. You should see versions like Microsoft Visual C++ 2015 Redistributable (for 14.0) or newer versions such as 2017, 2019, or 2022. <br>
+   To install it, you can download it [here](https://visualstudio.microsoft.com/visual-cpp-build-tools/).
+
+**4. Clone this repository**
 
    If you received the experiment as a zip folder, you can skip this step and proceed to the next one directly.
    If not, you can clone the repository to your local machine by running the following command in your terminal:
@@ -52,7 +59,7 @@ Note: to install ana/miniconda it might ask you to register, but you should be a
    git clone https://github.com/MultiplEYE-COST/wg1-experiment-implementation.git
    ```
 
-**4. Create the conda environment**
+**5. Create the conda environment**
 
    Navigate to the root folder of your local copy of the experiment and run the lines below in your terminal one after the other. 
    > Note: you can easily navigate through your directories by using this command `cd [path]`.
@@ -62,7 +69,8 @@ Note: to install ana/miniconda it might ask you to register, but you should be a
    
    The root folder should end with this path: `.../wg1-experiment-implementation/`. Whatever is before that depends on where you stored the experiment on your local machine.
 
-   Next, we can create the environment. This line creates a conda environment with the name `multipleye3.9` and installs the correct python version. 
+   Next, we can create the environment. This line creates a conda environment with the name `multipleye3.9` and installs the correct python version. <br>
+   If you are familiar with python and conda, and you want to create the environment with a different name, or you want to use a different python version, e.g. Python 3.10, which is also supported by the experiment, you can change the name of the environment and the python version in the command line.
 
    ```bash
    conda create --name multipleye3.9 python==3.9 
@@ -87,12 +95,12 @@ Note: to install ana/miniconda it might ask you to register, but you should be a
    Please change ``/Users/[USERNAME]/`` to the path of where you installed your miniconda. Please change ``miniconda3`` to ``anaconda3`` if you installed anaconda instead of miniconda. <br>
    Then you can create the environment again by running the command in the above.
 
-**5. Install Eye-tracker specific libraries** 
+**6. Install Eye-tracker specific libraries** 
 
 If you work with an EyeLink eye-tracker, you need to install the EyeLink libraries. You can find the instructions on how to do this [here](INSTALL_PYLINK.md).
 
 
-**6.** If you work in an IDE, you can open the repository as a project and configure the python interpreter to be the newly
+**7.** If you work in an IDE, you can open the repository as a project and configure the python interpreter to be the newly
    created env. How you have to do it depends on the IDE. For PyCharm it is explained under this link: [Configure existing conda env as PyCharm interpreter](https://www.jetbrains.com/help/pycharm/conda-support-creating-conda-virtual-environment.html)
 
 

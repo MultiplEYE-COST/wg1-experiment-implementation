@@ -30,12 +30,17 @@ If you are not sure, you can check if you have git installed by running the foll
 <pre><code class="language-bash">git --version
 </code></pre>
 <p>If you get an error message, it means your git is not installed, and you need to install it. You can download it <a href="https://git-scm.com/downloads">here</a>, and follow the instructions to install it.</p>
-<p><strong>3. Clone this repository</strong></p>
+<p><strong>3. Install Microsoft C++ Build Tools for Windows: Microsoft Visual C++ 14.0 or greater</strong></p>
+<p>If you are using Windows, you need to have Microsoft Visual C++ 14.0 or greater installed on your computer to install the required packages. <br>
+If you are not sure whether you have it installed, you can check it by going to the following path on your computer: <code>C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\MSBuild\Microsoft\VC</code>. If you see a folder with this name, it means you have it installed. <br>
+You can also go to <code>Control Panel</code> -&gt; <code>Programs</code> -&gt; <code>Programs and Features</code> and look for entries related to Microsoft Visual C++ Redistributable. You should see versions like Microsoft Visual C++ 2015 Redistributable (for 14.0) or newer versions such as 2017, 2019, or 2022. <br>
+To install it, you can download it <a href="https://visualstudio.microsoft.com/visual-cpp-build-tools/">here</a>.</p>
+<p><strong>4. Clone this repository</strong></p>
 <p>If you received the experiment as a zip folder, you can skip this step and proceed to the next one directly.
 If not, you can clone the repository to your local machine by running the following command in your terminal:</p>
 <pre><code class="language-bash">git clone https://github.com/MultiplEYE-COST/wg1-experiment-implementation.git
 </code></pre>
-<p><strong>4. Create the conda environment</strong></p>
+<p><strong>5. Create the conda environment</strong></p>
 <p>Navigate to the root folder of your local copy of the experiment and run the lines below in your terminal one after the other.</p>
 <blockquote>
 <p>Note: you can easily navigate through your directories by using this command <code>cd [path]</code>.
@@ -44,7 +49,8 @@ you can navigate to the root folder by running the following command in your ter
 If you want to go back to the previous folder, you can run the following command in your terminal: <code>cd ..</code>.</p>
 </blockquote>
 <p>The root folder should end with this path: <code>.../wg1-experiment-implementation/</code>. Whatever is before that depends on where you stored the experiment on your local machine.</p>
-<p>Next, we can create the environment. This line creates a conda environment with the name <code>multipleye3.9</code> and installs the correct python version.</p>
+<p>Next, we can create the environment. This line creates a conda environment with the name <code>multipleye3.9</code> and installs the correct python version. <br>
+If you are familiar with python and conda, and you want to create the environment with a different name, or you want to use a different python version, e.g. Python 3.10, which is also supported by the experiment, you can change the name of the environment and the python version in the command line.</p>
 <pre><code class="language-bash">conda create --name multipleye3.9 python==3.9 
 </code></pre>
 <p>After you've done that, you need to activate the environment by running the following command in your terminal:</p>
@@ -61,9 +67,9 @@ If you want to go back to the previous folder, you can run the following command
 </code></pre>
 <p>Please change <code>/Users/[USERNAME]/</code> to the path of where you installed your miniconda. Please change <code>miniconda3</code> to <code>anaconda3</code> if you installed anaconda instead of miniconda. <br>
 Then you can create the environment again by running the command in the above.</p>
-<p><strong>5. Install Eye-tracker specific libraries</strong></p>
+<p><strong>6. Install Eye-tracker specific libraries</strong></p>
 <p>If you work with an EyeLink eye-tracker, you need to install the EyeLink libraries. You can find the instructions on how to do this <a href="INSTALL_PYLINK.html">here</a>.</p>
-<p><strong>6.</strong> If you work in an IDE, you can open the repository as a project and configure the python interpreter to be the newly
+<p><strong>7.</strong> If you work in an IDE, you can open the repository as a project and configure the python interpreter to be the newly
 created env. How you have to do it depends on the IDE. For PyCharm it is explained under this link: <a href="https://www.jetbrains.com/help/pycharm/conda-support-creating-conda-virtual-environment.html">Configure existing conda env as PyCharm interpreter</a></p>
 <h2>For MacOS</h2>
 <p>The experiment has been tested on Mac as well but not as thoroughly as on Windows. The creation of the conda
@@ -73,7 +79,7 @@ order to make it run</strong>. If you had to install additional programs, please
 <ol>
 <li>You need to allow PsychoPy to access your input. In order to do that go to <code>System Preferences</code>
 -&gt; <code>Security &amp; Privacy</code> -&gt; <code>Privacy</code> -&gt; <code>Input Monitoring</code>. Then you click on the '+' and add PsychoPy.
-Pick the PsychoPy version that is in your env. For me the path for a anaconda env called 'test' looks like this:</li>
+Pick the PsychoPy version that is in your env. For me the path for a anaconda env called 'multipleye3.9' looks like this:</li>
 </ol>
 <pre><code class="language-bash">/Users/[USERNAME]/opt/anaconda3/envs/multipleye3.9/bin/psychopy
 </code></pre>
