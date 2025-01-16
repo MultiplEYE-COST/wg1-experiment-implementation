@@ -13,7 +13,7 @@ Install the [EyeLink Developers Kit](https://www.sr-research.com/support/showthr
 an [SR Research account](https://www.sr-research.com/support/thread-48.html).
 
 ### 2. Set up conda environment
-Set up your virtual environment with the python version specified (python 3.9). 
+Set up your virtual environment with the python version specified (python 3.9 or python 3.10). 
 See [CONDA_ENVIRONMENT.md](CONDA_ENVIRONMENT.md).
 
 ### 3. EyeLink path
@@ -27,7 +27,7 @@ C:\Program Files (x86)\SR Research\EyeLink\SampleExperiments\Python\[64 OR 32]\3
 ```
 
 In the path above, pick either the `32` folder or the `64` folder depending on your system. The `3.9` folder in the
-path refers to the python version that we are using.
+path refers to the python version that we are using. If you are using python 3.10, you need to pick the `3.10` folder.
 
 **Mac**
 
@@ -37,7 +37,7 @@ following link:
 /Applications/EyeLink/SampleExperiments/Python/3.9/pylink
 ```
 
-The `3.9` folder in the path refers to the python version that we are using.
+The `3.9` folder in the path refers to the python version that we are using. If you are using python 3.10, you need to pick the `3.10` folder.
 
 ### 4. Copy pylink folder to environment
 Now you need to paste the pylink folder to your environment. You can run the following command with the link from above
@@ -47,7 +47,7 @@ want to paste pylink into:
 **Windows**
 
 It is possible to use the ``cp`` command in the Windows powershell, in other terminals you might not be able to use it.
-But you can always copy and paste it manually.
+But you can always copy and paste it manually. Please replace python 3.9 with python 3.10 if you are using python 3.10.
 ```
 cp -R "C:\Program Files (x86)\SR Research\EyeLink\SampleExperiments\Python\64\3.9\pylink" C:\Users\[USERNAME]\anaconda3\envs\multipleye3.9\Lib\site-packages
 ```
@@ -61,3 +61,4 @@ cp -R /Applications/EyeLink/SampleExperiments/Python/3.9/pylink /Users/[USERNAME
 Note, that the path to your environment (for both Mac and Windows) looks different if:
 1. you installed miniconda instead of anaconda. Then you can replace `anaconda3` with `miniconda3` 
 2. you named your virtual environment differently. Then `multipleye3.9` must be replaced with the name of the environment.
+3. Please replace python 3.9 with python 3.10 if you are using python 3.10.

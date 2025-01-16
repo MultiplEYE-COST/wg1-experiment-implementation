@@ -43,6 +43,10 @@ You can try to find out whether the file or folder the program is looking for is
 If it seems to be there, sometimes, it is helpful to click `edit` on the interface and then check again that everything was entered correctly and then
 click `run` again. Even if everything was entered correctly previously, sometimes it can help to simply restart the experiment.
 
+### Error: path to the file is too long to be unzipped
+When using the Windows built-in unzip function, you might encounter an error message that the path is too long to be unzipped. It does not unzip some of the files and you cannot access them.
+This can be solved by using something more advanced for unzipping, such as 7-zip. You can download it [here](https://www.7-zip.org/).
+Or you can unzip it in a different computer, e.g. a Mac, and then copy the files to your computer.
 
 ### Image is blurry
 If your presentation PC is a Windows machine it is possible that you have to adjust the display settings like in the screenshot below.
@@ -51,6 +55,14 @@ Make sure that you select the display that you will run the experiment on! And t
 
 Another reason for blurry images is that the images were not adjusted to the resolution and size of your display.
 Please read the MultiplEYE guidelines on how to create the images adjusted to your display.
+
+### Image is larger than 37 cm in width and/or 28 cm in height
+
+If you see this error message, it means that the image you are trying to display is too large for the screen. This can cause the texts exceed the tracking area and the calibration will not work correctly.
+It is possible that the image is too large because the display settings are not correct. Please adjust the display solution for the monitor you are using to the numbers you specified in the pre-registration form. e.g. 1920x1080 for our lab monitor.
+![image](../images/Windows_display_setting_2.png)
+
+Another reason for larger images is that the resolution or the screen size of your monitor that you specified in the pre-registration form is not correct. Please check the resolution and the screen size of the monitor you are using and update these information to the MultiplEYE team.
 
 
 ### Error: 'No module named pylink' or 'Module pylink cannot be found'

@@ -24,7 +24,7 @@ contact [multipleye@cl.uzh.ch](mailto:multipleye@cl.uzh.ch).
 
 In order to run the MultiplEYE experiment you will need to complete the following steps
 1. Please read the official MultiplEYE Data Collection Guidelines linked on this page: [MultiplEYE contribute](https://multipleye.eu/contribute/)
-2. Download the experiment code from this repository. Either clone via git or download the zip file (see [download as zip](#download-the-experiment-code-as-zip-file)).
+2. Download the experiment code from this repository. Either clone via git or download the zip file (see [download as zip](#download-the-experiment-code-as-zip-file)). Please make sure to remove "-main" from the downloaded folder name. The folder should be named `wg1-experiment-implementation`!
 3. Following the MultiplEYE Data Collection Guidelines, prepare the stimulus files which includes the creation of the images
 4. Copy the stimulus files to the correct location in the experiment data folder: `experiment_implementation/data/[your stimulus folder]`
 5. Copy the files (3 Excel files) for the participant questionnaire the to the correct location in the experiment 
