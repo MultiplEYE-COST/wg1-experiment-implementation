@@ -117,3 +117,14 @@ Pick the PsychoPy version that is in your env. For me the path for a anaconda en
 ```bash
 /Users/[USERNAME]/opt/anaconda3/envs/multipleye3.9/bin/psychopy
 ```
+
+### Troubleshooting
+
+- If installing the requirements fails, try installing `hdf5`:
+  ```bash
+  brew install hdf5
+  ```
+- If you get an `ImportError` about "symbol not found in flat namespace", try downgrading wxPython to version 4.2.1:
+  ```bash
+  pip install wxPython==4.2.1
+  ```
