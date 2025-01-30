@@ -125,7 +125,9 @@ using a webcam. Please contact [multipleye@cl.uzh.ch](mailto:multipleye@cl.uzh.c
 ## Upload the data
 After you have run a MultiplEYE session, no matter if pilot or real experiment, please make sure to:
 1. Always save the entire `data` folder in a safe location locally as you do for other data collections.
-2. Upload the `data` to the MultiplEYE server. When you preregistered, you should have 
-received a folder where to upload the data.
+2. Upload the participant/session folder to the MultiplEYE server. When you preregistered, you should have 
+received a folder where to upload the data. Add the participant/session folder to the eye-tracking-sessions folder. Also add the
+session documentation file to the documentation folder in your respective folder. **Please consult Section 14 of the
+guidelines for more information on how to upload the data.**
 3. Whenever you collect data from a new participant, please upload the entire `data` folder to the server, 
 replacing the old one.
