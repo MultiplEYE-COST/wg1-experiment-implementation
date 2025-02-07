@@ -3,7 +3,7 @@ import os.path
 from pprint import pprint
 
 import pandas as pd
-from PyQt6 import QtGui, QtWidgets
+from PyQt6 import QtGui
 from psychopy import gui
 import constants
 
@@ -133,7 +133,7 @@ class MultiplEYEParticipantQuestionnaire:
                                  'other_reading_time']
 
             self._show_questions(
-                f'{self.instructions["pq_answer_for_lang"]} {self.pq_data[lang]}',
+                f'{self.pq_data[lang].upper()}: {self.instructions["pq_answer_for_lang"].strip()} {self.pq_data[lang].upper()}',
                 reading_questions,
                 button=self.instructions['pq_next_button'],
                 keys=[f'{lang}_{question}' for question in reading_questions[1:]],
@@ -247,6 +247,7 @@ class MultiplEYEParticipantQuestionnaire:
             pos=(constants.IMAGE_WIDTH_PX // 12, constants.IMAGE_HEIGHT_PX // 10),
             size=(800, 900),
         )
+        # pq_gui.showMaximized()
 
         try:
             pq_gui.cancelBtn.setHidden(True)
@@ -276,12 +277,8 @@ class MultiplEYEParticipantQuestionnaire:
         else:
             pq_data = existing_data
 
-         # first 4 questions on one page
+        # first 4 questions on one page
         for question_id, question_key in questions:
-            # Adding the current language in the additional_read_language question
-            if question_id == "additional_read_language":
-                self.questions["additional_read_language"][
-                    "pq_question_text"] = f'{self.questions["additional_read_language"]["pq_question_text"]}'
 
             answer_type = self.questions[question_id]["pq_answer_type"]
 

@@ -113,23 +113,16 @@ OPTION_4 = IMAGE_CONFIG['option_4']
 OPTION_5 = IMAGE_CONFIG['option_5']
 
 #########################################################
-
 # participant_questionnaire constants
+
 PQ_DATA_FOLDER_PATH = EXP_ROOT_PATH / 'data' / f'participant_questionnaire_{LANGUAGE}_{COUNTRY_CODE}_{LAB_NUMBER}'
 
-PQ_PARTICIPANT_INSTRUCTIONS_EXCEL = PQ_DATA_FOLDER_PATH / f'multipleye_questionnaire_instructions_{LANGUAGE}.xlsx'
-PQ_QUESTIONS_EXCEL = PQ_DATA_FOLDER_PATH / f'multipleye_questionnaire_questions_{LANGUAGE}.xlsx'
-PQ_LANGUAGES_EXCEL = PQ_DATA_FOLDER_PATH / f'language_iso639_1_{LANGUAGE}.xlsx'
-
-# excel file version
 PQ_PARTICIPANT_INSTRUCTIONS_XLSX = PQ_DATA_FOLDER_PATH / f'multipleye_questionnaire_instructions_{LANGUAGE}.xlsx'
 PQ_QUESTIONS_XLSX = PQ_DATA_FOLDER_PATH / f'multipleye_questionnaire_questions_{LANGUAGE}.xlsx'
 PQ_LANGUAGES_XLSX = PQ_DATA_FOLDER_PATH / f'language_iso639_1_{LANGUAGE}.xlsx'
 
-# Opening the file where the data is saved
 PQ_FILE = PQ_DATA_FOLDER_PATH / f'participant_questionnaire_data_{LANGUAGE}_{COUNTRY_CODE}_{LAB_NUMBER}.xlsx'
 
-# fix program icon and image not showing
 PQ_program_icon = EXP_ROOT_PATH / 'ui_data/interface_icons/program_icon.png'
 PQ_image_dir = EXP_ROOT_PATH / 'ui_data/interface_icons/running_icon_copy.png'
 
