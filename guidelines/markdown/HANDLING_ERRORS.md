@@ -35,6 +35,17 @@ check whether the file is really missing) without changing any code or file cont
 
 ## Common errors
 
+### Not all the files are there
+Please check whether you have all the files that are necessary. This includes the stimulus images as created by the 
+experiment team and the participant questionnaire files (3 excel files).
+
+### Not all updates have been made
+Maybe there has been a change recently to the stimulus files in english. Please check the changelog in the MultiplEYE files
+and make sure that you have all changes reflected in the files in your language. Please write an email to 
+[multipleye.project@gmail.com](mailto:multipleye.project@gmail.com) if you don't know where
+to find the changelog.
+Important: there might be small changes such as a typo in a column name that has been fixed. Please compare the files carefully.
+
 ### Error: `No such file or directory`
 If this is in the error message, it means that the program cannot find the file specified. This can be due to different reasons.
 Some of them you can solve yourself, others not.
@@ -77,6 +88,7 @@ restart the process in the `CONDA_ENVIRONMENT.md`.
 ![images](../images/visual_c++_error.png)
 If you see this error message, it means that you do not have the necessary build tools installed on your computer. 
 As instructed in the error message, you can download the necessary build tools from the link provided, and then restart the process in the `CONDA_ENVIRONMENT.md`.
+
 
 ### Other Errors (will be updated soon)
 - reaction latency: the experiment is designed such that participants cannot just press space right when the screen appears.

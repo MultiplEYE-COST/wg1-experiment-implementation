@@ -35,7 +35,17 @@ If you are not sure, you can check if you have git installed by running the foll
 If you are not sure whether you have it installed, you can check it by going to the following path on your computer: <code>C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\MSBuild\Microsoft\VC</code>. If you see a folder with this name, it means you have it installed. <br>
 You can also go to <code>Control Panel</code> -&gt; <code>Programs</code> -&gt; <code>Programs and Features</code> and look for entries related to Microsoft Visual C++ Redistributable. You should see versions like Microsoft Visual C++ 2015 Redistributable (for 14.0) or newer versions such as 2017, 2019, or 2022. <br>
 To install it, you can download it <a href="https://visualstudio.microsoft.com/visual-cpp-build-tools/">here</a>.</p>
-<p><strong>4. Clone this repository</strong></p>
+<p><strong>4a. Download this repository</strong></p>
+<p>If you have not already done so, please download the experiment as a zip folder (refer to the instructions in
+<a href="../README.html">this README</a>.
+Note: when you unzip the folder, sometimes another folder will be included. Please make sure that the folder structure looks like this:</p>
+<pre><code>  |-- wg1-experiment-implementation-main
+  |---- experiment_implementation
+  |---- guidelines
+  |---- README.html
+  ...
+</code></pre>
+<p><strong>4b. Clone this repository</strong></p>
 <p>If you received the experiment as a zip folder, you can skip this step and proceed to the next one directly.
 If not, you can clone the repository to your local machine by running the following command in your terminal:</p>
 <pre><code class="language-bash">git clone https://github.com/MultiplEYE-COST/wg1-experiment-implementation.git
@@ -49,6 +59,9 @@ you can navigate to the root folder by running the following command in your ter
 If you want to go back to the previous folder, you can run the following command in your terminal: <code>cd ..</code>.</p>
 </blockquote>
 <p>The root folder should end with this path: <code>.../wg1-experiment-implementation/</code>. Whatever is before that depends on where you stored the experiment on your local machine.</p>
+<blockquote>
+<p>Note: it is best to move the experiment folder to a location that is not too deep in the directory structure.</p>
+</blockquote>
 <p>Next, we can create the environment. This line creates a conda environment with the name <code>multipleye3.9</code> and installs the correct python version. <br>
 If you are familiar with python and conda, and you want to create the environment with a different name, or you want to use a different python version, e.g. Python 3.10, which is also supported by the experiment, you can change the name of the environment and the python version in the command line.</p>
 <pre><code class="language-bash">conda create --name multipleye3.9 python==3.9 
@@ -83,3 +96,12 @@ Pick the PsychoPy version that is in your env. For me the path for a anaconda en
 </ol>
 <pre><code class="language-bash">/Users/[USERNAME]/opt/anaconda3/envs/multipleye3.9/bin/psychopy
 </code></pre>
+<h3>Troubleshooting</h3>
+<ul>
+<li>If installing the requirements fails, try installing <code>hdf5</code>:<pre><code class="language-bash">brew install hdf5
+</code></pre>
+</li>
+<li>If you get an <code>ImportError</code> about &quot;symbol not found in flat namespace&quot;, try downgrading wxPython to version 4.2.1:<pre><code class="language-bash">pip install wxPython==4.2.1
+</code></pre>
+</li>
+</ul>

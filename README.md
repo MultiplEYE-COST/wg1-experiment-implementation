@@ -27,7 +27,7 @@ In order to run the MultiplEYE experiment you will need to complete the followin
 2. Download the experiment code from this repository. Either clone via git or download the zip file (see [download as zip](#download-the-experiment-code-as-zip-file)). Please make sure to remove "-main" from the downloaded folder name. The folder should be named `wg1-experiment-implementation`!
 3. Following the MultiplEYE Data Collection Guidelines, prepare the stimulus files which includes the creation of the images
 4. Copy the stimulus files to the correct location in the experiment data folder: `experiment_implementation/data/[your stimulus folder]`
-5. Copy the files (3 Excel files) for the participant questionnaire the to the correct location in the experiment 
+5. **Mandatory** also for test run: Copy the files (3 Excel files) for the participant questionnaire the to the correct location in the experiment 
 data folder. You will have to create a folder for your language and country. The folder should be named as follows:
 `experiment_implementation/data/participant_questionnaire_[LANGUAGE_CODE]_[COUNTRY_CODE]_[LAB_NUMBER]/`
 6. Optional: if you have created a translation of the interface, you can copy it to this location: 
@@ -45,7 +45,7 @@ Click on the green button `Code` and then click on `Download ZIP`. Unzip the fol
 > Note: The repository contains a folder with toy stimuli to test the experiment. Sometimes you cannot unzip these files because the path gets too long.
 > In this case, you can either move the folder to a different location closer to the root or unzip and ignore the files
 > in the toy stimuli folder (i.e. skip the error message that pops up during unzipping). To use the 
-> toy stimuli, please contact [multipleye@cl.uzh.ch](mailto:multipleye@cl.uzh.ch) and we can provide them and you can 
+> toy stimuli, please contact [multipleye.project@gmail.com](mailto:multipleye.project@gmail.com) and we can provide them and you can 
 > copy them to the correct location.
 
 ![Download](guidelines/images/download-as-zip.png)
@@ -120,7 +120,7 @@ work with the tobii eye-trackers:
 
 ### Develop and run experiments for other eye-trackers
 Depending on what is needed we can add more eye-trackers. There is also a team that is trying to set up experiment 
-using a webcam. Please contact [multipleye@cl.uzh.ch](mailto:multipleye@cl.uzh.ch) for more information.
+using a webcam. Please contact [multipleye.project@gmail.com](mailto:multipleye.project@gmail.com) for more information.
 
 ## Upload the data
 After you have run a MultiplEYE session, no matter if pilot or real experiment, please make sure to:
