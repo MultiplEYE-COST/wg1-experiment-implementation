@@ -122,18 +122,18 @@ def mark_stimulus_order_version_used(order_version: int, participant_id: int, se
         randomization_df.to_csv(constants.STIMULUS_RANDOMIZATION_CSV, sep=',', index=False, encoding='utf8')
 
 
-def determine_last_stimulus(relative_exp_result_path: str) -> tuple[pd.DataFrame, str, int | None, str | None]:
+def determine_last_stimulus(relative_exp_result_path: str) -> tuple[pd.DataFrame, str, int | None, str | None] | None:
     csv_path = f'{relative_exp_result_path}/logfiles/completed_stimuli.csv'
     if os.path.isfile(csv_path):
         completed_stimuli_df = pd.read_csv(csv_path, sep=',', encoding='utf8')
-    else:
-        # if the file does not exist, we return None as the experiment was interrupted before anything could happen
-        raise FileNotFoundError(f'Continue session: No completed_stimuli.csv file found. '
-                                f'PLease restart the experiment with a new participant ID.')
 
+    # if the file does not exist or is empty, we return None as the experiment was interrupted before
+    # anything could happen and restart the session from the beginning with the same ID
+    else:
+        return None
     if completed_stimuli_df.empty:
-        raise ValueError(f'Continue session: The completed_stimuli.csv file is empty. '
-                         f'Please restart the experiment with a new participant ID.')
+        # should not happen but you never know
+        return None
 
     if not len(list(Path(relative_exp_result_path).glob('*.edf'))) == 1:
         raise FileNotFoundError(f'Continue session: No EDF file found in the {relative_exp_result_path}. '

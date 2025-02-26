@@ -28,7 +28,6 @@ def run_experiment(
         continue_core_session: bool = False,
 
 ) -> None:
-
     participant_id_str = str(participant_id)
 
     # participant id should always be 3 digits long
@@ -54,21 +53,28 @@ def run_experiment(
         if not os.path.isdir(absolute_exp_result_path):
             os.makedirs(absolute_exp_result_path)
 
-    # it has already been checked that there is no folder with the same participant ID, so we can create a new folder
     # case for pilot session or core session
     else:
         relative_exp_result_path = f'{constants.RESULT_FOLDER_PATH}/{dataset_type.lower()}/{participant_result_folder}'
 
         if continue_core_session:
-            completed_stimuli_df, csv_path, last_completed_stimulus_id, last_trial_id = determine_last_stimulus(
+            determine_stimulus = determine_last_stimulus(
                 relative_exp_result_path
-                )
+            )
 
-            if not last_trial_id:
+            # if it is None, the file was not there or empty, i.e. the experiment did not start really
+            if determine_stimulus is None:
                 last_trial_id = 'full_restart'
 
+            else:
+                completed_stimuli_df, csv_path, last_completed_stimulus_id, last_trial_id = determine_stimulus
+                if not last_trial_id:
+                    last_trial_id = 'full_restart'
+
             relative_exp_result_path = (f'{constants.RESULT_FOLDER_PATH}/{dataset_type.lower()}/'
-                                        f'{participant_result_folder}_start_after_trial_{last_trial_id}')
+                                        f'{participant_result_folder}_'
+                                        f'{last_trial_id if last_trial_id == "full_restart" else "start_after_trial_" + 
+                                                                                                 str(last_trial_id)}')
 
             absolute_exp_result_path = os.path.abspath(relative_exp_result_path)
 
@@ -82,6 +88,8 @@ def run_experiment(
             completed_stimuli_df.to_csv(csv_path, index=False)
 
         else:
+            # it has already been checked that there is no folder with the same participant ID,
+            # so we can create a new folder
             if not os.path.exists(relative_exp_result_path):
                 os.mkdir(relative_exp_result_path)
             absolute_exp_result_path = os.path.abspath(relative_exp_result_path)
