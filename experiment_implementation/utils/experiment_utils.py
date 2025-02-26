@@ -128,13 +128,16 @@ def determine_last_stimulus(relative_exp_result_path: str) -> tuple[pd.DataFrame
         completed_stimuli_df = pd.read_csv(csv_path, sep=',', encoding='utf8')
     else:
         # if the file does not exist, we return None as the experiment was interrupted before anything could happen
-        return None
+        raise FileNotFoundError(f'Continue session: No completed_stimuli.csv file found. '
+                                f'PLease restart the experiment with a new participant ID.')
 
     if completed_stimuli_df.empty:
-        return None
+        raise ValueError(f'Continue session: The completed_stimuli.csv file is empty. '
+                         f'Please restart the experiment with a new participant ID.')
 
     if not len(list(Path(relative_exp_result_path).glob('*.edf'))) == 1:
-        raise FileNotFoundError(f'Continue session: No EDF file found in the {relative_exp_result_path}. Please check the path. '
+        raise FileNotFoundError(f'Continue session: No EDF file found in the {relative_exp_result_path}. '
+                                f'Please check the path. '
                                 f'You HAVE to copy the edf file from the host PC otherwise it will be overwritten.')
 
     # if the file is empty, we return None
@@ -151,7 +154,7 @@ def determine_last_stimulus(relative_exp_result_path: str) -> tuple[pd.DataFrame
         return completed_stimuli_df, csv_path, last_row['stimulus_id'], last_row['trial_id']
     # in case that the last stimulus has not been completed, we need to go back one stimulus
     elif last_row['completed'] == 0:
-        # if the first stimulus was started but not completed we wil start afresh
+        # if the first stimulus was started but not completed we will start afresh
         try:
             second_last_row = completed_stimuli_df.iloc[-2]
         except IndexError:
