@@ -100,7 +100,7 @@ This error can have multiple reasons. If you know how to do this you can do the 
 3. type `pip list` OR `pip3 list`(some people will ALWAYS have to use `pip` others `pip3` also for the commands below.
 4. scroll trhough the output of the list and look for packages that contain `PyQt6` (e.g. `PyQt6-Qt6`).
 5. Now there are multiple things that could have gone wrong:
-   a) check if there are any packages that contain `PyQt5`. If so, deinstall is by running `pip uninstall [PyQt5]`. Repeat this for all names in the list that contain PyQt5.
+   a) check if there are any packages that contain `PyQt5`. If so, deinstall is by running `pip uninstall PyQt5`. Repeat this for all names in the list that contain PyQt5.
    b) if a) is not true, try deinstalling all packages that contain `PyQt6` (see a) for how to do this) and instead install PyQt6==6.0.2, PyQt6-Qt6==6.0.2, PyQt6_sip==13.0.0, pyqt6-tools==6.0.2.3.2. You can install is by running
    `pip install PyQt6==6.0.2`, then run `pip install PyQt6-Qt6==6.0.2`, etc. for all four packages listed before.
 
