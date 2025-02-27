@@ -38,6 +38,8 @@ data folder. You will have to create a folder for your language and country. The
 9. [Run the dummy experiment](#run-the-dummy-experiment) to check if everything is working correctly
 10. [Run the experiment with an eye-tracker](#run-the-experiment-with-an-eye-tracker)
 
+> If you encounter any problems, please consult this [document](guidelines/markdown/HANDLING_ERRORS.md). If you cannot find your error, contact [multipleye.project@gmail.com](mailto:multipleye.project@gmail.com).
+
 ### Download the experiment code as zip file
 If you do not have git installed, you can download the code as a zip file from this website.
 Click on the green button `Code` and then click on `Download ZIP`. Unzip the folder in our preferred location.
