@@ -1,12 +1,15 @@
 # How to handle common errors
+It is very likely that you will encounter multiple error during the set-up. Don't be discouraged, this is normal. The data collection involves many tiny details and oftentimes, something goes wrong. 
+However, so far, we could install the experiment everywhere and there were no problems that could not been solved with a little patience. 
 
-> Please note that whenever you encounter an error, please let us know ([multipleye@cl.uzh.ch](mailto:multipleye@cl.uzh.ch)).
-> Oftentimes the error has been encountered before and can be easily fixed. Please do not change the code. If the error
+> Please note that whenever you encounter an error, please let us know ([multipleye.project@gmail.com](mailto:multipleye.project@gmail.com)).
+> Oftentimes the error has been encountered before and can be easily fixed. **Please do not change the code**. If the error
 > tells you, for example, that you've entered a wrong value in the GUI you can try and fix it by entering the correct value.
-> In any case: write down _exactly_ what steps you took to fix the error and copy paste the output of the GUI window. 
+> In any case: write down _exactly_ what steps you took to fix the error and copy paste the output of the GUI window. This document should
+> help you fix the error yourself, but **don't hesitate to contact us if it does not work out**. 
 
 **How are errors displayed and how can you read them!**
-- As soon as you start the experiment, a small window will show up with text written in it. See screenshot below (add screenshot)
+- As soon as you start the experiment, a small window will show up with text written in it. See screenshot below
 
 - This text will show many experiment details that are not relevant but also the error message. Oftentimes, the error
 messages contain some useful information that can help you debug the issue. The screenshot below shows an example of an error message:
@@ -31,9 +34,10 @@ Please follow the following steps when you encounter an error:
 check whether the file is really missing) without changing any code or file contents!
 5. Restart the experiment and very carefully check the details to make sure you did not accidentally enter a wrong value before
 6. If it still does not work, please read the guidelines again and check whether you missed a step.
-7. Please let us know about the error and attach the output of the GUI window anything you found out about the error message.
+7. Consult the list of common errors below and check whether one of these might solve your problem.
+8. Please let us know about the error and attach the output of the GUI window and anything you found out about the error message.
 
-## Common errors
+## List of Common errors
 
 ### Not all the files are there
 Please check whether you have all the files that are necessary. This includes the stimulus images as created by the 
@@ -89,6 +93,16 @@ restart the process in the `CONDA_ENVIRONMENT.md`.
 If you see this error message, it means that you do not have the necessary build tools installed on your computer. 
 As instructed in the error message, you can download the necessary build tools from the link provided, and then restart the process in the `CONDA_ENVIRONMENT.md`.
 
+### Error: ImportError: DLL load failed while importing QtCore: The specified procedure could not be found.
+This error can have multiple reasons. If you know how to do this you can do the following:
+1. go to the terminal where you started the experiment
+2. make sure that the environment is activated that you used to run the experiment
+3. type `pip list` OR `pip3 list`(some people will ALWAYS have to use `pip` others `pip3` also for the commands below.
+4. scroll trhough the output of the list and look for packages that contain `PyQt6` (e.g. `PyQt6-Qt6`).
+5. Now there are multiple things that could have gone wrong:
+   a) check if there are any packages that contain `PyQt5`. If so, deinstall is by running `pip uninstall PyQt5`. Repeat this for all names in the list that contain PyQt5.
+   b) if a) is not true, try deinstalling all packages that contain `PyQt6` (see a) for how to do this) and instead install PyQt6==6.0.2, PyQt6-Qt6==6.0.2, PyQt6_sip==13.0.0, pyqt6-tools==6.0.2.3.2. You can install is by running
+   `pip install PyQt6==6.0.2`, then run `pip install PyQt6-Qt6==6.0.2`, etc. for all four packages listed before.
 
 ### Other Errors (will be updated soon)
 - reaction latency: the experiment is designed such that participants cannot just press space right when the screen appears.
