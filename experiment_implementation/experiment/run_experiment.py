@@ -73,8 +73,7 @@ def run_experiment(
 
             relative_exp_result_path = (f'{constants.RESULT_FOLDER_PATH}/{dataset_type.lower()}/'
                                         f'{participant_result_folder}_'
-                                        f'{last_trial_id if last_trial_id == "full_restart" else "start_after_trial_" + 
-                                                                                                 str(last_trial_id)}')
+                                        f'{last_trial_id if last_trial_id == "full_restart" else "start_after_trial_" + (last_trial_id)}')
 
             absolute_exp_result_path = os.path.abspath(relative_exp_result_path)
 
