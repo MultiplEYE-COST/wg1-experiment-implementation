@@ -1,14 +1,17 @@
 <h1>How to handle common errors</h1>
+<p>It is very likely that you will encounter multiple error during the set-up. Don't be discouraged, this is normal. The data collection involves many tiny details and oftentimes, something goes wrong.
+However, so far, we could install the experiment everywhere and there were no problems that could not been solved with a little patience.</p>
 <blockquote>
-<p>Please note that whenever you encounter an error, please let us know (<a href="mailto:multipleye@cl.uzh.ch">multipleye@cl.uzh.ch</a>).
-Oftentimes the error has been encountered before and can be easily fixed. Please do not change the code. If the error
+<p>Please note that whenever you encounter an error, please let us know (<a href="mailto:multipleye.project@gmail.com">multipleye.project@gmail.com</a>).
+Oftentimes the error has been encountered before and can be easily fixed. <strong>Please do not change the code</strong>. If the error
 tells you, for example, that you've entered a wrong value in the GUI you can try and fix it by entering the correct value.
-In any case: write down <em>exactly</em> what steps you took to fix the error and copy paste the output of the GUI window.</p>
+In any case: write down <em>exactly</em> what steps you took to fix the error and copy paste the output of the GUI window. This document should
+help you fix the error yourself, but <strong>don't hesitate to contact us if it does not work out</strong>.</p>
 </blockquote>
 <p><strong>How are errors displayed and how can you read them!</strong></p>
 <ul>
 <li>
-<p>As soon as you start the experiment, a small window will show up with text written in it. See screenshot below (add screenshot)</p>
+<p>As soon as you start the experiment, a small window will show up with text written in it. See screenshot below</p>
 </li>
 <li>
 <p>This text will show many experiment details that are not relevant but also the error message. Oftentimes, the error
@@ -34,9 +37,10 @@ be missing for other labs as well.</p>
 check whether the file is really missing) without changing any code or file contents!</li>
 <li>Restart the experiment and very carefully check the details to make sure you did not accidentally enter a wrong value before</li>
 <li>If it still does not work, please read the guidelines again and check whether you missed a step.</li>
-<li>Please let us know about the error and attach the output of the GUI window anything you found out about the error message.</li>
+<li>Consult the list of common errors below and check whether one of these might solve your problem.</li>
+<li>Please let us know about the error and attach the output of the GUI window and anything you found out about the error message.</li>
 </ol>
-<h2>Common errors</h2>
+<h2>List of Common errors</h2>
 <h3>Not all the files are there</h3>
 <p>Please check whether you have all the files that are necessary. This includes the stimulus images as created by the
 experiment team and the participant questionnaire files (3 excel files).</p>
@@ -77,6 +81,18 @@ restart the process in the <code>CONDA_ENVIRONMENT.html</code>.</p>
 <p><img src="../images/visual_c++_error.png" alt="images" />
 If you see this error message, it means that you do not have the necessary build tools installed on your computer.
 As instructed in the error message, you can download the necessary build tools from the link provided, and then restart the process in the <code>CONDA_ENVIRONMENT.html</code>.</p>
+<h3>Error: ImportError: DLL load failed while importing QtCore: The specified procedure could not be found.</h3>
+<p>This error can have multiple reasons. If you know how to do this you can do the following:</p>
+<ol>
+<li>go to the terminal where you started the experiment</li>
+<li>make sure that the environment is activated that you used to run the experiment</li>
+<li>type <code>pip list</code> OR <code>pip3 list</code>(some people will ALWAYS have to use <code>pip</code> others <code>pip3</code> also for the commands below.</li>
+<li>scroll trhough the output of the list and look for packages that contain <code>PyQt6</code> (e.g. <code>PyQt6-Qt6</code>).</li>
+<li>Now there are multiple things that could have gone wrong:
+a) check if there are any packages that contain <code>PyQt5</code>. If so, deinstall is by running <code>pip uninstall PyQt5</code>. Repeat this for all names in the list that contain PyQt5.
+b) if a) is not true, try deinstalling all packages that contain <code>PyQt6</code> (see a) for how to do this) and instead install PyQt6==6.0.2, PyQt6-Qt6==6.0.2, PyQt6_sip==13.0.0, pyqt6-tools==6.0.2.3.2. You can install is by running
+<code>pip install PyQt6==6.0.2</code>, then run <code>pip install PyQt6-Qt6==6.0.2</code>, etc. for all four packages listed before.</li>
+</ol>
 <h3>Other Errors (will be updated soon)</h3>
 <ul>
 <li>reaction latency: the experiment is designed such that participants cannot just press space right when the screen appears.
