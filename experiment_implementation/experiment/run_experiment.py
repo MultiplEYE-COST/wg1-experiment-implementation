@@ -77,14 +77,15 @@ def run_experiment(
 
             absolute_exp_result_path = os.path.abspath(relative_exp_result_path)
 
-            # add a note in the completed_stimuli.csv file that the session has been continued
-            new_row = {
-                'timestamp_started': pd.NA, 'timestamp_completed': pd.NA, 'trial_id': pd.NA, 'stimulus_id': pd.NA,
-                'stimulus_name': absolute_exp_result_path, 'completed': 'restart',
-            }
+            if determine_stimulus is not None:
+                # add a note in the old completed_stimuli.csv file that the session has been continued
+                new_row = {
+                    'timestamp_started': pd.NA, 'timestamp_completed': pd.NA, 'trial_id': pd.NA, 'stimulus_id': pd.NA,
+                    'stimulus_name': absolute_exp_result_path, 'completed': 'restart',
+                }
 
-            completed_stimuli_df = pd.concat([completed_stimuli_df, pd.DataFrame(new_row, index=[0])])
-            completed_stimuli_df.to_csv(csv_path, index=False)
+                completed_stimuli_df = pd.concat([completed_stimuli_df, pd.DataFrame(new_row, index=[0])])
+                completed_stimuli_df.to_csv(csv_path, index=False)
 
         else:
             # it has already been checked that there is no folder with the same participant ID,

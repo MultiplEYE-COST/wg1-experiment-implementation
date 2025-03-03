@@ -175,7 +175,8 @@ class MultiplEYEParticipantQuestionnaire:
                                  'other_reading_time']
 
             self._show_questions(
-                f'{self.instructions["pq_answer_for_lang"]}: {self.pq_data[lang]}',
+                f'{self.pq_data[lang].upper()}: {self.instructions["pq_answer_for_lang"].strip()}: '
+                f'{self.pq_data[lang].upper()}',
                 reading_questions,
                 button=self.instructions['pq_next_button'],
                 keys=[f'{lang}_{question}' for question in reading_questions[1:]],
