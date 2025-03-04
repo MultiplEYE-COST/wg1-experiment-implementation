@@ -55,9 +55,10 @@ Note: to install ana/miniconda it might ask you to register, but you should be a
 
    If you have not already done so, please download the experiment as a zip folder (refer to the instructions in
    [this README](../README.md). 
-   Note: when you unzip the folder, sometimes another folder will be included. Please make sure that the folder structure looks like this:
+   Note: when you unzip the folder, sometimes another folder will be included. Please make sure that the folder structure looks like this. Please make sure to remove "-main" from the downloaded folder name. The folder should be named wg1-experiment-implementation!
+:
    
-      |-- wg1-experiment-implementation-main
+      |-- wg1-experiment-implementation
       |---- experiment_implementation
       |---- guidelines
       |---- README.md
