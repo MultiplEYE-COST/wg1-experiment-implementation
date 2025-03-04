@@ -24,19 +24,21 @@ contact [multipleye@cl.uzh.ch](mailto:multipleye@cl.uzh.ch).
 
 In order to run the MultiplEYE experiment you will need to complete the following steps
 1. Please read the official MultiplEYE Data Collection Guidelines linked on this page: [MultiplEYE contribute](https://multipleye.eu/contribute/)
-2. Following the MultiplEYE Data Collection Guidelines, prepare the stimulus files, the comprehension questions, the participant questionnaire and the instruction screens. Please refer to Sections 3, 4, 5, and 10.3 in teh guidelines.
-3. Download the experiment code from this repository. Either clone via git or download the zip file (see [download as zip](#download-the-experiment-code-as-zip-file)). Please make sure to remove "-main" from the downloaded folder name. The folder should be named `wg1-experiment-implementation`!
+2. Following the MultiplEYE Data Collection Guidelines, prepare the stimulus files, the comprehension questions, the participant questionnaire and the instruction screens. Please refer to Sections 3, 4, 5, and 10.3 in the guidelines.
+3. [Download the experiment code](#download-the-experiment-code-as-zip-file) from this repository. Either clone via git or download the zip file (see [download as zip](#download-the-experiment-code-as-zip-file)). Please make sure to remove "-main" from the downloaded folder name. The folder should be named `wg1-experiment-implementation`!
 4. Copy the stimulus files to the correct location in the experiment data folder: `experiment_implementation/data/[your stimulus folder]`
 5. **Mandatory** also for test run: Copy the files (3 Excel files) for the participant questionnaire the to the correct location in the experiment 
 data folder. You will have to create a folder for your language and country. The folder should be named as follows:
 `experiment_implementation/data/participant_questionnaire_[LANGUAGE_CODE]_[COUNTRY_CODE]_[LAB_NUMBER]/`
-6. Optional: if you have created a translation of the interface, you can copy it to this location: 
+6. Optional: if you have created a translation of the interface (MultiplEYE data collection guidelines Section 10.4), you can copy it to this location: 
 `experiment_implementation/ui_data/interface_language/[your language]`. The name of the file should be `experiment_interface_[your language].json`.
-7. Prepare the environment for the experiment following the guidelines in [CONDA_ENVIRONMENT.md](guidelines/markdown/CONDA_ENVIRONMENT.md)
-8. Install the necessary packages for your eye-tracker. For EyeLink eye-trackers 
+7. The final folder structure should look like this:
+   TODO
+9. Prepare the environment for the experiment following the guidelines in [CONDA_ENVIRONMENT.md](guidelines/markdown/CONDA_ENVIRONMENT.md)
+10. Install the necessary packages for your eye-tracker. For EyeLink eye-trackers 
 [INSTALL_PYLINK.md](guidelines/markdown/INSTALL_PYLINK.md). For Tobii eye-trackers, please see [develop for Tobii](#develop-and-run-experiments-for-tobii) further below.
-9. [Run the dummy experiment](#run-the-dummy-experiment) to check if everything is working correctly
-10. [Run the experiment with an eye-tracker](#run-the-experiment-with-an-eye-tracker)
+11. [Run the dummy experiment](#run-the-dummy-experiment) to check if everything is working correctly
+12. [Run the experiment with an eye-tracker](#run-the-experiment-with-an-eye-tracker)
 
 > If you encounter any problems, please consult this [document](guidelines/markdown/HANDLING_ERRORS.md). If you cannot find your error, contact [multipleye.project@gmail.com](mailto:multipleye.project@gmail.com).
 
@@ -126,10 +128,8 @@ using a webcam. Please contact [multipleye.project@gmail.com](mailto:multipleye.
 
 ## Upload the data
 After you have run a MultiplEYE session, no matter if pilot or real experiment, please make sure to:
-1. Always save the entire `data` folder in a safe location locally as you do for other data collections.
+1. Always save the entire `data` folder in a safe location locally as you do for other data collections. You are responsible for keeping your data safe!!
 2. Upload the participant/session folder to the MultiplEYE server. When you preregistered, you should have 
 received a folder where to upload the data. Add the participant/session folder to the eye-tracking-sessions folder. Also add the
 session documentation file to the documentation folder in your respective folder. **Please consult Section 14 of the
-guidelines for more information on how to upload the data.**
-3. Whenever you collect data from a new participant, please upload the entire `data` folder to the server, 
-replacing the old one.
+MultiplEYE data collection guidelines for more information on how to upload the data.**
