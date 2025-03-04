@@ -66,7 +66,7 @@ conda activate multipleye3.9
 
 Then you can navigate to the root folder of your local clone of the repository (your path should now end with 
 `wg1-experiment-implementation`. Please find instructions on how to navigate in a terminal in the 
-[CONDA_ENVIRONMENT.md](guidelines/markdown/CONDA_ENVIRONMENT.md) in section 4). Run the following command to run the dummy experiment:
+[CONDA_ENVIRONMENT.md](guidelines/markdown/CONDA_ENVIRONMENT.md) in section 5). Run the following command to run the dummy experiment:
 
 ```bash
 python experiment_implementation/start_multipleye_session.py
