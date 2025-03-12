@@ -104,6 +104,13 @@ This error can have multiple reasons. If you know how to do this you can do the 
    b) if a) is not true, try deinstalling all packages that contain `PyQt6` (see a) for how to do this) and instead install PyQt6==6.0.2, PyQt6-Qt6==6.0.2, PyQt6_sip==13.0.0, pyqt6-tools==6.0.2.3.2. You can install is by running
    `pip install PyQt6==6.0.2`, then run `pip install PyQt6-Qt6==6.0.2`, etc. for all four packages listed before.
 
+
+### Error: ValueError: Index pq_question_identifier invalid (sheet: 0)
+This error occurs when the participant questionnaire file with the questions is not correctly formatted. 
+It has helped in the past to copy the EN file again and add the entries in the other language again.
+You can also try and run it first with the EN file unchanged to see if this works. 
+And then insert the entries in your language.
+
 ### Other Errors (will be updated soon)
 - reaction latency: the experiment is designed such that participants cannot just press space right when the screen appears.
 If you test the experiment and it does not immediately react to your keypress, this must not be an error. If the new screen appears, wait a short moment

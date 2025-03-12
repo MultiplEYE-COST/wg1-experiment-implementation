@@ -743,8 +743,6 @@ class Experiment:
     def show_rating_screen(self, name: str, trial_number: int, screens: dict,
                            num_options: int, flag: str) -> None:
 
-        page_path = screens['path']
-
         if constants.DUMMY_MODE:
             self._display.fill(screen=self.instruction_screens['fixation_screen']['screen'])
             self._display.show()
