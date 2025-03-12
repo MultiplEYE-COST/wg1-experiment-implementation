@@ -1,9 +1,8 @@
 # Set up conda environment with correct PyGaze version for Windows
 
-Contributing to this repository is easiest if you set up your own virtual conda environment. You'll find a description of how to set up a conda environment below,
-but it is possible to use another environment if you prefer something else.
+Before installing the experiment locally you can watch this [video](https://www.youtube.com/watch?v=R6z0f5Perks&t=1s) for step-by-step instructions. Disclaimer: the video has been recorded a while ago. The steps are the same but there might be little differences. If you are unsure, please write us an email.
 
-**IMPORTANT**: in `requirements-eyelink.txt` you'll find all the dependencies you need for the project for EyeLink eye-trackers.
+> Note: sometimes if you get stuck it can be helpful to repeat steps 5 - 7. This means that you delete the environment you have already created and then redo it. It is normal that it does not immediately work. It might require to be patient. But you can do this!
 
 **1. Install anaconda / miniconda**
 
@@ -55,9 +54,10 @@ Note: to install ana/miniconda it might ask you to register, but you should be a
 
    If you have not already done so, please download the experiment as a zip folder (refer to the instructions in
    [this README](../README.md). 
-   Note: when you unzip the folder, sometimes another folder will be included. Please make sure that the folder structure looks like this:
+   Note: when you unzip the folder, sometimes another folder will be included. Please make sure that the folder structure looks like this. Please make sure to remove "-main" from the downloaded folder name. The folder should be named wg1-experiment-implementation!
+:
    
-      |-- wg1-experiment-implementation-main
+      |-- wg1-experiment-implementation
       |---- experiment_implementation
       |---- guidelines
       |---- README.md
