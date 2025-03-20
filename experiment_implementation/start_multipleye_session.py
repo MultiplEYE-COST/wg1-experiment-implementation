@@ -240,6 +240,12 @@ def start_experiment_session():
     if arguments['dummy_mode'] != local_config.DUMMY_MODE:
         settings_changed = True
 
+    if arguments['city'] != local_config.CITY:
+        settings_changed = True
+
+    if arguments['year'] != local_config.YEAR:
+        settings_changed = True
+
     if settings_changed and not arguments['continue_core_session']:
         with open(PARENT_FOLDER / 'local_config.py', 'w') as f:
             f.write(f'LANGUAGE = "{arguments["language"]}"\n')
@@ -316,11 +322,16 @@ def start_experiment_session():
         stimulus_order_version = arguments['stimulus_order_version']
         if stimulus_order_version == -1:
 
+            # if the session has been restarted
             if ((arguments['session_mode'].value in ['core', 'pilot'])
                     and (arguments['participant_id'] in PARTICIPANT_IDS)):
-                stimulus_order_version = experiment_utils.determine_stimulus_order_version(
-                    participant_id=arguments['participant_id']
-                )
+                if not arguments['continue_core_session']:
+                    raise ValueError("This ID has already been used. Please enable session restart if you like to "
+                                     "restart the Session for the same ID")
+                else:
+                    stimulus_order_version = experiment_utils.determine_stimulus_order_version(
+                        participant_id=arguments['participant_id']
+                    )
             else:
                 stimulus_order_version = experiment_utils.determine_stimulus_order_version()
             arguments['stimulus_order_version'] = stimulus_order_version
