@@ -6,6 +6,7 @@ Before installing the experiment locally you can watch this [video](https://www.
 
 **1. Install anaconda / miniconda**
 
+You can install it using this link: [anaconda](https://www.anaconda.com/download/success)
 Note: to install ana/miniconda it might ask you to register, but you should be able to skip this step. It usually says so at the bottom of the form, in a really small font size.
 
 **1.1 If you haven't worked with Windows PowerShell**
