@@ -2,12 +2,19 @@ from __future__ import annotations
 
 import argparse
 import os
+from enum import Enum
 from pathlib import Path
 
 import constants
 import pandas as pd
 
-from start_multipleye_session import SessionMode
+
+class SessionMode(Enum):
+    TEST = 'test'
+    MINIMAL = 'minimal'
+    ADDITIONAL = 'additional'
+    CORE = 'core'
+    PILOT = 'pilot'
 
 
 class ValidateParticipantIDAction(argparse.Action):
@@ -161,3 +168,19 @@ def determine_last_stimulus(relative_exp_result_path: str) -> tuple[pd.DataFrame
             return completed_stimuli_df, csv_path, None, None
 
         return completed_stimuli_df, csv_path, second_last_row['stimulus_id'], second_last_row['trial_id']
+
+
+def check_if_testing_images() -> bool:
+    """
+    Check if the images are for testing purposes.
+    """
+    # in the stimulus version files if there are only 10 versions or less these are the testing images,
+    # there need to be 250 for the piloting and the real experiment
+
+    num_versions = constants.NUM_VERSIONS
+
+    if num_versions <= 10:
+        return True
+
+    elif num_versions == 250:
+        return False
