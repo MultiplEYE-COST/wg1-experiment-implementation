@@ -5,7 +5,7 @@ from pprint import pprint
 import pandas as pd
 from PyQt6 import QtGui
 from psychopy import gui
-import constants
+from experiment_implementation import constants
 
 
 class MultiplEYEParticipantQuestionnaire:
@@ -132,11 +132,14 @@ class MultiplEYEParticipantQuestionnaire:
                                  'internet_reading_time',
                                  'other_reading_time']
 
+            keys = [f'{lang}_{question}' for question in reading_questions[1:]]
+            keys = ['read_language'] + keys
+
             self._show_questions(
                 f'{self.pq_data[lang].upper()}: {self.instructions["pq_answer_for_lang"].strip()} {self.pq_data[lang].upper()}',
                 reading_questions,
                 button=self.instructions['pq_next_button'],
-                keys=[f'{lang}_{question}' for question in reading_questions[1:]],
+                keys=keys,
             )
 
         # we allow for 4 additional languages to be mentioned
@@ -174,12 +177,15 @@ class MultiplEYEParticipantQuestionnaire:
                                  'internet_reading_time',
                                  'other_reading_time']
 
+            keys = [f'{lang}_{question}' for question in reading_questions[1:]]
+            keys = ['read_language'] + keys
+
             self._show_questions(
                 f'{self.pq_data[lang].upper()}: {self.instructions["pq_answer_for_lang"].strip()}: '
                 f'{self.pq_data[lang].upper()}',
                 reading_questions,
                 button=self.instructions['pq_next_button'],
-                keys=[f'{lang}_{question}' for question in reading_questions[1:]],
+                keys=keys,
             )
 
         self._show_questions(
@@ -280,6 +286,7 @@ class MultiplEYEParticipantQuestionnaire:
 
         # first 4 questions on one page
         for question_id, question_key in questions:
+            print(question_id, question_key)
 
             answer_type = self.questions[question_id]["pq_answer_type"]
 
@@ -302,12 +309,11 @@ class MultiplEYEParticipantQuestionnaire:
                     if option:
                         options.append(option)
 
-            # if it is a dropdown (i.e. multiple options), the initial value is an empty string
-            # which is prepended to the options
-            if len(options) > 1:
-                options.insert(0, '')
-
             if len(options) > 0:
+                # if it is a dropdown (i.e. multiple options), the initial value is an empty string
+                # which is prepended to the options
+                if len(options) > 1:
+                    options.insert(0, '')
 
                 question_text = pq_gui.addField(question_key,
                                                 label=self.questions[question_id]["pq_question_text"],
@@ -342,7 +348,7 @@ class MultiplEYEParticipantQuestionnaire:
 
         pq_gui.addText('')
         pq_gui.addText('')
-        pq_gui.addField('confirm_answer', self.instructions['pq_confirm_answers'], initial=False)
+        pq_gui.addField(key='confirm_answer', label=self.instructions['pq_confirm_answers'], initial=False)
 
         # the item in the top left position is some default text that I don't know how to remove otherwise
         pq_gui.layout.itemAtPosition(0, 0).widget().hide()

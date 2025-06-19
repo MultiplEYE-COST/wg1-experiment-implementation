@@ -12,6 +12,7 @@ from gooey import Gooey
 from gooey import GooeyParser
 
 import local_config
+from utils.experiment_utils import check_if_testing_images, SessionMode
 
 PARENT_FOLDER = Path(__file__).parent
 LANG_DIR = PARENT_FOLDER / 'ui_data/interface_language/'
@@ -43,13 +44,6 @@ else:
 with open(LANG_DIR / f'{GUI_LANG}.json', 'r', encoding='utf8') as translation_file:
     translations = json.load(translation_file)
 
-
-class SessionMode(Enum):
-    TEST = 'test'
-    MINIMAL = 'minimal'
-    ADDITIONAL = 'additional'
-    CORE = 'core'
-    PILOT = 'pilot'
 
 
 @Gooey(
@@ -350,6 +344,21 @@ def start_experiment_session():
         arguments.pop('dummy_mode', None)
         arguments.pop('city', None)
         arguments.pop('year', None)
+
+        testing_images = check_if_testing_images()
+
+        # create a small popup window to inform the user about the testing images, they have to confirm by pressing ok
+        if testing_images:
+            import tkinter as tk
+            from tkinter import messagebox
+
+            root = tk.Tk()
+            root.withdraw()  # Hide the main tkinter window
+            messagebox.showinfo("Testing Images", "You are using testing images. You cannot use those images for "
+                                                  "collecting pilot data nor for the core data collection. "
+                                                  "Please contact the experiment team to obtain the real images."
+                                                  "Please confirm to proceed.")
+
 
         # !!! THIS IMPORT CANNOT BE MOVED SOMEWHERE ELSE; OTHERWISE THE PROGRAM GETS REALLY SLOW !!!
         from experiment.run_experiment import run_experiment
