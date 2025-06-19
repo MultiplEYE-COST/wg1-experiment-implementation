@@ -221,7 +221,6 @@ def get_stimuli_screens(
             distractor_b_answer_key = row['distractor_b_key']
             distractor_c_answer_key = row['distractor_c_key']
 
-
             logfile.write(
                 [
                     get_time(),

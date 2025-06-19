@@ -620,7 +620,7 @@ class Experiment:
                     keypress_timestamp=keypress_timestamp, key_pressed=answer_chosen,
                     question=True, answer_correct=is_answer_correct,
                     message=f"FINAL ANSWER: correct answer is '{correct_answer_key}' "
-                            f"({question_dict['correct_answer']}), participant's answer is "
+                            f"({question_dict['correct_answer'].strip()}), participant's answer is "
                             f"{is_answer_correct}",
                 )
 
