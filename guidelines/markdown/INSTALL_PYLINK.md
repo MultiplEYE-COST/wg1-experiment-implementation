@@ -48,6 +48,7 @@ want to paste pylink into:
 
 It is possible to use the ``cp`` command in the Windows powershell, in other terminals you might not be able to use it.
 But you can always copy and paste it manually. Please replace python 3.9 with python 3.10 if you are using python 3.10.
+Note that the paths can be slightly different! Make sure to check them first. 
 ```
 cp -R "C:\Program Files (x86)\SR Research\EyeLink\SampleExperiments\Python\64\3.9\pylink" C:\Users\[USERNAME]\anaconda3\envs\multipleye3.9\Lib\site-packages
 ```
