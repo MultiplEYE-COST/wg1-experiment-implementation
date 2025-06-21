@@ -17,6 +17,7 @@ create a new clean env and install all the dependencies again. You do not have t
 <li><a href="#run-the-dummy-experiment">Run the experiment without an eye-tracker</a></li>
 <li><a href="#the-result-files">The result files</a></li>
 <li><a href="#run-the-experiment-with-an-eye-tracker">Run the experiment with an eye-tracker</a></li>
+<li><a href="#run-only-the-participant-questionnaire">Run only the participant questionnaire</a></li>
 <li><a href="#upload-the-data">Upload the data</a></li>
 </ul>
 <h2>Installation</h2>
@@ -115,7 +116,10 @@ using a webcam. Please contact <a href="mailto:multipleye.project@gmail.com">mul
 <pre><code class="language-bash">python -m experiment_implementation.experiment.participant_questionnaire
 </code></pre>
 <p>The result file will be stored under this path <code>wg1-experiment-implementation/test_pq/...json</code>.
-The participant ID will always be 1 and the files will be overwritten if you run the script again.</p>
+The participant ID will always be 1 by default, if you like to change it you can run the command like this:</p>
+<pre><code class="language-bash">python -m experiment_implementation.experiment.participant_questionnaire --participant_id 5
+</code></pre>
+<p>The file will be overwritten if you run it again with the same ID.</p>
 <h2>Upload the data</h2>
 <p>After you have run a MultiplEYE session, no matter if pilot or real experiment, please make sure to:</p>
 <ol>

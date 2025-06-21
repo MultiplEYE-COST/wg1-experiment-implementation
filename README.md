@@ -18,6 +18,7 @@ contact [multipleye@cl.uzh.ch](mailto:multipleye@cl.uzh.ch).
 - [Run the experiment without an eye-tracker](#run-the-dummy-experiment)
 - [The result files](#the-result-files)
 - [Run the experiment with an eye-tracker](#run-the-experiment-with-an-eye-tracker)
+- [Run only the participant questionnaire](#run-only-the-participant-questionnaire)
 - [Upload the data](#upload-the-data)
 
 
