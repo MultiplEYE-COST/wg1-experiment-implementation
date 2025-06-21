@@ -84,28 +84,28 @@ Note: to install ana/miniconda it might ask you to register, but you should be a
    The root folder should end with this path: `.../wg1-experiment-implementation/`. Whatever is before that depends on where you stored the experiment on your local machine.
    > Note: it is best to move the experiment folder to a location that is not too deep in the directory structure.
 
-   Next, we can create the environment. This line creates a conda environment with the name `multipleye3.9` and installs the correct python version. <br>
+   Next, we can create the environment. This line creates a conda environment with the name `multipleye3.10` and installs the correct python version. <br>
    If you are familiar with python and conda, and you want to create the environment with a different name, or you want to use a different python version, e.g. Python 3.10, which is also supported by the experiment, you can change the name of the environment and the python version in the command line.
 
    ```bash
-   conda create --name multipleye3.9 python==3.9 
+   conda create --name multipleye3.10 python==3.10 
    ```
    After you've done that, you need to activate the environment by running the following command in your terminal:
    ```bash
-   conda activate multipleye3.9
+   conda activate multipleye3.10
    ```
    Now, you can install the necessary packages for your eye-tracker by running the following command in your terminal:
    ```bash
     pip install -r requirements-eyelink.txt
   ```
   
-   If you want to re-create the conda environment with the same name `multipleye3.9` for any reason, you need to remove the existing environment first. You can do this by running the following command in your terminal:
+   If you want to re-create the conda environment with the same name `multipleye3.10` for any reason, you need to remove the existing environment first. You can do this by running the following command in your terminal:
    ```bash
-   conda remove --name multipleye3.9 --all
+   conda remove --name multipleye3.10 --all
    ```
    Or you can manually delete the folder of the environment. The path of the folder is usually like this:
    ```bash
-   /Users/[USERNAME]/miniconda3/envs/multipleye3.9
+   /Users/[USERNAME]/miniconda3/envs/multipleye3.10
    ```
    Please change ``/Users/[USERNAME]/`` to the path of where you installed your miniconda. Please change ``miniconda3`` to ``anaconda3`` if you installed anaconda instead of miniconda. <br>
    Then you can create the environment again by running the command in the above.
@@ -128,9 +128,9 @@ In order to run the experiment including the GUI on Mac you need to do the follo
 
 1. You need to allow PsychoPy to access your input. In order to do that go to `System Preferences` 
 -> `Security & Privacy` -> `Privacy` -> `Input Monitoring`. Then you click on the '+' and add PsychoPy. 
-Pick the PsychoPy version that is in your env. For me the path for a anaconda env called 'multipleye3.9' looks like this:
+Pick the PsychoPy version that is in your env. For me the path for a anaconda env called 'multipleye3.10' looks like this:
 ```bash
-/Users/[USERNAME]/opt/anaconda3/envs/multipleye3.9/bin/psychopy
+/Users/[USERNAME]/opt/anaconda3/envs/multipleye3.10/bin/psychopy
 ```
 
 ### Troubleshooting

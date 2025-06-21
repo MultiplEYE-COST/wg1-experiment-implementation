@@ -1,9 +1,11 @@
 <h1>Set up conda environment with correct PyGaze version for Windows</h1>
-<p>Contributing to this repository is easiest if you set up your own virtual conda environment. You'll find a description of how to set up a conda environment below,
-but it is possible to use another environment if you prefer something else.</p>
-<p><strong>IMPORTANT</strong>: in <code>requirements-eyelink.txt</code> you'll find all the dependencies you need for the project for EyeLink eye-trackers.</p>
+<p>Before installing the experiment locally you can watch this <a href="https://www.youtube.com/watch?v=R6z0f5Perks&amp;t=1s">video</a> for step-by-step instructions. Disclaimer: the video has been recorded a while ago. The steps are the same but there might be little differences. If you are unsure, please write us an email.</p>
+<blockquote>
+<p>Note: sometimes if you get stuck it can be helpful to repeat steps 5 - 7. This means that you delete the environment you have already created and then redo it. It is normal that it does not immediately work. It might require to be patient. But you can do this!</p>
+</blockquote>
 <p><strong>1. Install anaconda / miniconda</strong></p>
-<p>Note: to install ana/miniconda it might ask you to register, but you should be able to skip this step. It usually says so at the bottom of the form, in a really small font size.</p>
+<p>You can install it using this link: <a href="https://www.anaconda.com/download/success">anaconda</a>
+Note: to install ana/miniconda it might ask you to register, but you should be able to skip this step. It usually says so at the bottom of the form, in a really small font size.</p>
 <p><strong>1.1 If you haven't worked with Windows PowerShell</strong></p>
 <p>We highly recommend you to install anaconda instead of miniconda. Anaconda is a full package of python and other useful tools.
 Anaconda can take up a lot of space on your computer, but you will have everything available and it is easy to use.
@@ -38,8 +40,9 @@ To install it, you can download it <a href="https://visualstudio.microsoft.com/v
 <p><strong>4a. Download this repository</strong></p>
 <p>If you have not already done so, please download the experiment as a zip folder (refer to the instructions in
 <a href="../README.html">this README</a>.
-Note: when you unzip the folder, sometimes another folder will be included. Please make sure that the folder structure looks like this:</p>
-<pre><code>  |-- wg1-experiment-implementation-main
+Note: when you unzip the folder, sometimes another folder will be included. Please make sure that the folder structure looks like this. Please make sure to remove &quot;-main&quot; from the downloaded folder name. The folder should be named wg1-experiment-implementation!
+:</p>
+<pre><code>  |-- wg1-experiment-implementation
   |---- experiment_implementation
   |---- guidelines
   |---- README.html
@@ -62,21 +65,21 @@ If you want to go back to the previous folder, you can run the following command
 <blockquote>
 <p>Note: it is best to move the experiment folder to a location that is not too deep in the directory structure.</p>
 </blockquote>
-<p>Next, we can create the environment. This line creates a conda environment with the name <code>multipleye3.9</code> and installs the correct python version. <br>
+<p>Next, we can create the environment. This line creates a conda environment with the name <code>multipleye3.10</code> and installs the correct python version. <br>
 If you are familiar with python and conda, and you want to create the environment with a different name, or you want to use a different python version, e.g. Python 3.10, which is also supported by the experiment, you can change the name of the environment and the python version in the command line.</p>
-<pre><code class="language-bash">conda create --name multipleye3.9 python==3.9 
+<pre><code class="language-bash">conda create --name multipleye3.10 python==3.10 
 </code></pre>
 <p>After you've done that, you need to activate the environment by running the following command in your terminal:</p>
-<pre><code class="language-bash">conda activate multipleye3.9
+<pre><code class="language-bash">conda activate multipleye3.10
 </code></pre>
 <p>Now, you can install the necessary packages for your eye-tracker by running the following command in your terminal:</p>
 <pre><code class="language-bash"> pip install -r requirements-eyelink.txt
 </code></pre>
-<p>If you want to re-create the conda environment with the same name <code>multipleye3.9</code> for any reason, you need to remove the existing environment first. You can do this by running the following command in your terminal:</p>
-<pre><code class="language-bash">conda remove --name multipleye3.9 --all
+<p>If you want to re-create the conda environment with the same name <code>multipleye3.10</code> for any reason, you need to remove the existing environment first. You can do this by running the following command in your terminal:</p>
+<pre><code class="language-bash">conda remove --name multipleye3.10 --all
 </code></pre>
 <p>Or you can manually delete the folder of the environment. The path of the folder is usually like this:</p>
-<pre><code class="language-bash">/Users/[USERNAME]/miniconda3/envs/multipleye3.9
+<pre><code class="language-bash">/Users/[USERNAME]/miniconda3/envs/multipleye3.10
 </code></pre>
 <p>Please change <code>/Users/[USERNAME]/</code> to the path of where you installed your miniconda. Please change <code>miniconda3</code> to <code>anaconda3</code> if you installed anaconda instead of miniconda. <br>
 Then you can create the environment again by running the command in the above.</p>
@@ -92,9 +95,9 @@ order to make it run</strong>. If you had to install additional programs, please
 <ol>
 <li>You need to allow PsychoPy to access your input. In order to do that go to <code>System Preferences</code>
 -&gt; <code>Security &amp; Privacy</code> -&gt; <code>Privacy</code> -&gt; <code>Input Monitoring</code>. Then you click on the '+' and add PsychoPy.
-Pick the PsychoPy version that is in your env. For me the path for a anaconda env called 'multipleye3.9' looks like this:</li>
+Pick the PsychoPy version that is in your env. For me the path for a anaconda env called 'multipleye3.10' looks like this:</li>
 </ol>
-<pre><code class="language-bash">/Users/[USERNAME]/opt/anaconda3/envs/multipleye3.9/bin/psychopy
+<pre><code class="language-bash">/Users/[USERNAME]/opt/anaconda3/envs/multipleye3.10/bin/psychopy
 </code></pre>
 <h3>Troubleshooting</h3>
 <ul>

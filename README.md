@@ -18,6 +18,7 @@ contact [multipleye@cl.uzh.ch](mailto:multipleye@cl.uzh.ch).
 - [Run the experiment without an eye-tracker](#run-the-dummy-experiment)
 - [The result files](#the-result-files)
 - [Run the experiment with an eye-tracker](#run-the-experiment-with-an-eye-tracker)
+- [Upload the data](#upload-the-data)
 
 
 ## Installation
@@ -125,6 +126,22 @@ work with the tobii eye-trackers:
 ### Develop and run experiments for other eye-trackers
 Depending on what is needed we can add more eye-trackers. There is also a team that is trying to set up experiment 
 using a webcam. Please contact [multipleye.project@gmail.com](mailto:multipleye.project@gmail.com) for more information.
+
+## Run only the participant questionnaire
+If you only want to run the participant questionnaire, you can run the following command in the terminal. Make sure you are in this directory `wg1-experiment-implementation` and your conda environment is activated.:
+
+```bash
+python -m experiment_implementation.experiment.participant_questionnaire
+```
+
+The result file will be stored under this path `wg1-experiment-implementation/test_pq/...json`. 
+The participant ID will always be 1 by default, if you like to change it you can run the command like this:
+
+```bash
+python -m experiment_implementation.experiment.participant_questionnaire --participant_id 5
+```
+
+The file will be overwritten if you run it again with the same ID. 
 
 ## Upload the data
 After you have run a MultiplEYE session, no matter if pilot or real experiment, please make sure to:

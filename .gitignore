@@ -149,13 +149,13 @@ experiment_implementation/data/test_sessions
 /experiment_implementation/data/participant_questionnaire*/
 !experiment_implementation/data/stimuli_MultiplEYE_toy_x_x_1_1/
 
-/experiment_implementation/experiment/res/
 
 experiment_implementation/data/stimuli*/*.xslx
-experiment_implementation/data/test_sessions
 
 experiment_implementation/data/participant_questionnaire*
 !experiment_implementation/data/participant_questionnaire_toy_x_1
 /experiment_implementation/data/participant_questionnaire_en_gb_1/
 /experiment_implementation/utils/text_stats_en.csv
-/experiment_implementation/experiment/res/
+
+/res/
+/test_pq/

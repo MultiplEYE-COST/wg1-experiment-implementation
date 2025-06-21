@@ -17,19 +17,22 @@ create a new clean env and install all the dependencies again. You do not have t
 <li><a href="#run-the-dummy-experiment">Run the experiment without an eye-tracker</a></li>
 <li><a href="#the-result-files">The result files</a></li>
 <li><a href="#run-the-experiment-with-an-eye-tracker">Run the experiment with an eye-tracker</a></li>
+<li><a href="#upload-the-data">Upload the data</a></li>
 </ul>
 <h2>Installation</h2>
 <p>In order to run the MultiplEYE experiment you will need to complete the following steps</p>
 <ol>
 <li>Please read the official MultiplEYE Data Collection Guidelines linked on this page: <a href="https://multipleye.eu/contribute/">MultiplEYE contribute</a></li>
-<li>Download the experiment code from this repository. Either clone via git or download the zip file (see <a href="#download-the-experiment-code-as-zip-file">download as zip</a>). Please make sure to remove &quot;-main&quot; from the downloaded folder name. The folder should be named <code>wg1-experiment-implementation</code>!</li>
-<li>Following the MultiplEYE Data Collection Guidelines, prepare the stimulus files which includes the creation of the images</li>
+<li>Following the MultiplEYE Data Collection Guidelines, prepare the stimulus files, the comprehension questions, the participant questionnaire and the instruction screens. Please refer to Sections 3, 4, 5, and 10.3 in the guidelines.</li>
+<li><a href="#download-the-experiment-code-as-zip-file">Download the experiment code</a> from this repository. Either clone via git or download the zip file (see <a href="#download-the-experiment-code-as-zip-file">download as zip</a>). Please make sure to remove &quot;-main&quot; from the downloaded folder name. The folder should be named <code>wg1-experiment-implementation</code>!</li>
 <li>Copy the stimulus files to the correct location in the experiment data folder: <code>experiment_implementation/data/[your stimulus folder]</code></li>
 <li><strong>Mandatory</strong> also for test run: Copy the files (3 Excel files) for the participant questionnaire the to the correct location in the experiment
 data folder. You will have to create a folder for your language and country. The folder should be named as follows:
 <code>experiment_implementation/data/participant_questionnaire_[LANGUAGE_CODE]_[COUNTRY_CODE]_[LAB_NUMBER]/</code></li>
-<li>Optional: if you have created a translation of the interface, you can copy it to this location:
+<li>Optional: if you have created a translation of the interface (MultiplEYE data collection guidelines Section 10.4), you can copy it to this location:
 <code>experiment_implementation/ui_data/interface_language/[your language]</code>. The name of the file should be <code>experiment_interface_[your language].json</code>.</li>
+<li>The final folder structure should look like this:
+TODO</li>
 <li>Prepare the environment for the experiment following the guidelines in <a href="guidelines/html/CONDA_ENVIRONMENT.html">CONDA_ENVIRONMENT.html</a></li>
 <li>Install the necessary packages for your eye-tracker. For EyeLink eye-trackers
 <a href="guidelines/html/INSTALL_PYLINK.html">INSTALL_PYLINK.html</a>. For Tobii eye-trackers, please see <a href="#develop-and-run-experiments-for-tobii">develop for Tobii</a> further below.</li>
@@ -58,7 +61,7 @@ If you'd like to run it, make sure you have completed the above steps, and you h
 </code></pre>
 <p>Then you can navigate to the root folder of your local clone of the repository (your path should now end with
 <code>wg1-experiment-implementation</code>. Please find instructions on how to navigate in a terminal in the
-<a href="guidelines/html/CONDA_ENVIRONMENT.html">CONDA_ENVIRONMENT.html</a> in section 4). Run the following command to run the dummy experiment:</p>
+<a href="guidelines/html/CONDA_ENVIRONMENT.html">CONDA_ENVIRONMENT.html</a> in section 5). Run the following command to run the dummy experiment:</p>
 <pre><code class="language-bash">python experiment_implementation/start_multipleye_session.py
 </code></pre>
 <p>In the GUI that will pop up you can tick the box <code>Dummy version</code> to run the experiment in dummy mode.</p>
@@ -107,14 +110,18 @@ work with the tobii eye-trackers:</p>
 <h3>Develop and run experiments for other eye-trackers</h3>
 <p>Depending on what is needed we can add more eye-trackers. There is also a team that is trying to set up experiment
 using a webcam. Please contact <a href="mailto:multipleye.project@gmail.com">multipleye.project@gmail.com</a> for more information.</p>
+<h2>Run only the participant questionnaire</h2>
+<p>If you only want to run the participant questionnaire, you can run the following command in the terminal. Make sure you are in this directory <code>wg1-experiment-implementation</code> and your conda environment is activated.:</p>
+<pre><code class="language-bash">python -m experiment_implementation.experiment.participant_questionnaire
+</code></pre>
+<p>The result file will be stored under this path <code>wg1-experiment-implementation/test_pq/...json</code>.
+The participant ID will always be 1 and the files will be overwritten if you run the script again.</p>
 <h2>Upload the data</h2>
 <p>After you have run a MultiplEYE session, no matter if pilot or real experiment, please make sure to:</p>
 <ol>
-<li>Always save the entire <code>data</code> folder in a safe location locally as you do for other data collections.</li>
+<li>Always save the entire <code>data</code> folder in a safe location locally as you do for other data collections. You are responsible for keeping your data safe!!</li>
 <li>Upload the participant/session folder to the MultiplEYE server. When you preregistered, you should have
 received a folder where to upload the data. Add the participant/session folder to the eye-tracking-sessions folder. Also add the
 session documentation file to the documentation folder in your respective folder. <strong>Please consult Section 14 of the
-guidelines for more information on how to upload the data.</strong></li>
-<li>Whenever you collect data from a new participant, please upload the entire <code>data</code> folder to the server,
-replacing the old one.</li>
+MultiplEYE data collection guidelines for more information on how to upload the data.</strong></li>
 </ol>

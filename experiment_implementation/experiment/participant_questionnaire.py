@@ -1,3 +1,4 @@
+import argparse
 import json
 import os.path
 from pprint import pprint
@@ -5,7 +6,8 @@ from pprint import pprint
 import pandas as pd
 from PyQt6 import QtGui
 from psychopy import gui
-from experiment_implementation import constants
+
+import experiment_implementation.constants as constants
 
 
 class MultiplEYEParticipantQuestionnaire:
@@ -286,7 +288,6 @@ class MultiplEYEParticipantQuestionnaire:
 
         # first 4 questions on one page
         for question_id, question_key in questions:
-            print(question_id, question_key)
 
             answer_type = self.questions[question_id]["pq_answer_type"]
 
@@ -399,10 +400,27 @@ class MultiplEYEParticipantQuestionnaire:
 
 
 if __name__ == '__main__':
-    participant_id = 1
+    # add participant id as command line argument
+
+    parser = argparse.ArgumentParser(description='Run the MultiplEYE participant questionnaire.')
+    parser.add_argument(
+        '--participant_id',
+        type=int,
+        default=1,
+        help='The ID of the participant. Default is 1.',
+    )
+
+    args = parser.parse_args()
+    participant_id = args.participant_id
+
+    participant_id_str = str(participant_id)
+
+    # participant id should always be 3 digits long
+    while len(participant_id_str) < 3:
+        participant_id_str = "0" + participant_id_str
 
     # create res folder
-    os.makedirs('res', exist_ok=True)
+    os.makedirs('test_pq', exist_ok=True)
 
-    pq = MultiplEYEParticipantQuestionnaire(participant_id, 'res')
+    pq = MultiplEYEParticipantQuestionnaire(participant_id, 'test_pq')
     pq.run_questionnaire()
