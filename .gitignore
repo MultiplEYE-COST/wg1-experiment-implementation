@@ -159,3 +159,5 @@ experiment_implementation/data/participant_questionnaire*
 
 /res/
 /test_pq/
+*.zip
+/PQ-old-mapping

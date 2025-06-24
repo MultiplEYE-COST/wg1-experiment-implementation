@@ -7,7 +7,7 @@ import pandas as pd
 from PyQt6 import QtGui
 from psychopy import gui
 
-import experiment_implementation.constants as constants
+import constants
 
 
 class MultiplEYEParticipantQuestionnaire:
