@@ -132,15 +132,10 @@ using a webcam. Please contact [multipleye.project@gmail.com](mailto:multipleye.
 If you only want to run the participant questionnaire, you can run the following command in the terminal. Make sure you are in this directory `wg1-experiment-implementation` and your conda environment is activated.:
 
 ```bash
-python -m experiment_implementation.experiment.participant_questionnaire
+python experiment_implementation/test_pq.py
 ```
 
-The result file will be stored under this path `wg1-experiment-implementation/test_pq/...json`. 
-The participant ID will always be 1 by default, if you like to change it you can run the command like this:
-
-```bash
-python -m experiment_implementation.experiment.participant_questionnaire --participant_id 5
-```
+The result file will be stored under this path `wg1-experiment-implementation/test_pq/...json`.
 
 The file will be overwritten if you run it again with the same ID. 
 

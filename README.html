@@ -113,12 +113,9 @@ work with the tobii eye-trackers:</p>
 using a webcam. Please contact <a href="mailto:multipleye.project@gmail.com">multipleye.project@gmail.com</a> for more information.</p>
 <h2>Run only the participant questionnaire</h2>
 <p>If you only want to run the participant questionnaire, you can run the following command in the terminal. Make sure you are in this directory <code>wg1-experiment-implementation</code> and your conda environment is activated.:</p>
-<pre><code class="language-bash">python -m experiment_implementation.experiment.participant_questionnaire
+<pre><code class="language-bash">python experiment_implementation/test_pq.py
 </code></pre>
-<p>The result file will be stored under this path <code>wg1-experiment-implementation/test_pq/...json</code>.
-The participant ID will always be 1 by default, if you like to change it you can run the command like this:</p>
-<pre><code class="language-bash">python -m experiment_implementation.experiment.participant_questionnaire --participant_id 5
-</code></pre>
+<p>The result file will be stored under this path <code>wg1-experiment-implementation/test_pq/...json</code>.</p>
 <p>The file will be overwritten if you run it again with the same ID.</p>
 <h2>Upload the data</h2>
 <p>After you have run a MultiplEYE session, no matter if pilot or real experiment, please make sure to:</p>
