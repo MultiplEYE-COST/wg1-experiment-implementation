@@ -4,11 +4,10 @@ import os.path
 from pprint import pprint
 
 import pandas as pd
-from PyQt6 import QtGui
+from PyQt6 import QtGui, QtWidgets
 from psychopy import gui
 
 import constants
-
 
 class MultiplEYEParticipantQuestionnaire:
 
@@ -250,6 +249,10 @@ class MultiplEYEParticipantQuestionnaire:
         if existing_data is None:
             existing_data = {}
 
+
+        ########### SIZE CHANGES ###############################################################
+        '''
+        # Old Version
         pq_gui = gui.Dlg(
             title=self.instructions['pq_title'],
             # Positioning the dialog boxes in the top left corner of the screen
@@ -257,6 +260,29 @@ class MultiplEYEParticipantQuestionnaire:
             size=(800, 900),
         )
         # pq_gui.showMaximized()
+        '''
+
+        DIALOG_W = int(constants.IMAGE_WIDTH_PX)
+        DIALOG_H = int(constants.IMAGE_HEIGHT_PX * 0.7)   #height of screen is set to 70% of actual height
+        TOP_LEFT = (10, 10)  # 10px from the left, 10px from the top left corner
+
+        pq_gui = gui.Dlg(
+            title=self.instructions['pq_title'],
+            # Positioning the dialog boxes in the top left corner of the screen
+            pos=TOP_LEFT,
+            size=(800, 900),  #not used
+        )
+        # pq_gui.showMaximized()
+
+        # Fix the width of the window depending on screen width
+        # If not set than the window size will change for each question
+        pq_gui.setMinimumWidth(DIALOG_W)
+        pq_gui.setMaximumWidth(DIALOG_W)
+        pq_gui.setMinimumHeight(DIALOG_H)
+        pq_gui.setMaximumHeight(DIALOG_H)
+
+        #########################################################################################
+
 
         try:
             pq_gui.cancelBtn.setHidden(True)
@@ -288,6 +314,10 @@ class MultiplEYEParticipantQuestionnaire:
 
         # first 4 questions on one page
         for question_id, question_key in questions:
+            # Adding the current language in the additional_read_language question
+            if question_id == "additional_read_language":
+                self.questions["additional_read_language"][
+                    "pq_question_text"] = f'{self.questions["additional_read_language"]["pq_question_text"]}'
 
             answer_type = self.questions[question_id]["pq_answer_type"]
 
@@ -366,6 +396,34 @@ class MultiplEYEParticipantQuestionnaire:
                 # if we have already changed the font to italic, we don't want to change it again
                 if not item.widget().font().family() == constants.PQ_FONT_ITALIC[0]:
                     item.widget().setFont(QtGui.QFont(*constants.PQ_FONT))
+
+
+        ########### SIZE CHANGES ###############################################################
+
+        FIXED_INPUT_WIDTH = 300  # predetermined width for the answer choice
+        for row in range(pq_gui.layout.rowCount()):
+            input_item = pq_gui.layout.itemAtPosition(row, 1)
+            if input_item is None:
+                continue
+            input_widget = input_item.widget()
+            if input_widget:
+                input_widget.setFixedWidth(FIXED_INPUT_WIDTH)
+
+        available_label_width = DIALOG_W - FIXED_INPUT_WIDTH - 100  # remaining width for question's text
+
+        for row in range(pq_gui.layout.rowCount()):
+            label_item = pq_gui.layout.itemAtPosition(row, 0)
+            if label_item is None:
+                continue
+            label_widget = label_item.widget()
+            if isinstance(label_widget, QtWidgets.QLabel):
+                label_widget.setWordWrap(True)
+                label_widget.setMaximumWidth(available_label_width)
+
+        pq_gui.layout.setColumnStretch(0, 1)  # allow label column to stretch
+        pq_gui.layout.setColumnStretch(1, 0)  # prevent input column from growing
+
+        #########################################################################################
 
         ok_data = pq_gui.show()
         # the last entry is always the confirmation checkbox

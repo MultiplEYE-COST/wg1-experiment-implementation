@@ -137,7 +137,7 @@ def parse_args():
         metavar=translations['lab_number'],
         help=translations['lab_number_help'],
         widget='TextField',
-        default=1,
+        default=local_config.LAB_NUMBER,
         type=int,
         required=True,
         gooey_options={
