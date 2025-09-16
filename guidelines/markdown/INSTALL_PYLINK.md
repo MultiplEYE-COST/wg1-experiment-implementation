@@ -23,10 +23,10 @@ On Windows machines, the EyeLink developer kit is installed in an SR Research Fo
 developer kit is contained in the EyeLink folder. It includes different versions of pylink for different python versions.
 The correct pylink version can be found under the path below:
 ```
-C:\Program Files (x86)\SR Research\EyeLink\SampleExperiments\Python\[64 OR 32]\3.9\pylink
+C:\Program Files (x86)\SR Research\EyeLink\SampleExperiments\Python\[64 OR 32]\3.10\pylink
 ```
 
-In the path above, pick either the `32` folder or the `64` folder depending on your system. The `3.9` folder in the
+In the path above, pick either the `32` folder or the `64` folder depending on your system. The `3.10` folder in the
 path refers to the python version that we are using. If you are using python 3.10, you need to pick the `3.10` folder.
 
 **Mac**
@@ -34,10 +34,10 @@ path refers to the python version that we are using. If you are using python 3.1
 On Macs, the developer kit is stored in an EyeLink folder under applications. The pylink version is found under the
 following link:
 ```
-/Applications/EyeLink/SampleExperiments/Python/3.9/pylink
+/Applications/EyeLink/SampleExperiments/Python/3.10/pylink
 ```
 
-The `3.9` folder in the path refers to the python version that we are using. If you are using python 3.10, you need to pick the `3.10` folder.
+The `3.10` folder in the path refers to the python version that we are using. If you are using python 3.10, you need to pick the `3.10` folder.
 
 ### 4. Copy pylink folder to environment
 Now you need to paste the pylink folder to your environment. You can run the following command with the link from above

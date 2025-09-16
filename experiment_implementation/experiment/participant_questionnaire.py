@@ -188,14 +188,34 @@ class MultiplEYEParticipantQuestionnaire:
                 button=self.instructions['pq_next_button'],
                 keys=keys,
             )
+        additional_questions = [
+            'education_language_time',
+            'age_reading_start',
+            'public_language_time',
+            'language_use_people',
+            'language_use_context'
+        ]
+
+        ask_additional = any(q in self.questions.keys() for q in additional_questions)
 
         self._show_questions(
             '',
             ['tiredness', 'eyewear', 'alcohol_yesterday', 'alcohol_today'],
-            button=self.instructions['pq_submit_button'],
+            button=self.instructions['pq_submit_button'] if ask_additional else self.instructions['pq_next_button'],
         )
 
-        pprint(self.pq_data)
+        # if additional questions are in the file we show them
+
+        if ask_additional:
+            additional_questions = [q for q in additional_questions if q in self.questions.keys()]
+            self._show_questions(
+                '',
+                additional_questions,
+                button=self.instructions['pq_submit_button'],
+                optional=True
+            )
+
+        # pprint(self.pq_data)
         self._save_data()
 
         # show goodbye message
