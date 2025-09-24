@@ -9,6 +9,16 @@ from psychopy import gui
 
 import constants
 
+# these are all questions that are not part of the original questionnaire but might be added
+# if they are in the question file, they will be shown
+ADDITIONAL_QUESTIONS = [
+    'education_language_time',
+    'age_reading_start',
+    'public_language_time',
+    'language_use_people',
+    'language_use_context'
+]
+
 class MultiplEYEParticipantQuestionnaire:
 
     def __init__(self, participant_identifier: int, results_folder: str):
@@ -17,6 +27,7 @@ class MultiplEYEParticipantQuestionnaire:
         self.pq_data = {}
         self.confirmation_data = {}
         self.results_folder = results_folder
+        self.ask_additional = False
 
     def load_data(self):
 
@@ -188,26 +199,19 @@ class MultiplEYEParticipantQuestionnaire:
                 button=self.instructions['pq_next_button'],
                 keys=keys,
             )
-        additional_questions = [
-            'education_language_time',
-            'age_reading_start',
-            'public_language_time',
-            'language_use_people',
-            'language_use_context'
-        ]
 
-        ask_additional = any(q in self.questions.keys() for q in additional_questions)
+        self.ask_additional = any(q in self.questions.keys() for q in ADDITIONAL_QUESTIONS)
 
         self._show_questions(
             '',
             ['tiredness', 'eyewear', 'alcohol_yesterday', 'alcohol_today'],
-            button=self.instructions['pq_submit_button'] if ask_additional else self.instructions['pq_next_button'],
+            button=self.instructions['pq_submit_button'] if self.ask_additional  else self.instructions['pq_next_button'],
         )
 
         # if additional questions are in the file we show them
 
-        if ask_additional:
-            additional_questions = [q for q in additional_questions if q in self.questions.keys()]
+        if self.ask_additional :
+            additional_questions = [q for q in ADDITIONAL_QUESTIONS if q in self.questions.keys()]
             self._show_questions(
                 '',
                 additional_questions,
@@ -227,8 +231,19 @@ class MultiplEYEParticipantQuestionnaire:
 
         result_file_path = self.results_folder + result_file_name
 
+        multipleye_data = self.pq_data
+
+        if self.ask_additional:
+            # extract all additional questions and move to different file
+            additional_data = {k: v for k, v in self.pq_data.items() if k in ADDITIONAL_QUESTIONS}
+            multipleye_data = {k: v for k, v in self.pq_data.items() if k not in ADDITIONAL_QUESTIONS}
+
+            additional_data_path = self.results_folder + f"{result_file_name}_additional.json"
+            with open(additional_data_path, 'w', encoding='utf8') as f:
+                json.dump(additional_data, f, indent=4)
+
         with open(result_file_path, 'w', encoding='utf8') as f:
-            json.dump(self.pq_data, f, indent=4)
+            json.dump(multipleye_data, f, indent=4)
 
     def _show_questions(self, instructions: str, questions: list, button: str,
                         existing_data: dict = None,
