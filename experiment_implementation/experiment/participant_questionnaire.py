@@ -227,9 +227,9 @@ class MultiplEYEParticipantQuestionnaire:
 
     def _save_data(self):
         result_file_name = (f'/{self.participant_id}_{constants.LANGUAGE}_'
-                            f'{constants.COUNTRY_CODE}_{constants.LAB_NUMBER}_pq_data.json')
+                            f'{constants.COUNTRY_CODE}_{constants.LAB_NUMBER}_pq_data')
 
-        result_file_path = self.results_folder + result_file_name
+        result_file_path = self.results_folder + result_file_name + '.json'
 
         multipleye_data = self.pq_data
 
