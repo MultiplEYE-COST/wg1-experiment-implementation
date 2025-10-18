@@ -8,8 +8,8 @@ from experiment.participant_questionnaire import MultiplEYEParticipantQuestionna
 import constants
 
 
-def run_pq_only(id: int) -> None:
-    participant_id_str = str(id)
+def run_pq_only(pid: int) -> None:
+    participant_id_str = str(pid)
 
     # participant id should always be 3 digits long
     while len(participant_id_str) < 3:
@@ -19,7 +19,7 @@ def run_pq_only(id: int) -> None:
     repo_root = constants.EXP_ROOT_PATH
     os.makedirs(f'{repo_root.parent}/test_pq', exist_ok=True)
 
-    pq = MultiplEYEParticipantQuestionnaire(participant_id, f'{repo_root.parent}/test_pq')
+    pq = MultiplEYEParticipantQuestionnaire(participant_id_str, f'{repo_root.parent}/test_pq')
     pq.run_questionnaire()
 
 
