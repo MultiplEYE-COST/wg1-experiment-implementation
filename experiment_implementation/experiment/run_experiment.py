@@ -163,7 +163,13 @@ def run_experiment(
     # general_log_file.write([get_time(), 'finished initial calibration'])
 
     general_log_file.write([get_time(), 'start experiment'])
-    experiment.run_experiment()
+    try:
+        experiment.run_experiment()
+    except Exception as e:
+        general_log_file.write([get_time(), f'EXCEPTION_OCCURRED_{e}'])
+        experiment.finish_experiment(participant_questionnaire=False)
+        raise
+
     general_log_file.write([get_time(), 'finished experiment'])
 
     experiment.finish_experiment(participant_questionnaire=True)
