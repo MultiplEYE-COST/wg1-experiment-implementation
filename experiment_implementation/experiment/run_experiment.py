@@ -34,8 +34,8 @@ def run_experiment(
     while len(participant_id_str) < 3:
         participant_id_str = "0" + participant_id_str
 
-    participant_result_folder = (f'{participant_id_str}_{constants.LANGUAGE}_{constants.COUNTRY_CODE}_'
-                                 f'{constants.LAB_NUMBER}_ET{session_id}').upper()
+    # TODO Diego: replace all of these instance of constants.LANGUAGE, COUNTRY_CODE, LAB_NUMBER with constants.DATA_COLLECTION_NAME
+    participant_result_folder = (f'{participant_id_str}_{constants.DATA_COLLECTION_NAME}_ET{session_id}').upper()
 
     if not continue_core_session:
         experiment_utils.mark_stimulus_order_version_used(stimulus_order_version, participant_id, session_mode,

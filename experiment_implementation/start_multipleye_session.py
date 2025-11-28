@@ -92,58 +92,12 @@ def parse_args():
         description=translations['lab_settings_desc'],
     )
     lab_settings.add_argument(
-        '--language',
-        widget='TextField',
-        metavar=translations['language'],
-        help=translations['language_help'],
-        default=local_config.LANGUAGE,
-        required=True,
-        gooey_options={'visible': True},
+        '--data-collection-name',
+        metavar='Data collection name',
+        help='This is the name or your data collection.',
+        type=str,
     )
 
-    lab_settings.add_argument(
-        '--country_code',
-        help=translations['country_code_help'],
-        metavar=translations['country_code'],
-        widget='TextField',
-        default=local_config.COUNTRY_CODE,
-        required=True,
-        gooey_options={'visible': True},
-    )
-
-    lab_settings.add_argument(
-        '--city',
-        metavar=translations['city'],
-        help=translations['city_help'],
-        widget='TextField',
-        default=local_config.CITY,
-        required=True,
-        gooey_options={'visible': True},
-    )
-
-    lab_settings.add_argument(
-        '--year',
-        metavar=translations['year'],
-        help=translations['year_help'],
-        type=int,
-        widget='TextField',
-        default=local_config.YEAR,
-        required=True,
-        gooey_options={'visible': True},
-    )
-
-    lab_settings.add_argument(
-        '--lab_number',
-        metavar=translations['lab_number'],
-        help=translations['lab_number_help'],
-        widget='TextField',
-        default=local_config.LAB_NUMBER,
-        type=int,
-        required=True,
-        gooey_options={
-            'visible': True,
-        }
-    )
 
     lab_settings.add_argument(
         '--dummy_mode',
@@ -218,6 +172,7 @@ def start_experiment_session():
     arguments = parse_args()
     settings_changed = False
 
+    # TODO Diego: delete all code that is realted to language, city, etc. the code should only depend on the data collection name
     if arguments['language'] == 'toy':
         arguments['session_mode'] = SessionMode.MINIMAL
 
@@ -242,6 +197,7 @@ def start_experiment_session():
 
     if settings_changed and not arguments['continue_core_session']:
         with open(PARENT_FOLDER / 'local_config.py', 'w') as f:
+            # TODO Diego: delete and replace by data collection name
             f.write(f'LANGUAGE = "{arguments["language"]}"\n')
             f.write(f'COUNTRY_CODE = "{arguments["country_code"]}"\n')
             f.write(f'CITY = "{arguments["city"]}"\n')

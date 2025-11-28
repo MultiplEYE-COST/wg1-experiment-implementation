@@ -70,6 +70,7 @@ class Experiment:
         )
 
         if session_mode.value != 'minimal':
+            # TODO Diego: set language and country code to data collection name, remove the attribute of experiment that reference language etc.
             self.language = constants.LANGUAGE
             self.country_code = constants.COUNTRY_CODE
         else:
@@ -83,8 +84,8 @@ class Experiment:
             ),
         )
 
-        edf_file_path = (f'{participant_id}{self.language.lower()}'
-                         f'{self.country_code.lower()}{constants.LAB_NUMBER}.edf')
+        # TODO Diego: edf file name cannot be longer than 8 characters!!!
+        edf_file_path = f'{participant_id}neoit.edf'
 
         absolute_edf_file_path = f'{abs_exp_path}/{edf_file_path}'
         self.relative_edf_file_path = f'{rel_exp_path}/{edf_file_path}'

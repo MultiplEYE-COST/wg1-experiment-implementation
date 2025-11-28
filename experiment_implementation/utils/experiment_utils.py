@@ -67,7 +67,7 @@ def read_image_configuration(config_path: str) -> dict:
 
     return image_config
 
-
+# TODO Diego: rewrite this function to use the new randomization csv file format
 def determine_stimulus_order_version(participant_id: int = None) -> int:
     """
     Determine the stimulus order version for the participant.
@@ -99,6 +99,7 @@ def determine_stimulus_order_version(participant_id: int = None) -> int:
     return order_version
 
 
+# TODO Diego: clarify how we can use this and rewrite it
 def mark_stimulus_order_version_used(order_version: int, participant_id: int, session_mode: SessionMode,
                                      dataset_type: str, participant_result_folder: str) -> None:
     """

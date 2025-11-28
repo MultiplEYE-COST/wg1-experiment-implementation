@@ -30,6 +30,7 @@ def create_data_logfile(
     return lf
 
 
+# TODO Diego: we need to rewrite this to load the stimuli correctly
 def get_stimuli_screens(
         path_data_csv: str | Path,
         path_question_csv: str | Path,
@@ -209,9 +210,11 @@ def get_stimuli_screens(
             # get the question row
             row = row.iloc[0]
 
+            # TODO Diego: you don't have the snippet number, exclude this
             snippet_no = row['snippet_no']
 
             # the question id is a 4 or 5 digit number that is unique for each question
+            # TODO Diego: you don't have the snippet number, exclude this
             question_id = str(stimulus_id) + str(snippet_no) + str(condition_no) + str(question_no)
 
             question_img_path = row['question_img_path']

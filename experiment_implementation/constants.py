@@ -10,6 +10,7 @@ from runpy import run_path
 EXP_ROOT_PATH = Path(__file__).parent
 LOCAL_CONFIGS = run_path(str(EXP_ROOT_PATH / 'local_config.py'))
 
+# TODO Diego: replace all of these instance of LANGUAGE, COUNTRY_CODE, LAB_NUMBER, etc. with DATA_COLLECTION_NAME int he entire document below
 LANGUAGE = LOCAL_CONFIGS['LANGUAGE']
 COUNTRY_CODE = LOCAL_CONFIGS['COUNTRY_CODE']
 CITY = LOCAL_CONFIGS['CITY']
@@ -39,7 +40,8 @@ BGC = (15, 15, 15)
 HIGHLIGHT_COLOR = (185, 65, 40)
 
 DATA_FOLDER_PATH = f'data'
-RESULT_FOLDER_PATH = f'{EXP_ROOT_PATH}/data/eye_tracking_data_{LANGUAGE}_{COUNTRY_CODE}_{LAB_NUMBER}'
+# TODO Diego: replace all of these instance of LANGUAGE, COUNTRY_CODE, LAB_NUMBER, etc. what the file name actually is
+RESULT_FOLDER_PATH = f'{EXP_ROOT_PATH}/data/eye_tracking_data_{DATA_COLLECTION_NAME}'
 
 IMAGE_CONFIG_PATH = (f'{EXP_ROOT_PATH}/data/stimuli_MultiplEYE_{LANGUAGE}_{COUNTRY_CODE}_{CITY}_{LAB_NUMBER}_{YEAR}/config/'
                      f'config_{LANGUAGE}_{COUNTRY_CODE}_{CITY}_{LAB_NUMBER}_{YEAR}.py')
@@ -115,7 +117,7 @@ OPTION_5 = IMAGE_CONFIG['option_5']
 #########################################################
 # participant_questionnaire constants
 
-PQ_DATA_FOLDER_PATH = EXP_ROOT_PATH / 'data' / f'participant_questionnaire_{LANGUAGE.lower()}_{COUNTRY_CODE.lower()}_{LAB_NUMBER}'
+PQ_DATA_FOLDER_PATH = EXP_ROOT_PATH / 'data' / f'participant_questionnaire_{DATA_COLLECTION_NAME}'
 
 PQ_PARTICIPANT_INSTRUCTIONS_XLSX = PQ_DATA_FOLDER_PATH / f'multipleye_questionnaire_instructions_{LANGUAGE.lower()}.xlsx'
 PQ_QUESTIONS_XLSX = PQ_DATA_FOLDER_PATH / f'multipleye_questionnaire_questions_{LANGUAGE.lower()}.xlsx'
