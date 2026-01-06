@@ -1,0 +1,46 @@
+{
+  "Contact_information": {
+    "First_name": "Anna",
+    "Last_name": "Bondar",
+    "Affiliation": "University of Zurich",
+    "Email": "anna.bondar@uzh.ch"
+  },
+  "Data_collection_name": "MultiplEYE_CA_CH_Zurich_1_2025",
+  "Preregistration_core_or_additional_data_collection": "Pre-registration for core dataset",
+  "Name_eye-tracker": "EyeLink Portable Duo",
+  "Name_eye-tracker_manufacturer": "SR Research",
+  "Maximal_frequency": "2000",
+  "Specification_camera_system": "desktop mount",
+  "Specification_head_stabilization": [
+    "Tracking with stabilized head through chin / forehead rest",
+    "Combination of a chin and forehead rest (f. ex. when using tower mount eye tracker)"
+  ],
+  "Name_computer_operation_system": "Windows 11",
+  "Name_monitor": [
+    "HP OMEN X 25f",
+    "OMEN"
+  ],
+  "Monitor_resolution_in_px": "(1920,1080)",
+  "Screen_size_in_cm": "(54.5,30.2)",
+  "Diagonal_screen_cm": "63",
+  "Distance_in_cm": "60",
+  "Script_direction": "LTR",
+  "Language_code": "CA",
+  "Country_code": "CH",
+  "Lab_number": "1",
+  "City": "Zurich",
+  "Estimated_end_year_of_data_collection": "2025",
+  "Use_of_multiple_devices": "No",
+  "Stimuli_preparation": [
+    "Stimuli will be used from another lab for the same language"
+  ],
+  "Psychometric_tests": {
+    "Are_tests_conducted": "Yes",
+    "LWMC": "Lewandowsky et al. Working Memory Capacity (LWMC) battery",
+    "PLAB": "Metalinguistic aptitude: PLAB",
+    "Flanker": "Cognitive control: Flanker task",
+    "Stroop": "Cognitive control: Stroop task",
+    "RAN": "Rapid automatized naming: RAN task",
+    "WikiVocab": "Vocabulary test: WikiVocab"
+  }
+}

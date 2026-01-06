@@ -24,12 +24,12 @@ Once you have signed the form, please look at the black dot in the bottom right 
 10,instruction_screen_2,"
 
 
-Each text will be divided into multiple screens. Before each new text screen, you will see a black dot with a white centre shown at the top left corner of the screen. You must focus your eyes on the white centre of the dot to procede to the next screen. We will use this to check the accuracy of the eye-tracking, if the accuracy is low, we may need to recalibrate the eye-tracker. The experimenter will advise you if this is necessary, if not, you will automatically procede to the next text.
+Each text will be divided into multiple screens. Before each new text screen, you will see a black dot with a white centre shown at the top left corner of the screen. You must focus your eyes on the white centre of the dot to proceed to the next screen. We will use this to check the accuracy of the eye-tracking, if the accuracy is low, we may need to recalibrate the eye-tracker. The experimenter will advise you if this is necessary, if not, you will automatically proceed to the next screen.
 
 When you are finished reading each screen, please follow the same procedure to move on. Look at the **black dot** shown in the bottom right corner of the screen. While looking at the dot, press the **space bar** to continue to the next screen. **Please note, you won't be able to go back to a screen you have already read.**
 
 Please follow the above procedure to continue to the next screen.",,instruction_screen_2_toy.png,data/stimuli_MultiplEYE_TOY_X_x_1_1/participant_instructions_images_toy_x_1/instruction_screen_2_toy.png
-11,instruction_screen_3,"After each text, you will be presented with several comprehension questions about the text. Each question will be presented on a separate screen together with four answer options. **There is only one correct answer.** Please select the correct answer option by using the arrow keys on the keyboard. The selected answer will be highlighted. Once you are happy with your answer, press the space bar to confirm your selection. ",,instruction_screen_3_toy.png,data/stimuli_MultiplEYE_TOY_X_x_1_1/participant_instructions_images_toy_x_1/instruction_screen_3_toy.png
+11,instruction_screen_3,"After each text, you will be presented with several comprehension questions about the text. Each question will be presented on a separate screen together with four answer options. **There is only one correct answer.** Please select the correct answer option by using the arrow keys on the keyboard. The selected answer will be highlighted. Once you are happy with your answer, press the space bar to confirm your selection.",,instruction_screen_3_toy.png,data/stimuli_MultiplEYE_TOY_X_x_1_1/participant_instructions_images_toy_x_1/instruction_screen_3_toy.png
 12,instruction_screen_1,"You will read several different types of texts and answer comprehension questions related to them. The texts are diverse in terms of contents and layout. Some are longer and some are shorter. Please expect some uncommon words and different text styles and complexities. You may struggle to interpret some aspects of the texts, this is natural. The questions are also diverse. Some are more complex and some are easier. 
 
 Read each text naturally, as you would commonly read. Please read silently.
@@ -57,10 +57,10 @@ To continue, please look at the black dot in the bottom right corner of the scre
 3 – 50%
 4 – 75%
 5 – 100% ",presented after reading the text,familiarity_rating_screen_2_toy.png,data/stimuli_MultiplEYE_TOY_X_x_1_1/participant_instructions_images_toy_x_1/familiarity_rating_screen_2_toy.png
-18,camera_setup_screen,"Please ask the experimenter to adjust the camera and calibrate.
+18,camera_setup_screen,"Please ask the experimenter to **adjust the camera,** set the correct **sampling frequency** and calibrate.
 
 Press the space bar to go to the camera setup screen. 
 
-Move your finger close to your dominant eye. The experimenter will check if the correct eye is being tracked. ","presented before the camera set-up, after the instructions",camera_setup_screen_toy.png,data/stimuli_MultiplEYE_TOY_X_x_1_1/participant_instructions_images_toy_x_1/camera_setup_screen_toy.png
-19,validation_screen,"Now, we will validate the calibration of the camera and, if necessary, re-calibrate. Press the space bar to go to the calibration screen. ",Before each of the validations performed between trials.,validation_screen_toy.png,data/stimuli_MultiplEYE_TOY_X_x_1_1/participant_instructions_images_toy_x_1/validation_screen_toy.png
-20,recalibration_screen,"Now, we will recalibrate. Press the space bar to go to the calibration screen. ",presented before a trial when its previous trial has more then one triggers that fail to trigger.,recalibration_screen_toy.png,data/stimuli_MultiplEYE_TOY_X_x_1_1/participant_instructions_images_toy_x_1/recalibration_screen_toy.png
+Move your finger close to your **dominant eye.** The experimenter will check if the correct eye is being tracked. ","presented before the camera set-up, after the instructions",camera_setup_screen_toy.png,data/stimuli_MultiplEYE_TOY_X_x_1_1/participant_instructions_images_toy_x_1/camera_setup_screen_toy.png
+19,validation_screen,"Now, we will validate the calibration of the camera and, if necessary, re-calibrate. Press the space bar to go to the calibration screen. ",Before each of the validations performed between trials.,validation_screen_toy.png,data/stimuli_MultiplEYE_TOY_X_x_1_1/participant_instructions_images_toy_x_1/validation_screen_toy.png
+20,recalibration_screen,"Now, we will recalibrate. Press the space bar to go to the calibration screen. ",presented before a trial when its previous trial has more then one triggers that fail to trigger.,recalibration_screen_toy.png,data/stimuli_MultiplEYE_TOY_X_x_1_1/participant_instructions_images_toy_x_1/recalibration_screen_toy.png

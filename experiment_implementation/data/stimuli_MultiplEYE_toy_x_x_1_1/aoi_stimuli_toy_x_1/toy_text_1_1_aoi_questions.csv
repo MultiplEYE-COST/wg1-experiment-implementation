@@ -1,0 +1,781 @@
+char_idx,char,top_left_x,top_left_y,width,height,char_idx_in_line,line_idx,page,word_idx,word_idx_in_line,word,question_image_version
+0,W,81.0,89.0,14,33,0,0,question_01111,0,0,What,question_images_version_1
+1,h,95.0,89.0,14,33,1,0,question_01111,0,0,What,question_images_version_1
+2,a,109.0,89.0,14,33,2,0,question_01111,0,0,What,question_images_version_1
+3,t,123.0,89.0,14,33,3,0,question_01111,0,0,What,question_images_version_1
+4, ,137.0,89.0,14,33,4,0,question_01111,0,0,,question_images_version_1
+5,i,151.0,89.0,14,33,5,0,question_01111,1,1,is,question_images_version_1
+6,s,165.0,89.0,14,33,6,0,question_01111,1,1,is,question_images_version_1
+7, ,179.0,89.0,14,33,7,0,question_01111,1,1,,question_images_version_1
+8,p,193.0,89.0,14,33,8,0,question_01111,2,2,pymovements?,question_images_version_1
+9,y,207.0,89.0,14,33,9,0,question_01111,2,2,pymovements?,question_images_version_1
+10,m,221.0,89.0,14,33,10,0,question_01111,2,2,pymovements?,question_images_version_1
+11,o,235.0,89.0,14,33,11,0,question_01111,2,2,pymovements?,question_images_version_1
+12,v,249.0,89.0,14,33,12,0,question_01111,2,2,pymovements?,question_images_version_1
+13,e,263.0,89.0,14,33,13,0,question_01111,2,2,pymovements?,question_images_version_1
+14,m,277.0,89.0,14,33,14,0,question_01111,2,2,pymovements?,question_images_version_1
+15,e,291.0,89.0,14,33,15,0,question_01111,2,2,pymovements?,question_images_version_1
+16,n,305.0,89.0,14,33,16,0,question_01111,2,2,pymovements?,question_images_version_1
+17,t,319.0,89.0,14,33,17,0,question_01111,2,2,pymovements?,question_images_version_1
+18,s,333.0,89.0,14,33,18,0,question_01111,2,2,pymovements?,question_images_version_1
+19,?,347.0,89.0,14,33,19,0,question_01111,2,2,pymovements?,question_images_version_1
+0,A,691.12,440.88,14,33,0,0,toy_text_1_1_question_01111_target,0,0,A,question_images_version_1
+1, ,705.12,440.88,14,33,1,0,toy_text_1_1_question_01111_target,0,0,,question_images_version_1
+2,P,719.12,440.88,14,33,2,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_1
+3,y,733.12,440.88,14,33,3,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_1
+4,t,747.12,440.88,14,33,4,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_1
+5,h,761.12,440.88,14,33,5,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_1
+6,o,775.12,440.88,14,33,6,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_1
+7,n,789.12,440.88,14,33,7,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_1
+8, ,803.12,440.88,14,33,8,0,toy_text_1_1_question_01111_target,1,1,,question_images_version_1
+9,p,817.12,440.88,14,33,9,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_1
+10,a,831.12,440.88,14,33,10,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_1
+11,c,845.12,440.88,14,33,11,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_1
+12,k,859.12,440.88,14,33,12,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_1
+13,a,873.12,440.88,14,33,13,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_1
+14,g,887.12,440.88,14,33,14,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_1
+15,e,901.12,440.88,14,33,15,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_1
+0,A,195.6,250.5,14,33,0,0,toy_text_1_1_question_01111_distractor_a,0,0,A,question_images_version_1
+1, ,209.6,250.5,14,33,1,0,toy_text_1_1_question_01111_distractor_a,0,0,,question_images_version_1
+2,p,223.6,250.5,14,33,2,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_1
+3,l,237.6,250.5,14,33,3,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_1
+4,o,251.6,250.5,14,33,4,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_1
+5,t,265.6,250.5,14,33,5,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_1
+6,t,279.6,250.5,14,33,6,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_1
+7,i,293.6,250.5,14,33,7,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_1
+8,n,307.6,250.5,14,33,8,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_1
+9,g,321.6,250.5,14,33,9,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_1
+10, ,335.6,250.5,14,33,10,0,toy_text_1_1_question_01111_distractor_a,1,1,,question_images_version_1
+11,m,349.6,250.5,14,33,11,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_1
+12,e,363.6,250.5,14,33,12,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_1
+13,t,377.6,250.5,14,33,13,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_1
+14,h,391.6,250.5,14,33,14,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_1
+15,o,405.6,250.5,14,33,15,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_1
+16,d,419.6,250.5,14,33,16,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_1
+0,A,81.0,440.88,14,33,0,0,toy_text_1_1_question_01111_distractor_b,0,0,A,question_images_version_1
+1, ,95.0,440.88,14,33,1,0,toy_text_1_1_question_01111_distractor_b,0,0,,question_images_version_1
+2,J,109.0,440.88,14,33,2,0,toy_text_1_1_question_01111_distractor_b,1,1,Java,question_images_version_1
+3,a,123.0,440.88,14,33,3,0,toy_text_1_1_question_01111_distractor_b,1,1,Java,question_images_version_1
+4,v,137.0,440.88,14,33,4,0,toy_text_1_1_question_01111_distractor_b,1,1,Java,question_images_version_1
+5,a,151.0,440.88,14,33,5,0,toy_text_1_1_question_01111_distractor_b,1,1,Java,question_images_version_1
+6, ,165.0,440.88,14,33,6,0,toy_text_1_1_question_01111_distractor_b,1,1,,question_images_version_1
+7,s,179.0,440.88,14,33,7,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_1
+8,c,193.0,440.88,14,33,8,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_1
+9,r,207.0,440.88,14,33,9,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_1
+10,i,221.0,440.88,14,33,10,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_1
+11,p,235.0,440.88,14,33,11,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_1
+12,t,249.0,440.88,14,33,12,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_1
+0,A,195.6,751.5,14,33,0,0,toy_text_1_1_question_01111_distractor_c,0,0,A,question_images_version_1
+1, ,209.6,751.5,14,33,1,0,toy_text_1_1_question_01111_distractor_c,0,0,,question_images_version_1
+2,t,223.6,751.5,14,33,2,0,toy_text_1_1_question_01111_distractor_c,1,1,test,question_images_version_1
+3,e,237.6,751.5,14,33,3,0,toy_text_1_1_question_01111_distractor_c,1,1,test,question_images_version_1
+4,s,251.6,751.5,14,33,4,0,toy_text_1_1_question_01111_distractor_c,1,1,test,question_images_version_1
+5,t,265.6,751.5,14,33,5,0,toy_text_1_1_question_01111_distractor_c,1,1,test,question_images_version_1
+6, ,279.6,751.5,14,33,6,0,toy_text_1_1_question_01111_distractor_c,1,1,,question_images_version_1
+7,s,293.6,751.5,14,33,7,0,toy_text_1_1_question_01111_distractor_c,2,2,suite,question_images_version_1
+8,u,307.6,751.5,14,33,8,0,toy_text_1_1_question_01111_distractor_c,2,2,suite,question_images_version_1
+9,i,321.6,751.5,14,33,9,0,toy_text_1_1_question_01111_distractor_c,2,2,suite,question_images_version_1
+10,t,335.6,751.5,14,33,10,0,toy_text_1_1_question_01111_distractor_c,2,2,suite,question_images_version_1
+11,e,349.6,751.5,14,33,11,0,toy_text_1_1_question_01111_distractor_c,2,2,suite,question_images_version_1
+0,W,81.0,89.0,14,33,0,0,question_01111,0,0,What,question_images_version_2
+1,h,95.0,89.0,14,33,1,0,question_01111,0,0,What,question_images_version_2
+2,a,109.0,89.0,14,33,2,0,question_01111,0,0,What,question_images_version_2
+3,t,123.0,89.0,14,33,3,0,question_01111,0,0,What,question_images_version_2
+4, ,137.0,89.0,14,33,4,0,question_01111,0,0,,question_images_version_2
+5,i,151.0,89.0,14,33,5,0,question_01111,1,1,is,question_images_version_2
+6,s,165.0,89.0,14,33,6,0,question_01111,1,1,is,question_images_version_2
+7, ,179.0,89.0,14,33,7,0,question_01111,1,1,,question_images_version_2
+8,p,193.0,89.0,14,33,8,0,question_01111,2,2,pymovements?,question_images_version_2
+9,y,207.0,89.0,14,33,9,0,question_01111,2,2,pymovements?,question_images_version_2
+10,m,221.0,89.0,14,33,10,0,question_01111,2,2,pymovements?,question_images_version_2
+11,o,235.0,89.0,14,33,11,0,question_01111,2,2,pymovements?,question_images_version_2
+12,v,249.0,89.0,14,33,12,0,question_01111,2,2,pymovements?,question_images_version_2
+13,e,263.0,89.0,14,33,13,0,question_01111,2,2,pymovements?,question_images_version_2
+14,m,277.0,89.0,14,33,14,0,question_01111,2,2,pymovements?,question_images_version_2
+15,e,291.0,89.0,14,33,15,0,question_01111,2,2,pymovements?,question_images_version_2
+16,n,305.0,89.0,14,33,16,0,question_01111,2,2,pymovements?,question_images_version_2
+17,t,319.0,89.0,14,33,17,0,question_01111,2,2,pymovements?,question_images_version_2
+18,s,333.0,89.0,14,33,18,0,question_01111,2,2,pymovements?,question_images_version_2
+19,?,347.0,89.0,14,33,19,0,question_01111,2,2,pymovements?,question_images_version_2
+0,A,691.12,440.88,14,33,0,0,toy_text_1_1_question_01111_target,0,0,A,question_images_version_2
+1, ,705.12,440.88,14,33,1,0,toy_text_1_1_question_01111_target,0,0,,question_images_version_2
+2,P,719.12,440.88,14,33,2,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_2
+3,y,733.12,440.88,14,33,3,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_2
+4,t,747.12,440.88,14,33,4,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_2
+5,h,761.12,440.88,14,33,5,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_2
+6,o,775.12,440.88,14,33,6,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_2
+7,n,789.12,440.88,14,33,7,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_2
+8, ,803.12,440.88,14,33,8,0,toy_text_1_1_question_01111_target,1,1,,question_images_version_2
+9,p,817.12,440.88,14,33,9,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_2
+10,a,831.12,440.88,14,33,10,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_2
+11,c,845.12,440.88,14,33,11,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_2
+12,k,859.12,440.88,14,33,12,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_2
+13,a,873.12,440.88,14,33,13,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_2
+14,g,887.12,440.88,14,33,14,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_2
+15,e,901.12,440.88,14,33,15,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_2
+0,A,195.6,250.5,14,33,0,0,toy_text_1_1_question_01111_distractor_a,0,0,A,question_images_version_2
+1, ,209.6,250.5,14,33,1,0,toy_text_1_1_question_01111_distractor_a,0,0,,question_images_version_2
+2,p,223.6,250.5,14,33,2,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_2
+3,l,237.6,250.5,14,33,3,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_2
+4,o,251.6,250.5,14,33,4,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_2
+5,t,265.6,250.5,14,33,5,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_2
+6,t,279.6,250.5,14,33,6,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_2
+7,i,293.6,250.5,14,33,7,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_2
+8,n,307.6,250.5,14,33,8,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_2
+9,g,321.6,250.5,14,33,9,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_2
+10, ,335.6,250.5,14,33,10,0,toy_text_1_1_question_01111_distractor_a,1,1,,question_images_version_2
+11,m,349.6,250.5,14,33,11,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_2
+12,e,363.6,250.5,14,33,12,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_2
+13,t,377.6,250.5,14,33,13,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_2
+14,h,391.6,250.5,14,33,14,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_2
+15,o,405.6,250.5,14,33,15,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_2
+16,d,419.6,250.5,14,33,16,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_2
+0,A,81.0,440.88,14,33,0,0,toy_text_1_1_question_01111_distractor_b,0,0,A,question_images_version_2
+1, ,95.0,440.88,14,33,1,0,toy_text_1_1_question_01111_distractor_b,0,0,,question_images_version_2
+2,J,109.0,440.88,14,33,2,0,toy_text_1_1_question_01111_distractor_b,1,1,Java,question_images_version_2
+3,a,123.0,440.88,14,33,3,0,toy_text_1_1_question_01111_distractor_b,1,1,Java,question_images_version_2
+4,v,137.0,440.88,14,33,4,0,toy_text_1_1_question_01111_distractor_b,1,1,Java,question_images_version_2
+5,a,151.0,440.88,14,33,5,0,toy_text_1_1_question_01111_distractor_b,1,1,Java,question_images_version_2
+6, ,165.0,440.88,14,33,6,0,toy_text_1_1_question_01111_distractor_b,1,1,,question_images_version_2
+7,s,179.0,440.88,14,33,7,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_2
+8,c,193.0,440.88,14,33,8,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_2
+9,r,207.0,440.88,14,33,9,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_2
+10,i,221.0,440.88,14,33,10,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_2
+11,p,235.0,440.88,14,33,11,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_2
+12,t,249.0,440.88,14,33,12,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_2
+0,A,195.6,751.5,14,33,0,0,toy_text_1_1_question_01111_distractor_c,0,0,A,question_images_version_2
+1, ,209.6,751.5,14,33,1,0,toy_text_1_1_question_01111_distractor_c,0,0,,question_images_version_2
+2,t,223.6,751.5,14,33,2,0,toy_text_1_1_question_01111_distractor_c,1,1,test,question_images_version_2
+3,e,237.6,751.5,14,33,3,0,toy_text_1_1_question_01111_distractor_c,1,1,test,question_images_version_2
+4,s,251.6,751.5,14,33,4,0,toy_text_1_1_question_01111_distractor_c,1,1,test,question_images_version_2
+5,t,265.6,751.5,14,33,5,0,toy_text_1_1_question_01111_distractor_c,1,1,test,question_images_version_2
+6, ,279.6,751.5,14,33,6,0,toy_text_1_1_question_01111_distractor_c,1,1,,question_images_version_2
+7,s,293.6,751.5,14,33,7,0,toy_text_1_1_question_01111_distractor_c,2,2,suite,question_images_version_2
+8,u,307.6,751.5,14,33,8,0,toy_text_1_1_question_01111_distractor_c,2,2,suite,question_images_version_2
+9,i,321.6,751.5,14,33,9,0,toy_text_1_1_question_01111_distractor_c,2,2,suite,question_images_version_2
+10,t,335.6,751.5,14,33,10,0,toy_text_1_1_question_01111_distractor_c,2,2,suite,question_images_version_2
+11,e,349.6,751.5,14,33,11,0,toy_text_1_1_question_01111_distractor_c,2,2,suite,question_images_version_2
+0,W,81.0,89.0,14,33,0,0,question_01111,0,0,What,question_images_version_3
+1,h,95.0,89.0,14,33,1,0,question_01111,0,0,What,question_images_version_3
+2,a,109.0,89.0,14,33,2,0,question_01111,0,0,What,question_images_version_3
+3,t,123.0,89.0,14,33,3,0,question_01111,0,0,What,question_images_version_3
+4, ,137.0,89.0,14,33,4,0,question_01111,0,0,,question_images_version_3
+5,i,151.0,89.0,14,33,5,0,question_01111,1,1,is,question_images_version_3
+6,s,165.0,89.0,14,33,6,0,question_01111,1,1,is,question_images_version_3
+7, ,179.0,89.0,14,33,7,0,question_01111,1,1,,question_images_version_3
+8,p,193.0,89.0,14,33,8,0,question_01111,2,2,pymovements?,question_images_version_3
+9,y,207.0,89.0,14,33,9,0,question_01111,2,2,pymovements?,question_images_version_3
+10,m,221.0,89.0,14,33,10,0,question_01111,2,2,pymovements?,question_images_version_3
+11,o,235.0,89.0,14,33,11,0,question_01111,2,2,pymovements?,question_images_version_3
+12,v,249.0,89.0,14,33,12,0,question_01111,2,2,pymovements?,question_images_version_3
+13,e,263.0,89.0,14,33,13,0,question_01111,2,2,pymovements?,question_images_version_3
+14,m,277.0,89.0,14,33,14,0,question_01111,2,2,pymovements?,question_images_version_3
+15,e,291.0,89.0,14,33,15,0,question_01111,2,2,pymovements?,question_images_version_3
+16,n,305.0,89.0,14,33,16,0,question_01111,2,2,pymovements?,question_images_version_3
+17,t,319.0,89.0,14,33,17,0,question_01111,2,2,pymovements?,question_images_version_3
+18,s,333.0,89.0,14,33,18,0,question_01111,2,2,pymovements?,question_images_version_3
+19,?,347.0,89.0,14,33,19,0,question_01111,2,2,pymovements?,question_images_version_3
+0,A,691.12,440.88,14,33,0,0,toy_text_1_1_question_01111_target,0,0,A,question_images_version_3
+1, ,705.12,440.88,14,33,1,0,toy_text_1_1_question_01111_target,0,0,,question_images_version_3
+2,P,719.12,440.88,14,33,2,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_3
+3,y,733.12,440.88,14,33,3,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_3
+4,t,747.12,440.88,14,33,4,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_3
+5,h,761.12,440.88,14,33,5,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_3
+6,o,775.12,440.88,14,33,6,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_3
+7,n,789.12,440.88,14,33,7,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_3
+8, ,803.12,440.88,14,33,8,0,toy_text_1_1_question_01111_target,1,1,,question_images_version_3
+9,p,817.12,440.88,14,33,9,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_3
+10,a,831.12,440.88,14,33,10,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_3
+11,c,845.12,440.88,14,33,11,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_3
+12,k,859.12,440.88,14,33,12,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_3
+13,a,873.12,440.88,14,33,13,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_3
+14,g,887.12,440.88,14,33,14,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_3
+15,e,901.12,440.88,14,33,15,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_3
+0,A,195.6,250.5,14,33,0,0,toy_text_1_1_question_01111_distractor_a,0,0,A,question_images_version_3
+1, ,209.6,250.5,14,33,1,0,toy_text_1_1_question_01111_distractor_a,0,0,,question_images_version_3
+2,p,223.6,250.5,14,33,2,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_3
+3,l,237.6,250.5,14,33,3,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_3
+4,o,251.6,250.5,14,33,4,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_3
+5,t,265.6,250.5,14,33,5,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_3
+6,t,279.6,250.5,14,33,6,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_3
+7,i,293.6,250.5,14,33,7,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_3
+8,n,307.6,250.5,14,33,8,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_3
+9,g,321.6,250.5,14,33,9,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_3
+10, ,335.6,250.5,14,33,10,0,toy_text_1_1_question_01111_distractor_a,1,1,,question_images_version_3
+11,m,349.6,250.5,14,33,11,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_3
+12,e,363.6,250.5,14,33,12,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_3
+13,t,377.6,250.5,14,33,13,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_3
+14,h,391.6,250.5,14,33,14,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_3
+15,o,405.6,250.5,14,33,15,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_3
+16,d,419.6,250.5,14,33,16,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_3
+0,A,81.0,440.88,14,33,0,0,toy_text_1_1_question_01111_distractor_b,0,0,A,question_images_version_3
+1, ,95.0,440.88,14,33,1,0,toy_text_1_1_question_01111_distractor_b,0,0,,question_images_version_3
+2,J,109.0,440.88,14,33,2,0,toy_text_1_1_question_01111_distractor_b,1,1,Java,question_images_version_3
+3,a,123.0,440.88,14,33,3,0,toy_text_1_1_question_01111_distractor_b,1,1,Java,question_images_version_3
+4,v,137.0,440.88,14,33,4,0,toy_text_1_1_question_01111_distractor_b,1,1,Java,question_images_version_3
+5,a,151.0,440.88,14,33,5,0,toy_text_1_1_question_01111_distractor_b,1,1,Java,question_images_version_3
+6, ,165.0,440.88,14,33,6,0,toy_text_1_1_question_01111_distractor_b,1,1,,question_images_version_3
+7,s,179.0,440.88,14,33,7,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_3
+8,c,193.0,440.88,14,33,8,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_3
+9,r,207.0,440.88,14,33,9,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_3
+10,i,221.0,440.88,14,33,10,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_3
+11,p,235.0,440.88,14,33,11,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_3
+12,t,249.0,440.88,14,33,12,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_3
+0,A,195.6,751.5,14,33,0,0,toy_text_1_1_question_01111_distractor_c,0,0,A,question_images_version_3
+1, ,209.6,751.5,14,33,1,0,toy_text_1_1_question_01111_distractor_c,0,0,,question_images_version_3
+2,t,223.6,751.5,14,33,2,0,toy_text_1_1_question_01111_distractor_c,1,1,test,question_images_version_3
+3,e,237.6,751.5,14,33,3,0,toy_text_1_1_question_01111_distractor_c,1,1,test,question_images_version_3
+4,s,251.6,751.5,14,33,4,0,toy_text_1_1_question_01111_distractor_c,1,1,test,question_images_version_3
+5,t,265.6,751.5,14,33,5,0,toy_text_1_1_question_01111_distractor_c,1,1,test,question_images_version_3
+6, ,279.6,751.5,14,33,6,0,toy_text_1_1_question_01111_distractor_c,1,1,,question_images_version_3
+7,s,293.6,751.5,14,33,7,0,toy_text_1_1_question_01111_distractor_c,2,2,suite,question_images_version_3
+8,u,307.6,751.5,14,33,8,0,toy_text_1_1_question_01111_distractor_c,2,2,suite,question_images_version_3
+9,i,321.6,751.5,14,33,9,0,toy_text_1_1_question_01111_distractor_c,2,2,suite,question_images_version_3
+10,t,335.6,751.5,14,33,10,0,toy_text_1_1_question_01111_distractor_c,2,2,suite,question_images_version_3
+11,e,349.6,751.5,14,33,11,0,toy_text_1_1_question_01111_distractor_c,2,2,suite,question_images_version_3
+0,W,81.0,89.0,14,33,0,0,question_01111,0,0,What,question_images_version_4
+1,h,95.0,89.0,14,33,1,0,question_01111,0,0,What,question_images_version_4
+2,a,109.0,89.0,14,33,2,0,question_01111,0,0,What,question_images_version_4
+3,t,123.0,89.0,14,33,3,0,question_01111,0,0,What,question_images_version_4
+4, ,137.0,89.0,14,33,4,0,question_01111,0,0,,question_images_version_4
+5,i,151.0,89.0,14,33,5,0,question_01111,1,1,is,question_images_version_4
+6,s,165.0,89.0,14,33,6,0,question_01111,1,1,is,question_images_version_4
+7, ,179.0,89.0,14,33,7,0,question_01111,1,1,,question_images_version_4
+8,p,193.0,89.0,14,33,8,0,question_01111,2,2,pymovements?,question_images_version_4
+9,y,207.0,89.0,14,33,9,0,question_01111,2,2,pymovements?,question_images_version_4
+10,m,221.0,89.0,14,33,10,0,question_01111,2,2,pymovements?,question_images_version_4
+11,o,235.0,89.0,14,33,11,0,question_01111,2,2,pymovements?,question_images_version_4
+12,v,249.0,89.0,14,33,12,0,question_01111,2,2,pymovements?,question_images_version_4
+13,e,263.0,89.0,14,33,13,0,question_01111,2,2,pymovements?,question_images_version_4
+14,m,277.0,89.0,14,33,14,0,question_01111,2,2,pymovements?,question_images_version_4
+15,e,291.0,89.0,14,33,15,0,question_01111,2,2,pymovements?,question_images_version_4
+16,n,305.0,89.0,14,33,16,0,question_01111,2,2,pymovements?,question_images_version_4
+17,t,319.0,89.0,14,33,17,0,question_01111,2,2,pymovements?,question_images_version_4
+18,s,333.0,89.0,14,33,18,0,question_01111,2,2,pymovements?,question_images_version_4
+19,?,347.0,89.0,14,33,19,0,question_01111,2,2,pymovements?,question_images_version_4
+0,A,691.12,440.88,14,33,0,0,toy_text_1_1_question_01111_target,0,0,A,question_images_version_4
+1, ,705.12,440.88,14,33,1,0,toy_text_1_1_question_01111_target,0,0,,question_images_version_4
+2,P,719.12,440.88,14,33,2,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_4
+3,y,733.12,440.88,14,33,3,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_4
+4,t,747.12,440.88,14,33,4,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_4
+5,h,761.12,440.88,14,33,5,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_4
+6,o,775.12,440.88,14,33,6,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_4
+7,n,789.12,440.88,14,33,7,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_4
+8, ,803.12,440.88,14,33,8,0,toy_text_1_1_question_01111_target,1,1,,question_images_version_4
+9,p,817.12,440.88,14,33,9,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_4
+10,a,831.12,440.88,14,33,10,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_4
+11,c,845.12,440.88,14,33,11,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_4
+12,k,859.12,440.88,14,33,12,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_4
+13,a,873.12,440.88,14,33,13,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_4
+14,g,887.12,440.88,14,33,14,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_4
+15,e,901.12,440.88,14,33,15,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_4
+0,A,195.6,250.5,14,33,0,0,toy_text_1_1_question_01111_distractor_a,0,0,A,question_images_version_4
+1, ,209.6,250.5,14,33,1,0,toy_text_1_1_question_01111_distractor_a,0,0,,question_images_version_4
+2,p,223.6,250.5,14,33,2,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_4
+3,l,237.6,250.5,14,33,3,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_4
+4,o,251.6,250.5,14,33,4,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_4
+5,t,265.6,250.5,14,33,5,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_4
+6,t,279.6,250.5,14,33,6,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_4
+7,i,293.6,250.5,14,33,7,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_4
+8,n,307.6,250.5,14,33,8,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_4
+9,g,321.6,250.5,14,33,9,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_4
+10, ,335.6,250.5,14,33,10,0,toy_text_1_1_question_01111_distractor_a,1,1,,question_images_version_4
+11,m,349.6,250.5,14,33,11,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_4
+12,e,363.6,250.5,14,33,12,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_4
+13,t,377.6,250.5,14,33,13,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_4
+14,h,391.6,250.5,14,33,14,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_4
+15,o,405.6,250.5,14,33,15,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_4
+16,d,419.6,250.5,14,33,16,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_4
+0,A,81.0,440.88,14,33,0,0,toy_text_1_1_question_01111_distractor_b,0,0,A,question_images_version_4
+1, ,95.0,440.88,14,33,1,0,toy_text_1_1_question_01111_distractor_b,0,0,,question_images_version_4
+2,J,109.0,440.88,14,33,2,0,toy_text_1_1_question_01111_distractor_b,1,1,Java,question_images_version_4
+3,a,123.0,440.88,14,33,3,0,toy_text_1_1_question_01111_distractor_b,1,1,Java,question_images_version_4
+4,v,137.0,440.88,14,33,4,0,toy_text_1_1_question_01111_distractor_b,1,1,Java,question_images_version_4
+5,a,151.0,440.88,14,33,5,0,toy_text_1_1_question_01111_distractor_b,1,1,Java,question_images_version_4
+6, ,165.0,440.88,14,33,6,0,toy_text_1_1_question_01111_distractor_b,1,1,,question_images_version_4
+7,s,179.0,440.88,14,33,7,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_4
+8,c,193.0,440.88,14,33,8,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_4
+9,r,207.0,440.88,14,33,9,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_4
+10,i,221.0,440.88,14,33,10,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_4
+11,p,235.0,440.88,14,33,11,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_4
+12,t,249.0,440.88,14,33,12,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_4
+0,A,195.6,751.5,14,33,0,0,toy_text_1_1_question_01111_distractor_c,0,0,A,question_images_version_4
+1, ,209.6,751.5,14,33,1,0,toy_text_1_1_question_01111_distractor_c,0,0,,question_images_version_4
+2,t,223.6,751.5,14,33,2,0,toy_text_1_1_question_01111_distractor_c,1,1,test,question_images_version_4
+3,e,237.6,751.5,14,33,3,0,toy_text_1_1_question_01111_distractor_c,1,1,test,question_images_version_4
+4,s,251.6,751.5,14,33,4,0,toy_text_1_1_question_01111_distractor_c,1,1,test,question_images_version_4
+5,t,265.6,751.5,14,33,5,0,toy_text_1_1_question_01111_distractor_c,1,1,test,question_images_version_4
+6, ,279.6,751.5,14,33,6,0,toy_text_1_1_question_01111_distractor_c,1,1,,question_images_version_4
+7,s,293.6,751.5,14,33,7,0,toy_text_1_1_question_01111_distractor_c,2,2,suite,question_images_version_4
+8,u,307.6,751.5,14,33,8,0,toy_text_1_1_question_01111_distractor_c,2,2,suite,question_images_version_4
+9,i,321.6,751.5,14,33,9,0,toy_text_1_1_question_01111_distractor_c,2,2,suite,question_images_version_4
+10,t,335.6,751.5,14,33,10,0,toy_text_1_1_question_01111_distractor_c,2,2,suite,question_images_version_4
+11,e,349.6,751.5,14,33,11,0,toy_text_1_1_question_01111_distractor_c,2,2,suite,question_images_version_4
+0,W,81.0,89.0,14,33,0,0,question_01111,0,0,What,question_images_version_5
+1,h,95.0,89.0,14,33,1,0,question_01111,0,0,What,question_images_version_5
+2,a,109.0,89.0,14,33,2,0,question_01111,0,0,What,question_images_version_5
+3,t,123.0,89.0,14,33,3,0,question_01111,0,0,What,question_images_version_5
+4, ,137.0,89.0,14,33,4,0,question_01111,0,0,,question_images_version_5
+5,i,151.0,89.0,14,33,5,0,question_01111,1,1,is,question_images_version_5
+6,s,165.0,89.0,14,33,6,0,question_01111,1,1,is,question_images_version_5
+7, ,179.0,89.0,14,33,7,0,question_01111,1,1,,question_images_version_5
+8,p,193.0,89.0,14,33,8,0,question_01111,2,2,pymovements?,question_images_version_5
+9,y,207.0,89.0,14,33,9,0,question_01111,2,2,pymovements?,question_images_version_5
+10,m,221.0,89.0,14,33,10,0,question_01111,2,2,pymovements?,question_images_version_5
+11,o,235.0,89.0,14,33,11,0,question_01111,2,2,pymovements?,question_images_version_5
+12,v,249.0,89.0,14,33,12,0,question_01111,2,2,pymovements?,question_images_version_5
+13,e,263.0,89.0,14,33,13,0,question_01111,2,2,pymovements?,question_images_version_5
+14,m,277.0,89.0,14,33,14,0,question_01111,2,2,pymovements?,question_images_version_5
+15,e,291.0,89.0,14,33,15,0,question_01111,2,2,pymovements?,question_images_version_5
+16,n,305.0,89.0,14,33,16,0,question_01111,2,2,pymovements?,question_images_version_5
+17,t,319.0,89.0,14,33,17,0,question_01111,2,2,pymovements?,question_images_version_5
+18,s,333.0,89.0,14,33,18,0,question_01111,2,2,pymovements?,question_images_version_5
+19,?,347.0,89.0,14,33,19,0,question_01111,2,2,pymovements?,question_images_version_5
+0,A,691.12,440.88,14,33,0,0,toy_text_1_1_question_01111_target,0,0,A,question_images_version_5
+1, ,705.12,440.88,14,33,1,0,toy_text_1_1_question_01111_target,0,0,,question_images_version_5
+2,P,719.12,440.88,14,33,2,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_5
+3,y,733.12,440.88,14,33,3,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_5
+4,t,747.12,440.88,14,33,4,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_5
+5,h,761.12,440.88,14,33,5,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_5
+6,o,775.12,440.88,14,33,6,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_5
+7,n,789.12,440.88,14,33,7,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_5
+8, ,803.12,440.88,14,33,8,0,toy_text_1_1_question_01111_target,1,1,,question_images_version_5
+9,p,817.12,440.88,14,33,9,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_5
+10,a,831.12,440.88,14,33,10,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_5
+11,c,845.12,440.88,14,33,11,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_5
+12,k,859.12,440.88,14,33,12,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_5
+13,a,873.12,440.88,14,33,13,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_5
+14,g,887.12,440.88,14,33,14,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_5
+15,e,901.12,440.88,14,33,15,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_5
+0,A,195.6,250.5,14,33,0,0,toy_text_1_1_question_01111_distractor_a,0,0,A,question_images_version_5
+1, ,209.6,250.5,14,33,1,0,toy_text_1_1_question_01111_distractor_a,0,0,,question_images_version_5
+2,p,223.6,250.5,14,33,2,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_5
+3,l,237.6,250.5,14,33,3,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_5
+4,o,251.6,250.5,14,33,4,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_5
+5,t,265.6,250.5,14,33,5,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_5
+6,t,279.6,250.5,14,33,6,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_5
+7,i,293.6,250.5,14,33,7,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_5
+8,n,307.6,250.5,14,33,8,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_5
+9,g,321.6,250.5,14,33,9,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_5
+10, ,335.6,250.5,14,33,10,0,toy_text_1_1_question_01111_distractor_a,1,1,,question_images_version_5
+11,m,349.6,250.5,14,33,11,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_5
+12,e,363.6,250.5,14,33,12,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_5
+13,t,377.6,250.5,14,33,13,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_5
+14,h,391.6,250.5,14,33,14,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_5
+15,o,405.6,250.5,14,33,15,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_5
+16,d,419.6,250.5,14,33,16,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_5
+0,A,81.0,440.88,14,33,0,0,toy_text_1_1_question_01111_distractor_b,0,0,A,question_images_version_5
+1, ,95.0,440.88,14,33,1,0,toy_text_1_1_question_01111_distractor_b,0,0,,question_images_version_5
+2,J,109.0,440.88,14,33,2,0,toy_text_1_1_question_01111_distractor_b,1,1,Java,question_images_version_5
+3,a,123.0,440.88,14,33,3,0,toy_text_1_1_question_01111_distractor_b,1,1,Java,question_images_version_5
+4,v,137.0,440.88,14,33,4,0,toy_text_1_1_question_01111_distractor_b,1,1,Java,question_images_version_5
+5,a,151.0,440.88,14,33,5,0,toy_text_1_1_question_01111_distractor_b,1,1,Java,question_images_version_5
+6, ,165.0,440.88,14,33,6,0,toy_text_1_1_question_01111_distractor_b,1,1,,question_images_version_5
+7,s,179.0,440.88,14,33,7,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_5
+8,c,193.0,440.88,14,33,8,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_5
+9,r,207.0,440.88,14,33,9,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_5
+10,i,221.0,440.88,14,33,10,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_5
+11,p,235.0,440.88,14,33,11,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_5
+12,t,249.0,440.88,14,33,12,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_5
+0,A,195.6,751.5,14,33,0,0,toy_text_1_1_question_01111_distractor_c,0,0,A,question_images_version_5
+1, ,209.6,751.5,14,33,1,0,toy_text_1_1_question_01111_distractor_c,0,0,,question_images_version_5
+2,t,223.6,751.5,14,33,2,0,toy_text_1_1_question_01111_distractor_c,1,1,test,question_images_version_5
+3,e,237.6,751.5,14,33,3,0,toy_text_1_1_question_01111_distractor_c,1,1,test,question_images_version_5
+4,s,251.6,751.5,14,33,4,0,toy_text_1_1_question_01111_distractor_c,1,1,test,question_images_version_5
+5,t,265.6,751.5,14,33,5,0,toy_text_1_1_question_01111_distractor_c,1,1,test,question_images_version_5
+6, ,279.6,751.5,14,33,6,0,toy_text_1_1_question_01111_distractor_c,1,1,,question_images_version_5
+7,s,293.6,751.5,14,33,7,0,toy_text_1_1_question_01111_distractor_c,2,2,suite,question_images_version_5
+8,u,307.6,751.5,14,33,8,0,toy_text_1_1_question_01111_distractor_c,2,2,suite,question_images_version_5
+9,i,321.6,751.5,14,33,9,0,toy_text_1_1_question_01111_distractor_c,2,2,suite,question_images_version_5
+10,t,335.6,751.5,14,33,10,0,toy_text_1_1_question_01111_distractor_c,2,2,suite,question_images_version_5
+11,e,349.6,751.5,14,33,11,0,toy_text_1_1_question_01111_distractor_c,2,2,suite,question_images_version_5
+0,W,81.0,89.0,14,33,0,0,question_01111,0,0,What,question_images_version_6
+1,h,95.0,89.0,14,33,1,0,question_01111,0,0,What,question_images_version_6
+2,a,109.0,89.0,14,33,2,0,question_01111,0,0,What,question_images_version_6
+3,t,123.0,89.0,14,33,3,0,question_01111,0,0,What,question_images_version_6
+4, ,137.0,89.0,14,33,4,0,question_01111,0,0,,question_images_version_6
+5,i,151.0,89.0,14,33,5,0,question_01111,1,1,is,question_images_version_6
+6,s,165.0,89.0,14,33,6,0,question_01111,1,1,is,question_images_version_6
+7, ,179.0,89.0,14,33,7,0,question_01111,1,1,,question_images_version_6
+8,p,193.0,89.0,14,33,8,0,question_01111,2,2,pymovements?,question_images_version_6
+9,y,207.0,89.0,14,33,9,0,question_01111,2,2,pymovements?,question_images_version_6
+10,m,221.0,89.0,14,33,10,0,question_01111,2,2,pymovements?,question_images_version_6
+11,o,235.0,89.0,14,33,11,0,question_01111,2,2,pymovements?,question_images_version_6
+12,v,249.0,89.0,14,33,12,0,question_01111,2,2,pymovements?,question_images_version_6
+13,e,263.0,89.0,14,33,13,0,question_01111,2,2,pymovements?,question_images_version_6
+14,m,277.0,89.0,14,33,14,0,question_01111,2,2,pymovements?,question_images_version_6
+15,e,291.0,89.0,14,33,15,0,question_01111,2,2,pymovements?,question_images_version_6
+16,n,305.0,89.0,14,33,16,0,question_01111,2,2,pymovements?,question_images_version_6
+17,t,319.0,89.0,14,33,17,0,question_01111,2,2,pymovements?,question_images_version_6
+18,s,333.0,89.0,14,33,18,0,question_01111,2,2,pymovements?,question_images_version_6
+19,?,347.0,89.0,14,33,19,0,question_01111,2,2,pymovements?,question_images_version_6
+0,A,691.12,440.88,14,33,0,0,toy_text_1_1_question_01111_target,0,0,A,question_images_version_6
+1, ,705.12,440.88,14,33,1,0,toy_text_1_1_question_01111_target,0,0,,question_images_version_6
+2,P,719.12,440.88,14,33,2,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_6
+3,y,733.12,440.88,14,33,3,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_6
+4,t,747.12,440.88,14,33,4,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_6
+5,h,761.12,440.88,14,33,5,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_6
+6,o,775.12,440.88,14,33,6,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_6
+7,n,789.12,440.88,14,33,7,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_6
+8, ,803.12,440.88,14,33,8,0,toy_text_1_1_question_01111_target,1,1,,question_images_version_6
+9,p,817.12,440.88,14,33,9,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_6
+10,a,831.12,440.88,14,33,10,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_6
+11,c,845.12,440.88,14,33,11,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_6
+12,k,859.12,440.88,14,33,12,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_6
+13,a,873.12,440.88,14,33,13,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_6
+14,g,887.12,440.88,14,33,14,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_6
+15,e,901.12,440.88,14,33,15,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_6
+0,A,195.6,250.5,14,33,0,0,toy_text_1_1_question_01111_distractor_a,0,0,A,question_images_version_6
+1, ,209.6,250.5,14,33,1,0,toy_text_1_1_question_01111_distractor_a,0,0,,question_images_version_6
+2,p,223.6,250.5,14,33,2,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_6
+3,l,237.6,250.5,14,33,3,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_6
+4,o,251.6,250.5,14,33,4,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_6
+5,t,265.6,250.5,14,33,5,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_6
+6,t,279.6,250.5,14,33,6,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_6
+7,i,293.6,250.5,14,33,7,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_6
+8,n,307.6,250.5,14,33,8,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_6
+9,g,321.6,250.5,14,33,9,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_6
+10, ,335.6,250.5,14,33,10,0,toy_text_1_1_question_01111_distractor_a,1,1,,question_images_version_6
+11,m,349.6,250.5,14,33,11,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_6
+12,e,363.6,250.5,14,33,12,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_6
+13,t,377.6,250.5,14,33,13,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_6
+14,h,391.6,250.5,14,33,14,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_6
+15,o,405.6,250.5,14,33,15,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_6
+16,d,419.6,250.5,14,33,16,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_6
+0,A,81.0,440.88,14,33,0,0,toy_text_1_1_question_01111_distractor_b,0,0,A,question_images_version_6
+1, ,95.0,440.88,14,33,1,0,toy_text_1_1_question_01111_distractor_b,0,0,,question_images_version_6
+2,J,109.0,440.88,14,33,2,0,toy_text_1_1_question_01111_distractor_b,1,1,Java,question_images_version_6
+3,a,123.0,440.88,14,33,3,0,toy_text_1_1_question_01111_distractor_b,1,1,Java,question_images_version_6
+4,v,137.0,440.88,14,33,4,0,toy_text_1_1_question_01111_distractor_b,1,1,Java,question_images_version_6
+5,a,151.0,440.88,14,33,5,0,toy_text_1_1_question_01111_distractor_b,1,1,Java,question_images_version_6
+6, ,165.0,440.88,14,33,6,0,toy_text_1_1_question_01111_distractor_b,1,1,,question_images_version_6
+7,s,179.0,440.88,14,33,7,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_6
+8,c,193.0,440.88,14,33,8,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_6
+9,r,207.0,440.88,14,33,9,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_6
+10,i,221.0,440.88,14,33,10,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_6
+11,p,235.0,440.88,14,33,11,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_6
+12,t,249.0,440.88,14,33,12,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_6
+0,A,195.6,751.5,14,33,0,0,toy_text_1_1_question_01111_distractor_c,0,0,A,question_images_version_6
+1, ,209.6,751.5,14,33,1,0,toy_text_1_1_question_01111_distractor_c,0,0,,question_images_version_6
+2,t,223.6,751.5,14,33,2,0,toy_text_1_1_question_01111_distractor_c,1,1,test,question_images_version_6
+3,e,237.6,751.5,14,33,3,0,toy_text_1_1_question_01111_distractor_c,1,1,test,question_images_version_6
+4,s,251.6,751.5,14,33,4,0,toy_text_1_1_question_01111_distractor_c,1,1,test,question_images_version_6
+5,t,265.6,751.5,14,33,5,0,toy_text_1_1_question_01111_distractor_c,1,1,test,question_images_version_6
+6, ,279.6,751.5,14,33,6,0,toy_text_1_1_question_01111_distractor_c,1,1,,question_images_version_6
+7,s,293.6,751.5,14,33,7,0,toy_text_1_1_question_01111_distractor_c,2,2,suite,question_images_version_6
+8,u,307.6,751.5,14,33,8,0,toy_text_1_1_question_01111_distractor_c,2,2,suite,question_images_version_6
+9,i,321.6,751.5,14,33,9,0,toy_text_1_1_question_01111_distractor_c,2,2,suite,question_images_version_6
+10,t,335.6,751.5,14,33,10,0,toy_text_1_1_question_01111_distractor_c,2,2,suite,question_images_version_6
+11,e,349.6,751.5,14,33,11,0,toy_text_1_1_question_01111_distractor_c,2,2,suite,question_images_version_6
+0,W,81.0,89.0,14,33,0,0,question_01111,0,0,What,question_images_version_7
+1,h,95.0,89.0,14,33,1,0,question_01111,0,0,What,question_images_version_7
+2,a,109.0,89.0,14,33,2,0,question_01111,0,0,What,question_images_version_7
+3,t,123.0,89.0,14,33,3,0,question_01111,0,0,What,question_images_version_7
+4, ,137.0,89.0,14,33,4,0,question_01111,0,0,,question_images_version_7
+5,i,151.0,89.0,14,33,5,0,question_01111,1,1,is,question_images_version_7
+6,s,165.0,89.0,14,33,6,0,question_01111,1,1,is,question_images_version_7
+7, ,179.0,89.0,14,33,7,0,question_01111,1,1,,question_images_version_7
+8,p,193.0,89.0,14,33,8,0,question_01111,2,2,pymovements?,question_images_version_7
+9,y,207.0,89.0,14,33,9,0,question_01111,2,2,pymovements?,question_images_version_7
+10,m,221.0,89.0,14,33,10,0,question_01111,2,2,pymovements?,question_images_version_7
+11,o,235.0,89.0,14,33,11,0,question_01111,2,2,pymovements?,question_images_version_7
+12,v,249.0,89.0,14,33,12,0,question_01111,2,2,pymovements?,question_images_version_7
+13,e,263.0,89.0,14,33,13,0,question_01111,2,2,pymovements?,question_images_version_7
+14,m,277.0,89.0,14,33,14,0,question_01111,2,2,pymovements?,question_images_version_7
+15,e,291.0,89.0,14,33,15,0,question_01111,2,2,pymovements?,question_images_version_7
+16,n,305.0,89.0,14,33,16,0,question_01111,2,2,pymovements?,question_images_version_7
+17,t,319.0,89.0,14,33,17,0,question_01111,2,2,pymovements?,question_images_version_7
+18,s,333.0,89.0,14,33,18,0,question_01111,2,2,pymovements?,question_images_version_7
+19,?,347.0,89.0,14,33,19,0,question_01111,2,2,pymovements?,question_images_version_7
+0,A,691.12,440.88,14,33,0,0,toy_text_1_1_question_01111_target,0,0,A,question_images_version_7
+1, ,705.12,440.88,14,33,1,0,toy_text_1_1_question_01111_target,0,0,,question_images_version_7
+2,P,719.12,440.88,14,33,2,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_7
+3,y,733.12,440.88,14,33,3,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_7
+4,t,747.12,440.88,14,33,4,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_7
+5,h,761.12,440.88,14,33,5,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_7
+6,o,775.12,440.88,14,33,6,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_7
+7,n,789.12,440.88,14,33,7,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_7
+8, ,803.12,440.88,14,33,8,0,toy_text_1_1_question_01111_target,1,1,,question_images_version_7
+9,p,817.12,440.88,14,33,9,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_7
+10,a,831.12,440.88,14,33,10,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_7
+11,c,845.12,440.88,14,33,11,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_7
+12,k,859.12,440.88,14,33,12,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_7
+13,a,873.12,440.88,14,33,13,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_7
+14,g,887.12,440.88,14,33,14,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_7
+15,e,901.12,440.88,14,33,15,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_7
+0,A,195.6,250.5,14,33,0,0,toy_text_1_1_question_01111_distractor_a,0,0,A,question_images_version_7
+1, ,209.6,250.5,14,33,1,0,toy_text_1_1_question_01111_distractor_a,0,0,,question_images_version_7
+2,p,223.6,250.5,14,33,2,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_7
+3,l,237.6,250.5,14,33,3,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_7
+4,o,251.6,250.5,14,33,4,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_7
+5,t,265.6,250.5,14,33,5,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_7
+6,t,279.6,250.5,14,33,6,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_7
+7,i,293.6,250.5,14,33,7,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_7
+8,n,307.6,250.5,14,33,8,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_7
+9,g,321.6,250.5,14,33,9,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_7
+10, ,335.6,250.5,14,33,10,0,toy_text_1_1_question_01111_distractor_a,1,1,,question_images_version_7
+11,m,349.6,250.5,14,33,11,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_7
+12,e,363.6,250.5,14,33,12,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_7
+13,t,377.6,250.5,14,33,13,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_7
+14,h,391.6,250.5,14,33,14,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_7
+15,o,405.6,250.5,14,33,15,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_7
+16,d,419.6,250.5,14,33,16,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_7
+0,A,81.0,440.88,14,33,0,0,toy_text_1_1_question_01111_distractor_b,0,0,A,question_images_version_7
+1, ,95.0,440.88,14,33,1,0,toy_text_1_1_question_01111_distractor_b,0,0,,question_images_version_7
+2,J,109.0,440.88,14,33,2,0,toy_text_1_1_question_01111_distractor_b,1,1,Java,question_images_version_7
+3,a,123.0,440.88,14,33,3,0,toy_text_1_1_question_01111_distractor_b,1,1,Java,question_images_version_7
+4,v,137.0,440.88,14,33,4,0,toy_text_1_1_question_01111_distractor_b,1,1,Java,question_images_version_7
+5,a,151.0,440.88,14,33,5,0,toy_text_1_1_question_01111_distractor_b,1,1,Java,question_images_version_7
+6, ,165.0,440.88,14,33,6,0,toy_text_1_1_question_01111_distractor_b,1,1,,question_images_version_7
+7,s,179.0,440.88,14,33,7,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_7
+8,c,193.0,440.88,14,33,8,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_7
+9,r,207.0,440.88,14,33,9,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_7
+10,i,221.0,440.88,14,33,10,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_7
+11,p,235.0,440.88,14,33,11,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_7
+12,t,249.0,440.88,14,33,12,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_7
+0,A,195.6,751.5,14,33,0,0,toy_text_1_1_question_01111_distractor_c,0,0,A,question_images_version_7
+1, ,209.6,751.5,14,33,1,0,toy_text_1_1_question_01111_distractor_c,0,0,,question_images_version_7
+2,t,223.6,751.5,14,33,2,0,toy_text_1_1_question_01111_distractor_c,1,1,test,question_images_version_7
+3,e,237.6,751.5,14,33,3,0,toy_text_1_1_question_01111_distractor_c,1,1,test,question_images_version_7
+4,s,251.6,751.5,14,33,4,0,toy_text_1_1_question_01111_distractor_c,1,1,test,question_images_version_7
+5,t,265.6,751.5,14,33,5,0,toy_text_1_1_question_01111_distractor_c,1,1,test,question_images_version_7
+6, ,279.6,751.5,14,33,6,0,toy_text_1_1_question_01111_distractor_c,1,1,,question_images_version_7
+7,s,293.6,751.5,14,33,7,0,toy_text_1_1_question_01111_distractor_c,2,2,suite,question_images_version_7
+8,u,307.6,751.5,14,33,8,0,toy_text_1_1_question_01111_distractor_c,2,2,suite,question_images_version_7
+9,i,321.6,751.5,14,33,9,0,toy_text_1_1_question_01111_distractor_c,2,2,suite,question_images_version_7
+10,t,335.6,751.5,14,33,10,0,toy_text_1_1_question_01111_distractor_c,2,2,suite,question_images_version_7
+11,e,349.6,751.5,14,33,11,0,toy_text_1_1_question_01111_distractor_c,2,2,suite,question_images_version_7
+0,W,81.0,89.0,14,33,0,0,question_01111,0,0,What,question_images_version_8
+1,h,95.0,89.0,14,33,1,0,question_01111,0,0,What,question_images_version_8
+2,a,109.0,89.0,14,33,2,0,question_01111,0,0,What,question_images_version_8
+3,t,123.0,89.0,14,33,3,0,question_01111,0,0,What,question_images_version_8
+4, ,137.0,89.0,14,33,4,0,question_01111,0,0,,question_images_version_8
+5,i,151.0,89.0,14,33,5,0,question_01111,1,1,is,question_images_version_8
+6,s,165.0,89.0,14,33,6,0,question_01111,1,1,is,question_images_version_8
+7, ,179.0,89.0,14,33,7,0,question_01111,1,1,,question_images_version_8
+8,p,193.0,89.0,14,33,8,0,question_01111,2,2,pymovements?,question_images_version_8
+9,y,207.0,89.0,14,33,9,0,question_01111,2,2,pymovements?,question_images_version_8
+10,m,221.0,89.0,14,33,10,0,question_01111,2,2,pymovements?,question_images_version_8
+11,o,235.0,89.0,14,33,11,0,question_01111,2,2,pymovements?,question_images_version_8
+12,v,249.0,89.0,14,33,12,0,question_01111,2,2,pymovements?,question_images_version_8
+13,e,263.0,89.0,14,33,13,0,question_01111,2,2,pymovements?,question_images_version_8
+14,m,277.0,89.0,14,33,14,0,question_01111,2,2,pymovements?,question_images_version_8
+15,e,291.0,89.0,14,33,15,0,question_01111,2,2,pymovements?,question_images_version_8
+16,n,305.0,89.0,14,33,16,0,question_01111,2,2,pymovements?,question_images_version_8
+17,t,319.0,89.0,14,33,17,0,question_01111,2,2,pymovements?,question_images_version_8
+18,s,333.0,89.0,14,33,18,0,question_01111,2,2,pymovements?,question_images_version_8
+19,?,347.0,89.0,14,33,19,0,question_01111,2,2,pymovements?,question_images_version_8
+0,A,691.12,440.88,14,33,0,0,toy_text_1_1_question_01111_target,0,0,A,question_images_version_8
+1, ,705.12,440.88,14,33,1,0,toy_text_1_1_question_01111_target,0,0,,question_images_version_8
+2,P,719.12,440.88,14,33,2,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_8
+3,y,733.12,440.88,14,33,3,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_8
+4,t,747.12,440.88,14,33,4,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_8
+5,h,761.12,440.88,14,33,5,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_8
+6,o,775.12,440.88,14,33,6,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_8
+7,n,789.12,440.88,14,33,7,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_8
+8, ,803.12,440.88,14,33,8,0,toy_text_1_1_question_01111_target,1,1,,question_images_version_8
+9,p,817.12,440.88,14,33,9,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_8
+10,a,831.12,440.88,14,33,10,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_8
+11,c,845.12,440.88,14,33,11,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_8
+12,k,859.12,440.88,14,33,12,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_8
+13,a,873.12,440.88,14,33,13,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_8
+14,g,887.12,440.88,14,33,14,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_8
+15,e,901.12,440.88,14,33,15,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_8
+0,A,195.6,250.5,14,33,0,0,toy_text_1_1_question_01111_distractor_a,0,0,A,question_images_version_8
+1, ,209.6,250.5,14,33,1,0,toy_text_1_1_question_01111_distractor_a,0,0,,question_images_version_8
+2,p,223.6,250.5,14,33,2,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_8
+3,l,237.6,250.5,14,33,3,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_8
+4,o,251.6,250.5,14,33,4,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_8
+5,t,265.6,250.5,14,33,5,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_8
+6,t,279.6,250.5,14,33,6,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_8
+7,i,293.6,250.5,14,33,7,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_8
+8,n,307.6,250.5,14,33,8,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_8
+9,g,321.6,250.5,14,33,9,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_8
+10, ,335.6,250.5,14,33,10,0,toy_text_1_1_question_01111_distractor_a,1,1,,question_images_version_8
+11,m,349.6,250.5,14,33,11,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_8
+12,e,363.6,250.5,14,33,12,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_8
+13,t,377.6,250.5,14,33,13,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_8
+14,h,391.6,250.5,14,33,14,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_8
+15,o,405.6,250.5,14,33,15,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_8
+16,d,419.6,250.5,14,33,16,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_8
+0,A,81.0,440.88,14,33,0,0,toy_text_1_1_question_01111_distractor_b,0,0,A,question_images_version_8
+1, ,95.0,440.88,14,33,1,0,toy_text_1_1_question_01111_distractor_b,0,0,,question_images_version_8
+2,J,109.0,440.88,14,33,2,0,toy_text_1_1_question_01111_distractor_b,1,1,Java,question_images_version_8
+3,a,123.0,440.88,14,33,3,0,toy_text_1_1_question_01111_distractor_b,1,1,Java,question_images_version_8
+4,v,137.0,440.88,14,33,4,0,toy_text_1_1_question_01111_distractor_b,1,1,Java,question_images_version_8
+5,a,151.0,440.88,14,33,5,0,toy_text_1_1_question_01111_distractor_b,1,1,Java,question_images_version_8
+6, ,165.0,440.88,14,33,6,0,toy_text_1_1_question_01111_distractor_b,1,1,,question_images_version_8
+7,s,179.0,440.88,14,33,7,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_8
+8,c,193.0,440.88,14,33,8,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_8
+9,r,207.0,440.88,14,33,9,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_8
+10,i,221.0,440.88,14,33,10,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_8
+11,p,235.0,440.88,14,33,11,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_8
+12,t,249.0,440.88,14,33,12,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_8
+0,A,195.6,751.5,14,33,0,0,toy_text_1_1_question_01111_distractor_c,0,0,A,question_images_version_8
+1, ,209.6,751.5,14,33,1,0,toy_text_1_1_question_01111_distractor_c,0,0,,question_images_version_8
+2,t,223.6,751.5,14,33,2,0,toy_text_1_1_question_01111_distractor_c,1,1,test,question_images_version_8
+3,e,237.6,751.5,14,33,3,0,toy_text_1_1_question_01111_distractor_c,1,1,test,question_images_version_8
+4,s,251.6,751.5,14,33,4,0,toy_text_1_1_question_01111_distractor_c,1,1,test,question_images_version_8
+5,t,265.6,751.5,14,33,5,0,toy_text_1_1_question_01111_distractor_c,1,1,test,question_images_version_8
+6, ,279.6,751.5,14,33,6,0,toy_text_1_1_question_01111_distractor_c,1,1,,question_images_version_8
+7,s,293.6,751.5,14,33,7,0,toy_text_1_1_question_01111_distractor_c,2,2,suite,question_images_version_8
+8,u,307.6,751.5,14,33,8,0,toy_text_1_1_question_01111_distractor_c,2,2,suite,question_images_version_8
+9,i,321.6,751.5,14,33,9,0,toy_text_1_1_question_01111_distractor_c,2,2,suite,question_images_version_8
+10,t,335.6,751.5,14,33,10,0,toy_text_1_1_question_01111_distractor_c,2,2,suite,question_images_version_8
+11,e,349.6,751.5,14,33,11,0,toy_text_1_1_question_01111_distractor_c,2,2,suite,question_images_version_8
+0,W,81.0,89.0,14,33,0,0,question_01111,0,0,What,question_images_version_9
+1,h,95.0,89.0,14,33,1,0,question_01111,0,0,What,question_images_version_9
+2,a,109.0,89.0,14,33,2,0,question_01111,0,0,What,question_images_version_9
+3,t,123.0,89.0,14,33,3,0,question_01111,0,0,What,question_images_version_9
+4, ,137.0,89.0,14,33,4,0,question_01111,0,0,,question_images_version_9
+5,i,151.0,89.0,14,33,5,0,question_01111,1,1,is,question_images_version_9
+6,s,165.0,89.0,14,33,6,0,question_01111,1,1,is,question_images_version_9
+7, ,179.0,89.0,14,33,7,0,question_01111,1,1,,question_images_version_9
+8,p,193.0,89.0,14,33,8,0,question_01111,2,2,pymovements?,question_images_version_9
+9,y,207.0,89.0,14,33,9,0,question_01111,2,2,pymovements?,question_images_version_9
+10,m,221.0,89.0,14,33,10,0,question_01111,2,2,pymovements?,question_images_version_9
+11,o,235.0,89.0,14,33,11,0,question_01111,2,2,pymovements?,question_images_version_9
+12,v,249.0,89.0,14,33,12,0,question_01111,2,2,pymovements?,question_images_version_9
+13,e,263.0,89.0,14,33,13,0,question_01111,2,2,pymovements?,question_images_version_9
+14,m,277.0,89.0,14,33,14,0,question_01111,2,2,pymovements?,question_images_version_9
+15,e,291.0,89.0,14,33,15,0,question_01111,2,2,pymovements?,question_images_version_9
+16,n,305.0,89.0,14,33,16,0,question_01111,2,2,pymovements?,question_images_version_9
+17,t,319.0,89.0,14,33,17,0,question_01111,2,2,pymovements?,question_images_version_9
+18,s,333.0,89.0,14,33,18,0,question_01111,2,2,pymovements?,question_images_version_9
+19,?,347.0,89.0,14,33,19,0,question_01111,2,2,pymovements?,question_images_version_9
+0,A,691.12,440.88,14,33,0,0,toy_text_1_1_question_01111_target,0,0,A,question_images_version_9
+1, ,705.12,440.88,14,33,1,0,toy_text_1_1_question_01111_target,0,0,,question_images_version_9
+2,P,719.12,440.88,14,33,2,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_9
+3,y,733.12,440.88,14,33,3,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_9
+4,t,747.12,440.88,14,33,4,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_9
+5,h,761.12,440.88,14,33,5,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_9
+6,o,775.12,440.88,14,33,6,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_9
+7,n,789.12,440.88,14,33,7,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_9
+8, ,803.12,440.88,14,33,8,0,toy_text_1_1_question_01111_target,1,1,,question_images_version_9
+9,p,817.12,440.88,14,33,9,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_9
+10,a,831.12,440.88,14,33,10,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_9
+11,c,845.12,440.88,14,33,11,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_9
+12,k,859.12,440.88,14,33,12,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_9
+13,a,873.12,440.88,14,33,13,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_9
+14,g,887.12,440.88,14,33,14,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_9
+15,e,901.12,440.88,14,33,15,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_9
+0,A,195.6,250.5,14,33,0,0,toy_text_1_1_question_01111_distractor_a,0,0,A,question_images_version_9
+1, ,209.6,250.5,14,33,1,0,toy_text_1_1_question_01111_distractor_a,0,0,,question_images_version_9
+2,p,223.6,250.5,14,33,2,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_9
+3,l,237.6,250.5,14,33,3,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_9
+4,o,251.6,250.5,14,33,4,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_9
+5,t,265.6,250.5,14,33,5,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_9
+6,t,279.6,250.5,14,33,6,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_9
+7,i,293.6,250.5,14,33,7,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_9
+8,n,307.6,250.5,14,33,8,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_9
+9,g,321.6,250.5,14,33,9,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_9
+10, ,335.6,250.5,14,33,10,0,toy_text_1_1_question_01111_distractor_a,1,1,,question_images_version_9
+11,m,349.6,250.5,14,33,11,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_9
+12,e,363.6,250.5,14,33,12,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_9
+13,t,377.6,250.5,14,33,13,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_9
+14,h,391.6,250.5,14,33,14,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_9
+15,o,405.6,250.5,14,33,15,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_9
+16,d,419.6,250.5,14,33,16,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_9
+0,A,81.0,440.88,14,33,0,0,toy_text_1_1_question_01111_distractor_b,0,0,A,question_images_version_9
+1, ,95.0,440.88,14,33,1,0,toy_text_1_1_question_01111_distractor_b,0,0,,question_images_version_9
+2,J,109.0,440.88,14,33,2,0,toy_text_1_1_question_01111_distractor_b,1,1,Java,question_images_version_9
+3,a,123.0,440.88,14,33,3,0,toy_text_1_1_question_01111_distractor_b,1,1,Java,question_images_version_9
+4,v,137.0,440.88,14,33,4,0,toy_text_1_1_question_01111_distractor_b,1,1,Java,question_images_version_9
+5,a,151.0,440.88,14,33,5,0,toy_text_1_1_question_01111_distractor_b,1,1,Java,question_images_version_9
+6, ,165.0,440.88,14,33,6,0,toy_text_1_1_question_01111_distractor_b,1,1,,question_images_version_9
+7,s,179.0,440.88,14,33,7,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_9
+8,c,193.0,440.88,14,33,8,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_9
+9,r,207.0,440.88,14,33,9,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_9
+10,i,221.0,440.88,14,33,10,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_9
+11,p,235.0,440.88,14,33,11,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_9
+12,t,249.0,440.88,14,33,12,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_9
+0,A,195.6,751.5,14,33,0,0,toy_text_1_1_question_01111_distractor_c,0,0,A,question_images_version_9
+1, ,209.6,751.5,14,33,1,0,toy_text_1_1_question_01111_distractor_c,0,0,,question_images_version_9
+2,t,223.6,751.5,14,33,2,0,toy_text_1_1_question_01111_distractor_c,1,1,test,question_images_version_9
+3,e,237.6,751.5,14,33,3,0,toy_text_1_1_question_01111_distractor_c,1,1,test,question_images_version_9
+4,s,251.6,751.5,14,33,4,0,toy_text_1_1_question_01111_distractor_c,1,1,test,question_images_version_9
+5,t,265.6,751.5,14,33,5,0,toy_text_1_1_question_01111_distractor_c,1,1,test,question_images_version_9
+6, ,279.6,751.5,14,33,6,0,toy_text_1_1_question_01111_distractor_c,1,1,,question_images_version_9
+7,s,293.6,751.5,14,33,7,0,toy_text_1_1_question_01111_distractor_c,2,2,suite,question_images_version_9
+8,u,307.6,751.5,14,33,8,0,toy_text_1_1_question_01111_distractor_c,2,2,suite,question_images_version_9
+9,i,321.6,751.5,14,33,9,0,toy_text_1_1_question_01111_distractor_c,2,2,suite,question_images_version_9
+10,t,335.6,751.5,14,33,10,0,toy_text_1_1_question_01111_distractor_c,2,2,suite,question_images_version_9
+11,e,349.6,751.5,14,33,11,0,toy_text_1_1_question_01111_distractor_c,2,2,suite,question_images_version_9
+0,W,81.0,89.0,14,33,0,0,question_01111,0,0,What,question_images_version_10
+1,h,95.0,89.0,14,33,1,0,question_01111,0,0,What,question_images_version_10
+2,a,109.0,89.0,14,33,2,0,question_01111,0,0,What,question_images_version_10
+3,t,123.0,89.0,14,33,3,0,question_01111,0,0,What,question_images_version_10
+4, ,137.0,89.0,14,33,4,0,question_01111,0,0,,question_images_version_10
+5,i,151.0,89.0,14,33,5,0,question_01111,1,1,is,question_images_version_10
+6,s,165.0,89.0,14,33,6,0,question_01111,1,1,is,question_images_version_10
+7, ,179.0,89.0,14,33,7,0,question_01111,1,1,,question_images_version_10
+8,p,193.0,89.0,14,33,8,0,question_01111,2,2,pymovements?,question_images_version_10
+9,y,207.0,89.0,14,33,9,0,question_01111,2,2,pymovements?,question_images_version_10
+10,m,221.0,89.0,14,33,10,0,question_01111,2,2,pymovements?,question_images_version_10
+11,o,235.0,89.0,14,33,11,0,question_01111,2,2,pymovements?,question_images_version_10
+12,v,249.0,89.0,14,33,12,0,question_01111,2,2,pymovements?,question_images_version_10
+13,e,263.0,89.0,14,33,13,0,question_01111,2,2,pymovements?,question_images_version_10
+14,m,277.0,89.0,14,33,14,0,question_01111,2,2,pymovements?,question_images_version_10
+15,e,291.0,89.0,14,33,15,0,question_01111,2,2,pymovements?,question_images_version_10
+16,n,305.0,89.0,14,33,16,0,question_01111,2,2,pymovements?,question_images_version_10
+17,t,319.0,89.0,14,33,17,0,question_01111,2,2,pymovements?,question_images_version_10
+18,s,333.0,89.0,14,33,18,0,question_01111,2,2,pymovements?,question_images_version_10
+19,?,347.0,89.0,14,33,19,0,question_01111,2,2,pymovements?,question_images_version_10
+0,A,691.12,440.88,14,33,0,0,toy_text_1_1_question_01111_target,0,0,A,question_images_version_10
+1, ,705.12,440.88,14,33,1,0,toy_text_1_1_question_01111_target,0,0,,question_images_version_10
+2,P,719.12,440.88,14,33,2,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_10
+3,y,733.12,440.88,14,33,3,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_10
+4,t,747.12,440.88,14,33,4,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_10
+5,h,761.12,440.88,14,33,5,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_10
+6,o,775.12,440.88,14,33,6,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_10
+7,n,789.12,440.88,14,33,7,0,toy_text_1_1_question_01111_target,1,1,Python,question_images_version_10
+8, ,803.12,440.88,14,33,8,0,toy_text_1_1_question_01111_target,1,1,,question_images_version_10
+9,p,817.12,440.88,14,33,9,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_10
+10,a,831.12,440.88,14,33,10,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_10
+11,c,845.12,440.88,14,33,11,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_10
+12,k,859.12,440.88,14,33,12,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_10
+13,a,873.12,440.88,14,33,13,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_10
+14,g,887.12,440.88,14,33,14,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_10
+15,e,901.12,440.88,14,33,15,0,toy_text_1_1_question_01111_target,2,2,package,question_images_version_10
+0,A,195.6,250.5,14,33,0,0,toy_text_1_1_question_01111_distractor_a,0,0,A,question_images_version_10
+1, ,209.6,250.5,14,33,1,0,toy_text_1_1_question_01111_distractor_a,0,0,,question_images_version_10
+2,p,223.6,250.5,14,33,2,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_10
+3,l,237.6,250.5,14,33,3,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_10
+4,o,251.6,250.5,14,33,4,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_10
+5,t,265.6,250.5,14,33,5,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_10
+6,t,279.6,250.5,14,33,6,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_10
+7,i,293.6,250.5,14,33,7,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_10
+8,n,307.6,250.5,14,33,8,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_10
+9,g,321.6,250.5,14,33,9,0,toy_text_1_1_question_01111_distractor_a,1,1,plotting,question_images_version_10
+10, ,335.6,250.5,14,33,10,0,toy_text_1_1_question_01111_distractor_a,1,1,,question_images_version_10
+11,m,349.6,250.5,14,33,11,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_10
+12,e,363.6,250.5,14,33,12,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_10
+13,t,377.6,250.5,14,33,13,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_10
+14,h,391.6,250.5,14,33,14,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_10
+15,o,405.6,250.5,14,33,15,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_10
+16,d,419.6,250.5,14,33,16,0,toy_text_1_1_question_01111_distractor_a,2,2,method,question_images_version_10
+0,A,81.0,440.88,14,33,0,0,toy_text_1_1_question_01111_distractor_b,0,0,A,question_images_version_10
+1, ,95.0,440.88,14,33,1,0,toy_text_1_1_question_01111_distractor_b,0,0,,question_images_version_10
+2,J,109.0,440.88,14,33,2,0,toy_text_1_1_question_01111_distractor_b,1,1,Java,question_images_version_10
+3,a,123.0,440.88,14,33,3,0,toy_text_1_1_question_01111_distractor_b,1,1,Java,question_images_version_10
+4,v,137.0,440.88,14,33,4,0,toy_text_1_1_question_01111_distractor_b,1,1,Java,question_images_version_10
+5,a,151.0,440.88,14,33,5,0,toy_text_1_1_question_01111_distractor_b,1,1,Java,question_images_version_10
+6, ,165.0,440.88,14,33,6,0,toy_text_1_1_question_01111_distractor_b,1,1,,question_images_version_10
+7,s,179.0,440.88,14,33,7,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_10
+8,c,193.0,440.88,14,33,8,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_10
+9,r,207.0,440.88,14,33,9,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_10
+10,i,221.0,440.88,14,33,10,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_10
+11,p,235.0,440.88,14,33,11,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_10
+12,t,249.0,440.88,14,33,12,0,toy_text_1_1_question_01111_distractor_b,2,2,script,question_images_version_10
+0,A,195.6,751.5,14,33,0,0,toy_text_1_1_question_01111_distractor_c,0,0,A,question_images_version_10
+1, ,209.6,751.5,14,33,1,0,toy_text_1_1_question_01111_distractor_c,0,0,,question_images_version_10
+2,t,223.6,751.5,14,33,2,0,toy_text_1_1_question_01111_distractor_c,1,1,test,question_images_version_10
+3,e,237.6,751.5,14,33,3,0,toy_text_1_1_question_01111_distractor_c,1,1,test,question_images_version_10
+4,s,251.6,751.5,14,33,4,0,toy_text_1_1_question_01111_distractor_c,1,1,test,question_images_version_10
+5,t,265.6,751.5,14,33,5,0,toy_text_1_1_question_01111_distractor_c,1,1,test,question_images_version_10
+6, ,279.6,751.5,14,33,6,0,toy_text_1_1_question_01111_distractor_c,1,1,,question_images_version_10
+7,s,293.6,751.5,14,33,7,0,toy_text_1_1_question_01111_distractor_c,2,2,suite,question_images_version_10
+8,u,307.6,751.5,14,33,8,0,toy_text_1_1_question_01111_distractor_c,2,2,suite,question_images_version_10
+9,i,321.6,751.5,14,33,9,0,toy_text_1_1_question_01111_distractor_c,2,2,suite,question_images_version_10
+10,t,335.6,751.5,14,33,10,0,toy_text_1_1_question_01111_distractor_c,2,2,suite,question_images_version_10
+11,e,349.6,751.5,14,33,11,0,toy_text_1_1_question_01111_distractor_c,2,2,suite,question_images_version_10
