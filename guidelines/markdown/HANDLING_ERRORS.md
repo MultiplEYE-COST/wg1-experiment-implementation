@@ -90,8 +90,10 @@ restart the process in the `CONDA_ENVIRONMENT.md`.
 
 ### Error: Microsoft Visual C++ 14.0 or greater is required. Get it with "Microsoft C++ Build Tools": https://visualstudio.microsoft.com/visual-cpp-build-tools/
 ![images](../images/visual_c++_error.png)
-If you see this error message, it means that you do not have the necessary build tools installed on your computer. 
+If you see this error message, it means that you do not have the necessary build tools installed on your computer.
 As instructed in the error message, you can download the necessary build tools from the link provided, and then restart the process in the `CONDA_ENVIRONMENT.md`.
+Make sure that you choose "Desktop development with C++" in the installer as shown in the image below:
+![vis_cpp_install](../images/visual_c++_installer.png)
 
 ### Error: ImportError: DLL load failed while importing QtCore: The specified procedure could not be found.
 This error can have multiple reasons. If you know how to do this you can do the following:
