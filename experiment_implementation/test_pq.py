@@ -1,10 +1,9 @@
-import argparse
 import os
 
 from gooey import Gooey
 from gooey import GooeyParser
 
-from experiment.participant_questionnaire import MultiplEYEParticipantQuestionnaire
+from experiment_implementation.experiment.participant_questionnaire.participant_questionnaire import MultiplEYEParticipantQuestionnaire
 import constants
 
 
