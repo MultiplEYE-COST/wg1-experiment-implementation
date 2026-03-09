@@ -5,13 +5,29 @@ from pprint import pprint
 
 import pandas as pd
 from PyQt6 import QtGui, QtWidgets
-from psychopy import gui
+from psychopy import gui, core
 
 import constants
 
-## TODO adapt this code, the only thing that needs to be done is to adapt the question identifiers
+# these are all questions that are not part of the original questionnaire but might be added
+# if they are in the question file, they will be shown
+ADDITIONAL_QUESTIONS = [
+    'education_language_time',
+    'age_reading_start',
+    'public_language_time',
+    'language_use_people',
+    'language_use_context'
+]
 
-class AgingParticipantQuestionnaire:
+# not real questions, do not show free_text cells
+QUESTION_LABEL_ONLY = {
+    'dialect',
+    'dialect_name',
+    'read_language',
+    'additional_read_language',
+}
+
+class MultiplEYEParticipantQuestionnaire:
 
     def __init__(self, participant_identifier: int, results_folder: str):
         self.instructions, self.questions = self.load_data()
@@ -35,33 +51,58 @@ class AgingParticipantQuestionnaire:
         return pq_instructions_dict, pq_questions
 
     def run_questionnaire(self):
+        # PAGE 1
         self._show_questions(
             self.instructions['pq_initial_message'],
-            ['gender', 'years_education', 'level_education', 'age', 'socio_economic_status'],
+            ['gender', 'level_education', 'age', 'retirement_years'],
             button=self.instructions['pq_next_button'],
         )
 
+        # PAGE 2: impairments + medication with checkboxes
         self._show_questions(
             '',
-            ['childhood_languages'],
+            [],  # <-- no questions here
             button=self.instructions['pq_next_button'],
+            option_labels=[
+                (self.questions['impairments']['pq_question_text'], 'impairments_has_detail'),
+                (self.questions['medication']['pq_question_text'], 'medication_has_detail'),
+            ],
+            option_type='checkbox',
         )
 
+        # Save yes/no answers
+        self.pq_data['impairments'] = self.pq_data['impairments_has_detail']
+        self.pq_data['medication'] = self.pq_data['medication_has_detail']
+
+        # PAGE 3: details if checkbox checked
+        detail_questions = []
+        if self.pq_data.get('impairments_has_detail', False):
+            detail_questions.append('impairments_detail')
+        if self.pq_data.get('medication_has_detail', False):
+            detail_questions.append('medication_detail')
+
+        if detail_questions:
+            self._show_questions(
+                '',
+                detail_questions,
+                button=self.instructions['pq_next_button'],
+            )
+
         # check whether there are multiple languages that the person grew up with
-        if self.pq_data['childhood_languages'] == self.questions['childhood_languages']['pq_answer_option_1']:
+        if self.pq_data.get('childhood_languages') == self.questions['childhood_languages']['pq_answer_option_1']:
             self._show_questions(
                 '',
                 ['native_language_1'],
                 button=self.instructions['pq_next_button'],
             )
-        elif self.pq_data['childhood_languages'] == self.questions['childhood_languages']['pq_answer_option_2']:
+        elif self.pq_data.get('childhood_languages') == self.questions['childhood_languages']['pq_answer_option_2']:
             self._show_questions(
                 '',
                 ['native_language_1', 'native_language'],
                 button=self.instructions['pq_next_button'],
                 keys=['native_language_1', 'native_language_2']
             )
-        elif self.pq_data['childhood_languages'] == self.questions['childhood_languages']['pq_answer_option_3']:
+        elif self.pq_data.get('childhood_languages') == self.questions['childhood_languages']['pq_answer_option_3']:
             self._show_questions(
                 '',
                 ['native_language_1', 'native_language', 'native_language'],
@@ -71,13 +112,20 @@ class AgingParticipantQuestionnaire:
 
         self._show_questions(
             '',
-            ['use_language', 'dominant_language'],
+            ['education_language', 'middle_age_language', 'use_language', 'dominant_language'],
             button=self.instructions['pq_next_button'],
         )
 
-        languages_mentioned = ['native_language_1', 'native_language_2',
-                               'native_language_3', 'use_language', 'dominant_language'
-                               ]
+        languages_mentioned = [
+            'native_language_1',
+            'native_language_2',
+            'native_language_3',
+            'education_language',
+            'middle_age_language',
+            'use_language',
+            'dominant_language',
+        ]
+
         # get those languages that have been mentioned in the previous questions and whose keys are in the pq_data
         languages_mentioned = [language for language in languages_mentioned if
                                language in self.pq_data.keys() and self.pq_data[language] != '']
@@ -130,10 +178,8 @@ class AgingParticipantQuestionnaire:
             )
 
         for lang in unique_language_keys:
-            reading_questions = ['read_language', 'academic_reading_time', 'magazine_reading_time',
-                                 'newspaper_reading_time',
-                                 'email_reading_time', 'fiction_reading_time', 'nonfiction_reading_time',
-                                 'internet_reading_time',
+            reading_questions = ['read_language', 'fiction_reading_time', 'nonfiction_reading_time',
+                                 'newspaper_reading_time', 'online_reading_time',
                                  'other_reading_time']
 
             keys = [f'{lang}_{question}' for question in reading_questions[1:]]
@@ -175,10 +221,8 @@ class AgingParticipantQuestionnaire:
                 unique_reading_languages.append(self.pq_data[lang_key])
 
         for lang in unique_reading_language_keys:
-            reading_questions = ['read_language', 'academic_reading_time', 'magazine_reading_time',
-                                 'newspaper_reading_time',
-                                 'email_reading_time', 'fiction_reading_time', 'nonfiction_reading_time',
-                                 'internet_reading_time',
+            reading_questions = ['read_language', 'fiction_reading_time', 'nonfiction_reading_time',
+                                 'newspaper_reading_time', 'online_reading_time',
                                  'other_reading_time']
 
             keys = [f'{lang}_{question}' for question in reading_questions[1:]]
@@ -192,11 +236,24 @@ class AgingParticipantQuestionnaire:
                 keys=keys,
             )
 
+        self.ask_additional = any(q in self.questions.keys() for q in ADDITIONAL_QUESTIONS)
+
         self._show_questions(
             '',
             ['tiredness', 'eyewear', 'alcohol_yesterday', 'alcohol_today'],
-            button=self.instructions['pq_submit_button'],
+            button=self.instructions['pq_submit_button'] if self.ask_additional  else self.instructions['pq_next_button'],
         )
+
+        # if additional questions are in the file we show them
+
+        if self.ask_additional :
+            additional_questions = [q for q in ADDITIONAL_QUESTIONS if q in self.questions.keys()]
+            self._show_questions(
+                '',
+                additional_questions,
+                button=self.instructions['pq_submit_button'],
+                optional=True
+            )
 
         # pprint(self.pq_data)
         self._save_data()
@@ -328,6 +385,12 @@ class AgingParticipantQuestionnaire:
 
         # first 4 questions on one page
         for question_id, question_key in questions:
+            # QUESTION IS ONLY A LABEL FOR CHECKBOXES — NO INPUT FIELD
+            if question_id in QUESTION_LABEL_ONLY:
+                label = pq_gui.addText(self.questions[question_id]["pq_question_text"])
+                label.setFont(QtGui.QFont(*constants.PQ_FONT_BOLD))
+                continue
+
             # Adding the current language in the additional_read_language question
             if question_id == "additional_read_language":
                 self.questions["additional_read_language"][
@@ -369,8 +432,13 @@ class AgingParticipantQuestionnaire:
 
                 question_text.setFont(QtGui.QFont(*constants.PQ_FONT_BOLD))
 
+
             else:
-                question_text = pq_gui.addText(self.questions[question_id]["pq_question_text"])
+                question_text = pq_gui.addField(
+                    question_key,
+                    label=self.questions[question_id]["pq_question_text"],
+                    initial=existing_data.get(question_key, '')
+                )
                 question_text.setFont(QtGui.QFont(*constants.PQ_FONT_BOLD))
 
             # add help text if there is one
@@ -378,22 +446,22 @@ class AgingParticipantQuestionnaire:
                 help_text = pq_gui.addText(self.questions[question_id]["pq_question_help"])
                 help_text.setFont(QtGui.QFont(*constants.PQ_FONT_ITALIC, italic=True))
 
-            # if there are additional options that are no in the question file but have been passed
-            if option_labels:
-                for option_label, option_key in option_labels:
-                    if option_type == 'checkbox':
-                        pq_gui.addField(option_key, label=option_label, initial=False)
-                    elif option_type == 'dropdown_file':
-                        option_xlsx = pd.read_excel(constants.PQ_DATA_FOLDER_PATH / constants.PQ_LANGUAGES_XLSX)
-                        options = sorted(option_xlsx['language_name'].tolist())
-                        options.insert(0, '')
-                        pq_gui.addField(option_key, label=option_label, choices=options)
-                    else:
-                        pq_gui.addField(option_key, label=option_label)
+        # if there are additional options that are no in the question file but have been passed
+        if option_labels:
+            for option_label, option_key in option_labels:
+                if option_type == 'checkbox':
+                    pq_gui.addField(option_key, label=option_label, initial=False)
+                elif option_type == 'dropdown_file':
+                     option_xlsx = pd.read_excel(constants.PQ_DATA_FOLDER_PATH / constants.PQ_LANGUAGES_XLSX)
+                     options = sorted(option_xlsx['language_name'].tolist())
+                     options.insert(0, '')
+                     pq_gui.addField(option_key, label=option_label, choices=options)
+                else:
+                    pq_gui.addField(option_key, label=option_label)
 
         pq_gui.addText('')
         pq_gui.addText('')
-        pq_gui.addField(key='confirm_answer', label=self.instructions['pq_confirm_answers'], initial=False)
+        #pq_gui.addField(key='confirm_answer', label=self.instructions['pq_confirm_answers'], initial=False)
 
         # the item in the top left position is some default text that I don't know how to remove otherwise
         pq_gui.layout.itemAtPosition(0, 0).widget().hide()
@@ -441,7 +509,7 @@ class AgingParticipantQuestionnaire:
 
         ok_data = pq_gui.show()
         # the last entry is always the confirmation checkbox
-        answers_confirmed = pq_gui.data['confirm_answer']
+        # answers_confirmed = pq_gui.data['confirm_answer']
 
         pq_data.update(ok_data)
 
@@ -455,16 +523,16 @@ class AgingParticipantQuestionnaire:
                         self._show_questions(self.instructions['pq_answer_all'] + ' ' + instructions, questions,
                                              button=button,
                                              existing_data=pq_data, keys=keys, option_labels=option_labels,
-                                             option_type=option_type, confirmed=answers_confirmed,
+                                             option_type=option_type,
                                              recalled=True, optional=optional)
-            if not answers_confirmed:
-                gui.warnDlg(prompt=self.instructions['pq_confirmation'],
-                            title=self.instructions['pq_error_title'])
-                self._show_questions(self.instructions['pq_answer_all'] + ' ' + instructions, questions,
-                                     button=button,
-                                     existing_data=pq_data, keys=keys, option_labels=option_labels,
-                                     option_type=option_type, confirmed=answers_confirmed,
-                                     recalled=True, optional=optional)
+            #if not answers_confirmed:
+            #     gui.warnDlg(prompt=self.instructions['pq_confirmation'],
+            #                title=self.instructions['pq_error_title'])
+            #    self._show_questions(self.instructions['pq_answer_all'] + ' ' + instructions, questions,
+            #                         button=button,
+            #                         existing_data=pq_data, keys=keys, option_labels=option_labels,
+            #                         option_type=option_type, confirmed=answers_confirmed,
+            #                         recalled=True, optional=optional)
 
             # update the dictionary with the new data and save it to file
             self.pq_data.update(pq_data)
@@ -494,5 +562,5 @@ if __name__ == '__main__':
     # create res folder
     os.makedirs('test_pq', exist_ok=True)
 
-    pq = AgingParticipantQuestionnaire(participant_id, 'test_pq')
+    pq = MultiplEYEParticipantQuestionnaire(participant_id, 'test_pq')
     pq.run_questionnaire()
