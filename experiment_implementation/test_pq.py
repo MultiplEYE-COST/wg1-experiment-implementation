@@ -3,7 +3,7 @@ import os
 from gooey import Gooey
 from gooey import GooeyParser
 
-from experiment_implementation.experiment.participant_questionnaire.participant_questionnaire import MultiplEYEParticipantQuestionnaire
+from experiment_implementation.experiment.participant_questionnaire.aging_pq import MultiplEYEAgingParticipantQuestionnaire
 import constants
 
 
@@ -18,7 +18,7 @@ def run_pq_only(pid: int) -> None:
     repo_root = constants.EXP_ROOT_PATH
     os.makedirs(f'{repo_root.parent}/test_pq', exist_ok=True)
 
-    pq = MultiplEYEParticipantQuestionnaire(participant_id_str, f'{repo_root.parent}/test_pq')
+    pq = MultiplEYEAgingParticipantQuestionnaire(participant_id_str, f'{repo_root.parent}/test_pq')
     pq.run_questionnaire()
 
 

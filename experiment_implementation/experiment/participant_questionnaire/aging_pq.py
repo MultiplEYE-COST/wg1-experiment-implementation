@@ -27,7 +27,7 @@ QUESTION_LABEL_ONLY = {
     'additional_read_language',
 }
 
-class MultiplEYEParticipantQuestionnaire:
+class MultiplEYEAgingParticipantQuestionnaire:
 
     def __init__(self, participant_identifier: int, results_folder: str):
         self.instructions, self.questions = self.load_data()
