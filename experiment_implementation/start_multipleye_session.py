@@ -146,6 +146,16 @@ def parse_args():
     )
 
     lab_settings.add_argument(
+        '--subcorpus',
+        metavar="Name of the subcorpus (optional)",
+        help="If you are collecting data for a specific subcorpus, please enter the name. Otherwise, leave empty.",
+        widget='TextField',
+        default=local_config.SUBCORPUS,
+        required=False,
+        gooey_options={'visible': True},
+    )
+
+    lab_settings.add_argument(
         '--dummy_mode',
         metavar=translations['dummy_mode'],
         action='store_true',
@@ -240,6 +250,9 @@ def start_experiment_session():
     if arguments['year'] != local_config.YEAR:
         settings_changed = True
 
+    if arguments['subcorpus'] != local_config.SUBCORPUS:
+        settings_changed = True
+
     if settings_changed and not arguments['continue_core_session']:
         with open(PARENT_FOLDER / 'local_config.py', 'w') as f:
             f.write(f'LANGUAGE = "{arguments["language"]}"\n')
@@ -247,6 +260,7 @@ def start_experiment_session():
             f.write(f'CITY = "{arguments["city"]}"\n')
             f.write(f'YEAR = {arguments["year"]}\n')
             f.write(f'LAB_NUMBER = {arguments["lab_number"]}\n')
+            f.write(f'SUBCORPUS = "{arguments["subcorpus"]}"\n')
             f.write(f'DUMMY_MODE = {arguments["dummy_mode"]}\n')
 
         print(
@@ -257,6 +271,7 @@ def start_experiment_session():
             f'The country code is {arguments["country_code"]}.\n'
             f'The lab number is {arguments["lab_number"]}.\n'
             f'The city is {arguments["city"]}.\n'
+            f'The subcorpus is {arguments["subcorpus"]}.\n' if arguments['subcorpus'] else ''
             f'The estimated end year is {arguments["year"]}.\n'
             f'The dummy mode is {arguments["dummy_mode"]}.\n\n'
             'Please restart the program to apply the changes and run the experiment.\n'
@@ -334,16 +349,16 @@ def start_experiment_session():
         arguments['instruction_screens_path'] = constants.EXP_ROOT_PATH / constants.PARTICIPANT_INSTRUCTIONS_CSV
         arguments['question_screens_path'] = (constants.EXP_ROOT_PATH / constants.QUESTION_IMAGE_DIR /
                                               f'question_images_version_{stimulus_order_version}'
-                                              / f'multipleye_comprehension_questions_{arguments["language"]}_question_'
+                                              / f'multipleye_{local_config.SUBCORPUS + "_" if local_config.SUBCORPUS else ""}comprehension_questions_{arguments["language"]}_question_'
                                                 f'images_version_{stimulus_order_version}_with_img_paths.csv')
 
         arguments.pop('language', None)
         arguments.pop('full_language', None)
         arguments.pop('country_code', None)
         arguments.pop('lab_number', None)
-        arguments.pop('dummy_mode', None)
         arguments.pop('city', None)
         arguments.pop('year', None)
+        arguments.pop('subcorpus', None)
 
         testing_images = check_if_testing_images()
 

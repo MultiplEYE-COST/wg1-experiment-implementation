@@ -15,6 +15,7 @@ COUNTRY_CODE = LOCAL_CONFIGS['COUNTRY_CODE']
 CITY = LOCAL_CONFIGS['CITY']
 YEAR = LOCAL_CONFIGS['YEAR']
 LAB_NUMBER = LOCAL_CONFIGS['LAB_NUMBER']
+SUBCORPUS = LOCAL_CONFIGS['SUBCORPUS']
 
 
 DUMMY_MODE = LOCAL_CONFIGS['DUMMY_MODE']
@@ -39,10 +40,10 @@ BGC = (15, 15, 15)
 HIGHLIGHT_COLOR = (185, 65, 40)
 
 DATA_FOLDER_PATH = f'data'
-RESULT_FOLDER_PATH = f'{EXP_ROOT_PATH}/data/eye_tracking_data_{LANGUAGE}_{COUNTRY_CODE}_{LAB_NUMBER}'
+RESULT_FOLDER_PATH = f'{EXP_ROOT_PATH}/data/eye_tracking_data_{SUBCORPUS + "_" if SUBCORPUS else ""}{LANGUAGE}_{COUNTRY_CODE}_{LAB_NUMBER}'
 
-IMAGE_CONFIG_PATH = (f'{EXP_ROOT_PATH}/data/stimuli_MultiplEYE_{LANGUAGE}_{COUNTRY_CODE}_{CITY}_{LAB_NUMBER}_{YEAR}/config/'
-                     f'config_{LANGUAGE}_{COUNTRY_CODE}_{CITY}_{LAB_NUMBER}_{YEAR}.py')
+IMAGE_CONFIG_PATH = (f'{EXP_ROOT_PATH}/data/stimuli_MultiplEYE_{SUBCORPUS + "_" if SUBCORPUS else ""}{LANGUAGE}_{COUNTRY_CODE}_{CITY}_{LAB_NUMBER}_{YEAR}/config/'
+                     f'config_{SUBCORPUS + "_" if SUBCORPUS else ""}{LANGUAGE}_{COUNTRY_CODE}_{CITY}_{LAB_NUMBER}_{YEAR}.py')
 
 IMAGE_CONFIG = run_path(str(EXP_ROOT_PATH / IMAGE_CONFIG_PATH))
 ############################################################
@@ -115,11 +116,11 @@ OPTION_5 = IMAGE_CONFIG['option_5']
 #########################################################
 # participant_questionnaire constants
 
-PQ_DATA_FOLDER_PATH = EXP_ROOT_PATH / 'data' / f'participant_questionnaire_{LANGUAGE.lower()}_{COUNTRY_CODE.lower()}_{LAB_NUMBER}'
+PQ_DATA_FOLDER_PATH = EXP_ROOT_PATH / 'data' / f'participant_questionnaire_{SUBCORPUS + "_" if SUBCORPUS else ""}{LANGUAGE.lower()}_{COUNTRY_CODE.lower()}_{LAB_NUMBER}'
 
-PQ_PARTICIPANT_INSTRUCTIONS_XLSX = PQ_DATA_FOLDER_PATH / f'multipleye_questionnaire_instructions_{LANGUAGE.lower()}.xlsx'
-PQ_QUESTIONS_XLSX = PQ_DATA_FOLDER_PATH / f'multipleye_questionnaire_questions_{LANGUAGE.lower()}.xlsx'
-PQ_LANGUAGES_XLSX = PQ_DATA_FOLDER_PATH / f'language_iso639_1_{LANGUAGE.lower()}.xlsx'
+PQ_PARTICIPANT_INSTRUCTIONS_XLSX = PQ_DATA_FOLDER_PATH / f'multipleye_questionnaire_instructions_{SUBCORPUS + "_" if SUBCORPUS else ""}{LANGUAGE.lower()}.xlsx'
+PQ_QUESTIONS_XLSX = PQ_DATA_FOLDER_PATH / f'multipleye_questionnaire_questions_{SUBCORPUS + "_" if SUBCORPUS else ""}{LANGUAGE.lower()}.xlsx'
+PQ_LANGUAGES_XLSX = PQ_DATA_FOLDER_PATH / f'language_iso639_1_{SUBCORPUS + "_" if SUBCORPUS else ""}{LANGUAGE.lower()}.xlsx'
 
 PQ_program_icon = EXP_ROOT_PATH / 'ui_data/interface_icons/program_icon.png'
 PQ_image_dir = EXP_ROOT_PATH / 'ui_data/interface_icons/running_icon_copy.png'

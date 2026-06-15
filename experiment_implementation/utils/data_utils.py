@@ -86,6 +86,7 @@ def get_stimuli_screens(
 
         # if the session has been restarted after abortion, we need to skip the stimuli that have already been completed
         if last_completed_stimulus:
+            print(last_completed_stimulus, item_id)
             if last_completed_stimulus != item_id and not continue_now:
                 continue
             elif last_completed_stimulus == item_id and not continue_now:

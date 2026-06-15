@@ -1,6 +1,7 @@
-LANGUAGE = "toy"
-COUNTRY_CODE = "x"
-CITY = "x"
-YEAR = 1
+LANGUAGE = "en"
+COUNTRY_CODE = "us"
+CITY = "NewYork"
+YEAR = 2026
 LAB_NUMBER = 1
+SUBCORPUS = "aging"
 DUMMY_MODE = True

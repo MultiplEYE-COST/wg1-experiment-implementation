@@ -129,45 +129,55 @@ def mark_stimulus_order_version_used(order_version: int, participant_id: int, se
         randomization_df.to_csv(constants.STIMULUS_RANDOMIZATION_CSV, sep=',', index=False, encoding='utf8')
 
 
-def determine_last_stimulus(relative_exp_result_path: str) -> tuple[pd.DataFrame, str, int | None, str | None] | None:
-    csv_path = f'{relative_exp_result_path}/logfiles/completed_stimuli.csv'
-    if os.path.isfile(csv_path):
-        completed_stimuli_df = pd.read_csv(csv_path, sep=',', encoding='utf8')
+def determine_last_stimulus(relative_exp_result_path: str, dummy: bool) -> tuple[pd.DataFrame | None, str | None, int | None, str | None]:
+    old_csv_path = f'{relative_exp_result_path}/logfiles/completed_stimuli.csv'
+
+    old_completed_df = None
+    last_stim_id = None
+    last_trial_id = None
+
+    if os.path.isfile(old_csv_path):
+        old_completed_df = pd.read_csv(old_csv_path, sep=',', encoding='utf8')
 
     # if the file does not exist or is empty, we return None as the experiment was interrupted before
     # anything could happen and restart the session from the beginning with the same ID
     else:
-        return None
-    if completed_stimuli_df.empty:
-        # should not happen but you never know
-        return None
+        return old_completed_df, old_csv_path, last_stim_id, last_trial_id
 
-    if not len(list(Path(relative_exp_result_path).glob('*.edf'))) == 1:
+    if old_completed_df.empty:
+        # should not happen but you never know
+        return old_completed_df, old_csv_path, last_stim_id, last_trial_id
+
+    if not len(list(Path(relative_exp_result_path).glob('*.edf'))) == 1 and not dummy:
         raise FileNotFoundError(f'Continue session: No EDF file found in the {relative_exp_result_path}. '
                                 f'Please check the path. '
                                 f'You HAVE to copy the edf file from the host PC otherwise it will be overwritten.')
 
     # if the file is empty, we return None
     try:
-        last_row = completed_stimuli_df.iloc[-1]
+        last_row = old_completed_df.iloc[-1]
     except IndexError:
-        return completed_stimuli_df, csv_path, None, None
+        return old_completed_df, old_csv_path, last_stim_id, last_trial_id
 
     if last_row['completed'] == 'restart':
-        new_exp_path = last_row['stimulus_name']
-        return determine_last_stimulus(new_exp_path)
+        raise ValueError("It seems that this session has already been continued once. There is no option to continue it "
+                         "again.")
+        # new_exp_path = last_row['stimulus_name']
+        # return determine_last_stimulus(new_exp_path, dummy)
 
     if last_row['completed'] == 1:
-        return completed_stimuli_df, csv_path, last_row['stimulus_id'], last_row['trial_id']
+        return old_completed_df, old_csv_path, last_row['stimulus_id'], last_row['trial_id']
     # in case that the last stimulus has not been completed, we need to go back one stimulus
     elif last_row['completed'] == 0:
         # if the first stimulus was started but not completed we will start afresh
         try:
-            second_last_row = completed_stimuli_df.iloc[-2]
+            second_last_row = old_completed_df.iloc[-2]
         except IndexError:
-            return completed_stimuli_df, csv_path, None, None
+            return  old_completed_df, old_csv_path, last_stim_id, last_trial_id
 
-        return completed_stimuli_df, csv_path, second_last_row['stimulus_id'], second_last_row['trial_id']
+        return old_completed_df, old_csv_path, second_last_row['stimulus_id'], second_last_row['trial_id']
+
+    return old_completed_df, old_csv_path, last_stim_id, last_trial_id
 
 
 def check_if_testing_images() -> bool:

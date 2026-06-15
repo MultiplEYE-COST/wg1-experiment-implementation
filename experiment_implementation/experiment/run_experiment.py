@@ -25,6 +25,7 @@ def run_experiment(
         dataset_type: str,
         session_mode: SessionMode,
         stimulus_order_version: int,
+        dummy_mode: bool,
         continue_core_session: bool = False,
 
 ) -> None:
@@ -59,15 +60,16 @@ def run_experiment(
 
         if continue_core_session:
             determine_stimulus = determine_last_stimulus(
-                relative_exp_result_path
+                relative_exp_result_path, dummy_mode
             )
 
+            completed_stimuli_df, csv_path, last_completed_stimulus_id, last_trial_id = determine_stimulus
+
             # if it is None, the file was not there or empty, i.e. the experiment did not start really
-            if determine_stimulus is None:
+            if completed_stimuli_df is None:
                 last_trial_id = 'full_restart'
 
             else:
-                completed_stimuli_df, csv_path, last_completed_stimulus_id, last_trial_id = determine_stimulus
                 if not last_trial_id:
                     last_trial_id = 'full_restart'
 
@@ -77,7 +79,7 @@ def run_experiment(
 
             absolute_exp_result_path = os.path.abspath(relative_exp_result_path)
 
-            if determine_stimulus is not None:
+            if last_trial_id is not None:
                 # add a note in the old completed_stimuli.csv file that the session has been continued
                 new_row = {
                     'timestamp_started': pd.NA, 'timestamp_completed': pd.NA, 'trial_id': pd.NA, 'stimulus_id': pd.NA,
