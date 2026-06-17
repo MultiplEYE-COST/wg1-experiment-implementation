@@ -100,7 +100,7 @@ def determine_stimulus_order_version(participant_id: int = None) -> int:
 
 
 def mark_stimulus_order_version_used(order_version: int, participant_id: int, session_mode: SessionMode,
-                                     dataset_type: str, participant_result_folder: str) -> None:
+                                     dataset_type: str, participant_result_folder: str, dummy: bool) -> None:
     """
     Mark the stimulus order version as used by the participant.
     """
@@ -113,7 +113,7 @@ def mark_stimulus_order_version_used(order_version: int, participant_id: int, se
     # we only mark the participant ID as used if it was NOT a test run or the minimal exp
     if not session_mode.value == 'test' and not session_mode.value == 'minimal':
         relative_exp_result_path = f'{constants.RESULT_FOLDER_PATH}/{dataset_type.lower()}/{participant_result_folder}'
-        result = determine_last_stimulus(relative_exp_result_path)
+        result = determine_last_stimulus(relative_exp_result_path, dummy)
         participant_ids = randomization_df.participant_id.dropna().astype(int).values.tolist()
         if participant_id in participant_ids and result:
             raise ValueError(

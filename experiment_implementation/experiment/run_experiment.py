@@ -40,7 +40,7 @@ def run_experiment(
 
     if not continue_core_session:
         experiment_utils.mark_stimulus_order_version_used(stimulus_order_version, participant_id, session_mode,
-                                                          dataset_type, participant_result_folder)
+                                                          dataset_type, participant_result_folder, dummy_mode)
 
     last_completed_stimulus_id = None
 
