@@ -39,7 +39,7 @@ Name of the 3 files: language_iso639_1_XX.xlsx
 `experiment_implementation/ui_data/interface_language/[your language]`. The name of the file should be `experiment_interface_[your language].json`.
 7. The final folder structure should look like this:
    TODO
-**You can skip steps 9 and 10 if you did them for main experiment and you are using the same PC**
+   **You can skip steps 9 and 10 if you did them for main experiment and you are using the same PC**
 9. Prepare the environment for the experiment following the guidelines in [CONDA_ENVIRONMENT.md](guidelines/markdown/CONDA_ENVIRONMENT.md)
 10. Install the necessary packages for your eye-tracker. For EyeLink eye-trackers 
 [INSTALL_PYLINK.md](guidelines/markdown/INSTALL_PYLINK.md). For Tobii eye-trackers, please see [develop for Tobii](#develop-and-run-experiments-for-tobii) further below.
