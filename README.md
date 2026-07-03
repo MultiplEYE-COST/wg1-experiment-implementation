@@ -26,16 +26,20 @@ contact [multipleye@cl.uzh.ch](mailto:multipleye@cl.uzh.ch).
 
 In order to run the MultiplEYE experiment you will need to complete the following steps
 1. Please read the official MultiplEYE Data Collection Guidelines linked on this page: [MultiplEYE contribute](https://multipleye.eu/contribute/)
-2. Following the MultiplEYE Data Collection Guidelines, prepare the stimulus files, the comprehension questions, the participant questionnaire and the instruction screens. Please refer to Sections 3, 4, 5, and 10.3 in the guidelines.
-3. [Download the experiment code](#download-the-experiment-code-as-zip-file) from this repository. Either clone via git or download the zip file (see [download as zip](#download-the-experiment-code-as-zip-file)). Please make sure to remove "-main" from the downloaded folder name. The folder should be named `wg1-experiment-implementation`!
+2. Following the MultiplEYE Data Collection Guidelines, prepare the stimulus files, the comprehension questions, the participant questionnaire and the instruction screens as stated in Checklist for the MultiplEYE Aging Subcorpus Experiment.
+3. [Download the experiment code](#download-the-experiment-code-as-zip-file) from this repository. Either clone via git or download the zip file (see [download as zip](#download-the-experiment-code-as-zip-file)). Please make sure to remove "-main" from the downloaded folder name. The folder should be named `wg1-experiment-implementation-aging`!
 4. Copy the stimulus files to the correct location in the experiment data folder: `experiment_implementation/data/[your stimulus folder]`
-5. **Mandatory** also for test run: Copy the files (3 Excel files) for the participant questionnaire the to the correct location in the experiment 
+5. **Mandatory** also for testing: Copy the files (3 Excel files) for the participant questionnaire the to the correct location in the experiment 
 data folder. You will have to create a folder for your language and country. The folder should be named as follows:
 `experiment_implementation/data/participant_questionnaire_[LANGUAGE_CODE]_[COUNTRY_CODE]_[LAB_NUMBER]/`
+Name of the 3 files: language_iso639_1_XX.xlsx
+                     multipleye_questionnaire_instructions_aging_XX.xlsx
+                     multipleye_questionnaire_questions_aging_XX.xlsx
 6. Optional: if you have created a translation of the interface (MultiplEYE data collection guidelines Section 10.4), you can copy it to this location: 
 `experiment_implementation/ui_data/interface_language/[your language]`. The name of the file should be `experiment_interface_[your language].json`.
 7. The final folder structure should look like this:
    TODO
+**You can skip steps 9 and 10 if you did them for main experiment and you are using the same PC**
 9. Prepare the environment for the experiment following the guidelines in [CONDA_ENVIRONMENT.md](guidelines/markdown/CONDA_ENVIRONMENT.md)
 10. Install the necessary packages for your eye-tracker. For EyeLink eye-trackers 
 [INSTALL_PYLINK.md](guidelines/markdown/INSTALL_PYLINK.md). For Tobii eye-trackers, please see [develop for Tobii](#develop-and-run-experiments-for-tobii) further below.
@@ -59,6 +63,7 @@ Click on the green button `Code` and then click on `Download ZIP`. Unzip the fol
 ## Run the dummy experiment
 The experiment can be run in dummy mode which means that can be run without an actual eye-tracker.
 If you'd like to run it, make sure you have completed the above steps, and you have your conda environment activated.
+If you are using the environment from the main experiment, load the same environment as you did before.
 
 Activate the environment:
 
@@ -67,7 +72,7 @@ conda activate multipleye3.9
 ```
 
 Then you can navigate to the root folder of your local clone of the repository (your path should now end with 
-`wg1-experiment-implementation`. Please find instructions on how to navigate in a terminal in the 
+`wg1-experiment-implementation-aging`. Please find instructions on how to navigate in a terminal in the 
 [CONDA_ENVIRONMENT.md](guidelines/markdown/CONDA_ENVIRONMENT.md) in section 5). Run the following command to run the dummy experiment:
 
 ```bash
