@@ -31,15 +31,15 @@ In order to run the MultiplEYE experiment you will need to complete the followin
 4. Copy the stimulus files to the correct location in the experiment data folder: `experiment_implementation/data/[your stimulus folder]`
 5. **Mandatory** also for testing: Copy the files (3 Excel files) for the participant questionnaire the to the correct location in the experiment 
 data folder. You will have to create a folder for your language and country. The folder should be named as follows:
-`experiment_implementation/data/participant_questionnaire_[LANGUAGE_CODE]_[COUNTRY_CODE]_[LAB_NUMBER]/`
-Name of the 3 files: language_iso639_1_XX.xlsx
-                     multipleye_questionnaire_instructions_aging_XX.xlsx
-                     multipleye_questionnaire_questions_aging_XX.xlsx
+`experiment_implementation/data/participant_questionnaire_aging_[LANGUAGE_CODE]_[COUNTRY_CODE]_[LAB_NUMBER]/`
+Name of the 3 files you should copy there from switch: language_iso639_1_XX.xlsx
+                     multipleye_aging_questionnaire_instructions_XX.xlsx
+                     multipleye_aging_questionnaire_questions_XX.xlsx
 6. Optional: if you have created a translation of the interface (MultiplEYE data collection guidelines Section 10.4), you can copy it to this location: 
 `experiment_implementation/ui_data/interface_language/[your language]`. The name of the file should be `experiment_interface_[your language].json`.
 7. The final folder structure should look like this:
    TODO
-   **You can skip steps 9 and 10 if you did them for main experiment and you are using the same PC**
+   **You can skip steps 9 and 10 if you did them for the main experiment and you are using the same PC**
 9. Prepare the environment for the experiment following the guidelines in [CONDA_ENVIRONMENT.md](guidelines/markdown/CONDA_ENVIRONMENT.md)
 10. Install the necessary packages for your eye-tracker. For EyeLink eye-trackers 
 [INSTALL_PYLINK.md](guidelines/markdown/INSTALL_PYLINK.md). For Tobii eye-trackers, please see [develop for Tobii](#develop-and-run-experiments-for-tobii) further below.
