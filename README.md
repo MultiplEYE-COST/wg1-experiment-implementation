@@ -45,6 +45,7 @@ Name of the 3 files you should copy there from switch:
 9. Prepare the environment for the experiment following the guidelines in [CONDA_ENVIRONMENT.md](guidelines/markdown/CONDA_ENVIRONMENT.md)
 10. Install the necessary packages for your eye-tracker. For EyeLink eye-trackers 
 [INSTALL_PYLINK.md](guidelines/markdown/INSTALL_PYLINK.md). For Tobii eye-trackers, please see [develop for Tobii](#develop-and-run-experiments-for-tobii) further below.
+**IMPORTANT: For the aging subcorpus, the "Testing" mode does not work. For testing/piloting, use "Pilot" mode. For the actual data collection, use only the "Core" mode.**
 11. [Run the dummy experiment](#run-the-dummy-experiment) to check if everything is working correctly
 12. [Run the experiment with an eye-tracker](#run-the-experiment-with-an-eye-tracker)
 
