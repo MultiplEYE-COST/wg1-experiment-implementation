@@ -118,9 +118,9 @@ OPTION_5 = IMAGE_CONFIG['option_5']
 
 PQ_DATA_FOLDER_PATH = EXP_ROOT_PATH / 'data' / f'participant_questionnaire_{SUBCORPUS + "_" if SUBCORPUS else ""}{LANGUAGE.lower()}_{COUNTRY_CODE.lower()}_{LAB_NUMBER}'
 
-PQ_PARTICIPANT_INSTRUCTIONS_XLSX = PQ_DATA_FOLDER_PATH / f'multipleye_questionnaire_instructions_{SUBCORPUS + "_" if SUBCORPUS else ""}{LANGUAGE.lower()}.xlsx'
-PQ_QUESTIONS_XLSX = PQ_DATA_FOLDER_PATH / f'multipleye_questionnaire_questions_{SUBCORPUS + "_" if SUBCORPUS else ""}{LANGUAGE.lower()}.xlsx'
-PQ_LANGUAGES_XLSX = PQ_DATA_FOLDER_PATH / f'language_iso639_1_{SUBCORPUS + "_" if SUBCORPUS else ""}{LANGUAGE.lower()}.xlsx'
+PQ_PARTICIPANT_INSTRUCTIONS_XLSX = PQ_DATA_FOLDER_PATH / f'multipleye_{SUBCORPUS + "_" if SUBCORPUS else ""}questionnaire_instructions_{LANGUAGE.lower()}.xlsx'
+PQ_QUESTIONS_XLSX = PQ_DATA_FOLDER_PATH / f'multipleye_{SUBCORPUS + "_" if SUBCORPUS else ""}questionnaire_questions_{LANGUAGE.lower()}.xlsx'
+PQ_LANGUAGES_XLSX = PQ_DATA_FOLDER_PATH / f'language_iso639_1_{LANGUAGE.lower()}.xlsx'
 
 PQ_program_icon = EXP_ROOT_PATH / 'ui_data/interface_icons/program_icon.png'
 PQ_image_dir = EXP_ROOT_PATH / 'ui_data/interface_icons/running_icon_copy.png'
