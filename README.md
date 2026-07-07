@@ -32,9 +32,11 @@ In order to run the MultiplEYE experiment you will need to complete the followin
 5. **Mandatory** also for testing: Copy the files (3 Excel files) for the participant questionnaire the to the correct location in the experiment 
 data folder. You will have to create a folder for your language and country. The folder should be named as follows:
 `experiment_implementation/data/participant_questionnaire_aging_[LANGUAGE_CODE]_[COUNTRY_CODE]_[LAB_NUMBER]/`
-Name of the 3 files you should copy there from switch: language_iso639_1_XX.xlsx
-                     multipleye_aging_questionnaire_instructions_XX.xlsx
-                     multipleye_aging_questionnaire_questions_XX.xlsx
+
+Name of the 3 files you should copy there from switch: 
+ - language_iso639_1_XX.xlsx
+ - multipleye_aging_questionnaire_instructions_XX.xlsx
+ - multipleye_aging_questionnaire_questions_XX.xlsx
 6. Optional: if you have created a translation of the interface (MultiplEYE data collection guidelines Section 10.4), you can copy it to this location: 
 `experiment_implementation/ui_data/interface_language/[your language]`. The name of the file should be `experiment_interface_[your language].json`.
 7. The final folder structure should look like this:
