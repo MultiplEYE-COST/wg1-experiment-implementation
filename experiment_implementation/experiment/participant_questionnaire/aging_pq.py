@@ -58,35 +58,55 @@ class MultiplEYEAgingParticipantQuestionnaire:
             button=self.instructions['pq_next_button'],
         )
 
-        # PAGE 2: impairments + medication with checkboxes
+        # PAGE 2: health conditions + language impairments (multi-checkbox, one page)
         self._show_questions(
             '',
-            [],  # <-- no questions here
+            [],
             button=self.instructions['pq_next_button'],
             option_labels=[
-                (self.questions['impairments']['pq_question_text'], 'impairments_has_detail'),
-                (self.questions['medication']['pq_question_text'], 'medication_has_detail'),
+                ('Are you diagnosed with any health conditions?', 'impairments_header'),  # label only, use addText
+                ('No', 'impairments_no'),
+                ('Diabetes', 'impairments_diabetes'),
+                ('Cholesterol', 'impairments_cholesterol'),
+                ('High blood pressure', 'impairments_high_blood_pressure'),
+                ('Parkinson\'s disease', 'impairments_parkinson'),
+                ('Alzheimer\'s disease', 'impairments_alzheimer'),
+                ('Other', 'impairments_other'),
+                ('Have you been diagnosed with any language-related impairments?', 'medication_header'),  # label only
+                ('No', 'language_impairments_no'),
+                ('Dyslexia (reading disorder)', 'language_impairments_dyslexia'),
+                ('Aphasia (language impairment after a stroke)', 'language_impairments_aphasia'),
+                ('Other', 'language_impairments_other'),
+                ('Are you taking any medications?', 'medication_header'), # label only
+                ('Yes', 'medication_yes'),
+                ('No', 'medication_no'),
             ],
             option_type='checkbox',
         )
 
-        # Save yes/no answers
-        self.pq_data['impairments'] = self.pq_data['impairments_has_detail']
-        self.pq_data['medication'] = self.pq_data['medication_has_detail']
+        # Build list of detail questions dynamically based on what was checked
+        other_details = []
+        if self.pq_data.get('impairments_other', False):
+            other_details.append('impairments_detail')
+        if self.pq_data.get('language_impairments_other', False):
+            other_details.append('language_impairments_detail')
+        if self.pq_data.get('medication_yes', False):
+            other_details.append('medication_detail')
 
-        # PAGE 3: details if checkbox checked
-        detail_questions = []
-        if self.pq_data.get('impairments_has_detail', False):
-            detail_questions.append('impairments_detail')
-        if self.pq_data.get('medication_has_detail', False):
-            detail_questions.append('medication_detail')
-
-        if detail_questions:
+        # Show on one page only if at least one "Other" was selected
+        if other_details:
             self._show_questions(
                 '',
-                detail_questions,
+                other_details,
                 button=self.instructions['pq_next_button'],
             )
+
+        # PAGE: ask how many childhood languages
+        self._show_questions(
+            '',
+            ['childhood_languages'],
+            button=self.instructions['pq_next_button'],
+        )
 
         # check whether there are multiple languages that the person grew up with
         if self.pq_data.get('childhood_languages') == self.questions['childhood_languages']['pq_answer_option_1']:
@@ -179,7 +199,7 @@ class MultiplEYEAgingParticipantQuestionnaire:
 
         for lang in unique_language_keys:
             reading_questions = ['read_language', 'fiction_reading_time', 'nonfiction_reading_time',
-                                 'newspaper_reading_time', 'online_reading_time',
+                                 'academic_reading_time', 'newspaper_reading_time', 'online_reading_time',
                                  'other_reading_time']
 
             keys = [f'{lang}_{question}' for question in reading_questions[1:]]
@@ -449,13 +469,16 @@ class MultiplEYEAgingParticipantQuestionnaire:
         # if there are additional options that are no in the question file but have been passed
         if option_labels:
             for option_label, option_key in option_labels:
-                if option_type == 'checkbox':
+                if option_key.endswith('_header'):
+                    header = pq_gui.addText(option_label)
+                    header.setFont(QtGui.QFont(*constants.PQ_FONT_BOLD))
+                elif option_type == 'checkbox':
                     pq_gui.addField(option_key, label=option_label, initial=False)
                 elif option_type == 'dropdown_file':
-                     option_xlsx = pd.read_excel(constants.PQ_DATA_FOLDER_PATH / constants.PQ_LANGUAGES_XLSX)
-                     options = sorted(option_xlsx['language_name'].tolist())
-                     options.insert(0, '')
-                     pq_gui.addField(option_key, label=option_label, choices=options)
+                    option_xlsx = pd.read_excel(constants.PQ_DATA_FOLDER_PATH / constants.PQ_LANGUAGES_XLSX)
+                    options = sorted(option_xlsx['language_name'].tolist())
+                    options.insert(0, '')
+                    pq_gui.addField(option_key, label=option_label, choices=options)
                 else:
                     pq_gui.addField(option_key, label=option_label)
 
