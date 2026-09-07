@@ -222,7 +222,7 @@ class MultiplEYEAgingParticipantQuestionnaire:
 
         for lang in unique_reading_language_keys:
             reading_questions = ['read_language', 'fiction_reading_time', 'nonfiction_reading_time',
-                                 'newspaper_reading_time', 'online_reading_time',
+                                 'academic_reading_time', 'newspaper_reading_time', 'online_reading_time',
                                  'other_reading_time']
 
             keys = [f'{lang}_{question}' for question in reading_questions[1:]]
