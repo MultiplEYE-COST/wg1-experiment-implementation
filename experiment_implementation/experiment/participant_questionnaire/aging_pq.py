@@ -54,7 +54,7 @@ class MultiplEYEAgingParticipantQuestionnaire:
         # PAGE 1
         self._show_questions(
             self.instructions['pq_initial_message'],
-            ['gender', 'level_education', 'age', 'retirement_years'],
+            ['gender', 'level_education', 'age', 'retirement_years', 'childhood_languages'],
             button=self.instructions['pq_next_button'],
         )
 
