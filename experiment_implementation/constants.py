@@ -99,6 +99,10 @@ TOP_LEFT_CORNER = (
 
 IMAGE_CENTER = (IMAGE_WIDTH_PX // 2, IMAGE_HEIGHT_PX // 2)
 
+# writing direction of the stimuli as set by the image generation ("ltr", "rtl" or
+# "ttb"). Configs generated before this setting existed default to "ltr".
+SCRIPT_DIRECTION = str(IMAGE_CONFIG.get('SCRIPT_DIRECTION', 'ltr')).lower()
+
 # box sizes of the answer options for the comprehension questions, the box can be selected by pressing the arrow keys
 ARROW_LEFT = IMAGE_CONFIG['left']
 ARROW_UP = IMAGE_CONFIG['up']

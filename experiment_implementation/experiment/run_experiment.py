@@ -165,6 +165,13 @@ def run_experiment(
     general_log_file.write([get_time(), 'start experiment'])
     try:
         experiment.run_experiment()
+    except KeyboardInterrupt:
+        # Ctrl+C (e.g. from the terminal; the EyeLink host keyboard used in
+        # _fixation_trigger is not available on macOS): abort and close the data
+        # files cleanly instead of leaving them open.
+        general_log_file.write([get_time(), 'KEYBOARD_INTERRUPT'])
+        experiment.finish_experiment(participant_questionnaire=False)
+        raise
     except Exception as e:
         general_log_file.write([get_time(), f'EXCEPTION_OCCURRED_{e}'])
         experiment.finish_experiment(participant_questionnaire=False)

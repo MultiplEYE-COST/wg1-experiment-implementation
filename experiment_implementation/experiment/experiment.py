@@ -525,10 +525,25 @@ class Experiment:
                     arrow_image = arrow_image.resize((int(arrow_width), int(arrow_width)))
                     arrow_image.save(arrow_img_path)
 
-                    question_screen.draw_image(
-                        arrow_img_path,
-                        pos=(constants.IMAGE_WIDTH_PX // 2, (constants.IMAGE_HEIGHT_PX // 5) * 3),
-                    )
+                    if constants.SCRIPT_DIRECTION == 'ttb':
+                        # In vertical (ttb) scripts the four option boxes form a plus
+                        # around an empty middle; put the arrow in that gap, i.e. the
+                        # centre of the boxes' bounding box, instead of the fixed
+                        # horizontal position used for ltr/rtl.
+                        x_min = min(constants.ARROW_LEFT[0], constants.ARROW_RIGHT[0],
+                                    constants.ARROW_UP[0], constants.ARROW_DOWN[0])
+                        x_max = max(constants.ARROW_LEFT[2], constants.ARROW_RIGHT[2],
+                                    constants.ARROW_UP[2], constants.ARROW_DOWN[2])
+                        y_min = min(constants.ARROW_LEFT[1], constants.ARROW_RIGHT[1],
+                                    constants.ARROW_UP[1], constants.ARROW_DOWN[1])
+                        y_max = max(constants.ARROW_LEFT[3], constants.ARROW_RIGHT[3],
+                                    constants.ARROW_UP[3], constants.ARROW_DOWN[3])
+                        arrow_pos = ((x_min + x_max) // 2, (y_min + y_max) // 2)
+                    else:
+                        arrow_pos = (constants.IMAGE_WIDTH_PX // 2,
+                                     (constants.IMAGE_HEIGHT_PX // 5) * 3)
+
+                    question_screen.draw_image(arrow_img_path, pos=arrow_pos)
 
                 relative_question_page_path = question_dict['relative_path']
 
@@ -767,6 +782,18 @@ class Experiment:
         if not constants.DUMMY_MODE:
             self._eye_tracker.get_tracker().flushKeybuttons(0)
 
+        # In vertical (ttb) scripts the rating options are laid out as columns that
+        # are read right-to-left, so up/down are not intuitive. There the participant
+        # moves the highlight with left/right (left = next, right = previous, because
+        # option 1 is the rightmost column) and confirms with space. All other
+        # directions keep the up/down selection.
+        if constants.SCRIPT_DIRECTION == 'ttb':
+            next_key, previous_key = 'left', 'right'
+        else:
+            next_key, previous_key = 'down', 'up'
+        confirm_keys = ['space']
+        accepted_keys = [next_key, previous_key] + confirm_keys
+
         key_pressed = ''
         keypress_timestamp = -1
         valid_answer = False
@@ -775,29 +802,12 @@ class Experiment:
 
         while not valid_answer:
 
-            while key_pressed not in ['up', 'space', 'down']:
+            while key_pressed not in accepted_keys:
                 key_pressed, keypress_timestamp = self._keyboard.get_key(
                     flush=True,
                 )
 
-            if key_pressed == 'up':
-
-                if option_num == -1:
-                    option_num = 1
-                    answer_chosen = f'option_{option_num}'
-                    self._display.fill(screen=screens[f'option_{option_num}'])
-                    self._display.show()
-
-                elif option_num == 1:
-                    pass
-
-                else:
-                    option_num -= 1
-                    answer_chosen = f'option_{option_num}'
-                    self._display.fill(screen=screens[f'option_{option_num}'])
-                    self._display.show()
-
-            elif key_pressed == 'down':
+            if key_pressed == next_key:
 
                 if option_num == -1:
                     option_num = 1
@@ -814,7 +824,24 @@ class Experiment:
                     self._display.fill(screen=screens[f'option_{option_num}'])
                     self._display.show()
 
-            elif key_pressed == 'space' and answer_chosen:
+            elif key_pressed == previous_key:
+
+                if option_num == -1:
+                    option_num = 1
+                    answer_chosen = f'option_{option_num}'
+                    self._display.fill(screen=screens[f'option_{option_num}'])
+                    self._display.show()
+
+                elif option_num == 1:
+                    pass
+
+                else:
+                    option_num -= 1
+                    answer_chosen = f'option_{option_num}'
+                    self._display.fill(screen=screens[f'option_{option_num}'])
+                    self._display.show()
+
+            elif key_pressed in confirm_keys and answer_chosen:
                 valid_answer = True
 
             key_pressed = ''
@@ -880,7 +907,7 @@ class Experiment:
                     get_time(), trial_id, pd.NA, 'fixation_trigger', screen_onset, timestamp,
                     'ctrl c', False, pd.NA, f'ctrl-c_pressed_by_user_with_key_{key}_modifier_{modifier}'
                 )
-                self.finish_experiment()
+                self.finish_experiment(participant_questionnaire=False)
 
             # key q: skip fixation trigger and continue with experiment
             elif key in [113, 81] or (key in [113, 81] and modifier == 8):
